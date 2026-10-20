@@ -218,30 +218,80 @@ textarea:focus{outline:none;border-color:var(--mare)}
 
 @media print{.bar,.actions,.pens,.starters,.confetti,.toast{display:none!important}.sheet::before{position:absolute}.ex{break-inside:avoid-page}}
 
-.vf{list-style:none;padding:0;margin:0;max-width:1000px}
-.vf li{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.vf .opts{display:flex;gap:6px;flex-wrap:wrap}
-.vf .opts button{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:1px 14px}
-.vf .opts button:hover{border-color:var(--ink)}
-.vf .opts button.sel{border-color:var(--sole);box-shadow:0 0 0 2px var(--sole);font-weight:600}
-.vf .opts button.ok{background:var(--verde-tint);border-color:var(--ok);font-weight:700}
-.vf .opts button.ko{background:var(--rosso-tint);border-color:var(--ko);text-decoration:line-through}
-.readtext{max-width:1000px;padding:12px 16px;border-left:4px solid var(--mare);background:var(--mare-tint);border-radius:0 8px 8px 0;margin-bottom:14px}
-.readtext p{margin:.3em 0;line-height:2}
-.wordlist{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 14px}
-.wordlist span{padding:2px 12px;border-radius:20px;background:var(--verde-tint);color:var(--verde);font-weight:700}
-.prof .vf .opts button.key{box-shadow:0 0 0 2px var(--ok);background:var(--verde-tint)}
+/* ===== U1_L4: due parti e nuovi tipi di esercizio ===== */
+.tr{font-style:italic;color:#3E6E86}
+.parts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0 6px}
+.parts .part-btn{display:flex;flex-direction:column;gap:2px;align-items:flex-start;text-align:left;padding:12px 16px;border:2px solid var(--line);border-radius:12px;background:var(--card);font:inherit}
+.parts .part-btn b{font-family:var(--title);font-size:1.35rem;color:var(--bord)}
+.parts .part-btn span{font-weight:600}
+.parts .part-btn small{color:var(--soft)}
+.parts .part-btn.on{border-color:var(--bord);background:var(--sole-tint);box-shadow:0 0 0 1px var(--bord)}
+@media (max-width:620px){.parts{grid-template-columns:1fr}}
+.ptabs{display:inline-flex;gap:4px;margin-right:6px}
+.ptabs .part-btn{border:1.5px solid var(--bord);background:var(--card);color:var(--bord);border-radius:20px;padding:2px 12px;font:inherit;font-weight:700;font-size:.9rem;white-space:nowrap}
+.ptabs .part-btn.on{background:var(--bord);color:#fff}
+.part-head{margin:22px 0 0;padding:10px 16px;border-radius:10px;background:var(--bord);color:#fff;font-size:1.05rem}
+.part-head b{font-family:var(--title);font-size:1.3rem}
+.part-head .tr{color:#F3E3E6;display:block}
+.part-head[hidden]{display:none}
+.opts{display:inline-flex;flex-wrap:wrap;gap:6px;vertical-align:middle;margin:2px 0}
+.opts button{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:2px 14px;font:inherit;line-height:1.5}
+.opts button:hover{border-color:var(--ink)}
+.opts button.sel{border-color:var(--mare);background:var(--mare-tint);font-weight:700}
+.opts button.ok{border-color:var(--ok);background:var(--verde-tint);color:var(--ok)}
+.opts button.ko{border-color:var(--rosso);background:#FBE9E7;color:var(--rosso);text-decoration:line-through}
+.opts button.miss{border-style:dashed;border-color:var(--ok)}
+.ex-list li{line-height:2.1}
+.text.msg{border:1px solid var(--line);border-left:6px solid var(--sole);border-radius:10px;padding:14px 18px;line-height:2.1;font-size:1.08rem}
+.text .tok{cursor:pointer;border-radius:4px;padding:0 1px}
+.text .tok:hover{background:var(--paper2)}
+.text .tok.mk{background:#FFE34D}
+.text .tok.m-d{background:var(--mare-tint);box-shadow:inset 0 -3px var(--mare)}
+.text .tok.m-i{background:#FBE9E7;box-shadow:inset 0 -3px var(--rosso)}
+.text .tok.ok{outline:2px solid var(--ok);outline-offset:1px}
+.text .tok.ko{outline:2px solid var(--rosso);outline-offset:1px;text-decoration:line-through}
+.text .tok.miss{outline:2px dashed var(--ok);outline-offset:1px}
+.ord{margin-bottom:10px}
+.ord-line{min-height:2.4em;border-bottom:2px solid var(--mare);background:var(--mare-tint);border-radius:6px 6px 0 0;padding:4px 8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ord-line:empty::before{content:"…";color:var(--soft)}
+.ord-line.ok{border-color:var(--ok);background:var(--verde-tint)}
+.ord-line.ko{border-color:var(--rosso);background:#FBE9E7}
+.ord-pool{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.ord-pool .chip.used{opacity:.25;pointer-events:none}
+.chip.in{background:var(--card)}
+select.gap{width:auto;min-width:4.5em}
+.ex[hidden]{display:none}
+
+/* ===== versione insegnante: barra in basso sul telefono ===== */
+.mbar,.mlist{display:none}
+@media (max-width:700px){.jump{display:none}.ptabs .part-btn{padding:2px 9px}.prof .pts{display:none}.prof .prof-badge{font-size:0;padding:2px 8px}.prof .prof-badge::after{content:"Insegnante";font-size:.75rem}}
+@media (max-width:700px){
+  .prof .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:55;align-items:center;gap:8px;padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));background:var(--card);border-top:1px solid var(--line);box-shadow:0 -6px 18px -10px rgba(0,0,0,.3)}
+  .prof .mbar button.nv{flex:none;width:52px;height:46px;border-radius:12px;border:1.5px solid var(--bord);background:var(--card);color:var(--bord);font-size:1.6rem;line-height:1}
+  .prof .mbar button.nv:disabled{opacity:.3}
+  .prof .mbar .mt{flex:1;min-width:0;border:0;background:none;text-align:center;font:inherit;padding:2px 4px}
+  .prof .mbar .mt small{display:block;color:var(--soft);font-size:.8rem}
+  .prof .mbar .mt b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--bord)}
+  .prof .mlist.on{display:block;position:fixed;left:8px;right:8px;bottom:calc(72px + env(safe-area-inset-bottom,0px));z-index:56;max-height:65vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 30px -10px rgba(0,0,0,.4);padding:6px}
+  .prof .mlist button{display:block;width:100%;text-align:left;border:0;background:none;font:inherit;padding:9px 10px;border-radius:8px}
+  .prof .mlist button.cur{background:var(--sole-tint);font-weight:700}
+  .prof .mlist .ph{padding:8px 10px 2px;font-weight:700;color:var(--soft);font-size:.85rem}
+  .prof .sheet{padding-bottom:90px}
+  .prof .pairs{grid-template-columns:1fr}
+  .prof .dl{grid-template-columns:5em 1fr}
+  .prof .ex-list li,.prof .dl,.prof .text{overflow-wrap:anywhere}
+}
+.prof .ex .actions,.prof #sendRes,.prof #copyRes,.prof #resetAll,.prof .who-box .field{display:none}
+.prof .ord-pool{display:none}
 </style>
 </head>
-<body data-level="Italiano A1" data-mode="studente" data-unit="Unità 1" data-lesson="Lezione 4" data-name="Lavori o studi?">
+<body data-level="Italiano A2" data-mode="studente" data-unit="Unità 1" data-lesson="Lezione 4" data-name="Un regalo per tutti">
 
 <header class="bar">
   <span class="bar-title" id="barTitle"></span>
   <div class="progress" aria-hidden="true"><span id="prog"></span></div>
-  <nav class="jump" aria-label="Vai all’esercizio">
-    <a href="#es1" data-for="e1">1</a><a href="#es2" data-for="e2">2</a><a href="#es3" data-for="e3">3</a><a href="#es4" data-for="e4">4</a><a href="#es5" data-for="e5">5</a><a href="#es6" data-for="e6">6</a><a href="#es7" data-for="e7">7</a><a href="#es8" data-for="e8">8</a><a href="#es9" data-for="e9">9</a><a href="#es10" data-for="e10">10</a><a href="#es11" data-for="e11">11</a><a href="#es12" data-for="e12">12</a>
-  </nav>
-  <span class="pts" id="pts">0 / 113</span>
+  <nav class="jump" id="jump" aria-label="Vai all’esercizio"></nav>
+  <span class="pts" id="pts">0 / 0</span>
 </header>
 
 <main class="sheet">
@@ -257,127 +307,227 @@ textarea:focus{outline:none;border-color:var(--mare)}
     <div class="who-box">
       <label class="field"><b>Nome</b><input id="nome" autocomplete="name" placeholder="Scrivi il tuo nome"></label>
       <label class="field"><b>Data</b><input id="data"></label>
-      <div class="how"><p>Выполняй упражнения прямо на странице и нажимай «Controlla». Ответы сохраняются в этом браузере. В конце нажми «Invia all’insegnante»: откроется Google-форма с твоими результатами, нажми в ней «Invia».</p></div>
+      <div class="how"><p>Тетрадь состоит из двух частей. Делай ту часть, которую задал преподаватель. Нажимай «Controlla» под каждым упражнением, а в конце части — «Invia all’insegnante»: откроется Google-форма с твоими результатами, нажми в ней «Invia».</p></div>
     </div>
   </section>
 
-  <section class="ex" id="es1" data-ex="e1">
-    <span class="kind" data-icon="gram">Esercizio 1</span>
-    <h2>Componi le frasi</h2>
-    <p class="lead">Completa le frasi con le parole della lista. Tocca uno spazio, poi la parola giusta. Ogni parola si usa una volta.<span class="tr">Составь фразы: нажми на пропуск, затем на нужное слово. Каждое слово используется один раз.</span></p>
-    <div class="bank" id="bank1"><button class="chip">è</button><button class="chip">in</button><button class="chip">sono</button><button class="chip">abito</button><button class="chip">di</button><button class="chip">fa</button><button class="chip">lavoriamo</button><button class="chip">a</button></div>
-<ol class="ex-list"><li>Noi <button class="slot" data-answer="lavoriamo"></button> <button class="slot" data-answer="in"></button> una scuola di lingue.</li><li>Teresa <button class="slot" data-answer="fa"></button> la segretaria.</li><li>Io <button class="slot" data-answer="abito"></button> <button class="slot" data-answer="a"></button> Bologna.</li><li>Hans <button class="slot" data-answer="è"></button> <button class="slot" data-answer="di"></button> Berlino.</li><li>Carlo e Serena <button class="slot" data-answer="sono"></button> avvocati.</li></ol>
-    <div class="actions"><button class="btn" data-check="e1">Controlla</button><button class="btn ghost" data-reset="e1">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
+  <div class="parts" role="tablist" aria-label="Parti del quaderno">
+    <button class="part-btn" data-part="1" role="tab"><b>Parte 1</b><span>Pronomi diretti e indiretti</span><small>после первой части урока</small></button>
+    <button class="part-btn" data-part="2" role="tab"><b>Parte 2</b><span>Piacere, mancare, servire · ci e ne</span><small>после второй части урока</small></button>
+  </div>
+
+  <!-- ================= PARTE 1 ================= -->
+  <div class="part-head" data-part="1"><b>Parte 1</b> · Pronomi diretti e indiretti <span class="tr">Часть 1: прямые и косвенные местоимения</span></div>
+
+  <section class="ex" data-part="1" data-ex="e1" data-type="pairs">
+    <span class="kind" data-icon="match">Esercizio 1</span>
+    <h2>Chi riceve che cosa?</h2>
+    <p class="lead">Collega la persona (A) con il regalo giusto (B). Guarda bene il pronome! Tocca una frase a sinistra, poi la sua coppia a destra.<span class="tr">Соедини человека (A) с подходящим подарком (B). Смотри на местоимение! Нажми на фразу слева, потом на пару справа.</span></p>
+    <div class="pairs">
+      <div class="col"><h3>A</h3><ul>
+        <li><button class="card pa" data-n="1" data-key="c"><span class="bd">1</span><span class="txt">Mia sorella ama leggere.</span></button></li>
+        <li><button class="card pa" data-n="2" data-key="a"><span class="bd">2</span><span class="txt">Mio padre ha sempre freddo alle mani.</span></button></li>
+        <li><button class="card pa" data-n="3" data-key="e"><span class="bd">3</span><span class="txt">I miei amici amano il calcio.</span></button></li>
+        <li><button class="card pa" data-n="4" data-key="b"><span class="bd">4</span><span class="txt">Marta, tu bevi tanto caffè!</span></button></li>
+        <li><button class="card pa" data-n="5" data-key="f"><span class="bd">5</span><span class="txt">Io e mio marito abbiamo una casa nuova.</span></button></li>
+        <li><button class="card pa" data-n="6" data-key="d"><span class="bd">6</span><span class="txt">Signora Bianchi, che bel giardino!</span></button></li>
+      </ul></div>
+      <div class="col"><h3>B</h3><ul>
+        <li><div class="card pb" data-l="a" role="button" tabindex="0"><span class="bd">a</span><span class="txt">Gli compro un paio di guanti.</span></div></li>
+        <li><div class="card pb" data-l="b" role="button" tabindex="0"><span class="bd">b</span><span class="txt">Ti regalo una moka nuova.</span></div></li>
+        <li><div class="card pb" data-l="c" role="button" tabindex="0"><span class="bd">c</span><span class="txt">Le regalo un romanzo.</span></div></li>
+        <li><div class="card pb" data-l="d" role="button" tabindex="0"><span class="bd">d</span><span class="txt">Le porto dei semi di fiori.</span></div></li>
+        <li><div class="card pb" data-l="e" role="button" tabindex="0"><span class="bd">e</span><span class="txt">Gli prendo i biglietti per la partita.</span></div></li>
+        <li><div class="card pb" data-l="f" role="button" tabindex="0"><span class="bd">f</span><span class="txt">I nostri amici ci regalano una pianta.</span></div></li>
+      </ul></div>
+    </div>
+    <p class="sol">1 – c · 2 – a · 3 – e · 4 – b · 5 – f · 6 – d</p>
   </section>
 
-  <section class="ex" id="es2" data-ex="e2">
-    <span class="kind" data-icon="match">Esercizio 2</span>
-    <h2>Dove lavorano?</h2>
-    <p class="lead">Dove lavorano queste persone? Tocca una professione a sinistra, poi il luogo a destra.<span class="tr">Где работают эти люди? Нажми на профессию слева, затем на место справа.</span></p>
-    <div class="pairs" id="pairs"><div class="col"><h3>Chi?</h3><ul><li><button class="card pa" data-n="1" data-key="c"><span class="bd">1</span><span class="txt">l’infermiera</span></button></li><li><button class="card pa" data-n="2" data-key="e"><span class="bd">2</span><span class="txt">il cuoco</span></button></li><li><button class="card pa" data-n="3" data-key="a"><span class="bd">3</span><span class="txt">l’operaio</span></button></li><li><button class="card pa" data-n="4" data-key="b"><span class="bd">4</span><span class="txt">la farmacista</span></button></li><li><button class="card pa" data-n="5" data-key="d"><span class="bd">5</span><span class="txt">la commessa</span></button></li></ul></div><div class="col"><h3>Dove?</h3><ul><li><div class="card pb" data-l="a" role="button" tabindex="0"><span class="bd">a</span><span class="txt">in una fabbrica</span></div></li><li><div class="card pb" data-l="b" role="button" tabindex="0"><span class="bd">b</span><span class="txt">in una farmacia</span></div></li><li><div class="card pb" data-l="c" role="button" tabindex="0"><span class="bd">c</span><span class="txt">in un ospedale</span></div></li><li><div class="card pb" data-l="d" role="button" tabindex="0"><span class="bd">d</span><span class="txt">in un negozio</span></div></li><li><div class="card pb" data-l="e" role="button" tabindex="0"><span class="bd">e</span><span class="txt">in un ristorante</span></div></li></ul></div></div>
-    <p class="sol" style="margin-top:10px">1 – c · 2 – e · 3 – a · 4 – b · 5 – d</p>
-    <div class="actions"><button class="btn" data-check="e2">Controlla</button><button class="btn ghost" data-reset="e2">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
+  <section class="ex" data-part="1" data-ex="e2" data-type="pen2">
+    <span class="kind" data-icon="read">Esercizio 2</span>
+    <h2>Due colori: chi? o a chi?</h2>
+    <p class="lead">Leggi il testo. Con il blu evidenzia i pronomi diretti (chi? che cosa?), con il rosso i pronomi indiretti (a chi?).<span class="tr">Прочитай текст. Синим отметь прямые местоимения (кого? что?), красным — косвенные (кому?). Лишние слова отнимают баллы.</span></p>
+    <div class="pens" role="group" aria-label="Evidenziatori">
+      <button class="pen" data-pen="d" style="--c:var(--mare)" aria-pressed="true"><i></i>Diretti: chi? che cosa?</button>
+      <button class="pen" data-pen="i" style="--c:var(--rosso)" aria-pressed="false"><i></i>Indiretti: a chi?</button>
+      <button class="pen gomma" data-pen="x" aria-pressed="false"><i></i>Gomma</button>
+    </div>
+    <div class="text msg" data-text="Domenica è il compleanno di mio fratello Luca. Oggi {lo|d} chiamo e {gli|i} chiedo cosa desidera. Lui ama la musica: {gli|i} regalo un vinile. Il vinile {lo|d} compro in un piccolo negozio vicino a casa. Mia madre {mi|i} dice: «Io {gli|i} preparo una torta!». La torta di mamma? Luca {la|d} adora! E i nonni? {Li|d} invitiamo alla festa e poi {gli|i} mandiamo le foto."></div>
   </section>
 
-  <section class="ex" id="es3" data-ex="e3">
-    <span class="kind" data-icon="gram">Esercizio 3</span>
-    <h2>Maschile, femminile o tutti e due?</h2>
-    <p class="lead">Scegli: M (maschile), F (femminile) o M e F (una forma per tutti e due).<span class="tr">Выбери: мужской род, женский или одна форма на двоих.</span></p>
-<ul class="vf"><li><span>la commessa</span><span class="opts" data-answer="F"><button>M</button><button>F</button><button>M e F</button></span></li><li><span>il cameriere</span><span class="opts" data-answer="M"><button>M</button><button>F</button><button>M e F</button></span></li><li><span>la traduttrice</span><span class="opts" data-answer="F"><button>M</button><button>F</button><button>M e F</button></span></li><li><span>l’operaio</span><span class="opts" data-answer="M"><button>M</button><button>F</button><button>M e F</button></span></li><li><span>la studentessa</span><span class="opts" data-answer="F"><button>M</button><button>F</button><button>M e F</button></span></li><li><span>barista</span><span class="opts" data-answer="M e F"><button>M</button><button>F</button><button>M e F</button></span></li><li><span>insegnante</span><span class="opts" data-answer="M e F"><button>M</button><button>F</button><button>M e F</button></span></li><li><span>il programmatore</span><span class="opts" data-answer="M"><button>M</button><button>F</button><button>M e F</button></span></li><li><span>cantante</span><span class="opts" data-answer="M e F"><button>M</button><button>F</button><button>M e F</button></span></li><li><span>l’infermiera</span><span class="opts" data-answer="F"><button>M</button><button>F</button><button>M e F</button></span></li></ul>
-    <div class="actions"><button class="btn" data-check="e3">Controlla</button><button class="btn ghost" data-reset="e3">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
+  <section class="ex" data-part="1" data-ex="e3" data-type="order">
+    <span class="kind" data-icon="write">Esercizio 3</span>
+    <h2>Metti in ordine</h2>
+    <p class="lead">Tocca le parole nell’ordine giusto e forma la frase. Per togliere una parola, toccala nella frase.<span class="tr">Нажимай на слова в правильном порядке и собери фразу. Чтобы убрать слово, нажми на него во фразе.</span></p>
+    <ol class="ex-list">
+      <li class="ord" data-answer="le regalo un profumo" data-words="regalo|le|un|profumo"><div class="ord-line" aria-label="La tua frase"></div><div class="ord-pool"></div></li>
+      <li class="ord" data-answer="non gli telefono mai" data-words="telefono|non|gli|mai"><div class="ord-line" aria-label="La tua frase"></div><div class="ord-pool"></div></li>
+      <li class="ord" data-answer="ti posso offrire un caffè" data-words="posso|ti|un|caffè|offrire"><div class="ord-line" aria-label="La tua frase"></div><div class="ord-pool"></div></li>
+      <li class="ord" data-answer="i nonni ci mandano una cartolina" data-words="ci|i nonni|mandano|una cartolina"><div class="ord-line" aria-label="La tua frase"></div><div class="ord-pool"></div></li>
+      <li class="ord" data-answer="non la compro domani|domani non la compro" data-words="la|domani|compro|non"><div class="ord-line" aria-label="La tua frase"></div><div class="ord-pool"></div></li>
+      <li class="ord" data-answer="stasera vi scrivo un messaggio|vi scrivo un messaggio stasera" data-words="vi|un messaggio|scrivo|stasera"><div class="ord-line" aria-label="La tua frase"></div><div class="ord-pool"></div></li>
+    </ol>
   </section>
 
-  <section class="ex" id="es4" data-ex="e4">
-    <span class="kind" data-icon="write">Esercizio 4</span>
-    <h2>E al femminile?</h2>
-    <p class="lead">Scrivi la professione al femminile.<span class="tr">Напиши профессию в женском роде.</span></p>
-<ol class="ex-list"><li>il commesso → la <input class="gap" data-answer="commessa" aria-label="risposta"></li><li>l’impiegato → l’ <input class="gap" data-answer="impiegata" aria-label="risposta"></li><li>il cameriere → la <input class="gap" data-answer="cameriera" aria-label="risposta"></li><li>l’infermiere → l’ <input class="gap" data-answer="infermiera" aria-label="risposta"></li><li>il traduttore → la <input class="gap" data-answer="traduttrice" aria-label="risposta"></li><li>l’imprenditore → l’ <input class="gap" data-answer="imprenditrice" aria-label="risposta"></li><li>lo studente → la <input class="gap" data-answer="studentessa" aria-label="risposta"></li><li>il musicista → la <input class="gap" data-answer="musicista" aria-label="risposta"></li></ol>
-    <div class="actions"><button class="btn" data-check="e4">Controlla</button><button class="btn ghost" data-reset="e4">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
+  <section class="ex" data-part="1" data-ex="e4" data-type="choice">
+    <span class="kind" data-icon="gram">Esercizio 4</span>
+    <h2>Giusto o sbagliato?</h2>
+    <p class="lead">Leggi le frasi: il pronome è giusto o sbagliato?<span class="tr">Прочитай фразы: местоимение правильное или нет? Подумай: кого? или кому?</span></p>
+    <ol class="ex-list">
+      <li>Anna? <b>La</b> telefono stasera. <span class="opts" data-correct="1"><button>✓ giusto</button><button>✗ sbagliato</button></span></li>
+      <li>Marco? <b>Lo</b> aiuto con i compiti. <span class="opts" data-correct="0"><button>✓ giusto</button><button>✗ sbagliato</button></span></li>
+      <li>Ai miei genitori <b>gli</b> regalo un viaggio. <span class="opts" data-correct="1"><button>✓ giusto</button><button>✗ sbagliato</button></span></li>
+      <li>Il professore? <b>Gli</b> chiedo una spiegazione. <span class="opts" data-correct="0"><button>✓ giusto</button><button>✗ sbagliato</button></span></li>
+      <li>Le mie amiche? <b>Gli</b> invito alla festa. <span class="opts" data-correct="1"><button>✓ giusto</button><button>✗ sbagliato</button></span></li>
+      <li>Signora, <b>Le</b> offro un caffè? <span class="opts" data-correct="0"><button>✓ giusto</button><button>✗ sbagliato</button></span></li>
+      <li>Paolo? <b>Gli</b> chiamo domani. <span class="opts" data-correct="1"><button>✓ giusto</button><button>✗ sbagliato</button></span></li>
+      <li>Mia nonna? <b>Le</b> scrivo una lettera. <span class="opts" data-correct="0"><button>✓ giusto</button><button>✗ sbagliato</button></span></li>
+    </ol>
   </section>
 
-  <section class="ex" id="es5" data-ex="e5">
-    <span class="kind" data-icon="read">Esercizio 5</span>
-    <h2>Teresa, Maddalena e Piero</h2>
-    <p class="lead">Completa il testo con le parole mancanti.<span class="tr">Дополни текст недостающими словами.</span></p>
-    <div class="readtext"><p>Teresa e Maddalena sono <input class="gap" data-answer="di" aria-label="risposta"> Napoli, ma abitano <input class="gap" data-answer="a" aria-label="risposta"> Bologna. Teresa fa la segretaria in <input class="gap" data-answer="una" aria-label="risposta"> scuola di lingue. Maddalena è impiegata in <input class="gap" data-answer="un'" aria-label="risposta"> agenzia pubblicitaria. Piero invece lavora in <input class="gap" data-answer="uno" aria-label="risposta"> studio fotografico.</p></div>
-    <div class="actions"><button class="btn" data-check="e5">Controlla</button><button class="btn ghost" data-reset="e5">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
+  <section class="ex" data-part="1" data-ex="e5" data-type="gap">
+    <span class="kind" data-icon="vocab">Esercizio 5</span>
+    <h2>Al negozio di regali</h2>
+    <p class="lead">Completa il dialogo tra Clara e la commessa con il pronome giusto.<span class="tr">Дополни диалог Клары с продавщицей нужным местоимением.</span></p>
+    <div class="dialog">
+      <div class="dl"><span class="sp">Clara</span><div>Buongiorno! Cerco un regalo per mio marito.</div></div>
+      <div class="dl g"><span class="sp">Commessa</span><div>Cosa <select class="gap" data-answer="gli"></select> piace?</div></div>
+      <div class="dl"><span class="sp">Clara</span><div><select class="gap" data-answer="gli"></select> piace tanto cucinare.</div></div>
+      <div class="dl g"><span class="sp">Commessa</span><div>Allora <select class="gap" data-answer="gli"></select> consiglio questo libro di ricette.</div></div>
+      <div class="dl"><span class="sp">Clara</span><div>Che bello! <select class="gap" data-answer="lo"></select> prendo. E per mia figlia? <select class="gap" data-answer="le"></select> piacciono tanto gli orecchini.</div></div>
+      <div class="dl g"><span class="sp">Commessa</span><div>Guardi questi. <select class="gap" data-answer="le"></select> piacciono, signora?</div></div>
+      <div class="dl"><span class="sp">Clara</span><div>Sì, sono bellissimi: <select class="gap" data-answer="li"></select> prendo!</div></div>
+      <div class="dl g"><span class="sp">Commessa</span><div><select class="gap" data-answer="li"></select> incarto?</div></div>
+      <div class="dl"><span class="sp">Clara</span><div>Sì, grazie. E <select class="gap" data-answer="mi"></select> dà anche un biglietto d’auguri?</div></div>
+    </div>
   </section>
 
-  <section class="ex" id="es6" data-ex="e6">
-    <span class="kind" data-icon="read">Esercizio 6</span>
-    <h2>Chi sono?</h2>
-    <p class="lead">Leggi le informazioni e scegli la risposta giusta.<span class="tr">Прочитай информацию и выбери правильный ответ.</span></p>
-    <div class="readtext"><p><b>Carlo Mari</b>: Torino — architetto · <b>Jane Taylor</b>: Liverpool — segretaria · <b>Colette Petit</b>: Parigi — insegnante · <b>Manolo Sanchez</b>: Siviglia — studente</p></div>
-<ul class="vf"><li><span>1. Dove abita il signor Mari?</span><span class="opts" data-answer="A Torino"><button>A Torino</button><button>A Parigi</button><button>A Liverpool</button></span></li><li><span>2. La signora Taylor è insegnante?</span><span class="opts" data-answer="No, è segretaria."><button>Sì, è insegnante.</button><button>No, è segretaria.</button></span></li><li><span>3. Jane è tedesca?</span><span class="opts" data-answer="No, è inglese."><button>Sì, è tedesca.</button><button>No, è inglese.</button></span></li><li><span>4. Di dov’è Manolo?</span><span class="opts" data-answer="Di Siviglia."><button>Di Torino.</button><button>Di Siviglia.</button></span></li><li><span>5. Che lavoro fa il signor Mari?</span><span class="opts" data-answer="Fa l’architetto."><button>Fa l’architetto.</button><button>Fa l’insegnante.</button></span></li><li><span>6. Manolo lavora?</span><span class="opts" data-answer="No, è studente."><button>Sì, fa il segretario.</button><button>No, è studente.</button></span></li><li><span>7. Chi lavora in una scuola?</span><span class="opts" data-answer="Colette"><button>Jane</button><button>Colette</button><button>Manolo</button></span></li><li><span>8. Colette lavora?</span><span class="opts" data-answer="Sì, fa l’insegnante."><button>Sì, fa l’insegnante.</button><button>No, è studentessa.</button></span></li></ul>
-    <div class="actions"><button class="btn" data-check="e6">Controlla</button><button class="btn ghost" data-reset="e6">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
-  </section>
-
-  <section class="ex" id="es7" data-ex="e7">
-    <span class="kind" data-icon="gram">Esercizio 7</span>
-    <h2>Scegli la parola giusta</h2>
-    <p class="lead">Completa con le parole della lista.<span class="tr">Вставь слова из списка.</span></p>
-<div class="wordlist"><span>abitate</span><span>abitiamo</span><span>fa</span><span>lavora</span><span>lavoro</span><span>siete</span><span>sono</span><span>sono</span><span>sta</span></div><ol class="ex-list"><li>Che lavoro <input class="gap" data-answer="fa" aria-label="risposta"> Antonella?</li><li>Come <input class="gap" data-answer="sta" aria-label="risposta">, signora De Cecco? <span class="hint">(формальное)</span></li><li>Elena <input class="gap" data-answer="lavora" aria-label="risposta"> in un’agenzia pubblicitaria.</li><li>Noi <input class="gap" data-answer="abitiamo" aria-label="risposta"> a Torino.</li><li>Voi <input class="gap" data-answer="abitate|siete" aria-label="risposta"> a Napoli?</li><li>Io <input class="gap" data-answer="sono" aria-label="risposta"> segretaria, <input class="gap" data-answer="lavoro" aria-label="risposta"> in una scuola.</li><li>Floriana e Maddalena <input class="gap" data-answer="sono" aria-label="risposta"> di Palermo.</li><li>Voi <input class="gap" data-answer="siete" aria-label="risposta"> tedeschi?</li></ol>
-    <div class="actions"><button class="btn" data-check="e7">Controlla</button><button class="btn ghost" data-reset="e7">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
-  </section>
-
-  <section class="ex" id="es8" data-ex="e8">
-    <span class="kind" data-icon="write">Esercizio 8</span>
-    <h2>Completa le frasi</h2>
-    <p class="lead">Completa con le parole della lista. Attenzione: c’è una parola in più!<span class="tr">Вставь слова из списка. Внимание: одно слово лишнее!</span></p>
-<div class="wordlist"><span>figlio</span><span>fa</span><span>l’</span><span>lo</span><span>ristorante</span><span>scuola</span><span>siamo</span><span>sono</span><span>studiano</span><span>un</span></div><ol class="ex-list"><li>Mi chiamo Mario Baldini, <input class="gap" data-answer="sono" aria-label="risposta"> di Cagliari e lavoro in un <input class="gap" data-answer="ristorante" aria-label="risposta">. Parlo il francese e l’inglese.</li><li>Si chiama Marie Dupont, è francese, di Marsiglia e <input class="gap" data-answer="fa" aria-label="risposta"> la segretaria. Parla lo spagnolo e l’italiano.</li><li><input class="gap" data-answer="siamo" aria-label="risposta"> di Venezia e lavoriamo in una <input class="gap" data-answer="scuola" aria-label="risposta">. Parliamo l’inglese e il francese.</li><li>Marta Benelli è commessa e ha un <input class="gap" data-answer="figlio" aria-label="risposta"> di 5 anni. Lavora tanto e cerca una baby-sitter.</li><li>Jodie e Albert <input class="gap" data-answer="studiano" aria-label="risposta"> a Perugia. Cercano <input class="gap" data-answer="un" aria-label="risposta"> piccolo lavoro. Parlano abbastanza bene <input class="gap" data-answer="l'" aria-label="risposta">italiano.</li></ol>
-    <div class="actions"><button class="btn" data-check="e8">Controlla</button><button class="btn ghost" data-reset="e8">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
-  </section>
-
-  <section class="ex" id="es9" data-ex="e9">
-    <span class="kind" data-icon="gram">Esercizio 9</span>
-    <h2>Plurali ribelli</h2>
-    <p class="lead">Scrivi il plurale. Ricorda: persone → <b>-logi</b>, cose → <b>-loghi</b>; <b>-ista</b> → -isti / -iste.<span class="tr">Напиши множественное число. Люди → -logi, вещи → -loghi; -ista → -isti (м. р.) / -iste (ж. р.).</span></p>
-<ol class="ex-list"><li>lo psicologo → <input class="gap" data-answer="gli psicologi" aria-label="risposta" style="min-width:11em"></li><li>il catalogo → <input class="gap" data-answer="i cataloghi" aria-label="risposta" style="min-width:11em"></li><li>il biologo → <input class="gap" data-answer="i biologi" aria-label="risposta" style="min-width:11em"></li><li>il dialogo → <input class="gap" data-answer="i dialoghi" aria-label="risposta" style="min-width:11em"></li><li>il cardiologo → <input class="gap" data-answer="i cardiologi" aria-label="risposta" style="min-width:11em"></li><li>il prologo → <input class="gap" data-answer="i prologhi" aria-label="risposta" style="min-width:11em"></li><li>il neurologo → <input class="gap" data-answer="i neurologi" aria-label="risposta" style="min-width:11em"></li><li>il geologo → <input class="gap" data-answer="i geologi" aria-label="risposta" style="min-width:11em"></li><li>il barista → <input class="gap" data-answer="i baristi" aria-label="risposta" style="min-width:11em"></li><li>la giornalista → <input class="gap" data-answer="le giornaliste" aria-label="risposta" style="min-width:11em"></li><li>il tassista → <input class="gap" data-answer="i tassisti" aria-label="risposta" style="min-width:11em"></li><li>la cantante → <input class="gap" data-answer="le cantanti" aria-label="risposta" style="min-width:11em"></li></ol>
-    <div class="actions"><button class="btn" data-check="e9">Controlla</button><button class="btn ghost" data-reset="e9">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
-  </section>
-
-  <section class="ex" id="es10" data-ex="e10">
-    <span class="kind" data-icon="gram">Esercizio 10</span>
-    <h2>Ripasso: verbi in -are (1)</h2>
-    <p class="lead">Scegli la forma giusta del verbo.<span class="tr">Повторение: выбери правильную форму глагола.</span></p>
-<ul class="vf"><li><span>1. Io ___ l’estate. (amare)</span><span class="opts" data-answer="amo"><button>ama</button><button>amiamo</button><button>amo</button><button>ami</button></span></li><li><span>2. Io non ___ inglese e lui non ___ italiano. (parlare)</span><span class="opts" data-answer="parlo / parla"><button>parlo / parla</button><button>parlo / parle</button><button>parla / parlo</button><button>parlo / parli</button></span></li><li><span>3. Noi ___ la musica classica. (ascoltare)</span><span class="opts" data-answer="ascoltiamo"><button>ascoltano</button><button>ascoltiamo</button><button>ascoltate</button><button>ascoltamo</button></span></li><li><span>4. Lui ___ la TV. (guardare)</span><span class="opts" data-answer="guarda"><button>guardi</button><button>guarda</button><button>guardano</button><button>guarde</button></span></li><li><span>5. Noi ___ insieme ogni sabato sera. (ballare)</span><span class="opts" data-answer="balliamo"><button>ballamo</button><button>ballate</button><button>balliamo</button><button>ballano</button></span></li><li><span>6. Lei non ___ la cena per la figlia? (cucinare)</span><span class="opts" data-answer="cucina"><button>cucinate</button><button>cuciniamo</button><button>cucini</button><button>cucina</button></span></li><li><span>7. Luigi ___ il pane ogni mattina. (comprare)</span><span class="opts" data-answer="compra"><button>compro</button><button>comprate</button><button>compri</button><button>compra</button></span></li><li><span>8. Lei ___ all’università. (studiare)</span><span class="opts" data-answer="studia"><button>studia</button><button>studi</button><button>studii</button><button>studie</button></span></li><li><span>9. Loro ___ a calcio ogni venerdì. (giocare)</span><span class="opts" data-answer="giocano"><button>giocano</button><button>giocono</button><button>gioccano</button><button>giociano</button></span></li><li><span>10. Voi ___ in centro. (camminare)</span><span class="opts" data-answer="camminate"><button>camminate</button><button>caminate</button><button>cammite</button><button>camminiate</button></span></li><li><span>11. Lui ___ bene, come un cantante. (cantare)</span><span class="opts" data-answer="canta"><button>cantia</button><button>cante</button><button>canta</button><button>canto</button></span></li><li><span>12. Paola e Filippo ___ spesso in Italia. (viaggiare)</span><span class="opts" data-answer="viaggiano"><button>viaggiano</button><button>viaggia</button><button>viaggate</button><button>viaggiamo</button></span></li><li><span>13. Mio fratello ___ in una banca e mia sorella ___ in un negozio. (lavorare)</span><span class="opts" data-answer="lavora / lavora"><button>lavora / lavora</button><button>lavore / lavore</button><button>lavoro / lavora</button><button>lavoro / lavorano</button></span></li><li><span>14. Tu ___ il mare e ___? (guardare, sognare)</span><span class="opts" data-answer="guardi / sogni"><button>guardo / sogno</button><button>guardi / sogno</button><button>guardi / sogni</button><button>guarda / sogna</button></span></li></ul>
-    <div class="actions"><button class="btn" data-check="e10">Controlla</button><button class="btn ghost" data-reset="e10">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
-  </section>
-
-  <section class="ex" id="es11" data-ex="e11">
-    <span class="kind" data-icon="write">Esercizio 11</span>
-    <h2>Ripasso: verbi in -are (2)</h2>
-    <p class="lead">Completa con la forma giusta del verbo tra parentesi.<span class="tr">Повторение: вставь глагол в правильной форме.</span></p>
-<ol class="ex-list"><li>Io <span class="hint">(parlare)</span> <input class="gap" data-answer="parlo" aria-label="risposta"> con gli amici.</li><li>Tu <span class="hint">(lavorare)</span> <input class="gap" data-answer="lavori" aria-label="risposta"> in un ufficio?</li><li>Lui <span class="hint">(abitare)</span> <input class="gap" data-answer="abita" aria-label="risposta"> qui.</li><li>Noi <span class="hint">(ascoltare)</span> <input class="gap" data-answer="ascoltiamo" aria-label="risposta"> la radio.</li><li>Voi <span class="hint">(guardare)</span> <input class="gap" data-answer="guardate" aria-label="risposta"> spesso i film italiani?</li><li>Loro non <span class="hint">(visitare)</span> <input class="gap" data-answer="visitano" aria-label="risposta"> Roma molto spesso.</li><li>Io <span class="hint">(telefonare)</span> <input class="gap" data-answer="telefono" aria-label="risposta"> a mia sorella la sera.</li><li>Tu non <span class="hint">(trovare)</span> <input class="gap" data-answer="trovi" aria-label="risposta"> le chiavi?</li><li>Lei <span class="hint">(lavare)</span> <input class="gap" data-answer="lava" aria-label="risposta"> la macchina.</li><li>Noi <span class="hint">(imparare)</span> <input class="gap" data-answer="impariamo" aria-label="risposta"> molte parole nuove.</li><li>Voi non <span class="hint">(parlare)</span> <input class="gap" data-answer="parlate" aria-label="risposta"> lentamente.</li><li>Gli studenti <span class="hint">(studiare)</span> <input class="gap" data-answer="studiano" aria-label="risposta"> in biblioteca.</li><li>Io <span class="hint">(aspettare)</span> <input class="gap" data-answer="aspetto" aria-label="risposta"> l’autobus da dieci minuti.</li><li>Tu <span class="hint">(cambiare)</span> <input class="gap" data-answer="cambi" aria-label="risposta"> spesso idea.</li><li>Lui <span class="hint">(lavorare)</span> <input class="gap" data-answer="lavora" aria-label="risposta"> in un ristorante.</li><li>Noi <span class="hint">(abitare)</span> <input class="gap" data-answer="abitiamo" aria-label="risposta"> in una casa grande.</li><li>Voi <span class="hint">(ascoltare)</span> <input class="gap" data-answer="ascoltate" aria-label="risposta"> la professoressa?</li><li>Loro <span class="hint">(parlare)</span> <input class="gap" data-answer="parlano" aria-label="risposta"> tre lingue.</li><li>Io non <span class="hint">(trovare)</span> <input class="gap" data-answer="trovo" aria-label="risposta"> questo esercizio difficile.</li><li>Tu <span class="hint">(visitare)</span> <input class="gap" data-answer="visiti" aria-label="risposta"> spesso i tuoi amici?</li><li>Lei <span class="hint">(preparare)</span> <input class="gap" data-answer="prepara" aria-label="risposta"> la cena per la famiglia.</li><li>Noi non <span class="hint">(guardare)</span> <input class="gap" data-answer="guardiamo" aria-label="risposta"> la TV la sera.</li><li>Voi <span class="hint">(imparare)</span> <input class="gap" data-answer="imparate" aria-label="risposta"> velocemente.</li><li>Gli studenti non <span class="hint">(lavorare)</span> <input class="gap" data-answer="lavorano" aria-label="risposta"> molto in classe.</li><li>Io <span class="hint">(parlare)</span> <input class="gap" data-answer="parlo" aria-label="risposta"> con il professore.</li></ol>
-    <div class="actions"><button class="btn" data-check="e11">Controlla</button><button class="btn ghost" data-reset="e11">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
-  </section>
-
-  <section class="ex" id="es12" data-ex="e12">
-    <span class="kind" data-icon="write">Esercizio 12</span>
-    <h2>E tu? Che lavoro fai?</h2>
-    <p class="lead">Scrivi 3–4 frasi: che lavoro fai (o che cosa studi), dove lavori, come lavori.<span class="tr">Напиши 3–4 предложения: кем работаешь (или что изучаешь), где и как работаешь.</span></p>
-    <div class="starters" id="starters"><button>Faccio il/la…</button><button>Sono…</button><button>Lavoro in…</button><button>Lavoro a tempo pieno.</button><button>Lavoro part-time.</button><button>Lavoro da remoto.</button><button>Studio…</button></div>
-    <textarea id="essay" data-scritto="Esercizio 12" placeholder="Faccio… Lavoro in…" aria-label="Il tuo testo"></textarea>
-    <div class="meters"><span class="meter" id="mFrasi">Frasi: <b>0</b> / 3–4</span><span class="meter" id="mFare"><i>faccio / sono</i>: <b>0</b></span><span class="meter" id="mIn"><i>lavoro in / studio</i>: <b>0</b></span></div>
+  <section class="ex" data-part="1" data-ex="e6" data-type="write">
+    <span class="kind" data-icon="write">Esercizio 6</span>
+    <h2>Cosa regaliamo a…?</h2>
+    <p class="lead">Scrivi un messaggio a un amico o a un’amica (5–6 frasi): tra poco è il compleanno di una persona che conoscete. Cosa le o gli regalate? Perché? Usa gli, le, lo, la.<span class="tr">Напиши сообщение другу или подруге (5–6 предложений): скоро день рождения у вашего общего знакомого. Что вы ему или ей подарите и почему? Используй gli, le, lo, la.</span></p>
+    <div class="starters"><button>Ciao!</button><button>Sabato è il compleanno di…</button><button>Cosa gli regaliamo?</button><button>Cosa le regaliamo?</button><button>Gli piace…</button><button>Le piacciono…</button><button>Lo compro io!</button></div>
+    <textarea data-scritto="Parte 1 — Esercizio 6" data-min="5" data-words="gli|le" placeholder="Ciao Marta! Sabato è il compleanno di Paolo. Cosa gli regaliamo?…" aria-label="Il tuo testo"></textarea>
+    <div class="meters"><span class="meter m-fr">Frasi: <b>0</b> / 5–6</span><span class="meter m-w"><i>gli / le</i>: <b>0</b></span></div>
     <p class="hint" style="margin-top:8px">Это задание проверяет преподаватель: текст попадёт в форму вместе с результатом.</p>
   </section>
 
-  <!-- ===== COMPLIMENTI ===== -->
+  <!-- ================= PARTE 2 ================= -->
+  <div class="part-head" data-part="2"><b>Parte 2</b> · Piacere, mancare, servire · ci e ne <span class="tr">Часть 2: piacere, mancare, servire, ci и ne</span></div>
+
+  <section class="ex" data-part="2" data-ex="e7" data-type="pairs">
+    <span class="kind" data-icon="match">Esercizio 1</span>
+    <h2>Inizio e fine</h2>
+    <p class="lead">Collega l’inizio (A) con la fine giusta (B). Attenzione: una cosa o tante cose?<span class="tr">Соедини начало (A) с правильным концом (B). Внимание: одна вещь или много?</span></p>
+    <div class="pairs">
+      <div class="col"><h3>A</h3><ul>
+        <li><button class="card pa" data-n="1" data-key="d"><span class="bd">1</span><span class="txt">Vivo all’estero da un anno e…</span></button></li>
+        <li><button class="card pa" data-n="2" data-key="a"><span class="bd">2</span><span class="txt">Per il viaggio…</span></button></li>
+        <li><button class="card pa" data-n="3" data-key="f"><span class="bd">3</span><span class="txt">Mio figlio mangia solo pizza:</span></button></li>
+        <li><button class="card pa" data-n="4" data-key="b"><span class="bd">4</span><span class="txt">Ai miei nonni…</span></button></li>
+        <li><button class="card pa" data-n="5" data-key="e"><span class="bd">5</span><span class="txt">Laura, sei partita ieri e già…</span></button></li>
+        <li><button class="card pa" data-n="6" data-key="c"><span class="bd">6</span><span class="txt">Non posso pagare:</span></button></li>
+      </ul></div>
+      <div class="col"><h3>B</h3><ul>
+        <li><div class="card pb" data-l="a" role="button" tabindex="0"><span class="bd">a</span><span class="txt">…mi servono una valigia e un passaporto.</span></div></li>
+        <li><div class="card pb" data-l="b" role="button" tabindex="0"><span class="bd">b</span><span class="txt">…piacciono i film vecchi.</span></div></li>
+        <li><div class="card pb" data-l="c" role="button" tabindex="0"><span class="bd">c</span><span class="txt">…mi mancano dieci euro.</span></div></li>
+        <li><div class="card pb" data-l="d" role="button" tabindex="0"><span class="bd">d</span><span class="txt">…mi manca tanto la mia famiglia.</span></div></li>
+        <li><div class="card pb" data-l="e" role="button" tabindex="0"><span class="bd">e</span><span class="txt">…mi manchi!</span></div></li>
+        <li><div class="card pb" data-l="f" role="button" tabindex="0"><span class="bd">f</span><span class="txt">…gli piace tantissimo!</span></div></li>
+      </ul></div>
+    </div>
+    <p class="sol">1 – d · 2 – a · 3 – f · 4 – b · 5 – e · 6 – c</p>
+  </section>
+
+  <section class="ex" data-part="2" data-ex="e8" data-type="choice">
+    <span class="kind" data-icon="gram">Esercizio 2</span>
+    <h2>Chi manca a chi?</h2>
+    <p class="lead">Leggi la frase italiana: chi sente la mancanza di chi? Scegli il significato giusto.<span class="tr">Прочитай итальянскую фразу: кто по кому скучает? Выбери правильный смысл.</span></p>
+    <ol class="ex-list">
+      <li><b>Ti manco?</b><br><span class="opts" data-correct="0"><button>Ты скучаешь по мне?</button><button>Я скучаю по тебе?</button></span></li>
+      <li><b>Mi manchi.</b><br><span class="opts" data-correct="1"><button>Ты скучаешь по мне.</button><button>Я скучаю по тебе.</button></span></li>
+      <li><b>Gli manchiamo.</b><br><span class="opts" data-correct="0"><button>Он скучает по нам.</button><button>Мы скучаем по нему.</button></span></li>
+      <li><b>Ci mancate!</b><br><span class="opts" data-correct="1"><button>Вы скучаете по нам!</button><button>Мы скучаем по вам!</button></span></li>
+      <li><b>Le manca suo figlio.</b><br><span class="opts" data-correct="0"><button>Она скучает по сыну.</button><button>Сын скучает по ней.</button></span></li>
+      <li><b>Mancate a Paolo.</b><br><span class="opts" data-correct="1"><button>Вы скучаете по Паоло.</button><button>Паоло скучает по вам.</button></span></li>
+    </ol>
+  </section>
+
+  <section class="ex" data-part="2" data-ex="e9" data-type="order">
+    <span class="kind" data-icon="write">Esercizio 3</span>
+    <h2>Metti in ordine</h2>
+    <p class="lead">Tocca le parole nell’ordine giusto e forma la frase.<span class="tr">Нажимай на слова в правильном порядке и собери фразу.</span></p>
+    <ol class="ex-list">
+      <li class="ord" data-answer="mi manca il mare" data-words="mi|il mare|manca"><div class="ord-line" aria-label="La tua frase"></div><div class="ord-pool"></div></li>
+      <li class="ord" data-answer="non gli piacciono i gatti" data-words="piacciono|gli|non|i gatti"><div class="ord-line" aria-label="La tua frase"></div><div class="ord-pool"></div></li>
+      <li class="ord" data-answer="ci servono due biglietti" data-words="servono|ci|due biglietti"><div class="ord-line" aria-label="La tua frase"></div><div class="ord-pool"></div></li>
+      <li class="ord" data-answer="mi è piaciuto il regalo|il regalo mi è piaciuto" data-words="è piaciuto|mi|il regalo"><div class="ord-line" aria-label="La tua frase"></div><div class="ord-pool"></div></li>
+      <li class="ord" data-answer="ne compro tre" data-words="ne|compro|tre"><div class="ord-line" aria-label="La tua frase"></div><div class="ord-pool"></div></li>
+      <li class="ord" data-answer="ci vado domani|domani ci vado" data-words="ci|domani|vado"><div class="ord-line" aria-label="La tua frase"></div><div class="ord-pool"></div></li>
+    </ol>
+  </section>
+
+  <section class="ex" data-part="2" data-ex="e10" data-type="choice">
+    <span class="kind" data-icon="gram">Esercizio 4</span>
+    <h2>Trova l’errore</h2>
+    <p class="lead">La frase è giusta o sbagliata?<span class="tr">Фраза правильная или в ней ошибка?</span></p>
+    <ol class="ex-list">
+      <li>Mi piacciono i fiori. <span class="opts" data-correct="0"><button>✓ giusto</button><button>✗ sbagliato</button></span></li>
+      <li>Mi manca i miei amici. <span class="opts" data-correct="1"><button>✓ giusto</button><button>✗ sbagliato</button></span></li>
+      <li>Quante sciarpe hai? Ci ho due. <span class="opts" data-correct="1"><button>✓ giusto</button><button>✗ sbagliato</button></span></li>
+      <li>Vai al mare? Sì, ci vado domani. <span class="opts" data-correct="0"><button>✓ giusto</button><button>✗ sbagliato</button></span></li>
+      <li>Io manco la mia famiglia. <span class="opts" data-correct="1"><button>✓ giusto</button><button>✗ sbagliato</button></span></li>
+      <li>Che ne dici di una pizza? <span class="opts" data-correct="0"><button>✓ giusto</button><button>✗ sbagliato</button></span></li>
+      <li>Gli serve una borsa nuova. <span class="opts" data-correct="0"><button>✓ giusto</button><button>✗ sbagliato</button></span></li>
+      <li>A Laura le piace il jazz. <span class="opts" data-correct="1"><button>✓ giusto</button><button>✗ sbagliato</button></span></li>
+    </ol>
+  </section>
+
+  <section class="ex" data-part="2" data-ex="e11" data-type="gap">
+    <span class="kind" data-icon="vocab">Esercizio 5</span>
+    <h2>Un regalo per la mamma</h2>
+    <p class="lead">Completa il dialogo con il pronome giusto.<span class="tr">Дополни диалог: выбери нужное местоимение или частицу.</span></p>
+    <div class="dialog">
+      <div class="dl"><span class="sp">Anna</span><div>Domenica è la festa della mamma. Cosa <select class="gap" data-answer="le"></select> regaliamo?</div></div>
+      <div class="dl g"><span class="sp">Luca</span><div>Mah… <select class="gap" data-answer="le"></select> piacciono tanto i fiori.</div></div>
+      <div class="dl"><span class="sp">Anna</span><div>I fiori? <select class="gap" data-answer="li"></select> prendiamo sempre! Che <select class="gap" data-answer="ne"></select> dici di un profumo?</div></div>
+      <div class="dl g"><span class="sp">Luca</span><div>Buona idea! In centro c’è una profumeria: <select class="gap" data-answer="ci"></select> andiamo domani?</div></div>
+      <div class="dl"><span class="sp">Anna</span><div>Domani non posso: <select class="gap" data-answer="mi"></select> serve tempo per finire un lavoro. Vai tu?</div></div>
+      <div class="dl g"><span class="sp">Luca</span><div>Va bene, <select class="gap" data-answer="ci"></select> vado io. Quanti profumi compro?</div></div>
+      <div class="dl"><span class="sp">Anna</span><div><select class="gap" data-answer="ne"></select> compri uno, basta!</div></div>
+      <div class="dl g"><span class="sp">Luca</span><div>E il biglietto d’auguri? <select class="gap" data-answer="lo"></select> scrivi tu?</div></div>
+      <div class="dl"><span class="sp">Anna</span><div>Sì, <select class="gap" data-answer="lo"></select> scrivo io. E poi <select class="gap" data-answer="le"></select> telefoniamo insieme!</div></div>
+    </div>
+  </section>
+
+  <section class="ex" data-part="2" data-ex="e12" data-type="write">
+    <span class="kind" data-icon="write">Esercizio 6</span>
+    <h2>Le cose che mi mancano</h2>
+    <p class="lead">Scrivi un post come Chiara (60–80 parole): cosa ti manca quando sei lontano/-a da casa? Che cosa ti piace del posto dove sei? Usa mi manca, mi mancano, mi piace, mi serve.<span class="tr">Напиши пост как Кьяра (60–80 слов): по чему ты скучаешь вдали от дома? Что тебе нравится там, где ты сейчас? Используй mi manca, mi mancano, mi piace, mi serve.</span></p>
+    <div class="starters"><button>Ciao a tutti!</button><button>Quando sono lontano/-a da casa…</button><button>Mi manca…</button><button>Mi mancano…</button><button>Però mi piace…</button><button>Mi serve sempre…</button><button>E a voi?</button></div>
+    <textarea data-scritto="Parte 2 — Esercizio 6" data-minw="60" data-words="manca|mancano|manchi" placeholder="Ciao a tutti! Quando sono lontana da casa mi manca…" aria-label="Il tuo testo"></textarea>
+    <div class="meters"><span class="meter m-wc">Parole: <b>0</b> / 60–80</span><span class="meter m-w"><i>manca / mancano</i>: <b>0</b></span></div>
+    <p class="hint" style="margin-top:8px">Это задание проверяет преподаватель: текст попадёт в форму вместе с результатом.</p>
+  </section>
+
+  <!-- ===== RISULTATO DELLA PARTE ===== -->
   <section class="finale" id="finale" aria-live="polite">
     <div class="ring">
       <svg viewBox="0 0 170 170"><circle class="bgc" cx="85" cy="85" r="74"/><circle class="fg" id="ringFg" cx="85" cy="85" r="74"/></svg>
-      <div class="num"><b id="finNum">0</b><span>su <span id="finMax">113</span></span></div>
+      <div class="num"><b id="finNum">0</b><span>su <span id="finMax">0</span></span></div>
     </div>
     <div>
       <p class="fin-title" id="finTitle">Il tuo risultato</p>
-      <p class="fin-sub" id="finSub">Controlla tutti gli esercizi per vedere quante risposte giuste hai.</p>
-      <p class="fin-ru" id="finRu">Нажми «Controlla tutto», чтобы увидеть, сколько у тебя правильных ответов.</p>
+      <p class="fin-sub" id="finSub"></p>
+      <p class="fin-ru" id="finRu"></p>
       <ul class="break" id="break"></ul>
       <div class="actions">
         <button class="btn" id="checkAll">Controlla tutto</button>
         <button class="btn alt" id="sendRes">Invia all’insegnante</button>
         <button class="btn ghost" id="copyRes">Copia il risultato</button>
-        <button class="btn ghost" id="resetAll">Cancella tutto</button>
+        <button class="btn ghost" id="resetAll">Cancella questa parte</button>
       </div>
     </div>
   </section>
@@ -385,7 +535,6 @@ textarea:focus{outline:none;border-color:var(--mare)}
   <footer class="folio"><span id="folioL"></span><span>Quaderno degli esercizi</span></footer>
 </main>
 <div class="toast" id="toast" role="status"></div>
-
 <script>
 (function(){
   const B=document.body,PROF=B.dataset.mode==='insegnante',BRAND='Italiano passo passo';
@@ -394,21 +543,20 @@ textarea:focus{outline:none;border-color:var(--mare)}
 
   /* ===== GOOGLE MODULO: dove arrivano i risultati (uno per tutto il corso, non cambiare) ===== */
   const MODULO={
-    url:'https://docs.google.com/forms/d/14NRmZJQlbSai_Hxm4RKLjGgWE5HG28OJ__dfjNyahqs/viewform', /* modulo A1 */
+    url:'https://docs.google.com/forms/d/e/1FAIpQLSdWvL3aBL7NjZmhLvsCEaIKkgNiHiT0R3lUEP6061C2_TRfZg/viewform',
     nome:'entry.1271164771', data:'entry.1325902077', lezione:'entry.1705899089', punteggio:'entry.1851506855',
     dettagli:'entry.1450450077', testo:'entry.2110683261', percentuale:'entry.1501772916'
   };
-  const $=s=>document.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+  const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* intestazioni */
   document.title=BRAND+' — '+UNIT+', '+LES+': '+NAME+' — Quaderno degli esercizi'+(PROF?' (insegnante)':'');
   $('#barTitle').innerHTML=BRAND+' — '+UNIT+', '+LES+' — <i>'+NAME+'</i>';
   $('#coverUnit').textContent=UNIT+' — '+LES;$('#coverName').textContent=NAME;$('#lvl').textContent=LV;
   $('#folioL').textContent=BRAND+' — '+LV+' — '+UNIT+', '+LES+': '+NAME;
   if(PROF){B.classList.add('prof');const bd=document.createElement('span');bd.className='prof-badge';bd.textContent='Versione insegnante — con soluzioni';$('#barTitle').after(bd)}
 
-  /* icone a linee nere (stesse della lezione) */
+  /* icone a linee nere */
   const ICONS={
     write:'<rect x="11" y="5" width="27" height="38" rx="3"/><path d="M6 11h8M6 19h8M6 27h8M6 35h8"/><rect x="16" y="11" width="4" height="4"/><path d="M24 13h9"/><rect x="16" y="20" width="4" height="4"/><path d="M24 22h9"/><rect x="16" y="29" width="4" height="4"/><path d="M24 31h4"/><path d="M44 17 31 36l-4 3 1-5 13-19z"/>',
     gram:'<path d="M5 5h26v19H5z"/><path d="M11 10l10 8"/><circle cx="38" cy="11" r="4"/><path d="M38 15v15M27 19l11 4"/><circle cx="12" cy="34" r="3"/><circle cx="25" cy="34" r="3"/><path d="M6 44c0-3 3-5 6-5s6 2 6 5M19 44c0-3 3-5 6-5s6 2 6 5"/>',
@@ -425,185 +573,239 @@ textarea:focus{outline:none;border-color:var(--mare)}
   function judgeInput(inp){
     inp.classList.remove('ok','ko');const n=inp.nextElementSibling;if(n&&n.classList.contains('acc'))n.remove();
     const r=judge(inp.value,inp.dataset.answer);inp.classList.add(r?'ok':'ko');
-    if(r===1){const a=inp.dataset.answer.split('|').find(x=>fold(x)===fold(inp.value));const s=document.createElement('span');s.className='acc';s.textContent='→ '+a;s.title='Attenzione all’accento';inp.after(s)}
+    if(r===1){const a=inp.dataset.answer.split('|').find(x=>fold(x)===fold(inp.value));const s=document.createElement('span');s.className='acc';s.textContent='→ '+a;inp.after(s)}
     return r?1:0;
   }
   const clearMarks=root=>{$$('.ok,.ko,.miss',root).forEach(e=>e.classList.remove('ok','ko','miss'));$$('.acc',root).forEach(e=>e.remove())};
 
-  const MAX={e1:8,e2:5,e3:10,e4:8,e5:5,e6:8,e7:9,e8:9,e9:12,e10:14,e11:25},LABELS={e1:'Esercizio 1',e2:'Esercizio 2',e3:'Esercizio 3',e4:'Esercizio 4',e5:'Esercizio 5',e6:'Esercizio 6',e7:'Esercizio 7',e8:'Esercizio 8',e9:'Esercizio 9',e10:'Esercizio 10',e11:'Esercizio 11'};
-  const score={e1:null,e2:null,e3:null,e4:null,e5:null,e6:null,e7:null,e8:null,e9:null,e10:null,e11:null};const NEX=Object.keys(MAX).length;
-  const TOTAL=Object.values(MAX).reduce((a,b)=>a+b,0);
+  /* ===== esercizi ===== */
+  const EX=$$('section.ex[data-type]').map(sec=>({k:sec.dataset.ex,part:sec.dataset.part,type:sec.dataset.type,sec}));
+  const byK={};EX.forEach(e=>byK[e.k]=e);
+  let N=0;let lastPart='';EX.forEach(e=>{if(e.part!==lastPart){N=0;lastPart=e.part}N++;e.n=N;e.sec.id='es'+e.k.slice(1);e.label='Esercizio '+N});
 
-  /* ===== Es. 1: banca di parole ===== */
-  const slots=$$('#es1 .slot'),chips=$$('#bank1 .chip');let cur1=null;
-  const cap=(s,c)=>c?s.charAt(0).toUpperCase()+s.slice(1):s;
-  function setCur(sl){cur1=sl;slots.forEach(s=>s.classList.toggle('cur',s===sl))}
-  function nextEmpty(){return slots.find(s=>!s.dataset.val)||null}
-  function fillSlot(sl,w){sl.dataset.val=w;sl.textContent=cap(w,sl.hasAttribute('data-cap'));chips.forEach(c=>{if(c.textContent===w)c.classList.add('used')})}
-  function emptySlot(sl){const w=sl.dataset.val;delete sl.dataset.val;sl.textContent='';chips.forEach(c=>{if(c.textContent===w)c.classList.remove('used')})}
-  chips.forEach(c=>c.onclick=()=>{let t=(cur1&&!cur1.dataset.val)?cur1:nextEmpty();if(!t)return;clearMarks($('#es1'));fillSlot(t,c.textContent);setCur(nextEmpty());save()});
-  slots.forEach(s=>s.onclick=()=>{clearMarks($('#es1'));if(s.dataset.val){emptySlot(s);save()}setCur(s)});
-  setCur(slots[0]);
+  /* menu a tendina */
+  const SEL_OPTS=['ci','ne','mi','ti','gli','le','lo','la','li'];
+  $$('select.gap').forEach(s=>{s.innerHTML='<option value="">…</option>'+SEL_OPTS.map(o=>'<option>'+o+'</option>').join('')});
 
-  /* ===== Es. 2: collega ===== */
-  const PC=['var(--mare)','var(--rosso)','var(--verde)','var(--sole)','var(--bord)'];
-  const pa=$$('#pairs .pa'),pb=$$('#pairs .pb');let pairs={},selA=null;
-  function drawPairs(){
-    pa.forEach(a=>{const l=pairs[a.dataset.n];a.classList.toggle('paired',!!l);a.classList.toggle('sel',a===selA);a.style.setProperty('--c',PC[a.dataset.n-1]);a.querySelector('.bd').textContent=l?a.dataset.n+l:a.dataset.n});
-    pb.forEach(b=>{const n=Object.keys(pairs).find(k=>pairs[k]===b.dataset.l);b.classList.toggle('paired',!!n);if(n)b.style.setProperty('--c',PC[n-1]);b.querySelector('.bd').textContent=n?n+b.dataset.l:b.dataset.l});
-  }
-  pa.forEach(a=>a.onclick=e=>{if(e.target.closest('.gloss'))return;clearMarks($('#es2'));if(pairs[a.dataset.n]){delete pairs[a.dataset.n]}selA=(selA===a)?null:a;drawPairs();save()});
-  pb.forEach(b=>{const act=e=>{if(e.target.closest('input,.gloss'))return;clearMarks($('#es2'));const l=b.dataset.l;
-      if(selA){for(const k in pairs)if(pairs[k]===l)delete pairs[k];pairs[selA.dataset.n]=l;selA=null}
-      else{for(const k in pairs)if(pairs[k]===l)delete pairs[k]}
-      drawPairs();save()};
-    b.onclick=act;b.onkeydown=e=>{if((e.key==='Enter'||e.key===' ')&&e.target===b){e.preventDefault();act(e)}}});
-  drawPairs();
+  /* banca di parole */
+  EX.filter(e=>e.type==='bank').forEach(e=>{
+    const slots=$$('.slot',e.sec),chips=$$('.chip',e.sec);let cur=null;
+    const setCur=s=>{cur=s;slots.forEach(x=>x.classList.toggle('cur',x===s))};
+    const nextEmpty=()=>slots.find(s=>!s.dataset.val)||null;
+    e.fill=(s,w)=>{s.dataset.val=w;s.textContent=w;chips.forEach(c=>{if(c.textContent===w)c.classList.add('used')})};
+    const empty=s=>{const w=s.dataset.val;delete s.dataset.val;s.textContent='';chips.forEach(c=>{if(c.textContent===w)c.classList.remove('used')})};
+    chips.forEach(c=>c.onclick=()=>{if(c.classList.contains('used'))return;const t=(cur&&!cur.dataset.val)?cur:nextEmpty();if(!t)return;clearMarks(e.sec);e.fill(t,c.textContent);setCur(nextEmpty());save()});
+    slots.forEach(s=>s.onclick=()=>{clearMarks(e.sec);if(s.dataset.val){empty(s);save()}setCur(s)});
+    e.max=slots.length;e.check=()=>{let n=0;slots.forEach(s=>{s.classList.remove('cur');const ok=s.dataset.val===s.dataset.answer;s.classList.add(ok?'ok':'ko');if(ok)n++});return n};
+    e.reset=()=>{slots.forEach(s=>{if(s.dataset.val)empty(s)});setCur(slots[0])};
+    e.get=()=>slots.map(s=>s.dataset.val||'');e.set=v=>{(v||[]).forEach((w,i)=>{if(w&&slots[i])e.fill(slots[i],w)});setCur(nextEmpty())};
+    setCur(slots[0]);
+  });
+  /* scelta multipla */
+  EX.filter(e=>e.type==='choice').forEach(e=>{
+    const groups=$$('.opts',e.sec);
+    groups.forEach(g=>$$('button',g).forEach(b=>b.onclick=()=>{clearMarks(g);$$('button',g).forEach(x=>x.classList.toggle('sel',x===b));save()}));
+    e.max=groups.length;
+    e.check=()=>{let n=0;groups.forEach(g=>{const bs=$$('button',g),s=bs.findIndex(b=>b.classList.contains('sel'));const c=+g.dataset.correct;if(s<0){bs[c].classList.add('miss');return}bs[s].classList.add(s===c?'ok':'ko');if(s===c)n++});return n};
+    e.reset=()=>groups.forEach(g=>$$('button',g).forEach(b=>b.classList.remove('sel')));
+    e.get=()=>groups.map(g=>$$('button',g).findIndex(b=>b.classList.contains('sel')));
+    e.set=v=>(v||[]).forEach((i,j)=>{if(i>=0&&groups[j])$$('button',groups[j])[i].classList.add('sel')});
+    if(PROF)groups.forEach(g=>$$('button',g)[+g.dataset.correct].classList.add('sel','ok'));
+  });
+  /* completare */
+  EX.filter(e=>e.type==='gap').forEach(e=>{
+    const gs=$$('.gap',e.sec);e.max=gs.length;
+    gs.forEach(i=>i.addEventListener(i.tagName==='SELECT'?'change':'input',()=>{i.classList.remove('ok','ko');const n=i.nextElementSibling;if(n&&n.classList.contains('acc'))n.remove();save()}));
+    e.check=()=>gs.reduce((a,i)=>a+judgeInput(i),0);
+    e.reset=()=>gs.forEach(i=>i.value='');
+    e.get=()=>gs.map(i=>i.value);e.set=v=>(v||[]).forEach((x,j)=>{if(x&&gs[j])gs[j].value=x});
+  });
+  /* evidenziare nel testo */
+  EX.filter(e=>e.type==='pick').forEach(e=>{
+    const box=$('.text',e.sec);
+    box.dataset.text.split(/(\{[^}]+\})/).forEach(part=>{
+      const m=part.match(/^\{(.+)\}$/);
+      if(m){const s=document.createElement('span');s.className='tok';s.dataset.v='1';s.textContent=m[1];box.append(s);return}
+      part.split(/(\s+)/).forEach(w=>{if(!w)return;if(/^\s+$/.test(w)){box.append(w);return}
+        const mm=w.match(/^([^\wÀ-ÿ]*)([\wÀ-ÿ’']+)([^\wÀ-ÿ]*)$/);if(!mm){box.append(w);return}
+        if(mm[1])box.append(mm[1]);const s=document.createElement('span');s.className='tok';s.textContent=mm[2];box.append(s);if(mm[3])box.append(mm[3])})});
+    box.removeAttribute('data-text');
+    const toks=$$('.tok',box),found=$('.found',e.sec);
+    const cnt=()=>{if(found)found.textContent=toks.filter(t=>t.classList.contains('mk')).length};
+    toks.forEach(t=>t.onclick=()=>{clearMarks(e.sec);t.classList.toggle('mk');cnt();save()});
+    e.max=toks.filter(t=>t.dataset.v).length;
+    e.check=()=>{let good=0,bad=0;toks.forEach(t=>{if(t.classList.contains('mk')){if(t.dataset.v){t.classList.add('ok');good++}else{t.classList.add('ko');bad++}}else if(t.dataset.v)t.classList.add('miss')});return Math.max(0,good-bad)};
+    e.reset=()=>{toks.forEach(t=>t.classList.remove('mk'));cnt()};
+    e.get=()=>toks.map(t=>t.classList.contains('mk')?1:0);e.set=v=>{(v||[]).forEach((x,j)=>{if(x&&toks[j])toks[j].classList.add('mk')});cnt()};
+    if(PROF)toks.forEach(t=>{if(t.dataset.v)t.classList.add('mk')});
+  });
+  /* scrittura */
+  EX.filter(e=>e.type==='write').forEach(e=>{
+    const ta=$('textarea',e.sec);e.ta=ta;
+    $$('.starters button',e.sec).forEach(b=>b.onclick=()=>{const v=ta.value;ta.value=v+(v&&!/\s$/.test(v)?' ':'')+b.textContent.replace('…',' ');ta.focus();ta.selectionStart=ta.selectionEnd=ta.value.length;meters();save()});
+    const words=new RegExp('\\b('+ta.dataset.words+')\\b','gi');
+    function meters(){const t=ta.value;const fr=(t.match(/[^.!?…]*[a-zà-ù][^.!?…]*[.!?…]+/gi)||[]).length,wc=(t.match(/[A-Za-zÀ-ÿ’']+/g)||[]).length,ww=(t.match(words)||[]).length;
+      const f=$('.m-fr b',e.sec),w=$('.m-wc b',e.sec),k=$('.m-w b',e.sec);
+      if(f){f.textContent=fr;f.parentNode.classList.toggle('ok',fr>=+ta.dataset.min)}
+      if(w){w.textContent=wc;w.parentNode.classList.toggle('ok',wc>=+ta.dataset.minw)}
+      if(k){k.textContent=ww;k.parentNode.classList.toggle('ok',ww>=2)}}
+    e.meters=meters;ta.addEventListener('input',()=>{meters();save()});
+    e.get=()=>ta.value;e.set=v=>{ta.value=v||'';meters()};e.reset=()=>{ta.value='';meters()};
+  });
 
-  /* ===== esercizi a scelta ===== */
-  const vfg=$$('.vf .opts');
-  vfg.forEach(g=>g.querySelectorAll('button').forEach(b=>b.onclick=()=>{clearMarks(g.closest('.ex'));const was=b.classList.contains('sel');g.querySelectorAll('button').forEach(x=>x.classList.remove('sel'));if(!was)b.classList.add('sel');save()}));
-  const vfState=()=>vfg.map(g=>{const s=g.querySelector('.sel');return s?s.textContent:''});
-  const chooseCheck=id=>{let n=0;$$('#'+id+' .vf .opts').forEach(g=>{const s=g.querySelector('.sel');if(!s)return;const ok=s.textContent===g.dataset.answer;s.classList.add(ok?'ok':'ko');if(ok)n++});return n};
-  const chooseReset=id=>$$('#'+id+' .vf .opts button').forEach(b=>b.classList.remove('sel','ok','ko'));
-  const gapCheck=id=>{let n=0;$$('#'+id+' .gap').forEach(i=>n+=judgeInput(i));return n};
-  const gapReset=id=>$$('#'+id+' .gap').forEach(i=>i.value='');
 
-  /* ===== controlli ===== */
-  const CHECK={
-    e1(){let n=0;slots.forEach(s=>{s.classList.remove('cur');const ok=s.dataset.val===s.dataset.answer;s.classList.add(ok?'ok':'ko');if(ok)n++});return n},
-    e2(){let n=0;pa.forEach(a=>{const l=pairs[a.dataset.n];if(!l)return;const ok=l===a.dataset.key;a.classList.add(ok?'ok':'ko');const b=pb.find(x=>x.dataset.l===l);b.classList.add(ok?'ok':'ko');if(ok)n++});return n},
-    e3(){return chooseCheck('es3')},
-    e4(){return gapCheck('es4')},
-    e5(){return gapCheck('es5')},
-    e6(){return chooseCheck('es6')},
-    e7(){return gapCheck('es7')},
-    e8(){return gapCheck('es8')},
-    e9(){return gapCheck('es9')},
-    e10(){return chooseCheck('es10')},
-    e11(){return gapCheck('es11')}
-  };
-  function verdict(sec,n,max){
-    const v=sec.querySelector('.verdict');const r=n/max;
-    v.className='verdict'+(r===1?'':r>=.6?' mid':' low');
-    v.textContent=r===1?'Perfetto!':r>=.8?'Bravo! Quasi tutto giusto.':r>=.6?'Bene, ma rivedi gli errori.':'Coraggio, riprova!';
-  }
-  function runCheck(k){
-    const sec=$('[data-ex="'+k+'"]');clearMarks(sec);const n=CHECK[k]();score[k]=n;
-    sec.querySelector('.score').textContent=n+' / '+MAX[k];verdict(sec,n,MAX[k]);update();
-  }
+  /* collegare (coppie) */
+  const PC=['var(--mare)','var(--rosso)','var(--verde)','var(--sole)','var(--bord)','#7A5BA6'];
+  EX.filter(e=>e.type==='pairs').forEach(e=>{
+    const pa=$$('.pa',e.sec),pb=$$('.pb',e.sec);let pairs={},selA=null;
+    const draw=()=>{pa.forEach(a=>{const l=pairs[a.dataset.n];a.classList.toggle('paired',!!l);a.classList.toggle('sel',a===selA);a.style.setProperty('--c',PC[(a.dataset.n-1)%PC.length]);a.querySelector('.bd').textContent=l?a.dataset.n+l:a.dataset.n});
+      pb.forEach(b=>{const n=Object.keys(pairs).find(k=>pairs[k]===b.dataset.l);b.classList.toggle('paired',!!n);if(n)b.style.setProperty('--c',PC[(n-1)%PC.length]);b.querySelector('.bd').textContent=n?n+b.dataset.l:b.dataset.l})};
+    pa.forEach(a=>a.onclick=()=>{clearMarks(e.sec);if(pairs[a.dataset.n])delete pairs[a.dataset.n];selA=(selA===a)?null:a;draw();save()});
+    pb.forEach(b=>{const act=()=>{clearMarks(e.sec);const l=b.dataset.l;for(const k in pairs)if(pairs[k]===l)delete pairs[k];if(selA){pairs[selA.dataset.n]=l;selA=null}draw();save()};
+      b.onclick=act;b.onkeydown=ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();act()}}});
+    e.max=pa.length;
+    e.check=()=>{let n=0;pa.forEach(a=>{const l=pairs[a.dataset.n];if(!l){a.classList.add('miss');return}const ok=l===a.dataset.key;a.classList.add(ok?'ok':'ko');pb.find(x=>x.dataset.l===l).classList.add(ok?'ok':'ko');if(ok)n++});return n};
+    e.reset=()=>{pairs={};selA=null;draw()};e.get=()=>pairs;e.set=v=>{pairs=v||{};draw()};
+    if(PROF)pa.forEach(a=>pairs[a.dataset.n]=a.dataset.key);draw();
+  });
+  /* mettere in ordine */
+  EX.filter(e=>e.type==='order').forEach(e=>{
+    const items=$$('.ord',e.sec);
+    items.forEach(li=>{const ws=li.dataset.words.split('|');const idx=ws.map((w,i)=>i);
+      for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]]}
+      if(idx.every((v,i)=>v===i)&&idx.length>1)idx.push(idx.shift());
+      const pool=$('.ord-pool',li),line=$('.ord-line',li);li._seq=[];
+      idx.forEach(i=>{const c=document.createElement('button');c.className='chip';c.textContent=ws[i];c.dataset.i=i;pool.append(c)});
+      li._draw=()=>{line.innerHTML='';li._seq.forEach(i=>{const c=document.createElement('button');c.className='chip in';c.textContent=ws[i];c.onclick=()=>{li._seq=li._seq.filter(x=>x!==i);clearMarks(li);li._draw();save()};line.append(c)});
+        $$('.chip',pool).forEach(c=>c.classList.toggle('used',li._seq.includes(+c.dataset.i)))};
+      $$('.chip',pool).forEach(c=>c.onclick=()=>{const i=+c.dataset.i;if(li._seq.includes(i))return;li._seq.push(i);clearMarks(li);li._draw();save()});
+      li._val=()=>li._seq.map(i=>ws[i]).join(' ');li._draw();
+      if(PROF){const s=document.createElement('p');s.className='sol';s.textContent=li.dataset.answer.split('|').join(' / ');li.append(s)}});
+    e.max=items.length;
+    e.check=()=>{let n=0;items.forEach(li=>{const ok=li.dataset.answer.split('|').some(a=>norm(a)===norm(li._val()));$('.ord-line',li).classList.add(ok?'ok':'ko');if(ok)n++});return n};
+    e.reset=()=>items.forEach(li=>{li._seq=[];li._draw()});
+    e.get=()=>items.map(li=>li._seq);e.set=v=>(v||[]).forEach((s,j)=>{if(items[j]&&Array.isArray(s)){items[j]._seq=s;items[j]._draw()}});
+  });
+  /* due evidenziatori */
+  EX.filter(e=>e.type==='pen2').forEach(e=>{
+    const box=$('.text',e.sec);
+    box.dataset.text.split(/(\{[^}]+\})/).forEach(part=>{
+      const m=part.match(/^\{(.+)\|([di])\}$/);
+      if(m){const s=document.createElement('span');s.className='tok';s.dataset.v=m[2];s.textContent=m[1];box.append(s);return}
+      part.split(/(\s+)/).forEach(w=>{if(!w)return;if(/^\s+$/.test(w)){box.append(w);return}
+        const mm=w.match(/^([^\wÀ-ÿ]*)([\wÀ-ÿ’']+)([^\wÀ-ÿ]*)$/);if(!mm){box.append(w);return}
+        if(mm[1])box.append(mm[1]);const s=document.createElement('span');s.className='tok';s.textContent=mm[2];box.append(s);if(mm[3])box.append(mm[3])})});
+    box.removeAttribute('data-text');
+    const toks=$$('.tok',box);let pen='d';
+    $$('.pen',e.sec).forEach(p=>p.onclick=()=>{pen=p.dataset.pen;$$('.pen',e.sec).forEach(q=>q.setAttribute('aria-pressed',q===p))});
+    const setM=(t,m)=>{t.classList.remove('m-d','m-i');if(m){t.dataset.m=m;t.classList.add('m-'+m)}else delete t.dataset.m};
+    toks.forEach(t=>t.onclick=()=>{clearMarks(e.sec);setM(t,(pen==='x'||t.dataset.m===pen)?null:pen);save()});
+    e.max=toks.filter(t=>t.dataset.v).length;
+    e.check=()=>{let good=0,bad=0;toks.forEach(t=>{if(t.dataset.m){if(t.dataset.m===t.dataset.v){t.classList.add('ok');good++}else{t.classList.add('ko');bad++}}else if(t.dataset.v)t.classList.add('miss')});return Math.max(0,good-bad)};
+    e.reset=()=>toks.forEach(t=>setM(t,null));e.get=()=>toks.map(t=>t.dataset.m||'');e.set=v=>(v||[]).forEach((m,j)=>{if(m&&toks[j])setM(toks[j],m)});
+    if(PROF)toks.forEach(t=>{if(t.dataset.v)setM(t,t.dataset.v)});
+  });
+  /* pulsanti sotto ogni esercizio */
+  const score={};
+  EX.filter(e=>e.check).forEach(e=>{score[e.k]=null;const a=document.createElement('div');a.className='actions';
+    a.innerHTML='<button class="btn" data-check="'+e.k+'">Controlla</button><button class="btn ghost" data-reset="'+e.k+'">Ricomincia</button><span class="score"></span><span class="verdict"></span>';e.sec.append(a)});
+  function verdict(sec,n,max){const v=sec.querySelector('.verdict');const r=n/max;v.className='verdict'+(r===1?'':r>=.6?' mid':' low');
+    v.textContent=r===1?'Perfetto!':r>=.8?'Bravo! Quasi tutto giusto.':r>=.6?'Bene, ma rivedi gli errori.':'Coraggio, riprova!'}
+  function runCheck(k){const e=byK[k];clearMarks(e.sec);const n=e.check();score[k]=n;e.sec.querySelector('.score').textContent=n+' / '+e.max;verdict(e.sec,n,e.max);update()}
   $$('[data-check]').forEach(b=>b.onclick=()=>runCheck(b.dataset.check));
-  const RESET={
-    e1(){slots.forEach(s=>{if(s.dataset.val)emptySlot(s)});setCur(slots[0])},
-    e2(){pairs={};selA=null;drawPairs()},
-    e3(){chooseReset('es3')},
-    e4(){gapReset('es4')},
-    e5(){gapReset('es5')},
-    e6(){chooseReset('es6')},
-    e7(){gapReset('es7')},
-    e8(){gapReset('es8')},
-    e9(){gapReset('es9')},
-    e10(){chooseReset('es10')},
-    e11(){gapReset('es11')}
-  };
-  $$('[data-reset]').forEach(b=>b.onclick=()=>{const k=b.dataset.reset,sec=$('[data-ex="'+k+'"]');clearMarks(sec);RESET[k]();score[k]=null;sec.querySelector('.score').textContent='';sec.querySelector('.verdict').textContent='';update();save()});
-  $$('.gap').forEach(i=>i.addEventListener('input',()=>{i.classList.remove('ok','ko');const n=i.nextElementSibling;if(n&&n.classList.contains('acc'))n.remove();save()}));
+  function doReset(k){const e=byK[k];clearMarks(e.sec);e.reset();score[k]=null;const s=e.sec.querySelector('.score');if(s){s.textContent='';e.sec.querySelector('.verdict').textContent=''}}
+  $$('[data-reset]').forEach(b=>b.onclick=()=>{doReset(b.dataset.reset);update();save()});
 
-  /* ===== Es. 5: scrittura ===== */
-  const essay=$('#essay');
-  $$('#starters button').forEach(b=>b.onclick=()=>{const v=essay.value;const sep=v&&!/\s$/.test(v)?' ':'';essay.value=v+sep+b.textContent.replace('…',' ');essay.focus();essay.selectionStart=essay.selectionEnd=essay.value.length;meters();save()});
-  function meters(){
-    const t=essay.value.toLowerCase();const fr=(essay.value.match(/[^.!?…]*[a-zà-ù][^.!?…]*[.!?…]+/gi)||[]).length;
-    const fs=(t.match(/\b(faccio|sono)\b/g)||[]).length,li=(t.match(/lavoro in|\bstudio\b/g)||[]).length;
-    $('#mFrasi b').textContent=fr;$('#mFare b').textContent=fs;$('#mIn b').textContent=li;
-    $('#mFrasi').classList.toggle('ok',fr>=3);$('#mFare').classList.toggle('ok',fs>0);$('#mIn').classList.toggle('ok',li>0);
-    $('[data-for="e12"]').classList.toggle('done',fr>=3&&fs>0&&li>0);
-    return fr;
+  /* ===== parti ===== */
+  let PART='1';
+  const jump=$('#jump');
+  function setPart(p,scroll){PART=p;
+    EX.forEach(e=>e.sec.hidden=e.part!==p);$$('.part-head').forEach(h=>h.hidden=h.dataset.part!==p);
+    $$('.part-btn').forEach(b=>{b.setAttribute('aria-selected',b.dataset.part===p);b.classList.toggle('on',b.dataset.part===p)});
+    jump.innerHTML=EX.filter(e=>e.part===p).map(e=>'<a href="#'+e.sec.id+'" data-for="'+e.k+'">'+e.n+'</a>').join('');
+    try{if(history.replaceState)history.replaceState(null,'','#parte'+p)}catch(e){}
+    update();save();if(scroll)document.querySelector('.parts').scrollIntoView({behavior:reduce?'auto':'smooth'});
   }
-  essay.addEventListener('input',()=>{meters();save()});
+  const pt=document.createElement('span');pt.className='ptabs';pt.innerHTML='<button class="part-btn" data-part="1">Parte 1</button><button class="part-btn" data-part="2">Parte 2</button>';jump.before(pt);
+  $$('.part-btn').forEach(b=>b.onclick=()=>setPart(b.dataset.part,true));
 
-  /* ===== finale ===== */
-  const C=2*Math.PI*74,fg=$('#ringFg');fg.style.strokeDasharray=C;fg.style.strokeDashoffset=C;$('#finMax').textContent=TOTAL;
-  let celebrated=false;
+  /* ===== risultato della parte ===== */
+  const C=2*Math.PI*74,fg=$('#ringFg');fg.style.strokeDasharray=C;fg.style.strokeDashoffset=C;let celebrated={};
+  const partEx=()=>EX.filter(e=>e.part===PART&&e.check);
   function update(){
-    const done=Object.keys(score).filter(k=>score[k]!==null);
-    const tot=done.reduce((a,k)=>a+score[k],0);
-    $('#pts').textContent=tot+' / '+TOTAL;$('#prog').style.width=(done.length/NEX*100)+'%';
-    Object.keys(score).forEach(k=>$('[data-for="'+k+'"]').classList.toggle('done',score[k]!==null&&score[k]===MAX[k]));
-    $('#finNum').textContent=tot;fg.style.strokeDashoffset=C*(1-tot/TOTAL);
-    $('#break').innerHTML=Object.keys(MAX).map(k=>'<li class="'+(score[k]===MAX[k]?'full':'')+'"><span>'+LABELS[k]+'</span><b>'+(score[k]===null?'—':score[k])+' / '+MAX[k]+'</b></li>').join('');
+    const L=partEx(),TOT=L.reduce((a,e)=>a+e.max,0),done=L.filter(e=>score[e.k]!==null),tot=done.reduce((a,e)=>a+score[e.k],0);
+    $('#pts').textContent=tot+' / '+TOT;$('#prog').style.width=(done.length/L.length*100)+'%';$('#finMax').textContent=TOT;
+    EX.forEach(e=>{const a=jump.querySelector('[data-for="'+e.k+'"]');if(!a)return;
+      if(e.check)a.classList.toggle('done',score[e.k]===e.max);else a.classList.toggle('done',(e.ta.value.match(/[A-Za-zÀ-ÿ]+/g)||[]).length>=30)});
+    $('#finNum').textContent=tot;fg.style.strokeDashoffset=C*(1-(TOT?tot/TOT:0));
+    $('#break').innerHTML=L.map(e=>'<li class="'+(score[e.k]===e.max?'full':'')+'"><span>'+e.label+'</span><b>'+(score[e.k]===null?'—':score[e.k])+' / '+e.max+'</b></li>').join('');
     const T=$('#finTitle'),S=$('#finSub'),R=$('#finRu');
-    if(done.length<NEX){T.textContent=done.length?'Avanti così!':'Il tuo risultato';S.textContent=done.length?'Hai controllato '+done.length+' esercizi su '+NEX+'. Continua!':'Controlla tutti gli esercizi per vedere quante risposte giuste hai.';R.textContent=done.length?'Проверь все упражнения, чтобы увидеть итог.':'Нажми «Controlla tutto», чтобы увидеть, сколько у тебя правильных ответов.';fg.style.stroke='var(--sole)';return}
-    const p=tot/TOTAL;
-    if(p>=.9){T.textContent='Complimenti!';S.textContent='Hai '+tot+' risposte giuste su '+TOTAL+'. Un lavoro eccellente!';R.textContent='Отличная работа! Так держать.';fg.style.stroke='var(--verde)'}
-    else if(p>=.75){T.textContent='Complimenti!';S.textContent='Hai '+tot+' risposte giuste su '+TOTAL+'. Ancora qualche ritocco e sarà perfetto.';R.textContent='Очень хорошо! Исправь оставшиеся ошибки.';fg.style.stroke='var(--verde)'}
-    else if(p>=.5){T.textContent='Buon lavoro!';S.textContent='Hai '+tot+' risposte giuste su '+TOTAL+'. Ripassa la Scheda di grammatica e correggi gli errori.';R.textContent='Неплохо! Повтори правила в «Scheda di grammatica» и исправь ошибки.';fg.style.stroke='var(--sole)'}
-    else{T.textContent='Coraggio!';S.textContent='Hai '+tot+' risposte giuste su '+TOTAL+'. Chi va piano va sano e va lontano: rileggi le regole e riprova.';R.textContent='Не сдавайся! Перечитай правила и попробуй ещё раз.';fg.style.stroke='var(--rosso)'}
-    if(p>=.75&&!celebrated){celebrated=true;confetti()}
-    if(p<.75)celebrated=false;
+    if(done.length<L.length){T.textContent='Parte '+PART+': il tuo risultato';S.textContent=done.length?'Hai controllato '+done.length+' esercizi su '+L.length+'. Continua!':'Controlla tutti gli esercizi per vedere quante risposte giuste hai.';R.textContent=done.length?'Проверь все упражнения этой части, чтобы увидеть итог.':'Нажми «Controlla tutto», чтобы увидеть результат этой части.';fg.style.stroke='var(--sole)';return}
+    const p=tot/TOT;
+    if(p>=.9){T.textContent='Complimenti!';S.textContent='Parte '+PART+': '+tot+' risposte giuste su '+TOT+'. Un lavoro eccellente!';R.textContent='Отличная работа! Так держать.';fg.style.stroke='var(--verde)'}
+    else if(p>=.75){T.textContent='Complimenti!';S.textContent='Parte '+PART+': '+tot+' risposte giuste su '+TOT+'. Ancora qualche ritocco e sarà perfetto.';R.textContent='Очень хорошо! Исправь оставшиеся ошибки.';fg.style.stroke='var(--verde)'}
+    else if(p>=.5){T.textContent='Buon lavoro!';S.textContent='Parte '+PART+': '+tot+' risposte giuste su '+TOT+'. Ripassa le regole e correggi gli errori.';R.textContent='Неплохо! Повтори правила и исправь ошибки.';fg.style.stroke='var(--sole)'}
+    else{T.textContent='Coraggio!';S.textContent='Parte '+PART+': '+tot+' risposte giuste su '+TOT+'. Chi va piano va sano e va lontano: rileggi le regole e riprova.';R.textContent='Не сдавайся! Перечитай правила и попробуй ещё раз.';fg.style.stroke='var(--rosso)'}
+    if(p>=.75&&!celebrated[PART]){celebrated[PART]=true;confetti()}if(p<.75)celebrated[PART]=false;
   }
-  function confetti(){
-    if(reduce)return;const box=document.createElement('div');box.className='confetti';const cols=['#1F8A50','#FFFFFF','#C8312B','#C59A45'];
+  function confetti(){if(reduce)return;const box=document.createElement('div');box.className='confetti';const cols=['#1F8A50','#FFFFFF','#C8312B','#C59A45'];
     for(let i=0;i<90;i++){const c=document.createElement('i');c.style.left=Math.random()*100+'vw';c.style.background=cols[i%4];c.style.boxShadow='0 0 0 1px rgba(0,0,0,.08)';c.style.animationDuration=(2.2+Math.random()*1.8)+'s';c.style.animationDelay=(Math.random()*.6)+'s';c.style.transform='rotate('+Math.random()*360+'deg)';box.append(c)}
-    document.body.append(box);setTimeout(()=>box.remove(),4800);
-  }
-  $('#checkAll').onclick=()=>{Object.keys(CHECK).forEach(runCheck);$('#finale').scrollIntoView({block:'center'})};
-  $('#resetAll').onclick=()=>{if(!confirm('Cancellare tutte le risposte?'))return;Object.keys(RESET).forEach(k=>{clearMarks($('[data-ex="'+k+'"]'));RESET[k]();score[k]=null;const s=$('[data-ex="'+k+'"]');s.querySelector('.score').textContent='';s.querySelector('.verdict').textContent=''});essay.value='';meters();celebrated=false;update();save()};
+    document.body.append(box);setTimeout(()=>box.remove(),4800)}
+  $('#checkAll').onclick=()=>{partEx().forEach(e=>runCheck(e.k));$('#finale').scrollIntoView({block:'center'})};
+  $('#resetAll').onclick=()=>{if(!confirm('Cancellare tutte le risposte di questa parte?'))return;EX.filter(e=>e.part===PART).forEach(e=>{if(e.check)doReset(e.k);else e.reset()});celebrated[PART]=false;update();save()};
 
-  /* copia il risultato */
-  function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.id);toast.id=setTimeout(()=>el.classList.remove('on'),2200)}
+  function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.id);toast.id=setTimeout(()=>el.classList.remove('on'),2400)}
+  const lezione=()=>UNIT+', '+LES+': '+NAME+' — Parte '+PART;
+  const texts=()=>EX.filter(e=>e.part===PART&&e.ta).map(e=>e.ta.dataset.scritto+':\n'+(e.ta.value.trim()||'—')).join('\n\n');
   $('#copyRes').onclick=()=>{
-    const done=Object.keys(score).filter(k=>score[k]!==null),tot=done.reduce((a,k)=>a+score[k],0);
-    const lines=[BRAND+' — '+UNIT+', '+LES+': '+NAME,'Quaderno degli esercizi','Nome: '+($('#nome').value||'—'),'Data: '+($('#data').value||'—'),''];
-    Object.keys(MAX).forEach(k=>lines.push(LABELS[k]+': '+(score[k]===null?'non controllato':score[k]+' / '+MAX[k])));
-    lines.push('Totale: '+tot+' / '+TOTAL+' ('+Math.round(tot/TOTAL*100)+'%)');$$('textarea[data-scritto]').forEach(t=>lines.push('',t.dataset.scritto+':',t.value.trim()||'—'));
-    const txt=lines.join('\n');
-    const ok=()=>toast('Risultato copiato! Incollalo in Google Classroom.');
-    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(ok,fallback)}else fallback();
-    function fallback(){const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.append(ta);ta.select();try{document.execCommand('copy');ok()}catch(e){toast('Copia non riuscita: seleziona il testo a mano.')}ta.remove()}
+    const L=partEx(),TOT=L.reduce((a,e)=>a+e.max,0),tot=L.reduce((a,e)=>a+(score[e.k]||0),0);
+    const lines=[BRAND+' — '+lezione(),'Quaderno degli esercizi','Nome: '+($('#nome').value||'—'),'Data: '+($('#data').value||'—'),''];
+    L.forEach(e=>lines.push(e.label+': '+(score[e.k]===null?'non controllato':score[e.k]+' / '+e.max)));
+    lines.push('Totale: '+tot+' / '+TOT+' ('+Math.round(tot/TOT*100)+'%)','',texts());
+    const txt=lines.join('\n'),ok=()=>toast('Risultato copiato! Incollalo in Google Classroom.');
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(ok,fb)}else fb();
+    function fb(){const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.append(ta);ta.select();try{document.execCommand('copy');ok()}catch(e){toast('Copia non riuscita.')}ta.remove()}
   };
-
-  /* invia al Google Modulo */
-  const sendBtn=$('#sendRes');
-  function sentFlag(v){try{if(v===undefined)return localStorage.getItem(KEY+':sent');localStorage.setItem(KEY+':sent',v)}catch(e){}}
-  sendBtn.onclick=()=>{
-    const nome=$('#nome').value.trim();
-    if(!nome){toast('Scrivi il tuo nome in alto, per favore.');$('#nome').focus();return}
-    Object.keys(CHECK).forEach(runCheck);
-    const tot=Object.keys(score).reduce((a,k)=>a+(score[k]||0),0),pct=Math.round(tot/TOTAL*100);
-    const det=Object.keys(MAX).map(k=>LABELS[k]+': '+score[k]+'/'+MAX[k]).join(' · ');
-    const testi=$$('textarea[data-scritto]').map(t=>t.dataset.scritto+':\n'+(t.value.trim()||'—')).join('\n\n');
+  $('#sendRes').onclick=()=>{
+    const nome=$('#nome').value.trim();if(!nome){toast('Scrivi il tuo nome in alto, per favore.');$('#nome').focus();return}
+    const L=partEx();L.forEach(e=>runCheck(e.k));
+    const TOT=L.reduce((a,e)=>a+e.max,0),tot=L.reduce((a,e)=>a+(score[e.k]||0),0),pct=Math.round(tot/TOT*100);
+    const det=L.map(e=>e.label+': '+score[e.k]+'/'+e.max).join(' · ');
     const f=new URLSearchParams({usp:'pp_url'});
-    f.append(MODULO.nome,nome);f.append(MODULO.data,$('#data').value);f.append(MODULO.lezione,UNIT+', '+LES+': '+NAME);
-    f.append(MODULO.punteggio,tot+' / '+TOTAL);f.append(MODULO.percentuale,pct);f.append(MODULO.dettagli,det);f.append(MODULO.testo,testi);
-    /* si apre il modulo Google già compilato: lo studente controlla e preme «Invia» */
-    const w=window.open(MODULO.url+'?'+f.toString(),'_blank');
-    if(!w){location.href=MODULO.url+'?'+f.toString();return}
-    sentFlag(new Date().toISOString());
+    f.append(MODULO.nome,nome);f.append(MODULO.data,$('#data').value);f.append(MODULO.lezione,lezione());
+    f.append(MODULO.punteggio,tot+' / '+TOT);f.append(MODULO.percentuale,pct);f.append(MODULO.dettagli,det);f.append(MODULO.testo,texts());
+    const w=window.open(MODULO.url+'?'+f.toString(),'_blank');if(!w){location.href=MODULO.url+'?'+f.toString();return}
     toast('Si è aperto il modulo: premi «Invia» in fondo alla pagina.');
   };
 
-  /* soluzioni nella versione insegnante */
-  if(PROF){
-    $$('.vf .opts').forEach(g=>[...g.querySelectorAll('button')].forEach(b=>{if(b.textContent===g.dataset.answer)b.classList.add('key')}));
-    $$('[data-answer]:not(.opts)').forEach(el=>{const s=document.createElement('span');s.className='sol';s.textContent=el.dataset.answer.split('|').join(' / ');el.after(s)});
-  }
+  if(PROF){$$('[data-answer]').forEach(el=>{const s=document.createElement('span');s.className='sol';s.textContent=el.dataset.answer.split('|').join(' / ');el.after(s)})}
 
-  /* salvataggio automatico nel browser */
-  function save(){try{localStorage.setItem(KEY,JSON.stringify({
-    nome:$('#nome').value,data:$('#data').value,slots:slots.map(s=>s.dataset.val||''),pairs,
-    gaps:$$('.gap').map(i=>i.value),vf:vfState(),essay:essay.value}))}catch(e){}}
+  /* salvataggio automatico */
+  function save(){try{const d={nome:$('#nome').value,data:$('#data').value,part:PART,ex:{}};EX.forEach(e=>d.ex[e.k]=e.get());localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}}
   function load(){let d=null;try{d=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
-    if(!d){$('#data').value=new Date().toLocaleDateString('it-IT');return}
-    $('#nome').value=d.nome||'';$('#data').value=d.data||new Date().toLocaleDateString('it-IT');
-    (d.slots||[]).forEach((w,i)=>{if(w&&slots[i])fillSlot(slots[i],w)});setCur(nextEmpty());
-    pairs=d.pairs||{};drawPairs();
-    $$('.gap').forEach((g,i)=>{if(d.gaps&&d.gaps[i])g.value=d.gaps[i]});
-    vfg.forEach((g,i)=>{const v=d.vf&&d.vf[i];if(v)[...g.querySelectorAll('button')].forEach(b=>{if(b.textContent===v)b.classList.add('sel')})});
-    essay.value=d.essay||'';
-  }
+    $('#data').value=new Date().toLocaleDateString('it-IT');if(!d||PROF)return null;
+    $('#nome').value=d.nome||'';$('#data').value=d.data||$('#data').value;EX.forEach(e=>{if(d.ex&&d.ex[e.k]!==undefined)e.set(d.ex[e.k])});return d.part}
   ['#nome','#data'].forEach(s=>$(s).addEventListener('input',save));
-  load();meters();update();
+  const saved=load();const h=(location.hash.match(/parte([12])/)||[])[1];
+  setPart(h||saved||'1',false);
+
+  /* versione insegnante: barra in basso sul telefono */
+  if(PROF){
+    const bar=document.createElement('div');bar.className='mbar';bar.innerHTML='<button class="nv" data-d="-1" aria-label="Esercizio precedente">‹</button><button class="mt" type="button"><small></small><b></b></button><button class="nv" data-d="1" aria-label="Esercizio successivo">›</button>';
+    const list=document.createElement('div');list.className='mlist';document.body.append(list,bar);
+    const all=EX;let cur=0;
+    const lab=e=>'Parte '+e.part+' · Esercizio '+e.n+' / '+EX.filter(x=>x.part===e.part).length;
+    function show(){const e=all[cur];bar.querySelector('small').textContent=lab(e);bar.querySelector('b').textContent=e.sec.querySelector('h2').textContent;
+      bar.querySelector('[data-d="-1"]').disabled=cur===0;bar.querySelector('[data-d="1"]').disabled=cur===all.length-1}
+    function go(i){cur=Math.max(0,Math.min(all.length-1,i));const e=all[cur];if(e.part!==PART)setPart(e.part,false);show();list.classList.remove('on');
+      setTimeout(()=>e.sec.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'}),30)}
+    bar.querySelectorAll('.nv').forEach(b=>b.onclick=()=>go(cur+ +b.dataset.d));
+    bar.querySelector('.mt').onclick=()=>{let h='',p='';all.forEach((e,i)=>{if(e.part!==p){p=e.part;h+='<p class="ph">Parte '+p+'</p>'}h+='<button data-i="'+i+'" class="'+(i===cur?'cur':'')+'">'+e.n+'. '+e.sec.querySelector('h2').textContent+'</button>'});list.innerHTML=h;list.classList.toggle('on');list.querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>go(+b.dataset.i))};
+    addEventListener('scroll',()=>{const vis=all.filter(e=>!e.sec.hidden);let best=null;vis.forEach(e=>{if(e.sec.getBoundingClientRect().top<innerHeight*.4)best=e});if(best){const i=all.indexOf(best);if(i!==cur){cur=i;show()}}},{passive:true});
+    $$('.part-btn').forEach(b=>b.addEventListener('click',()=>{cur=all.findIndex(e=>e.part===b.dataset.part);show()}));
+    cur=all.findIndex(e=>e.part===PART);show();
+  }
+  addEventListener('hashchange',()=>{const x=(location.hash.match(/parte([12])/)||[])[1];if(x&&x!==PART)setPart(x,true)});
 })();
 </script>
 </body>
