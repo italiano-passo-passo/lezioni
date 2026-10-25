@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quaderno degli esercizi — Unità 6, Lezione 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,800;1,600;1,800&display=swap" rel="stylesheet">
+<!--
+  ITALIANO PASSO PASSO — QUADERNO DEGLI ESERCIZI (template)
+  Per un'altra lezione cambia solo: data-level, data-unit, data-lesson, data-name nel <body> e il contenuto degli esercizi.
+  Versione insegnante (con soluzioni): data-mode="insegnante" → salva come U?_L?_Esercizi_insegnante.html (solo sul computer).
+-->
+<style>
+:root{
+  --bg:#FFFFFF; --card:#FFFFFF; --ink:#262626; --soft:#6B6B6B; --paper2:#F4F5F5;
+  --bord:#7A1E2C; --verde:#5E7A3A; --rosso:#B4493B; --mare:#2F6F86; --sole:#C59A45;
+  --mare-tint:#E6EFF2; --rosso-tint:#F7E6E2; --sole-tint:#F7F1E3; --verde-tint:#E9EFDF;
+  --line:#DDE0DF; --ok:#5E7A3A; --ko:#B4493B;
+  --title:"Playfair Display", Georgia, serif;
+  --body:"Source Sans 3", "Segoe UI", Roboto, Arial, sans-serif;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1B1F1E; --card:#1B1F1E; --ink:#ECECEA; --soft:#A9AEAC; --paper2:#252A29; --bord:#F0A3AE;
+    --verde:#A9BE7A; --rosso:#E58C76; --mare:#7FB5C9; --sole:#D9B66A;
+    --mare-tint:#22313A; --rosso-tint:#3A2621; --sole-tint:#332C1E; --verde-tint:#283020;
+    --line:#38403E; --ok:#A9BE7A; --ko:#E58C76; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1B1F1E; --card:#1B1F1E; --ink:#ECECEA; --soft:#A9AEAC; --paper2:#252A29; --bord:#F0A3AE;
+  --verde:#A9BE7A; --rosso:#E58C76; --mare:#7FB5C9; --sole:#D9B66A;
+  --mare-tint:#22313A; --rosso-tint:#3A2621; --sole-tint:#332C1E; --verde-tint:#283020;
+  --line:#38403E; --ok:#A9BE7A; --ko:#E58C76; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 56px);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17.5px;line-height:1.45}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--card)}
+h1,h2,h3{font-family:var(--title);color:var(--bord);line-height:1.1;margin:0 0 .35em;font-weight:700}
+h2{font-size:clamp(1.6rem,2.8vw,2.3rem)}
+h3{font-size:1.25rem}
+p{margin:0 0 .6em}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--rosso);outline-offset:2px}
+
+/* barra in alto */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;align-items:center;gap:16px;padding:6px 22px 6px 34px;background:var(--card);border-bottom:1px solid var(--line);font-size:.9rem}
+.bar-title{font-weight:600;color:var(--bord);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.progress{flex:1;height:3px;background:var(--line);min-width:60px;border-radius:3px;overflow:hidden}
+.progress span{display:block;height:100%;width:0;background:var(--rosso);transition:width .4s}
+.pts{font-weight:700;color:var(--rosso);white-space:nowrap;font-variant-numeric:tabular-nums}
+.jump{display:flex;gap:4px}
+.jump a{display:grid;place-items:center;width:28px;height:28px;border:1px solid var(--line);border-radius:50%;text-decoration:none;color:var(--ink);font-weight:700;font-size:.85rem}
+.jump a:hover{border-color:var(--ink)}
+.jump a.done{background:var(--verde-tint);border-color:var(--ok);color:var(--ok)}
+@media (max-width:700px){.bar-title,.progress{display:none}.bar{justify-content:space-between;padding-left:24px}}
+
+/* foglio */
+.sheet{min-height:100vh;background:var(--card);padding:22px 120px 0 58px;position:relative}
+.sheet::before{content:"";position:fixed;left:0;top:0;bottom:0;width:14px;background:linear-gradient(to right,#1F8A50 0 5px,transparent 5px 9px,#C8312B 9px 14px);z-index:22}
+.brand{position:absolute;top:16px;right:26px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.8rem;font-weight:600;color:var(--bord)}
+.brand i{display:flex;width:44px;height:29px;box-shadow:0 0 0 1px var(--line)}
+.brand i b{flex:1}.brand i b:nth-child(1){background:#1F8A50}.brand i b:nth-child(2){background:#fff}.brand i b:nth-child(3){background:#C8312B}
+@media (max-width:860px){.sheet{padding:18px 18px 0 32px}.brand{position:static;align-items:flex-end;margin-bottom:6px}}
+.kind{display:flex;align-items:center;gap:10px;font-weight:600;font-size:1rem;color:var(--rosso);margin-bottom:8px}
+.kind::after{content:"";flex:1;height:1px;background:var(--line)}
+.hint{color:var(--soft);font-size:.88em}
+.tr{display:block;color:var(--soft);font-size:.93em;font-style:italic}
+.lead{max-width:80ch;margin-bottom:14px}
+.folio{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding:10px 0 16px;border-top:1px solid var(--line);font-size:.82rem;color:var(--soft)}
+
+/* icone a linee nere */
+.ico{width:40px;height:40px;flex:none;color:var(--ink)}
+.ico svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+/* copertina */
+.cover{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:end;padding:10px 0 26px}
+@media (max-width:860px){.cover{grid-template-columns:1fr;gap:20px}}
+.cover-unit{font-weight:700;font-size:1.2rem;color:var(--bord);margin:0 0 .2em}
+.cover h1{font-size:clamp(2.6rem,6vw,5rem);line-height:.95;margin:.05em 0 .15em}
+.cover h1 .l2{display:block;font-style:italic;font-weight:600;color:var(--rosso);padding-left:.6em;font-size:.62em;margin-top:.15em}
+.who-box{border-top:1px solid var(--ink);padding-top:10px}
+.field{display:flex;gap:12px;align-items:baseline;margin:6px 0}
+.field b{min-width:3.4em;color:var(--bord)}
+.field input{flex:1;border:0;border-bottom:2px solid var(--line);background:none;padding:2px 4px;min-width:0}
+.field input:focus{outline:none;border-bottom-color:var(--mare)}
+.how{margin-top:12px;padding:10px 14px;border-left:3px solid var(--sole);background:var(--sole-tint);border-radius:0 8px 8px 0;font-size:.95rem}
+.how p{margin:0}
+
+/* esercizi */
+.ex{padding:30px 0 6px;border-top:1px solid var(--line);margin-top:8px}
+.ex .kind{margin-bottom:6px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
+.btn{border:1px solid var(--bord);border-radius:6px;padding:6px 18px;background:var(--bord);color:#fff;font-weight:600}
+.btn:hover{filter:brightness(1.15)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--ink)}
+.btn.alt{background:var(--mare);border-color:var(--mare)}
+.score{font-weight:700;color:var(--rosso)}
+.verdict{font-family:var(--title);font-style:italic;font-weight:600;color:var(--verde);font-size:1.15rem}
+.verdict.mid{color:var(--sole)}.verdict.low{color:var(--rosso)}
+
+.gap{border:0;border-bottom:2px solid var(--mare);background:var(--mare-tint);border-radius:4px 4px 0 0;padding:0 6px;min-width:8em;width:10em;max-width:100%}
+.gap:focus{outline:none;box-shadow:0 0 0 2px var(--sole)}
+.gap.ok{border-bottom-color:var(--ok);background:var(--verde-tint)}
+.gap.ko{border-bottom-color:var(--ko);background:var(--rosso-tint)}
+.acc{font-size:.8em;color:var(--sole);font-weight:700;margin-left:4px}
+.ex-list{padding-left:0;margin:0;list-style:none;counter-reset:e;max-width:1100px}
+.ex-list li{counter-increment:e;padding:.55em 0 .55em 2em;position:relative;border-bottom:1px solid var(--line);line-height:2}
+.ex-list li::before{content:counter(e)".";position:absolute;left:0;top:.55em;font-weight:700;color:var(--rosso)}
+.gloss{border-bottom:2px dotted var(--sole);cursor:help;position:relative}
+.gloss:hover::after,.gloss:focus::after{content:attr(data-g);position:absolute;left:0;top:1.7em;background:var(--ink);color:var(--card);padding:4px 10px;border-radius:6px;font-size:.8rem;white-space:nowrap;z-index:5;line-height:1.4}
+
+/* es. 1: banca di parole */
+.bank{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 16px;padding:12px;border-radius:8px;background:var(--paper2)}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:3px 14px;font-weight:600;transition:opacity .2s,transform .15s}
+.chip:hover{border-color:var(--ink);transform:translateY(-1px)}
+.chip.used{opacity:.25;pointer-events:none;text-decoration:line-through}
+.dialog{max-width:1000px}
+.dl{display:grid;grid-template-columns:6.4em 1fr;gap:12px;padding:.5em 0;border-bottom:1px solid var(--line);line-height:2.1}
+.dl .sp{font-weight:700;color:var(--rosso)}
+.dl.g .sp{color:var(--mare)}
+.slot{display:inline-block;vertical-align:baseline;min-width:8.5em;min-height:1.65em;line-height:1.45;padding:0 10px;border:0;border-bottom:2px solid var(--mare);background:var(--mare-tint);border-radius:4px 4px 0 0;font-weight:600;text-align:center}
+.slot:empty::before{content:"\00a0"}
+.slot.cur{box-shadow:0 0 0 2px var(--sole);background:var(--sole-tint)}
+.slot.ok{border-bottom-color:var(--ok);background:var(--verde-tint)}
+.slot.ko{border-bottom-color:var(--ko);background:var(--rosso-tint)}
+
+/* es. 2: collega */
+.pairs{display:grid;grid-template-columns:1fr 1.15fr;gap:14px 44px;max-width:1200px}
+@media (max-width:860px){.pairs{grid-template-columns:1fr}}
+.col h3{font-size:1.05rem;color:var(--soft);font-family:var(--body);font-weight:700;margin-bottom:8px}
+.col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.card{width:100%;display:flex;gap:12px;align-items:center;padding:9px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);text-align:left;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.card:hover{border-color:var(--ink)}
+.card.sel{box-shadow:0 0 0 2px var(--sole);border-color:var(--sole)}
+.card.ok{border-color:var(--ok);background:var(--verde-tint)}
+.card.ko{border-color:var(--ko);background:var(--rosso-tint)}
+.bd{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:700;border:1.5px solid var(--line);color:var(--soft);font-size:.95rem}
+.card.paired .bd{border-color:transparent;color:#fff;background:var(--c)}
+.card .gap{width:9em;min-width:7em}
+.card .txt{flex:1;line-height:1.9}
+.footnotes{margin-top:12px}
+.footnotes p{margin:0}
+
+/* es. 3: evidenziatori */
+.pens{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.pen{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--card);border-radius:20px;padding:3px 14px 3px 8px;font-weight:600}
+.pen i{width:18px;height:18px;border-radius:50%;background:var(--c);display:block}
+.pen[aria-pressed="true"]{border-color:var(--c);box-shadow:0 0 0 2px var(--c)}
+.pen.gomma i{background:none;border:2px dashed var(--soft)}
+.text{font-size:1.1rem;line-height:2;max-width:78ch;padding:14px 18px;background:var(--paper2);border-radius:8px;margin-bottom:16px}
+.tok{cursor:pointer;border-radius:3px;padding:1px 1px;transition:background .15s}
+.tok:hover{background:var(--sole-tint)}
+.tok.mi{background:var(--mare-tint);box-shadow:inset 0 -3px var(--mare)}
+.tok.mp{background:var(--rosso-tint);box-shadow:inset 0 -3px var(--rosso)}
+.tok.ok::after{content:" ✓";color:var(--ok);font-weight:700;font-size:.8em}
+.tok.ko{text-decoration:line-through;text-decoration-color:var(--ko);text-decoration-thickness:2px}
+.tok.miss{outline:1.5px dashed var(--sole);outline-offset:1px}
+.bins{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1200px}
+@media (max-width:640px){.bins{grid-template-columns:1fr}}
+.bin{padding:12px 16px;min-height:120px;border-top:3px solid var(--mare);background:var(--mare-tint);border-radius:0 0 8px 8px}
+.bin.p{border-top-color:var(--rosso);background:var(--rosso-tint)}
+.bin h3{font-size:1.1rem;display:flex;justify-content:space-between;gap:10px}
+.bin h3 span{font-family:var(--body);color:var(--soft);font-size:.9rem;font-weight:600}
+.bin ol{margin:0;padding-left:1.6em;columns:2;column-gap:24px}
+.bin li{padding:1px 0;break-inside:avoid}
+.bin .empty{color:var(--soft);font-size:.9rem;list-style:none;margin-left:-1.6em}
+
+/* es. 5: scrittura */
+.starters{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}
+.starters button{border:1px dashed var(--mare);background:var(--mare-tint);border-radius:20px;padding:1px 12px;font-size:.95rem}
+textarea{width:100%;max-width:1000px;min-height:220px;border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--paper2);resize:vertical;line-height:1.6;display:block}
+textarea:focus{outline:none;border-color:var(--mare)}
+.meters{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.meter{display:inline-block;padding:3px 12px;border-radius:20px;background:var(--paper2);font-size:.92rem}
+.meter b{font-variant-numeric:tabular-nums}
+.meter.ok{background:var(--verde-tint);color:var(--ok)}
+
+/* finale: complimenti */
+.finale{margin:34px 0 0;border:2px solid var(--bord);border-radius:14px;padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;max-width:1100px;position:relative;overflow:hidden}
+@media (max-width:700px){.finale{grid-template-columns:1fr;padding:20px;gap:18px;justify-items:start}}
+.ring{position:relative;width:170px;height:170px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:10}
+.ring .bgc{stroke:var(--line)}
+.ring .fg{stroke:var(--verde);stroke-linecap:round;transition:stroke-dashoffset 1.2s ease-out,stroke .3s}
+.ring .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .num b{font-family:var(--title);font-size:3rem;font-weight:800;color:var(--bord);line-height:1}
+.ring .num span{color:var(--soft);font-size:.95rem}
+.fin-title{font-family:var(--title);font-style:italic;font-weight:800;font-size:clamp(2.4rem,5vw,3.8rem);color:var(--bord);line-height:1;margin:0 0 .1em;display:inline-block;padding-bottom:.12em;background:linear-gradient(to right,#1F8A50 0 33.3%,var(--line) 33.3% 66.6%,#C8312B 66.6%) bottom/100% 4px no-repeat}
+.fin-sub{font-size:1.15rem;margin:.3em 0 0}
+.fin-ru{color:var(--soft);margin:.2em 0 0}
+.break{list-style:none;padding:0;margin:14px 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.break li{padding:6px 12px;border-radius:8px;background:var(--paper2);display:flex;justify-content:space-between;gap:8px;font-size:.95rem}
+.break li b{font-variant-numeric:tabular-nums}
+.break li.full{background:var(--verde-tint);color:var(--ok)}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
+.confetti i{position:absolute;top:-20px;width:9px;height:14px;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(120px);background:var(--ink);color:var(--card);padding:8px 18px;border-radius:20px;z-index:60;transition:transform .3s}
+.toast.on{transform:translateX(-50%) translateY(0)}
+@media (prefers-reduced-motion:reduce){.ring .fg,.chip,.toast,.progress span{transition:none}}
+
+/* versione insegnante */
+.prof-badge{font-size:.8rem;font-weight:700;color:#fff;background:var(--ok);padding:1px 10px;border-radius:20px;white-space:nowrap}
+.sol{display:none;margin-left:6px;font-size:.82em;font-weight:700;color:var(--ok);background:var(--verde-tint);border-radius:4px;padding:0 6px;vertical-align:middle;line-height:1.5}
+.prof .sol{display:inline-block}
+.prof .tok[data-v="i"]{text-decoration:underline var(--mare) 2px;text-underline-offset:4px}
+.prof .tok[data-v="p"]{text-decoration:underline var(--rosso) 2px;text-underline-offset:4px}
+
+@media print{.bar,.actions,.pens,.starters,.confetti,.toast{display:none!important}.sheet::before{position:absolute}.ex{break-inside:avoid-page}}
+/* ===== CARATTERE GRANDE (22.10.2026): шрифт тетради растёт вместе с экраном (дома ученик не увеличивает сам) ===== */
+html{font-size:clamp(17px,min(1.7vw,3vh),32px)}
+body{font-size:1.1rem}
+.ex-list,.dialog,.pairs,.bins,.finale,textarea{max-width:none}
+.lead{max-width:none}
+.text{max-width:60em}
+.jump a{width:1.7em;height:1.7em}
+.ico{width:2.2em;height:2.2em}
+.ring{width:9em;height:9em}
+.sheet{padding-right:clamp(20px,7vw,140px)}
+.gloss:hover::after,.gloss:focus::after{font-size:.85em}
+@media (max-width:700px){html{font-size:17px}}
+/* ===== AGGIUNTE U6_L2 ===== */
+/* ===== GIOCO «MEMORY» (24.10.2026): блок шаблона ===== */
+.memory{flex:1 1 auto;display:flex;flex-direction:column;min-height:0}
+.mem-grid{flex:1 1 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(4.2em,1fr);gap:.6em;min-height:0}
+.mem-card{border:0;padding:0;background:none;perspective:900px;cursor:pointer;font:inherit;color:inherit;min-height:4.2em}
+.mem-card .in{position:relative;display:block;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d}
+.mem-card.on .in,.mem-card.done .in{transform:rotateY(180deg)}
+.mem-card .mf,.mem-card .mb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:.4em .6em;border-radius:12px;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:2px solid var(--line)}
+.mem-card .mf{font-family:var(--title);font-size:2em;font-weight:800;color:#fff;background:var(--mare)}
+.mem-card.a .mf{background:var(--sole)}
+.mem-card .mb{transform:rotateY(180deg);background:var(--mare-tint);font-weight:600;line-height:1.25}
+.mem-card.a .mb{background:var(--sole-tint)}
+.mem-card.done .mb{border-color:var(--ok);background:var(--verde-tint)}
+.mem-card.done{cursor:default;animation:ipp-pop .45s ease}
+.mem-card.miss .mb{border-color:var(--ko)}
+.memory .actions{margin-top:.6em}
+.mem-list{display:grid;grid-template-columns:1fr 1fr;gap:.5em}
+.mem-pair{border:1px solid var(--line);border-radius:10px;padding:.4em .8em;background:var(--card)}
+.mem-pair .q{display:block;color:var(--mare)}
+.mem-pair b{color:var(--ok)}
+@media (max-width:700px){.mem-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.mem-list{grid-template-columns:1fr}}
+
+.mem-grid{grid-auto-rows:minmax(5em,auto)}
+.mem-card .mb{font-size:.95em}
+.mem-info{color:var(--soft);margin:.5em 0 0}
+.gap.sm{min-width:0;width:5.2em}
+.dettato{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(20em,100%),1fr));gap:.3em 2em}
+.dettato .gap{width:8em;min-width:0}
+@media (max-width:700px){.prof .jump,.prof .pts,.prof .prof-badge{display:none}.dettato .gap{width:42%}}
+.vocale{margin-top:16px;padding:12px 16px;border-radius:10px;background:var(--sole-tint);border-left:4px solid var(--sole)}
+.vocale h3{margin:0 0 .3em}
+.audio{margin:.4em 0 .8em}
+.audio{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;border:1px solid var(--line);border-left:6px solid var(--mare);border-radius:10px;background:var(--mare-tint)}
+.audio .a-play{width:52px;height:52px;border-radius:50%;border:0;background:var(--mare);color:#fff;font-size:1.3rem;flex:none}
+.audio .a-bar{flex:1 1 180px;height:8px;border-radius:8px;background:var(--line);cursor:pointer;position:relative;overflow:hidden}
+.audio .a-bar span{position:absolute;inset:0 auto 0 0;width:0;background:var(--mare)}
+.audio .a-time{font-variant-numeric:tabular-nums;color:var(--soft);min-width:5.5em;font-size:.92rem}
+.audio .a-btn{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:2px 12px;font-size:.9rem}
+.audio .a-btn[aria-pressed="true"]{border-color:var(--mare);color:var(--mare);font-weight:700}
+.audio.empty{justify-content:center;color:var(--soft);border-style:dashed;border-left-style:solid;min-height:76px}
+.gbar{display:none}
+@media (max-width:700px){.prof .gbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;align-items:center;gap:8px;padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));background:var(--card);border-top:1px solid var(--line)}
+.prof .gbar button{font:inherit}.prof .gbar .nv{width:52px;height:46px;border-radius:12px;border:1.5px solid var(--bord);background:var(--card);color:var(--bord);font-size:1.6rem}
+.prof .gbar .gt{flex:1;min-width:0;border:0;background:none;text-align:center}.prof .gbar .gt small{display:block;color:var(--soft);font-size:.8rem}.prof .gbar .gt b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--bord)}
+.prof .sheet{padding-bottom:90px!important}.prof .img-slot,.prof .gift-stage{max-height:28vh;overflow:hidden}.prof .gift-stage svg{max-height:26vh}
+}
+/* mappa del quartiere */
+.nv-road{stroke:#D9D6CF;stroke-width:46;stroke-linecap:square}.nv-dash{stroke:#fff;stroke-width:3;stroke-dasharray:12 12}
+.nv-pl rect{fill:#fff;stroke:#BDB7AC;stroke-width:2}.nv-pl text{font:700 24px var(--body);fill:var(--ink);text-anchor:middle}.nv-pl .e{font-size:30px;dominant-baseline:middle}
+.nv-pl.goal rect{fill:var(--sole-tint);stroke:var(--sole);stroke-width:5}
+.nv-pl.ok rect{fill:var(--verde-tint);stroke:var(--ok);stroke-width:5}
+.nmap{width:100%;max-width:820px;height:auto;display:block;border-radius:12px;border:1px solid var(--line);margin:4px 0 12px}
+.route{line-height:2.4;max-width:80ch}
+.route .slot{min-width:6em}
+.reading{border-left:4px solid var(--mare);background:var(--mare-tint);padding:10px 16px;border-radius:0 10px 10px 0;margin-bottom:12px}
+.vf{list-style:none;padding:0;margin:0;max-width:1000px}
+.vf li{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.vf li>span:first-child{flex:1 1 30em}
+.vf .opts{display:flex;gap:6px;flex-wrap:wrap}
+.vf .opts button{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:1px 14px}
+.vf .opts button.sel{border-color:var(--sole);box-shadow:0 0 0 2px var(--sole);font-weight:600}
+.vf .opts button.ok{background:var(--verde-tint);border-color:var(--ok);font-weight:700}
+.vf .opts button.ko{background:var(--rosso-tint);border-color:var(--ko);text-decoration:line-through}
+.vf .opts button.key{box-shadow:0 0 0 2px var(--ok);background:var(--verde-tint)}
+
+.slots-list li{line-height:2.3}
+.qmap .m-nb,.qmap .m-n{display:none}
+</style>
+</head>
+<body data-level="Italiano A1" data-mode="studente" data-unit="Unità 6" data-lesson="Lezione 4" data-name="La seconda a destra">
+
+<header class="bar">
+  <span class="bar-title" id="barTitle"></span>
+  <div class="progress" aria-hidden="true"><span id="prog"></span></div>
+  <nav class="jump" aria-label="Vai all’esercizio">
+    <a href="#es1" data-for="e1">1</a><a href="#es2" data-for="e2">2</a><a href="#es3" data-for="e3">3</a><a href="#es4" data-for="e4">4</a><a href="#es5" data-for="e5">5</a><a href="#es6" data-for="e6">6</a>
+  </nav>
+  <span class="pts" id="pts">0 / 30</span>
+</header>
+
+<main class="sheet">
+  <div class="brand" aria-hidden="true"><i><b></b><b></b><b></b></i><span id="lvl"></span></div>
+
+  <section class="cover">
+    <div>
+      <span class="kind">Italiano passo passo</span>
+      <p class="cover-unit" id="coverUnit"></p>
+      <h1>Quaderno degli esercizi<span class="l2" id="coverName"></span></h1>
+    </div>
+    <div class="who-box">
+      <label class="field"><b>Nome</b><input id="nome" autocomplete="name" placeholder="Scrivi il tuo nome"></label>
+      <label class="field"><b>Data</b><input id="data"></label>
+      <div class="how"><p>Выполняй упражнения прямо на странице и нажимай «Controlla». Ответы сохраняются в этом браузере. В конце нажми «Invia all’insegnante»: откроется Google-форма с твоими результатами, нажми в ней «Invia».</p></div>
+    </div>
+  </section>
+
+  <!-- ===== ESERCIZIO 1: IL PERCORSO (banca di parole) ===== -->
+  <section class="ex" id="es1" data-ex="e1">
+    <span class="kind" data-icon="vocab">Esercizio 1</span>
+    <h2>Come arrivo alla stazione?</h2>
+    <p class="lead">Completa le indicazioni con le parole della lista. Tocca uno spazio, poi la parola giusta.<span class="tr">Дополни объяснение дороги словами из списка: нажми на пропуск, затем на нужное слово.</span></p>
+    <div class="bank" id="bank1"><button class="chip">dritto</button><button class="chip">incrocio</button><button class="chip">a destra</button><button class="chip">semaforo</button><button class="chip">gira</button><button class="chip">attraversa</button><button class="chip">traversa</button><button class="chip">a sinistra</button></div>
+    <p class="route">■ Scusi, come faccio ad arrivare alla stazione?<br>▼ Allora, Lei esce dall’albergo e va <button class="slot" data-answer="dritto"></button>. Al primo <button class="slot" data-answer="incrocio"></button> gira <button class="slot" data-answer="a destra"></button> e continua fino al <button class="slot" data-answer="semaforo"></button>. Lì <button class="slot" data-answer="gira"></button> a sinistra e <button class="slot" data-answer="attraversa"></button> la piazza. Alla seconda <button class="slot" data-answer="traversa"></button> gira <button class="slot" data-answer="a sinistra"></button>: la stazione è proprio lì.<br>■ Grazie mille! — ▼ Non c’è di che.</p>
+    <div class="actions"><button class="btn" data-check="e1">Controlla</button><button class="btn ghost" data-reset="e1">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
+  </section>
+
+  <!-- ===== ESERCIZIO 2: L'ORA (collega) ===== -->
+  <section class="ex" id="es2" data-ex="e2">
+    <span class="kind" data-icon="match">Esercizio 2</span>
+    <h2>Che ore sono?</h2>
+    <p class="lead">Collega l’ora con le parole: tocca un orario, poi la risposta giusta.<span class="tr">Соедини время с его записью словами: нажми на время, потом на ответ.</span></p>
+    <div class="pairs" id="pairs">
+      <div class="col"><h3>L’ora</h3><ul>
+        <li><button class="card pa" data-n="1" data-key="c"><span class="bd">1</span><span class="txt">13.30</span></button></li>
+        <li><button class="card pa" data-n="2" data-key="e"><span class="bd">2</span><span class="txt">12.00</span></button></li>
+        <li><button class="card pa" data-n="3" data-key="a"><span class="bd">3</span><span class="txt">18.32</span></button></li>
+        <li><button class="card pa" data-n="4" data-key="d"><span class="bd">4</span><span class="txt">22.15</span></button></li>
+        <li><button class="card pa" data-n="5" data-key="b"><span class="bd">5</span><span class="txt">3.45</span></button></li>
+      </ul></div>
+      <div class="col"><h3>In parole</h3><ul>
+        <li><div class="card pb" data-l="a" role="button" tabindex="0"><span class="bd">a</span><span class="txt">Sono le diciotto e trentadue.</span></div></li>
+        <li><div class="card pb" data-l="b" role="button" tabindex="0"><span class="bd">b</span><span class="txt">Sono le quattro meno un quarto.</span></div></li>
+        <li><div class="card pb" data-l="c" role="button" tabindex="0"><span class="bd">c</span><span class="txt">È l’una e mezza.</span></div></li>
+        <li><div class="card pb" data-l="d" role="button" tabindex="0"><span class="bd">d</span><span class="txt">Sono le ventidue e quindici.</span></div></li>
+        <li><div class="card pb" data-l="e" role="button" tabindex="0"><span class="bd">e</span><span class="txt">È mezzogiorno.</span></div></li>
+      </ul></div>
+    </div>
+    <p class="sol" style="margin-top:10px">1 – c · 2 – e · 3 – a · 4 – d · 5 – b</p>
+    <div class="actions"><button class="btn" data-check="e2">Controlla</button><button class="btn ghost" data-reset="e2">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
+  </section>
+
+  <!-- ===== ESERCIZIO 3: A CHE ORA? ===== -->
+  <section class="ex" id="es3" data-ex="e3">
+    <span class="kind" data-icon="gram">Esercizio 3</span>
+    <h2>Le, l’, alle, all’ o a?</h2>
+    <p class="lead">Completa con la parola giusta: <i>ore, le, l’, alle, all’, a</i>.<span class="tr">Вставь нужное слово: ore, le, l’, alle, all’, a.</span></p>
+    <ol class="ex-list">
+      <li>Scusi, che <input class="gap" style="width:4em;min-width:0" data-answer="ore" aria-label="risposta"> sono?</li>
+      <li>Sono <input class="gap" style="width:4.5em;min-width:0" data-answer="le" aria-label="risposta"> tre e mezza.</li>
+      <li>È <input class="gap" style="width:4.5em;min-width:0" data-answer="l’|l'" aria-label="risposta"> una.</li>
+      <li>Il museo apre <input class="gap" style="width:4.5em;min-width:0" data-answer="alle" aria-label="risposta"> nove.</li>
+      <li>Il film comincia <input class="gap" style="width:4.5em;min-width:0" data-answer="all’|all'" aria-label="risposta"> una e un quarto.</li>
+      <li>Il bar chiude <input class="gap" style="width:4.5em;min-width:0" data-answer="a" aria-label="risposta"> mezzanotte.</li>
+      <li>Pranziamo <input class="gap" style="width:4.5em;min-width:0" data-answer="a" aria-label="risposta"> mezzogiorno.</li>
+      <li>Il treno da Perugia arriva <input class="gap" style="width:4.5em;min-width:0" data-answer="alle" aria-label="risposta"> 18.32.</li>
+    </ol>
+    <div class="actions"><button class="btn" data-check="e3">Controlla</button><button class="btn ghost" data-reset="e3">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
+  </section>
+
+  <!-- ===== ESERCIZIO 4: CAFFÈ CULTURALE ===== -->
+  <section class="ex" id="es4" data-ex="e4">
+    <span class="kind" data-icon="read">Esercizio 4</span>
+    <h2>Caffè culturale: la piazza</h2>
+    <p class="lead">Leggi il testo e rispondi: vero o falso?<span class="tr">Прочитай текст и ответь: верно или нет?</span></p>
+    <div class="reading"><p>Dai tempi più antichi ad oggi, in Italia la piazza non è solo uno spazio fisico, ma anche sociale, il vero cuore della città: le persone infatti vanno in piazza per incontrare gli amici, per un appuntamento, per bere un caffè, per chiacchierare; ma anche per protestare o festeggiare, vendere e comprare. Non esiste una città italiana senza una piazza importante: dal forum degli antichi Romani alla piazza come centro politico e religioso del Rinascimento, l’Italia ha una vera tradizione culturale legata alla piazza; non a caso la parola «piazza» è presente in molti modi di dire, come per esempio: «fare piazza pulita» (eliminare ogni elemento di disturbo) o «mettere in piazza» (rivelare a tutti un fatto privato e riservato).</p>
+    <p class="hint"><i>il cuore</i> — сердце · <i>chiacchierare</i> — болтать · <i>non esiste</i> — не существует · <i>il modo di dire</i> — выражение, поговорка</p></div>
+    <ul class="vf"><li><span>1. In Italia la piazza è solo uno spazio fisico.</span><span class="opts" data-answer="falso"><button>vero</button><button>falso</button></span></li><li><span>2. In piazza le persone incontrano gli amici e bevono un caffè.</span><span class="opts" data-answer="vero"><button>vero</button><button>falso</button></span></li><li><span>3. In piazza si può anche protestare o festeggiare.</span><span class="opts" data-answer="vero"><button>vero</button><button>falso</button></span></li><li><span>4. Molte città italiane non hanno una piazza importante.</span><span class="opts" data-answer="falso"><button>vero</button><button>falso</button></span></li><li><span>5. «Mettere in piazza» = raccontare a tutti un fatto privato.</span><span class="opts" data-answer="vero"><button>vero</button><button>falso</button></span></li><li><span>6. «Fare piazza pulita» = fare una festa in piazza.</span><span class="opts" data-answer="falso"><button>vero</button><button>falso</button></span></li></ul>
+    <div class="actions"><button class="btn" data-check="e4">Controlla</button><button class="btn ghost" data-reset="e4">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
+  </section>
+
+  <!-- ===== ESERCIZIO 5: DOVE ARRIVI? ===== -->
+  <section class="ex" id="es5" data-ex="e5">
+    <span class="kind" data-icon="read">Esercizio 5</span>
+    <h2>Dove arrivi?</h2>
+    <p class="lead">Sei all’albergo (●, la freccia guarda in su). Leggi le indicazioni, segui il percorso sulla mappa e scegli dove arrivi.<span class="tr">Ты у гостиницы (●, стрелка смотрит вверх). Прочитай указания, пройди маршрут по карте и выбери, куда ты пришёл.</span></p>
+    <svg class="nmap" viewBox="0 0 1100 640"><rect width="1100" height="640" fill="#F3F1EC"/><line x1="110" y1="560" x2="860" y2="560" class="nv-road"/><line x1="110" y1="400" x2="860" y2="400" class="nv-road"/><line x1="110" y1="240" x2="860" y2="240" class="nv-road"/><line x1="110" y1="80" x2="860" y2="80" class="nv-road"/><line x1="110" y1="560" x2="110" y2="80" class="nv-road"/><line x1="360" y1="560" x2="360" y2="80" class="nv-road"/><line x1="610" y1="560" x2="610" y2="80" class="nv-road"/><line x1="860" y1="560" x2="860" y2="80" class="nv-road"/><line x1="110" y1="560" x2="860" y2="560" class="nv-dash"/><line x1="110" y1="400" x2="860" y2="400" class="nv-dash"/><line x1="110" y1="240" x2="860" y2="240" class="nv-dash"/><line x1="110" y1="80" x2="860" y2="80" class="nv-dash"/><line x1="110" y1="560" x2="110" y2="80" class="nv-dash"/><line x1="360" y1="560" x2="360" y2="80" class="nv-dash"/><line x1="610" y1="560" x2="610" y2="80" class="nv-dash"/><line x1="860" y1="560" x2="860" y2="80" class="nv-dash"/><g class="nv-pl"><rect x="10" y="590" width="200" height="46" rx="8"/><text x="110" y="622">🏨 l’albergo</text></g><g class="nv-pl"><rect x="640" y="290" width="190" height="80" rx="10"/><text class="e" x="735" y="316">💊</text><text x="735" y="356">la farmacia</text></g><g class="nv-pl"><rect x="890" y="130" width="190" height="80" rx="10"/><text class="e" x="985" y="156">🏦</text><text x="985" y="196">la banca</text></g><g class="nv-pl"><rect x="390" y="130" width="190" height="80" rx="10"/><text class="e" x="485" y="156">🎬</text><text x="485" y="196">il cinema</text></g><g class="nv-pl"><rect x="890" y="450" width="190" height="80" rx="10"/><text class="e" x="985" y="476">🚉</text><text x="985" y="516">la stazione</text></g><g class="nv-pl"><rect x="140" y="110" width="190" height="80" rx="10"/><text class="e" x="235" y="136">🖼</text><text x="235" y="176">il museo</text></g><g class="nv-pl"><rect x="640" y="110" width="190" height="80" rx="10"/><text class="e" x="735" y="136">🍝</text><text x="735" y="176">il ristorante</text></g><g class="nv-pl"><rect x="390" y="290" width="190" height="80" rx="10"/><text class="e" x="485" y="316">🛒</text><text x="485" y="356">il supermercato</text></g><g transform="translate(110,560)"><circle r="24" fill="#C8312B"/><path d="M0,-15 L11,9 L0,3 L-11,9 Z" fill="#fff"/></g></svg>
+    <ul class="vf">
+      <li><span>1. Esci dall’albergo e vai dritto fino al secondo incrocio. Poi giri a destra e vai dritto fino al primo incrocio. Lì, a sinistra, c’è…</span><span class="opts" data-answer="il cinema"><button>il cinema</button><button>la stazione</button><button>la farmacia</button><button>il museo</button></span></li>
+      <li><span>2. Esci dall’albergo, giri subito a destra e vai dritto fino al terzo incrocio. Lì, a sinistra, c’è…</span><span class="opts" data-answer="la stazione"><button>il cinema</button><button>la stazione</button><button>la farmacia</button><button>il museo</button></span></li>
+      <li><span>3. Esci dall’albergo e vai dritto fino al primo incrocio. Giri a destra, vai dritto fino al secondo incrocio e lì, a sinistra, c’è…</span><span class="opts" data-answer="la farmacia"><button>il cinema</button><button>la stazione</button><button>la farmacia</button><button>il museo</button></span></li>
+    </ul>
+    <div class="actions"><button class="btn" data-check="e5">Controlla</button><button class="btn ghost" data-reset="e5">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
+  </section>
+
+  <!-- ===== ESERCIZIO 6: SCRIVI ===== -->
+  <section class="ex" id="es6" data-ex="e6">
+    <span class="kind" data-icon="write">Esercizio 6</span>
+    <h2>Da casa mia a…</h2>
+    <p class="lead">Spiega a un amico italiano come arrivare da casa tua a un posto che ti piace (un bar, un parco, la fermata…). Come ti muovi? Quanto tempo ci metti? Scrivi 5–7 frasi.<span class="tr">Объясни другу-итальянцу, как дойти от твоего дома до любимого места. Как ты передвигаешься? Сколько времени уходит? 5–7 предложений.</span></p>
+    <div class="starters" id="starters"><button>Esci di casa e…</button><button>vai dritto</button><button>giri a destra</button><button>giri a sinistra</button><button>al primo incrocio…</button><button>al semaforo…</button><button>attraversi la piazza</button><button>Ci metti … minuti a piedi.</button><button>Io di solito vado a piedi / in autobus.</button></div>
+    <textarea id="essay" data-scritto="Esercizio 6" placeholder="Esci di casa e vai dritto…" aria-label="Il tuo testo"></textarea>
+    <div class="meters"><span class="meter" id="mFrasi">Frasi: <b>0</b> / 5–7</span><span class="meter" id="mDir"><i>dritto / destra / sinistra</i>: <b>0</b></span><span class="meter" id="mVia"><i>incrocio / semaforo / piazza / traversa</i>: <b>0</b></span></div>
+    <p class="hint" style="margin-top:8px">Это задание проверяет преподаватель: текст попадёт в форму вместе с результатом, когда ты нажмёшь «Invia all’insegnante».</p>
+    <div class="vocale"><h3>🎙 Messaggio vocale</h3><p>Registra un messaggio vocale (30–40 secondi): il percorso da casa tua a un posto che ti piace. «Esco di casa, vado dritto, giro a…»<span class="tr">Запиши голосовое сообщение (30–40 секунд): дорога от дома до любимого места.</span></p></div>
+  </section>
+  <!-- ===== COMPLIMENTI ===== -->
+  <section class="finale" id="finale" aria-live="polite">
+    <div class="ring">
+      <svg viewBox="0 0 170 170"><circle class="bgc" cx="85" cy="85" r="74"/><circle class="fg" id="ringFg" cx="85" cy="85" r="74"/></svg>
+      <div class="num"><b id="finNum">0</b><span>su <span id="finMax">30</span></span></div>
+    </div>
+    <div>
+      <p class="fin-title" id="finTitle">Il tuo risultato</p>
+      <p class="fin-sub" id="finSub">Controlla tutti gli esercizi per vedere quante risposte giuste hai.</p>
+      <p class="fin-ru" id="finRu">Нажми «Controlla tutto», чтобы увидеть, сколько у тебя правильных ответов.</p>
+      <ul class="break" id="break"></ul>
+      <div class="actions">
+        <button class="btn" id="checkAll">Controlla tutto</button>
+        <button class="btn alt" id="sendRes">Invia all’insegnante</button>
+        <button class="btn ghost" id="copyRes">Copia il risultato</button>
+        <button class="btn ghost" id="resetAll">Cancella tutto</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="folio"><span id="folioL"></span><span>Quaderno degli esercizi</span></footer>
+</main>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+  const B=document.body,PROF=B.dataset.mode==='insegnante',BRAND='Italiano passo passo';
+  const LV=B.dataset.level,UNIT=B.dataset.unit,LES=B.dataset.lesson,NAME=B.dataset.name;
+  const KEY='ipp:esercizi:'+UNIT+':'+LES;
+
+  /* ===== GOOGLE MODULO: dove arrivano i risultati (uno per tutto il corso, non cambiare) ===== */
+  const MODULO={
+    url:'https://docs.google.com/forms/d/e/1FAIpQLSfdEbDz_loexufuIp4SsyB9jLq7otuUNPJeA91Qpgd0R-3EeA/viewform', /* modulo A1 */
+    nome:'entry.1271164771', data:'entry.1325902077', lezione:'entry.1705899089', punteggio:'entry.1851506855',
+    dettagli:'entry.1450450077', testo:'entry.2110683261', percentuale:'entry.1501772916'
+  };
+  const $=s=>document.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* intestazioni */
+  document.title=BRAND+' — '+UNIT+', '+LES+': '+NAME+' — Quaderno degli esercizi'+(PROF?' (insegnante)':'');
+  $('#barTitle').innerHTML=BRAND+' — '+UNIT+', '+LES+' — <i>'+NAME+'</i>';
+  $('#coverUnit').textContent=UNIT+' — '+LES;$('#coverName').textContent=NAME;$('#lvl').textContent=LV;
+  $('#folioL').textContent=BRAND+' — '+LV+' — '+UNIT+', '+LES+': '+NAME;
+  if(PROF){B.classList.add('prof');const bd=document.createElement('span');bd.className='prof-badge';bd.textContent='Versione insegnante — con soluzioni';$('#barTitle').after(bd)}
+
+  /* icone a linee nere (stesse della lezione) */
+  const ICONS={
+    write:'<rect x="11" y="5" width="27" height="38" rx="3"/><path d="M6 11h8M6 19h8M6 27h8M6 35h8"/><rect x="16" y="11" width="4" height="4"/><path d="M24 13h9"/><rect x="16" y="20" width="4" height="4"/><path d="M24 22h9"/><rect x="16" y="29" width="4" height="4"/><path d="M24 31h4"/><path d="M44 17 31 36l-4 3 1-5 13-19z"/>',
+    gram:'<path d="M5 5h26v19H5z"/><path d="M11 10l10 8"/><circle cx="38" cy="11" r="4"/><path d="M38 15v15M27 19l11 4"/><circle cx="12" cy="34" r="3"/><circle cx="25" cy="34" r="3"/><path d="M6 44c0-3 3-5 6-5s6 2 6 5M19 44c0-3 3-5 6-5s6 2 6 5"/>',
+    vocab:'<path d="M7 5h20a3 3 0 0 1 3 3v13a3 3 0 0 1-3 3H15l-7 6v-6H7a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3z"/><path d="M11 11h12M17 9v2M14 12c1 4 4 7 8 8M20 12c-1 4-4 7-8 8"/><path d="M34 19h7a3 3 0 0 1 3 3v13a3 3 0 0 1-3 3h-1v6l-7-6h-7a3 3 0 0 1-3-3v-7"/><path d="M30 34l4-9 4 9M31.5 31h5"/>',
+    listen:'<path d="M9 30v-6a15 15 0 0 1 30 0v6"/><rect x="5" y="28" width="8" height="13" rx="3"/><rect x="35" y="28" width="8" height="13" rx="3"/><path d="M20 31v6M24 28v12M28 31v6"/>',
+    read:'<circle cx="24" cy="10" r="6"/><path d="M6 21l18 6 18-6v19l-18 6-18-6z"/><path d="M24 27v19"/><rect x="2" y="27" width="5" height="9" rx="2"/><rect x="41" y="27" width="5" height="9" rx="2"/>',
+    match:'<rect x="3" y="6" width="14" height="9" rx="2"/><rect x="3" y="20" width="14" height="9" rx="2"/><rect x="3" y="34" width="14" height="9" rx="2"/><rect x="31" y="6" width="14" height="9" rx="2"/><rect x="31" y="20" width="14" height="9" rx="2"/><rect x="31" y="34" width="14" height="9" rx="2"/><path d="M17 10.5l14 28M17 24.5l14-14M17 38.5l14-14"/>'
+  };
+  $$('[data-icon]').forEach(el=>{const k=ICONS[el.dataset.icon];if(!k)return;const sp=document.createElement('span');sp.className='ico';sp.setAttribute('aria-hidden','true');sp.innerHTML='<svg viewBox="0 0 48 48">'+k+'</svg>';el.prepend(sp)});
+
+  /* confronto risposte */
+  const norm=s=>(s||'').toLowerCase().replace(/[’`´]/g,"'").replace(/\s+/g,' ').replace(/[.!?,;:]+$/,'').trim();
+  const fold=s=>norm(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  function judge(v,ans){const a=ans.split('|');if(!norm(v))return 0;if(a.some(x=>norm(x)===norm(v)))return 2;if(a.some(x=>fold(x)===fold(v)))return 1;return 0}
+  function judgeInput(inp){
+    inp.classList.remove('ok','ko');const n=inp.nextElementSibling;if(n&&n.classList.contains('acc'))n.remove();
+    const r=judge(inp.value,inp.dataset.answer);inp.classList.add(r?'ok':'ko');
+    if(r===1){const a=inp.dataset.answer.split('|').find(x=>fold(x)===fold(inp.value));const s=document.createElement('span');s.className='acc';s.textContent='→ '+a;s.title='Attenzione all’accento';inp.after(s)}
+    return r?1:0;
+  }
+  const clearMarks=root=>{$$('.ok,.ko,.miss',root).forEach(e=>e.classList.remove('ok','ko','miss'));$$('.acc',root).forEach(e=>e.remove())};
+
+  const MAX={e1:8,e2:5,e3:8,e4:6,e5:3},LABELS={e1:'Esercizio 1',e2:'Esercizio 2',e3:'Esercizio 3',e4:'Esercizio 4',e5:'Esercizio 5'};
+  const score={e1:null,e2:null,e3:null,e4:null,e5:null};
+  const TOTAL=Object.values(MAX).reduce((a,b)=>a+b,0);
+
+  /* ===== Es. 2: banca di parole ===== */
+  const slots=$$('#es1 .slot'),chips=$$('#bank1 .chip');let cur1=null;
+  const cap=(s,c)=>c?s.charAt(0).toUpperCase()+s.slice(1):s;
+  function setCur(sl){cur1=sl;slots.forEach(s=>s.classList.toggle('cur',s===sl))}
+  function nextEmpty(){return slots.find(s=>!s.dataset.val)||null}
+  function fillSlot(sl,w){sl.dataset.val=w;sl.textContent=cap(w,sl.hasAttribute('data-cap'));chips.forEach(c=>{if(c.textContent===w)c.classList.add('used')})}
+  function emptySlot(sl){const w=sl.dataset.val;delete sl.dataset.val;sl.textContent='';chips.forEach(c=>{if(c.textContent===w)c.classList.remove('used')})}
+  chips.forEach(c=>c.onclick=()=>{let t=(cur1&&!cur1.dataset.val)?cur1:nextEmpty();if(!t)return;clearMarks($('#es1'));fillSlot(t,c.textContent);setCur(nextEmpty());save()});
+  slots.forEach(s=>s.onclick=()=>{clearMarks($('#es1'));if(s.dataset.val){emptySlot(s);save()}setCur(s)});
+  setCur(slots[0]);
+
+  /* ===== Es. 2: collega ===== */
+  const PC=['var(--mare)','var(--rosso)','var(--verde)','var(--sole)','var(--bord)'];
+  const pa=$$('#pairs .pa'),pb=$$('#pairs .pb');let pairs={},selA=null;
+  function drawPairs(){
+    pa.forEach(a=>{const l=pairs[a.dataset.n];a.classList.toggle('paired',!!l);a.classList.toggle('sel',a===selA);a.style.setProperty('--c',PC[a.dataset.n-1]);a.querySelector('.bd').textContent=l?a.dataset.n+l:a.dataset.n});
+    pb.forEach(b=>{const n=Object.keys(pairs).find(k=>pairs[k]===b.dataset.l);b.classList.toggle('paired',!!n);if(n)b.style.setProperty('--c',PC[n-1]);b.querySelector('.bd').textContent=n?n+b.dataset.l:b.dataset.l});
+  }
+  pa.forEach(a=>a.onclick=e=>{if(e.target.closest('.gloss'))return;clearMarks($('#es2'));if(pairs[a.dataset.n]){delete pairs[a.dataset.n]}selA=(selA===a)?null:a;drawPairs();save()});
+  pb.forEach(b=>{const act=e=>{if(e.target.closest('input,.gloss'))return;clearMarks($('#es2'));const l=b.dataset.l;
+      if(selA){for(const k in pairs)if(pairs[k]===l)delete pairs[k];pairs[selA.dataset.n]=l;selA=null}
+      else{for(const k in pairs)if(pairs[k]===l)delete pairs[k]}
+      drawPairs();save()};
+    b.onclick=act;b.onkeydown=e=>{if((e.key==='Enter'||e.key===' ')&&e.target===b){e.preventDefault();act(e)}}});
+  drawPairs();
+
+  /* ===== vero/falso e scelte ===== */
+  const vfg=$$('.vf .opts');
+  vfg.forEach(g=>g.querySelectorAll('button').forEach(b=>b.onclick=()=>{clearMarks(g.closest('.ex'));const was=b.classList.contains('sel');g.querySelectorAll('button').forEach(x=>x.classList.remove('sel'));if(!was)b.classList.add('sel');save()}));
+  const vfState=()=>vfg.map(g=>{const s=g.querySelector('.sel');return s?s.textContent:''});
+  const chooseCheck=id=>{let n=0;$$('#'+id+' .vf .opts').forEach(g=>{const s=g.querySelector('.sel');if(!s)return;const ok=s.textContent===g.dataset.answer;s.classList.add(ok?'ok':'ko');if(ok)n++});return n};
+  const chooseReset=id=>$$('#'+id+' .vf .opts button').forEach(b=>b.classList.remove('sel','ok','ko'));
+  /* ===== controlli ===== */
+  const CHECK={
+    e1(){let n=0;slots.forEach(s=>{s.classList.remove('cur');const ok=s.dataset.val===s.dataset.answer;s.classList.add(ok?'ok':'ko');if(ok)n++});return n},
+    e3(){let n=0;$$('#es3 .gap').forEach(i=>n+=judgeInput(i));return n},
+    e4(){return chooseCheck('es4')},
+    e5(){return chooseCheck('es5')},
+    e2(){let n=0;pa.forEach(a=>{const l=pairs[a.dataset.n];if(!l)return;const ok=l===a.dataset.key;a.classList.add(ok?'ok':'ko');const b=pb.find(x=>x.dataset.l===l);b.classList.add(ok?'ok':'ko');if(ok)n++});return n}
+  };
+  function verdict(sec,n,max){
+    const v=sec.querySelector('.verdict');const r=n/max;
+    v.className='verdict'+(r===1?'':r>=.6?' mid':' low');
+    v.textContent=r===1?'Perfetto!':r>=.8?'Bravo! Quasi tutto giusto.':r>=.6?'Bene, ma rivedi gli errori.':'Coraggio, riprova!';
+  }
+  function runCheck(k){
+    const sec=$('[data-ex="'+k+'"]');clearMarks(sec);const n=CHECK[k]();score[k]=n;
+    sec.querySelector('.score').textContent=n+' / '+MAX[k];verdict(sec,n,MAX[k]);update();
+  }
+  $$('[data-check]').forEach(b=>b.onclick=()=>runCheck(b.dataset.check));
+  const RESET={
+    e1(){slots.forEach(s=>{if(s.dataset.val)emptySlot(s)});setCur(slots[0])},
+    e2(){pairs={};selA=null;drawPairs()},
+    e3(){$$('#es3 .gap').forEach(i=>i.value='')},
+    e4(){chooseReset('es4')},
+    e5(){chooseReset('es5')}
+  };
+  $$('[data-reset]').forEach(b=>b.onclick=()=>{const k=b.dataset.reset,sec=$('[data-ex="'+k+'"]');clearMarks(sec);RESET[k]();score[k]=null;sec.querySelector('.score').textContent='';sec.querySelector('.verdict').textContent='';update();save()});
+  $$('.gap').forEach(i=>i.addEventListener('input',()=>{i.classList.remove('ok','ko');const n=i.nextElementSibling;if(n&&n.classList.contains('acc'))n.remove();save()}));
+
+  /* ===== Es. 5: scrittura ===== */
+  const essay=$('#essay');
+  $$('#starters button').forEach(b=>b.onclick=()=>{const v=essay.value;const sep=v&&!/\s$/.test(v)?' ':'';essay.value=v+sep+b.textContent.replace('…',' ');essay.focus();essay.selectionStart=essay.selectionEnd=essay.value.length;meters();save()});
+  function meters(){
+    const t=essay.value.toLowerCase();const fr=(essay.value.match(/[^.!?…]*[a-zà-ù][^.!?…]*[.!?…]+/gi)||[]).length;
+    const di=(t.match(/dritto|destra|sinistra/g)||[]).length,vi=(t.match(/incrocio|semaforo|piazza|traversa/g)||[]).length;
+    $('#mFrasi b').textContent=fr;$('#mDir b').textContent=di;$('#mVia b').textContent=vi;
+    $('#mFrasi').classList.toggle('ok',fr>=5);$('#mDir').classList.toggle('ok',di>0);$('#mVia').classList.toggle('ok',vi>0);
+    $('[data-for="e6"]').classList.toggle('done',fr>=5&&di>0&&vi>0);
+    return fr;
+  }
+  essay.addEventListener('input',()=>{meters();save()});
+
+  /* ===== finale ===== */
+  const C=2*Math.PI*74,fg=$('#ringFg');fg.style.strokeDasharray=C;fg.style.strokeDashoffset=C;$('#finMax').textContent=TOTAL;
+  let celebrated=false;
+  function update(){
+    const done=Object.keys(score).filter(k=>score[k]!==null);
+    const tot=done.reduce((a,k)=>a+score[k],0);
+    $('#pts').textContent=tot+' / '+TOTAL;$('#prog').style.width=(done.length/Object.keys(MAX).length*100)+'%';
+    Object.keys(score).forEach(k=>$('[data-for="'+k+'"]').classList.toggle('done',score[k]!==null&&score[k]===MAX[k]));
+    $('#finNum').textContent=tot;fg.style.strokeDashoffset=C*(1-tot/TOTAL);
+    $('#break').innerHTML=Object.keys(MAX).map(k=>'<li class="'+(score[k]===MAX[k]?'full':'')+'"><span>'+LABELS[k]+'</span><b>'+(score[k]===null?'—':score[k])+' / '+MAX[k]+'</b></li>').join('');
+    const T=$('#finTitle'),S=$('#finSub'),R=$('#finRu');
+    const NEX=Object.keys(MAX).length;if(done.length<NEX){T.textContent=done.length?'Avanti così!':'Il tuo risultato';S.textContent=done.length?'Hai controllato '+done.length+' esercizi su '+NEX+'. Continua!':'Controlla tutti gli esercizi per vedere quante risposte giuste hai.';R.textContent=done.length?'Проверь все упражнения, чтобы увидеть итог.':'Нажми «Controlla tutto», чтобы увидеть, сколько у тебя правильных ответов.';fg.style.stroke='var(--sole)';return}
+    const p=tot/TOTAL;
+    if(p>=.9){T.textContent='Complimenti!';S.textContent='Hai '+tot+' risposte giuste su '+TOTAL+'. Un lavoro eccellente!';R.textContent='Отличная работа! Так держать.';fg.style.stroke='var(--verde)'}
+    else if(p>=.75){T.textContent='Complimenti!';S.textContent='Hai '+tot+' risposte giuste su '+TOTAL+'. Ancora qualche ritocco e sarà perfetto.';R.textContent='Очень хорошо! Исправь оставшиеся ошибки.';fg.style.stroke='var(--verde)'}
+    else if(p>=.5){T.textContent='Buon lavoro!';S.textContent='Hai '+tot+' risposte giuste su '+TOTAL+'. Ripassa la Scheda di grammatica e correggi gli errori.';R.textContent='Неплохо! Повтори правила в «Scheda di grammatica» и исправь ошибки.';fg.style.stroke='var(--sole)'}
+    else{T.textContent='Coraggio!';S.textContent='Hai '+tot+' risposte giuste su '+TOTAL+'. Chi va piano va sano e va lontano: rileggi le regole e riprova.';R.textContent='Не сдавайся! Перечитай правила и попробуй ещё раз.';fg.style.stroke='var(--rosso)'}
+    if(p>=.75&&!celebrated){celebrated=true;confetti()}
+    if(p<.75)celebrated=false;
+  }
+  function confetti(){
+    if(reduce)return;const box=document.createElement('div');box.className='confetti';const cols=['#1F8A50','#FFFFFF','#C8312B','#C59A45'];
+    for(let i=0;i<90;i++){const c=document.createElement('i');c.style.left=Math.random()*100+'vw';c.style.background=cols[i%4];c.style.boxShadow='0 0 0 1px rgba(0,0,0,.08)';c.style.animationDuration=(2.2+Math.random()*1.8)+'s';c.style.animationDelay=(Math.random()*.6)+'s';c.style.transform='rotate('+Math.random()*360+'deg)';box.append(c)}
+    document.body.append(box);setTimeout(()=>box.remove(),4800);
+  }
+  $('#checkAll').onclick=()=>{Object.keys(CHECK).forEach(runCheck);$('#finale').scrollIntoView({block:'center'})};
+  $('#resetAll').onclick=()=>{if(!confirm('Cancellare tutte le risposte?'))return;Object.keys(RESET).forEach(k=>{clearMarks($('[data-ex="'+k+'"]'));RESET[k]();score[k]=null;const s=$('[data-ex="'+k+'"]');s.querySelector('.score').textContent='';s.querySelector('.verdict').textContent=''});essay.value='';meters();celebrated=false;update();save()};
+
+  /* copia il risultato */
+  function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.id);toast.id=setTimeout(()=>el.classList.remove('on'),2200)}
+  $('#copyRes').onclick=()=>{
+    const done=Object.keys(score).filter(k=>score[k]!==null),tot=done.reduce((a,k)=>a+score[k],0);
+    const lines=[BRAND+' — '+UNIT+', '+LES+': '+NAME,'Quaderno degli esercizi','Nome: '+($('#nome').value||'—'),'Data: '+($('#data').value||'—'),''];
+    Object.keys(MAX).forEach(k=>lines.push(LABELS[k]+': '+(score[k]===null?'non controllato':score[k]+' / '+MAX[k])));
+    lines.push('Totale: '+tot+' / '+TOTAL+' ('+Math.round(tot/TOTAL*100)+'%)');$$('textarea[data-scritto]').forEach(t=>lines.push('',t.dataset.scritto+':',t.value.trim()||'—'));
+    const txt=lines.join('\n');
+    const ok=()=>toast('Risultato copiato! Incollalo in Google Classroom.');
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(ok,fallback)}else fallback();
+    function fallback(){const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.append(ta);ta.select();try{document.execCommand('copy');ok()}catch(e){toast('Copia non riuscita: seleziona il testo a mano.')}ta.remove()}
+  };
+
+  /* invia al Google Modulo */
+  const sendBtn=$('#sendRes');
+  function sentFlag(v){try{if(v===undefined)return localStorage.getItem(KEY+':sent');localStorage.setItem(KEY+':sent',v)}catch(e){}}
+  sendBtn.onclick=()=>{
+    const nome=$('#nome').value.trim();
+    if(!nome){toast('Scrivi il tuo nome in alto, per favore.');$('#nome').focus();return}
+    Object.keys(CHECK).forEach(runCheck);
+    const tot=Object.keys(score).reduce((a,k)=>a+(score[k]||0),0),pct=Math.round(tot/TOTAL*100);
+    const det=Object.keys(MAX).map(k=>LABELS[k]+': '+score[k]+'/'+MAX[k]).join(' · ');
+    const testi=$$('textarea[data-scritto]').map(t=>t.dataset.scritto+':\n'+(t.value.trim()||'—')).join('\n\n');
+    const f=new URLSearchParams({usp:'pp_url'});
+    f.append(MODULO.nome,nome);f.append(MODULO.data,$('#data').value);f.append(MODULO.lezione,UNIT+', '+LES+': '+NAME);
+    f.append(MODULO.punteggio,tot+' / '+TOTAL);f.append(MODULO.percentuale,pct);f.append(MODULO.dettagli,det);f.append(MODULO.testo,testi);
+    /* si apre il modulo Google già compilato: lo studente controlla e preme «Invia» */
+    const w=window.open(MODULO.url+'?'+f.toString(),'_blank');
+    if(!w){location.href=MODULO.url+'?'+f.toString();return}
+    sentFlag(new Date().toISOString());
+    toast('Si è aperto il modulo: premi «Invia» in fondo alla pagina.');
+  };
+
+  /* ascolto: lettore audio (come nella lezione) */
+  $$('.audio').forEach(box=>{const src=(box.dataset.src||'').trim();if(!src)return;
+    box.innerHTML='<audio preload="metadata"></audio><button class="a-play" type="button" aria-label="Ascolta">▶</button><div class="a-bar"><span></span></div><span class="a-time">0:00 / 0:00</span><button class="a-btn" type="button" data-back>−5 s</button><button class="a-btn" type="button" data-rate aria-pressed="false">0,75×</button>';
+    const a=box.querySelector('audio'),pl=box.querySelector('.a-play'),bar=box.querySelector('.a-bar'),fill=bar.querySelector('span'),tm=box.querySelector('.a-time'),rt=box.querySelector('[data-rate]');
+    a.src=src;const f=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
+    const upd=()=>{fill.style.width=(a.duration?a.currentTime/a.duration*100:0)+'%';tm.textContent=f(a.currentTime)+' / '+f(a.duration||0)};
+    a.addEventListener('timeupdate',upd);a.addEventListener('loadedmetadata',upd);a.addEventListener('play',()=>pl.textContent='❚❚');a.addEventListener('pause',()=>pl.textContent='▶');
+    pl.onclick=()=>a.paused?a.play():a.pause();bar.onclick=e=>{const r=bar.getBoundingClientRect();if(a.duration)a.currentTime=(e.clientX-r.left)/r.width*a.duration};
+    box.querySelector('[data-back]').onclick=()=>{a.currentTime=Math.max(0,a.currentTime-5)};rt.onclick=()=>{const s=a.playbackRate===1;a.playbackRate=s?.75:1;rt.setAttribute('aria-pressed',s)}});
+
+  /* versione insegnante sul telefono: barra in basso, salto tra gli esercizi */
+  if(PROF){const EXS=$$('section.ex');const gb=document.createElement('div');gb.className='gbar';
+    gb.innerHTML='<button class="nv" data-d="-1" aria-label="Indietro">‹</button><button class="gt" type="button"><small></small><b></b></button><button class="nv" data-d="1" aria-label="Avanti">›</button>';document.body.append(gb);
+    let cur=0;const show=i=>{cur=Math.max(0,Math.min(EXS.length-1,i));gb.querySelector('small').textContent='Esercizio '+(cur+1)+' / '+EXS.length;gb.querySelector('b').textContent=EXS[cur].querySelector('h2').textContent};
+    gb.querySelectorAll('.nv').forEach(b=>b.onclick=()=>{show(cur+ +b.dataset.d);EXS[cur].scrollIntoView({block:'start'})});
+    gb.querySelector('.gt').onclick=()=>{EXS[cur].scrollIntoView({block:'start'})};
+    addEventListener('scroll',()=>{const y=innerHeight*.35;let k=0;EXS.forEach((s,i)=>{if(s.getBoundingClientRect().top<y)k=i});if(k!==cur)show(k)},{passive:true});show(0)}
+
+  /* soluzioni nella versione insegnante */
+  if(PROF){
+    $$('[data-answer]').forEach(el=>{const s=document.createElement('span');s.className='sol';s.textContent=el.dataset.answer.split('|').join(' / ');el.after(s)});
+  }
+
+  /* salvataggio automatico nel browser */
+  function save(){try{localStorage.setItem(KEY,JSON.stringify({
+    nome:$('#nome').value,data:$('#data').value,slots:slots.map(s=>s.dataset.val||''),pairs,vf:vfState(),
+    gaps:$$('.gap').map(i=>i.value),essay:essay.value}))}catch(e){}}
+  function load(){let d=null;try{d=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
+    if(!d){$('#data').value=new Date().toLocaleDateString('it-IT');return}
+    $('#nome').value=d.nome||'';$('#data').value=d.data||new Date().toLocaleDateString('it-IT');
+    (d.slots||[]).forEach((w,i)=>{if(w&&slots[i])fillSlot(slots[i],w)});setCur(nextEmpty());
+    pairs=d.pairs||{};drawPairs();
+    vfg.forEach((g,i)=>{const v=d.vf&&d.vf[i];if(v)[...g.querySelectorAll('button')].forEach(b=>{if(b.textContent===v)b.classList.add('sel')})});
+    $$('.gap').forEach((g,i)=>{if(d.gaps&&d.gaps[i])g.value=d.gaps[i]});
+    essay.value=d.essay||'';
+  }
+  ['#nome','#data'].forEach(s=>$(s).addEventListener('input',save));
+  load();meters();update();
+})();
+</script>
+</body>
+</html>
