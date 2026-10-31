@@ -563,5 +563,111 @@ select.gap{width:auto;min-width:8em;cursor:pointer}
   load();meters();update();
 })();
 </script>
+<!-- IPP-INVIO-UNIVERSALE v6: invio universale al Google Modulo (A1/A2) con report errori -->
+<script>
+(function(){
+  /* ===== MODULI: uno per livello. Il livello si legge da <body data-level="Italiano A1|A2"> =====
+     (per forzarlo: data-form="A2" nel <body> oppure ?livello=A2 nel link) */
+  const MODULI={
+    A1:{url:'https://docs.google.com/forms/d/e/1FAIpQLSfdEbDz_loexufuIp4SsyB9jLq7otuUNPJeA91Qpgd0R-3EeA/viewform',
+      nome:'entry.1271164771',data:'entry.1325902077',lezione:'entry.1705899089',punteggio:'entry.1851506855',
+      dettagli:'entry.1450450077',errori:'entry.1885764929',testo:'entry.2110683261',percentuale:'entry.1501772916'},
+    A2:{url:'https://docs.google.com/forms/d/e/1FAIpQLSdWvL3aBL7NjZmhLvsCEaIKkgNiHiT0R3lUEP6061C2_TRfZg/viewform',
+      nome:'entry.1271164771',data:'entry.1325902077',lezione:'entry.1705899089',punteggio:'entry.1851506855',
+      dettagli:'entry.1450450077',errori:'entry.1242774453',testo:'entry.2110683261',percentuale:'entry.1501772916'}
+  };
+  const B=document.body;if(B.dataset.mode==='insegnante')return;
+  const $=s=>document.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+  const GAP='input[data-answer],textarea[data-answer],select[data-answer]';
+  const norm=s=>(s||'').toLowerCase().replace(/[’`´]/g,"'").replace(/\s+/g,' ').replace(/[.!?,;:]+$/,'').trim();
+  const fold=s=>norm(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  function judge(v,ans){const a=ans.split('|');if(!norm(v))return 0;if(a.some(x=>norm(x)===norm(v)))return 2;if(a.some(x=>fold(x)===fold(v)))return 1;return 0}
+  function toast(t){const el=$('#toast');if(!el){alert(t);return}el.textContent=t;el.classList.add('on');clearTimeout(toast.id);toast.id=setTimeout(()=>el.classList.remove('on'),2600)}
+  const ANY=GAP+',.slot,.opts';
+  function ctxTab(el){const td=el.closest('td');if(!td||el.closest('li'))return '';const tr=td.parentElement,tb=tr.closest('table'),ci=[...tr.children].indexOf(td);
+    const rh=ci>0?(tr.children[0].textContent||'').replace(/\s+/g,' ').trim():'',h=tb&&tb.rows[0]&&tb.rows[0].children[ci],
+      ch=h?((h.firstChild&&h.firstChild.textContent)||h.textContent||'').replace(/\s+/g,' ').trim():'';
+    return (rh||ch)?[rh,ch].filter(Boolean).join(' · ')+' ___':''}
+  function ctxAny(el){const tab=ctxTab(el);if(tab)return tab;const box=el.closest('li')||el.closest('p')||el.closest('.dl')||el.parentElement;if(!box)return '';
+    const c=box.cloneNode(true);$$('.acc,.sol,.bd,.sp',c).forEach(a=>a.remove());
+    const all=$$(ANY,box),cs=$$(ANY,c),i=all.indexOf(el);
+    cs.forEach((x,k)=>{const o=all[k];x.replaceWith(k===i?' § ':((o.dataset&&o.dataset.val&&o.matches('.slot'))?' '+o.dataset.val+' ':' … '))});
+    let t=c.textContent.replace(/[▼▶]/g,'').replace(/\s+/g,' ').trim();
+    if(t.length>90){const k=t.indexOf('§');t='…'+t.slice(Math.max(0,k-38),k+24).trim()+'…'}
+    return t.replace('§','___').replace(/\s+/g,' ').replace(/\s([,.;:!?])/g,'$1').trim()}
+  /* legge TUTTE le sezioni .ex della pagina e confronta risposte e soluzioni direttamente dal DOM */
+  function analizza(){
+    const pen={};$$('.pen[data-pen]').forEach(p=>{if(p.dataset.pen!=='x')pen[p.dataset.pen]=p.textContent.split('+')[0].trim()});
+    const righe=[],errori=[],nonLetti=[];let ok=0,tot=0,nErr=0;
+    $$('section.ex').forEach((sec,idx)=>{
+      if(sec.hidden)return; /* quaderni a «Parti»: conta solo la parte aperta */
+      const lab=((sec.querySelector('.kind')||{}).textContent||('Esercizio '+(idx+1))).trim().replace(/^Esercizio\s*/i,'Es.');
+      let n=0,g=0;const e=[];
+      let bad=0;
+      $$('.tok',sec).forEach(t=>{const m=t.dataset.m,v=t.dataset.v;
+        if(v){n++;if(m===v)g++;else e.push({t:t.textContent+' → ✗ «'+(pen[m]||'—')+'» ✓ «'+(pen[v]||v)+'»'})}
+        else if(m){bad++;e.push({t:t.textContent+' → segnata come «'+(pen[m]||m)+'», ma non va segnata'})}});
+      g=Math.max(0,g-bad);
+      /* collega (colonna A ↔ colonna B): lo stato si legge dalle etichette «1c» sulle carte */
+      $$('.pa[data-n][data-key]',sec).forEach(a=>{n++;const bd=(a.querySelector('.bd')||{textContent:''}).textContent.trim(),l=bd.slice(a.dataset.n.length);
+        if(l===a.dataset.key)g++;else e.push({t:((a.querySelector('.txt')||a).textContent.trim())+' → ✗ «'+(l||'—')+'» ✓ «'+a.dataset.key+'»'})});
+      $$(GAP,sec).forEach(i=>{n++;const r=judge(i.value,i.dataset.answer),v=i.value.trim(),gi=i.dataset.answer.split('|').join(' / ');
+        if(r)g++;
+        if(r===0)e.push({t:ctxAny(i)+' → ✗ «'+(v||'—')+'» ✓ «'+gi+'»'});
+        else if(r===1)e.push({t:ctxAny(i)+' → ✗ «'+v+'» ✓ «'+gi+'» (solo accento)',acc:1})});
+      $$('.slot[data-answer]',sec).forEach(s=>{n++;const alt=s.dataset.answer.split('|');
+        if(s.dataset.val&&alt.some(a=>norm(a)===norm(s.dataset.val)))g++;
+        else e.push({t:ctxAny(s)+' → ✗ «'+(s.dataset.val||'—')+'» ✓ «'+alt.join(' / ')+'»'})});
+      /* metti in ordine: parole scelte nella riga della frase */
+      $$('li.ord[data-answer]',sec).forEach(li=>{n++;const alt=li.dataset.answer.split('|');
+        const v=$$('.ord-line button,.ord-line .chip,.ord-line span',li).map(b=>b.textContent.trim()).filter(Boolean).join(' ');
+        if(alt.some(a=>norm(a)===norm(v)))g++;
+        else e.push({t:'frase → ✗ «'+(v||'—')+'» ✓ «'+alt.join(' / ')+'»'})});
+      /* memory: coppie trovate */
+      $$('.memory[data-pairs]',sec).forEach(m=>{let pr=[];try{pr=JSON.parse(m.dataset.pairs)}catch(x){}
+        const tr=new Set($$('.mem-card.done',m).map(c=>c.dataset.p));
+        pr.forEach((q,i)=>{n++;if(tr.has(String(i)))g++;else e.push({t:'coppia non trovata: «'+q.join('» ↔ «')+'»'})})});
+      $$('.opts',sec).forEach(o=>{const bt=$$('button',o);let sel,gia,ok;
+        if(o.dataset.correct!==undefined){n++;const v=o.dataset.val;sel=v!==undefined&&v!==''&&bt[+v]?[bt[+v].textContent.trim()]:[];gia=[(bt[+o.dataset.correct]||{textContent:o.dataset.correct}).textContent.trim()];ok=v===o.dataset.correct}
+        else if(o.dataset.answer!==undefined){n++;sel=bt.filter(b=>b.classList.contains('sel')).map(b=>b.textContent.trim());gia=o.dataset.answer.split(',').map(x=>x.trim());ok=sel.slice().sort().join(',')===gia.slice().sort().join(',')}
+        else return;
+        if(ok)g++;else e.push({t:ctxAny(o)+' → ✗ «'+(sel.join(' + ')||'—')+'» ✓ «'+gia.join(' + ')+'»'})});
+      if(!n){if(sec.querySelector('[data-check]'))nonLetti.push(lab);return}
+      const veri=e.filter(x=>!x.acc).length;ok+=g;tot+=n;nErr+=veri;
+      righe.push(lab.replace('Es.','Esercizio ')+': '+g+'/'+n);
+      const vuoti=e.filter(x=>/✗ «—»|coppia non trovata/.test(x.t)).length;
+      if(e.length)errori.push(lab+' ('+veri+' err.): '+(n>2&&vuoti===n&&e.length===n?'non svolto':e.map(x=>x.t).join(' ; ')));
+    });
+    let rep=nErr||errori.length?'ERRORI ('+nErr+'): '+errori.join(' || '):'ERRORI: nessuno';
+    if(nonLetti.length)rep+=' || [non analizzati: '+nonLetti.join(', ')+']';
+    if(rep.length>4000)rep=rep.slice(0,4000)+' … [tagliato]';
+    return {ok,tot,dettagli:righe.join(' · '),errori:rep};
+  }
+
+  function invia(){
+    const nome=($('#nome')||{value:''}).value.trim();
+    if(!nome){toast('Scrivi il tuo nome in alto, per favore.');$('#nome')&&$('#nome').focus();return}
+    const m=(new URLSearchParams(location.search).get('livello')||B.dataset.form||B.dataset.level||'').match(/A\s*([12])/i);
+    const M=m&&MODULI['A'+m[1]];
+    if(!M){toast('Livello non riconosciuto (A1/A2): avvisa l’insegnante.');return}
+    const a=analizza(),pct=a.tot?Math.round(a.ok/a.tot*100):0;
+    const parte=$('.part-btn.on'),lez=(B.dataset.unit||'')+', '+(B.dataset.lesson||'')+': '+(B.dataset.name||'')+(parte?' — Parte '+parte.dataset.part:'');
+    const testi=$$('textarea[data-scritto]').filter(t=>!t.closest('[hidden]')).map(t=>t.dataset.scritto+':\n'+(t.value.trim()||'—')).join('\n\n');
+    const f=new URLSearchParams({usp:'pp_url'});
+    f.append(M.nome,nome);f.append(M.data,($('#data')||{value:''}).value);f.append(M.lezione,lez);
+    f.append(M.punteggio,a.ok+' / '+a.tot);f.append(M.percentuale,pct);f.append(M.dettagli,a.dettagli);
+    f.append(M.errori,a.errori);f.append(M.testo,testi);
+    const url=M.url+'?'+f.toString();
+    const w=window.open(url,'_blank');if(!w){location.href=url;return}
+    toast('Si è aperto il modulo: premi «Invia» in fondo alla pagina.');
+  }
+
+  /* sostituisce il vecchio pulsante «Invia all’insegnante» (toglie il vecchio gestore) */
+  const old=$('#sendRes');if(!old)return;
+  const nb=old.cloneNode(true);old.replaceWith(nb);nb.addEventListener('click',invia);
+})();
+</script>
+<!-- /IPP-INVIO-UNIVERSALE -->
+
 </body>
 </html>

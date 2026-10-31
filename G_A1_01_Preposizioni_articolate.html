@@ -989,5 +989,89 @@ setMode(ST.mode==='lez'?'lez':'studio');
 refresh();
 })();
 </script>
+<!-- IPP-INVIO-GRAMMATICA v1: aggiunge il report degli errori alle pagine di grammatica (G_…) e instrada A1/A2 -->
+<script>
+(function(){
+  /* Il punteggio resta quello della pagina; qui si aggiunge solo il campo «errori» e si sceglie il modulo A1/A2
+     dal livello scritto nella pagina (MOD.meta.livello, es. "Italiano A1" o "Italiano A2"). */
+  const MODULI={
+    A1:{url:'https://docs.google.com/forms/d/e/1FAIpQLSfdEbDz_loexufuIp4SsyB9jLq7otuUNPJeA91Qpgd0R-3EeA/viewform',errori:'entry.1885764929'},
+    A2:{url:'https://docs.google.com/forms/d/e/1FAIpQLSdWvL3aBL7NjZmhLvsCEaIKkgNiHiT0R3lUEP6061C2_TRfZg/viewform',errori:'entry.1242774453'}
+  };
+  const btn=document.getElementById('sendRes');if(!btn||typeof MOD==='undefined')return;
+  const meta=MOD.meta||{},lv=((meta.livello||'')+' '+(meta.codice||'')).match(/A\s*([12])/i),M=lv&&MODULI['A'+lv[1]];
+  const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+  const norm=s=>(s||'').toLowerCase().replace(/[’`´]/g,"'").replace(/\s+/g,' ').replace(/[.!?,;:]+$/,'').trim();
+  const fold=s=>norm(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  function judge(v,ans){const a=ans.split('|');if(!norm(v))return 0;if(a.some(x=>norm(x)===norm(v)))return 2;if(a.some(x=>fold(x)===fold(v)))return 1;return 0}
+  const ANY='input[data-answer],.opts';
+  function ctx(el){
+    const td=el.closest('td');
+    if(td){const tr=td.parentElement,tb=tr.closest('table'),ci=[...tr.children].indexOf(td);
+      const rh=ci>0?(tr.children[0].textContent||'').replace(/\s+/g,' ').trim():'',h=tb&&tb.rows[0]&&tb.rows[0].children[ci],
+        ch=h?((h.firstChild&&h.firstChild.textContent)||h.textContent||'').replace(/\s+/g,' ').trim():'';
+      if(rh||ch)return [rh,ch].filter(Boolean).join(' · ')+' ___'}
+    const box=el.closest('li')||el.parentElement;if(!box)return '';
+    const c=box.cloneNode(true);$$('.acc,.sol,.why,.bd',c).forEach(a=>a.remove());
+    const all=$$(ANY,box),cs=$$(ANY,c),i=all.indexOf(el);
+    cs.forEach((x,k)=>x.replaceWith(k===i?' § ':' … '));
+    let t=c.textContent.replace(/\s+/g,' ').trim();
+    if(t.length>90){const k=t.indexOf('§');t='…'+t.slice(Math.max(0,k-38),k+24).trim()+'…'}
+    return t.replace('§','___').replace(/\s+/g,' ').replace(/\s([,.;:!?])/g,'$1').trim()}
+  const txt=e=>e.textContent.replace(/\s+/g,' ').trim();
+  const sol=e=>{const s=e.querySelector('.sol');return s?txt(s):''};
+  function analizza(){
+    const righe=[],errori=[];let nErr=0;
+    $$('section[id^="es-"],section#test').forEach((sec,idx)=>{
+      if(sec.querySelector('.speed,textarea'))return;
+      const kt=txt(sec.querySelector('.kind')||sec.querySelector('h2')||{textContent:'Es.'+(idx+1)}),km=kt.match(/^(?:Esercizio|Es\.?)\s*(\d+)\s*(.*)$/i),lab=km?'Es.'+km[1]+(km[2]?' ('+km[2]+')':''):kt;
+      let n=0,g=0;const e=[];
+      $$('input.gap[data-answer]',sec).forEach(i=>{n++;const r=judge(i.value,i.dataset.answer),v=i.value.trim(),gi=i.dataset.answer.split('|').join(' / ');
+        if(r)g++;
+        if(r===0)e.push({t:ctx(i)+' → ✗ «'+(v||'—')+'» ✓ «'+gi+'»'});
+        else if(r===1)e.push({t:ctx(i)+' → ✗ «'+v+'» ✓ «'+gi+'» (solo accento)',acc:1})});
+      $$('.opts',sec).forEach(o=>{const bt=$$('button',o);if(!bt.some(b=>b.hasAttribute('data-ok')))return;n++;
+        const s=bt.find(b=>b.classList.contains('sel')),k=bt.find(b=>b.hasAttribute('data-ok'));
+        if(s&&s===k)g++;else e.push({t:ctx(o)+' → ✗ «'+(s?txt(s):'—')+'» ✓ «'+txt(k)+'»'})});
+      /* segna le parole: giuste − sbagliate, come nella pagina */
+      const toks=$$('.tok',sec);if(toks.some(t=>t.dataset.t)){let bad=0;
+        toks.forEach(t=>{const mk=t.classList.contains('mk'),ok=!!t.dataset.t;
+          if(ok){n++;if(mk)g++;else e.push({t:txt(t)+' → ✗ «—» ✓ «da segnare»'})}
+          else if(mk){bad++;e.push({t:txt(t)+' → ✗ «segnata» ✓ «non va segnata»'})}});
+        g=Math.max(0,g-bad)}
+      /* collega: sul lato destro la carta collegata mostra il numero della carta di sinistra */
+      $$('.pa[data-k]',sec).forEach(a=>{n++;const num=txt(a.querySelector('.bd')),b=$$('.pb[data-k]',sec).find(x=>txt(x.querySelector('.bd'))===num);
+        const want=$$('.pb[data-k="'+a.dataset.k+'"]',sec)[0];
+        if(b&&b.dataset.k===a.dataset.k)g++;else e.push({t:txt(a).replace(txt(a.querySelector('.bd')),'').replace(sol(a),'').trim()+' → ✗ «'+(b?txt(b).replace(txt(b.querySelector('.bd')),'').trim():'—')+'» ✓ «'+(want?txt(want).replace(txt(want.querySelector('.bd')),'').trim():sol(a))+'»'})});
+      /* smista nelle colonne */
+      $$('.chip[data-k]',sec).forEach(c=>{const bin=c.closest('.bin');if(!bin&&!sec.querySelector('.bins'))return;n++;
+        const parola=txt(c).replace(sol(c),'').trim(),giusto=sol(c),dove=bin?txt(bin.querySelector('h4')):'';
+        if(bin&&norm(dove)===norm(giusto))g++;else e.push({t:parola+' → ✗ «'+(dove||'—')+'» ✓ «'+giusto+'»'})});
+      /* metti in ordine */
+      $$('li[data-k] .oline',sec).forEach(L=>{const li=L.closest('li');n++;const v=$$('.tile',L).map(txt).join(' '),giusto=sol(li);
+        if(v&&norm(v)===norm(giusto))g++;else e.push({t:'frase → ✗ «'+(v||'—')+'» ✓ «'+giusto+'»'})});
+      if(!n)return;
+      const veri=e.filter(x=>!x.acc).length,vuoti=e.filter(x=>/✗ «—»/.test(x.t)).length;nErr+=veri;
+      righe.push({lab:lab,n:n,g:g,id:sec.id});
+      if(e.length)errori.push(lab+' ('+veri+' err.): '+(n>2&&vuoti===n&&e.length===n?'non svolto':e.map(x=>x.t).join(' ; ')));
+    });
+    let rep=nErr||errori.length?'ERRORI ('+nErr+'): '+errori.join(' || '):'ERRORI: nessuno';
+    if(rep.length>4000)rep=rep.slice(0,4000)+' … [tagliato]';
+    return {righe:righe,errori:rep};
+  }
+  window.__ippAnalizza=analizza;
+  /* alla pressione di «Invia all’insegnante»: la pagina prepara il suo link, qui lo si completa */
+  btn.addEventListener('click',function(){
+    const orig=window.open;
+    window.open=function(u,t,f){
+      window.open=orig;let url=u;
+      try{if(M){const q=String(u).indexOf('?'),qs=new URLSearchParams(String(u).slice(q+1));qs.append(M.errori,analizza().errori);url=M.url+'?'+qs.toString()}}catch(x){}
+      const w=orig.call(window,url,t,f);if(!w){location.href=url;return {}}return w};
+    setTimeout(()=>{window.open=orig},0);
+  },true);
+})();
+</script>
+<!-- /IPP-INVIO-GRAMMATICA -->
+
 </body>
 </html>
