@@ -55,6 +55,9 @@ button{cursor:pointer}
 .bar-title{font-weight:600;color:var(--bord);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .progress{flex:1;height:3px;background:var(--line);min-width:60px;border-radius:3px;overflow:hidden}
 .progress span{display:block;height:100%;width:0;background:var(--rosso);transition:width .4s}
+/* ===== IP logo + gradini ===== */
+.brand svg{display:block;flex:none;width:64px;height:64px}
+.progress{height:16px;border-radius:0;clip-path:polygon(0 100%,0 80%,20% 80%,20% 60%,40% 60%,40% 40%,60% 40%,60% 20%,80% 20%,80% 0,100% 0,100% 100%)}
 .pts{font-weight:700;color:var(--rosso);white-space:nowrap;font-variant-numeric:tabular-nums}
 .jump{display:flex;gap:4px}
 .jump a{display:grid;place-items:center;width:28px;height:28px;border:1px solid var(--line);border-radius:50%;text-decoration:none;color:var(--ink);font-weight:700;font-size:.85rem}
@@ -289,7 +292,7 @@ body{font-size:1.1rem}
 </header>
 
 <main class="sheet">
-  <div class="brand" aria-hidden="true"><i><b></b><b></b><b></b></i><span id="lvl"></span></div>
+  <div class="brand" aria-hidden="true"><svg class="ipl" viewBox="0 0 220 220" aria-hidden="true"><circle cx="110.0" cy="110.0" r="109.5" fill="#FFFFFF" stroke="#DDE0DF" stroke-width="1.0"/><path transform="translate(59.3 0)" d="M25.7048 110.3608 27.9312 111.77759999999999Q22.5676 119.77239999999999 19.0762 122.6566Q15.5848 125.54079999999999 11.0308 125.54079999999999Q7.8936 125.54079999999999 5.9708000000000006 123.76979999999999Q4.048 121.99879999999999 4.048 119.1652Q4.048 116.8376 5.3636 112.1824L11.2332 90.42439999999999Q11.9416 87.38839999999999 11.9416 86.37639999999999Q11.9416 84.7572 10.575399999999998 84.0994Q9.2092 83.4416 5.9708 83.4416V80.7092Q17.71 79.79839999999999 26.4132 77.87559999999999L17.204 111.6764Q16.2932 114.8136 16.2932 116.9388Q16.2932 117.54599999999999 16.7486 118.00139999999999Q17.204 118.4568 17.8112 118.4568Q19.8352 118.4568 25.7048 110.3608ZM23.4784 55.30799999999999Q26.312 55.30799999999999 28.3866 57.331999999999994Q30.461199999999998 59.355999999999995 30.461199999999998 62.1896Q30.461199999999998 65.0232 28.437199999999997 66.9966Q26.4132 68.97 23.4784 68.97Q20.6448 68.97 18.722 66.946Q16.7992 64.922 16.7992 61.987199999999994Q16.7992 59.355999999999995 18.8232 57.331999999999994Q20.8472 55.30799999999999 23.4784 55.30799999999999Z" fill="#7A1E2C"/><path transform="translate(59.3 0)" d="M35.824799999999996 83.4416V80.7092Q41.3908 80.102 55.3564 77.87559999999999L51.5108 89.5136Q55.9636 83.2392 59.6574 80.5574Q63.351200000000006 77.87559999999999 67.7028 77.87559999999999Q72.7628 77.87559999999999 75.6976 81.2152Q78.6324 84.5548 78.6324 90.1208Q78.6324 103.2768 69.7268 114.6112Q60.8212 125.9456 50.599999999999994 125.9456Q48.07 125.9456 43.7184 123.7192L42.504 127.8684Q39.974000000000004 137.3812 39.974000000000004 139.304Q39.974000000000004 141.1256 41.3908 141.834Q42.8076 142.5424 46.552 142.6436V145.376H21.3532V142.6436H21.9604Q25.0976 142.6436 26.4132 141.2268Q27.7288 139.81 28.9432 135.1548L39.0632 95.88919999999999Q41.2896 87.4896 41.2896 85.9716Q41.2896 84.5548 40.2776 84.0994Q39.2656 83.644 35.824799999999996 83.4416ZM65.9824 90.222Q65.9824 87.89439999999999 64.8186 86.4776Q63.654799999999994 85.0608 61.732 85.0608Q60.416399999999996 85.0608 59.151399999999995 85.5668Q57.886399999999995 86.0728 56.874399999999994 87.1354Q55.8624 88.198 54.9516 89.26059999999998Q54.040800000000004 90.32319999999999 53.2312 92.0436Q52.4216 93.764 51.8144 94.92779999999999Q51.2072 96.0916 50.6 97.96379999999999Q49.9928 99.836 49.6892 100.6962Q49.3856 101.5564 48.9302 103.1756Q48.4748 104.7948 48.4748 104.896Q44.9328 116.8376 44.9328 118.76039999999999Q44.9328 120.27839999999999 46.0966 121.341Q47.260400000000004 122.4036 48.879599999999996 122.4036Q52.522800000000004 122.4036 55.8624 118.305Q59.202 114.2064 61.3272 108.691Q63.4524 103.1756 64.7174 98.0144Q65.9824 92.8532 65.9824 90.222Z" fill="#7A1E2C"/><circle cx="149.1" cy="117.0" r="7.6" fill="#B4493B"/><rect x="83.8" y="159.2" width="17.5" height="5.0" fill="#1F8A50"/><rect x="101.3" y="159.2" width="17.5" height="5.0" fill="#FFFFFF" stroke="#DDE0DF" stroke-width="0.5"/><rect x="118.7" y="159.2" width="17.5" height="5.0" fill="#C8312B"/></svg><span id="lvl"></span></div>
 
   <!-- ===== COPERTINA ===== -->
   <section class="cover">
@@ -672,111 +675,5 @@ body{font-size:1.1rem}
   load();memBuild();meters();update();
 })();
 </script>
-<!-- IPP-INVIO-UNIVERSALE v6: invio universale al Google Modulo (A1/A2) con report errori -->
-<script>
-(function(){
-  /* ===== MODULI: uno per livello. Il livello si legge da <body data-level="Italiano A1|A2"> =====
-     (per forzarlo: data-form="A2" nel <body> oppure ?livello=A2 nel link) */
-  const MODULI={
-    A1:{url:'https://docs.google.com/forms/d/e/1FAIpQLSfdEbDz_loexufuIp4SsyB9jLq7otuUNPJeA91Qpgd0R-3EeA/viewform',
-      nome:'entry.1271164771',data:'entry.1325902077',lezione:'entry.1705899089',punteggio:'entry.1851506855',
-      dettagli:'entry.1450450077',errori:'entry.1885764929',testo:'entry.2110683261',percentuale:'entry.1501772916'},
-    A2:{url:'https://docs.google.com/forms/d/e/1FAIpQLSdWvL3aBL7NjZmhLvsCEaIKkgNiHiT0R3lUEP6061C2_TRfZg/viewform',
-      nome:'entry.1271164771',data:'entry.1325902077',lezione:'entry.1705899089',punteggio:'entry.1851506855',
-      dettagli:'entry.1450450077',errori:'entry.1242774453',testo:'entry.2110683261',percentuale:'entry.1501772916'}
-  };
-  const B=document.body;if(B.dataset.mode==='insegnante')return;
-  const $=s=>document.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-  const GAP='input[data-answer],textarea[data-answer],select[data-answer]';
-  const norm=s=>(s||'').toLowerCase().replace(/[’`´]/g,"'").replace(/\s+/g,' ').replace(/[.!?,;:]+$/,'').trim();
-  const fold=s=>norm(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-  function judge(v,ans){const a=ans.split('|');if(!norm(v))return 0;if(a.some(x=>norm(x)===norm(v)))return 2;if(a.some(x=>fold(x)===fold(v)))return 1;return 0}
-  function toast(t){const el=$('#toast');if(!el){alert(t);return}el.textContent=t;el.classList.add('on');clearTimeout(toast.id);toast.id=setTimeout(()=>el.classList.remove('on'),2600)}
-  const ANY=GAP+',.slot,.opts';
-  function ctxTab(el){const td=el.closest('td');if(!td||el.closest('li'))return '';const tr=td.parentElement,tb=tr.closest('table'),ci=[...tr.children].indexOf(td);
-    const rh=ci>0?(tr.children[0].textContent||'').replace(/\s+/g,' ').trim():'',h=tb&&tb.rows[0]&&tb.rows[0].children[ci],
-      ch=h?((h.firstChild&&h.firstChild.textContent)||h.textContent||'').replace(/\s+/g,' ').trim():'';
-    return (rh||ch)?[rh,ch].filter(Boolean).join(' · ')+' ___':''}
-  function ctxAny(el){const tab=ctxTab(el);if(tab)return tab;const box=el.closest('li')||el.closest('p')||el.closest('.dl')||el.parentElement;if(!box)return '';
-    const c=box.cloneNode(true);$$('.acc,.sol,.bd,.sp',c).forEach(a=>a.remove());
-    const all=$$(ANY,box),cs=$$(ANY,c),i=all.indexOf(el);
-    cs.forEach((x,k)=>{const o=all[k];x.replaceWith(k===i?' § ':((o.dataset&&o.dataset.val&&o.matches('.slot'))?' '+o.dataset.val+' ':' … '))});
-    let t=c.textContent.replace(/[▼▶]/g,'').replace(/\s+/g,' ').trim();
-    if(t.length>90){const k=t.indexOf('§');t='…'+t.slice(Math.max(0,k-38),k+24).trim()+'…'}
-    return t.replace('§','___').replace(/\s+/g,' ').replace(/\s([,.;:!?])/g,'$1').trim()}
-  /* legge TUTTE le sezioni .ex della pagina e confronta risposte e soluzioni direttamente dal DOM */
-  function analizza(){
-    const pen={};$$('.pen[data-pen]').forEach(p=>{if(p.dataset.pen!=='x')pen[p.dataset.pen]=p.textContent.split('+')[0].trim()});
-    const righe=[],errori=[],nonLetti=[];let ok=0,tot=0,nErr=0;
-    $$('section.ex').forEach((sec,idx)=>{
-      if(sec.hidden)return; /* quaderni a «Parti»: conta solo la parte aperta */
-      const lab=((sec.querySelector('.kind')||{}).textContent||('Esercizio '+(idx+1))).trim().replace(/^Esercizio\s*/i,'Es.');
-      let n=0,g=0;const e=[];
-      let bad=0;
-      $$('.tok',sec).forEach(t=>{const m=t.dataset.m,v=t.dataset.v;
-        if(v){n++;if(m===v)g++;else e.push({t:t.textContent+' → ✗ «'+(pen[m]||'—')+'» ✓ «'+(pen[v]||v)+'»'})}
-        else if(m){bad++;e.push({t:t.textContent+' → segnata come «'+(pen[m]||m)+'», ma non va segnata'})}});
-      g=Math.max(0,g-bad);
-      /* collega (colonna A ↔ colonna B): lo stato si legge dalle etichette «1c» sulle carte */
-      $$('.pa[data-n][data-key]',sec).forEach(a=>{n++;const bd=(a.querySelector('.bd')||{textContent:''}).textContent.trim(),l=bd.slice(a.dataset.n.length);
-        if(l===a.dataset.key)g++;else e.push({t:((a.querySelector('.txt')||a).textContent.trim())+' → ✗ «'+(l||'—')+'» ✓ «'+a.dataset.key+'»'})});
-      $$(GAP,sec).forEach(i=>{n++;const r=judge(i.value,i.dataset.answer),v=i.value.trim(),gi=i.dataset.answer.split('|').join(' / ');
-        if(r)g++;
-        if(r===0)e.push({t:ctxAny(i)+' → ✗ «'+(v||'—')+'» ✓ «'+gi+'»'});
-        else if(r===1)e.push({t:ctxAny(i)+' → ✗ «'+v+'» ✓ «'+gi+'» (solo accento)',acc:1})});
-      $$('.slot[data-answer]',sec).forEach(s=>{n++;const alt=s.dataset.answer.split('|');
-        if(s.dataset.val&&alt.some(a=>norm(a)===norm(s.dataset.val)))g++;
-        else e.push({t:ctxAny(s)+' → ✗ «'+(s.dataset.val||'—')+'» ✓ «'+alt.join(' / ')+'»'})});
-      /* metti in ordine: parole scelte nella riga della frase */
-      $$('li.ord[data-answer]',sec).forEach(li=>{n++;const alt=li.dataset.answer.split('|');
-        const v=$$('.ord-line button,.ord-line .chip,.ord-line span',li).map(b=>b.textContent.trim()).filter(Boolean).join(' ');
-        if(alt.some(a=>norm(a)===norm(v)))g++;
-        else e.push({t:'frase → ✗ «'+(v||'—')+'» ✓ «'+alt.join(' / ')+'»'})});
-      /* memory: coppie trovate */
-      $$('.memory[data-pairs]',sec).forEach(m=>{let pr=[];try{pr=JSON.parse(m.dataset.pairs)}catch(x){}
-        const tr=new Set($$('.mem-card.done',m).map(c=>c.dataset.p));
-        pr.forEach((q,i)=>{n++;if(tr.has(String(i)))g++;else e.push({t:'coppia non trovata: «'+q.join('» ↔ «')+'»'})})});
-      $$('.opts',sec).forEach(o=>{const bt=$$('button',o);let sel,gia,ok;
-        if(o.dataset.correct!==undefined){n++;const v=o.dataset.val;sel=v!==undefined&&v!==''&&bt[+v]?[bt[+v].textContent.trim()]:[];gia=[(bt[+o.dataset.correct]||{textContent:o.dataset.correct}).textContent.trim()];ok=v===o.dataset.correct}
-        else if(o.dataset.answer!==undefined){n++;sel=bt.filter(b=>b.classList.contains('sel')).map(b=>b.textContent.trim());gia=o.dataset.answer.split(',').map(x=>x.trim());ok=sel.slice().sort().join(',')===gia.slice().sort().join(',')}
-        else return;
-        if(ok)g++;else e.push({t:ctxAny(o)+' → ✗ «'+(sel.join(' + ')||'—')+'» ✓ «'+gia.join(' + ')+'»'})});
-      if(!n){if(sec.querySelector('[data-check]'))nonLetti.push(lab);return}
-      const veri=e.filter(x=>!x.acc).length;ok+=g;tot+=n;nErr+=veri;
-      righe.push(lab.replace('Es.','Esercizio ')+': '+g+'/'+n);
-      const vuoti=e.filter(x=>/✗ «—»|coppia non trovata/.test(x.t)).length;
-      if(e.length)errori.push(lab+' ('+veri+' err.): '+(n>2&&vuoti===n&&e.length===n?'non svolto':e.map(x=>x.t).join(' ; ')));
-    });
-    let rep=nErr||errori.length?'ERRORI ('+nErr+'): '+errori.join(' || '):'ERRORI: nessuno';
-    if(nonLetti.length)rep+=' || [non analizzati: '+nonLetti.join(', ')+']';
-    if(rep.length>4000)rep=rep.slice(0,4000)+' … [tagliato]';
-    return {ok,tot,dettagli:righe.join(' · '),errori:rep};
-  }
-
-  function invia(){
-    const nome=($('#nome')||{value:''}).value.trim();
-    if(!nome){toast('Scrivi il tuo nome in alto, per favore.');$('#nome')&&$('#nome').focus();return}
-    const m=(new URLSearchParams(location.search).get('livello')||B.dataset.form||B.dataset.level||'').match(/A\s*([12])/i);
-    const M=m&&MODULI['A'+m[1]];
-    if(!M){toast('Livello non riconosciuto (A1/A2): avvisa l’insegnante.');return}
-    const a=analizza(),pct=a.tot?Math.round(a.ok/a.tot*100):0;
-    const parte=$('.part-btn.on'),lez=(B.dataset.unit||'')+', '+(B.dataset.lesson||'')+': '+(B.dataset.name||'')+(parte?' — Parte '+parte.dataset.part:'');
-    const testi=$$('textarea[data-scritto]').filter(t=>!t.closest('[hidden]')).map(t=>t.dataset.scritto+':\n'+(t.value.trim()||'—')).join('\n\n');
-    const f=new URLSearchParams({usp:'pp_url'});
-    f.append(M.nome,nome);f.append(M.data,($('#data')||{value:''}).value);f.append(M.lezione,lez);
-    f.append(M.punteggio,a.ok+' / '+a.tot);f.append(M.percentuale,pct);f.append(M.dettagli,a.dettagli);
-    f.append(M.errori,a.errori);f.append(M.testo,testi);
-    const url=M.url+'?'+f.toString();
-    const w=window.open(url,'_blank');if(!w){location.href=url;return}
-    toast('Si è aperto il modulo: premi «Invia» in fondo alla pagina.');
-  }
-
-  /* sostituisce il vecchio pulsante «Invia all’insegnante» (toglie il vecchio gestore) */
-  const old=$('#sendRes');if(!old)return;
-  const nb=old.cloneNode(true);old.replaceWith(nb);nb.addEventListener('click',invia);
-})();
-</script>
-<!-- /IPP-INVIO-UNIVERSALE -->
-
 </body>
 </html>
