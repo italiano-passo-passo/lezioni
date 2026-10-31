@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Italiano passo passo — Gradi di comparazione</title>
+<!-- ===== FOTO: incolla il link della foto tra le virgolette "" ===== -->
+<script>
+const FOTO={
+
+};
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,800&display=swap" rel="stylesheet">
+<!--
+  ITALIANO PASSO PASSO — GRAMMATICA PASSO PASSO (motore)
+  Non modificare questo file a mano: il modulo si costruisce con GPP_build.py dal file di dati .txt.
+  Modulo Google: lo stesso dei Quaderni A1 (risultati con la dicitura «Grammatica passo passo»).
+-->
+<style>
+:root{
+  --bg:#FFFFFF; --card:#FFFFFF; --ink:#262626; --soft:#6B6B6B; --paper2:#F4F5F5;
+  --bord:#7A1E2C; --verde:#5E7A3A; --rosso:#B4493B; --mare:#2F6F86; --sole:#C59A45;
+  --mare-tint:#E6EFF2; --rosso-tint:#F7E6E2; --sole-tint:#F7F1E3; --verde-tint:#E9EFDF;
+  --line:#DDE0DF; --ok:#5E7A3A; --ko:#B4493B; --gsheet:#EAF3F8; --gink:#1F4E66;
+  --title:"Playfair Display", Georgia, serif;
+  --body:"Source Sans 3", "Segoe UI", Roboto, Arial, sans-serif;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1B1F1E; --card:#1B1F1E; --ink:#ECECEA; --soft:#A9AEAC; --paper2:#252A29; --bord:#F0A3AE;
+    --verde:#A9BE7A; --rosso:#E58C76; --mare:#7FB5C9; --sole:#D9B66A;
+    --mare-tint:#22313A; --rosso-tint:#3A2621; --sole-tint:#332C1E; --verde-tint:#283020;
+    --line:#38403E; --ok:#A9BE7A; --ko:#E58C76; --gsheet:#1B2A33; --gink:#9CC7DA; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1B1F1E; --card:#1B1F1E; --ink:#ECECEA; --soft:#A9AEAC; --paper2:#252A29; --bord:#F0A3AE;
+  --verde:#A9BE7A; --rosso:#E58C76; --mare:#7FB5C9; --sole:#D9B66A;
+  --mare-tint:#22313A; --rosso-tint:#3A2621; --sole-tint:#332C1E; --verde-tint:#283020;
+  --line:#38403E; --ok:#A9BE7A; --ko:#E58C76; --gsheet:#1B2A33; --gink:#9CC7DA; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:clamp(17px,min(1.7vw,3vh),32px);scroll-padding-top:calc(env(safe-area-inset-top,0px) + 5.5em);scroll-behavior:smooth}
+@media (max-width:700px){html{font-size:17px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.1rem;line-height:1.45}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:var(--card)}
+h1,h2,h3{font-family:var(--title);color:var(--bord);line-height:1.1;margin:0 0 .35em;font-weight:700}
+h2{font-size:clamp(1.5rem,2.6vw,2.2rem)}
+h3{font-size:1.2rem}
+p{margin:0 0 .6em}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--rosso);outline-offset:2px}
+.hint{color:var(--soft);font-size:.88em}
+.tr{display:block;color:var(--soft);font-size:.93em;font-style:italic}
+.muted{color:var(--soft)}
+
+/* ===== barra in alto con la scaletta ===== */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;display:flex;align-items:center;gap:14px;padding:6px 18px 6px 34px;background:var(--card);border-bottom:1px solid var(--line);font-size:.82rem}
+.bar-title{font-weight:600;color:var(--bord);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto}
+.bar-title i{color:var(--mare)}
+.ladder{display:flex;align-items:flex-end;gap:3px;flex:1 1 auto;justify-content:center;min-width:0}
+.step{border:0;background:none;padding:0 2px;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--soft);font-weight:600;font-size:.82rem;white-space:nowrap}
+.step i{display:block;width:3.6em;border-radius:3px 3px 0 0;background:var(--line);transition:background .3s}
+.step:nth-child(1) i{height:.45em}.step:nth-child(2) i{height:.7em}.step:nth-child(3) i{height:.95em}.step:nth-child(4) i{height:1.2em}.step:nth-child(5) i{height:1.45em}.step:nth-child(6) i{height:1.7em}
+.step:hover{color:var(--ink)}
+.step.part i{background:var(--sole)}
+.step.done i{background:var(--verde)}
+.step.done{color:var(--ok)}
+.step.here{color:var(--mare)}
+.step.here i{box-shadow:0 0 0 2px var(--mare)}
+.pts{font-weight:700;color:var(--rosso);white-space:nowrap;font-variant-numeric:tabular-nums}
+.bbtns{display:flex;gap:6px;align-items:center}
+.tbtn{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:2px 12px;font-weight:600;white-space:nowrap;font-size:.82rem}
+.tbtn:hover{border-color:var(--ink)}
+.tbtn[aria-pressed="true"]{background:var(--mare);border-color:var(--mare);color:#fff}
+#hlBtn[aria-pressed="true"]{background:#FFE34D;color:#1d1d1d;border-color:#D9BC1F}
+#toolsBtn{display:none}
+.lez #toolsBtn{display:inline-block}
+@media (max-width:860px){
+  .bar{flex-wrap:wrap;gap:6px 10px;padding:6px 10px 6px 24px}
+  .bar-title{display:none}
+  .ladder{order:3;flex-basis:100%;justify-content:space-between;overflow-x:auto}
+  .step i{width:2.6em}
+  .bbtns{margin-left:auto}
+}
+
+/* ===== foglio ===== */
+.sheet{background:var(--card);padding:22px clamp(20px,7vw,140px) 0 58px;position:relative}
+.sheet::before{content:"";position:fixed;left:0;top:0;bottom:0;width:14px;background:linear-gradient(to right,#1F8A50 0 5px,transparent 5px 9px,#C8312B 9px 14px);z-index:32}
+.brand{position:absolute;top:16px;right:26px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.8rem;font-weight:600;color:var(--bord)}
+.brand svg{display:block;flex:none;width:56px;height:56px}
+@media (max-width:860px){.sheet{padding:16px 16px 0 30px}.brand{position:static;align-items:flex-end;margin-bottom:6px}}
+.kind{display:flex;align-items:center;gap:10px;font-weight:600;font-size:1rem;color:var(--rosso);margin-bottom:6px}
+.kind::after{content:"";flex:1;height:1px;background:var(--line)}
+.stag{order:3;font-size:.8rem;font-weight:700;color:var(--soft);border:1px solid var(--line);border-radius:20px;padding:0 10px}
+.ico{width:2.2em;height:2.2em;flex:none;color:var(--ink)}
+.ico svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.folio{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding:10px 0 16px;border-top:1px solid var(--line);font-size:.82rem;color:var(--soft)}
+
+/* ===== copertina ===== */
+.cover{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:end;padding:10px 0 26px}
+@media (max-width:860px){.cover{grid-template-columns:1fr;gap:20px}}
+.cover-unit{font-weight:700;font-size:1.15rem;color:var(--mare);margin:0 0 .2em}
+.cover h1{font-size:clamp(2.4rem,5.6vw,4.6rem);line-height:.98;margin:.05em 0 .2em}
+.cover h1 .l2{display:block;font-family:var(--body);font-weight:600;color:var(--soft);font-size:.34em;margin-top:.5em;line-height:1.3}
+.cover-link{font-size:.9rem;color:var(--soft)}
+.who-box{border-top:1px solid var(--ink);padding-top:10px}
+.field{display:flex;gap:12px;align-items:baseline;margin:6px 0}
+.field b{min-width:3.4em;color:var(--bord)}
+.field input{flex:1;border:0;border-bottom:2px solid var(--line);background:none;padding:2px 4px;min-width:0}
+.field input:focus{outline:none;border-bottom-color:var(--mare)}
+.how{margin-top:12px;padding:10px 14px;border-left:3px solid var(--sole);background:var(--sole-tint);border-radius:0 8px 8px 0;font-size:.92rem}
+.how p{margin:0}
+
+/* ===== regola: foglio azzurro (come «Nuova grammatica») ===== */
+.regola{background:var(--gsheet);margin:18px calc(-1*clamp(20px,7vw,140px)) 0 -58px;padding:26px clamp(20px,7vw,140px) 18px 58px}
+@media (max-width:860px){.regola{margin:14px -16px 0 -30px;padding:20px 16px 14px 30px}}
+.regola .kind{color:var(--mare)}
+.regola .kind::after{background:var(--mare)}
+.regola h2{color:var(--mare)}
+.rsub{color:var(--soft);margin-bottom:14px}
+.rpart{background:var(--card);border-top:3px solid var(--mare);border-radius:0 0 10px 10px;padding:12px 18px 10px;margin-bottom:14px}
+.rpart h3{color:var(--gink);font-size:1.15rem}
+.rpart b{color:var(--gink)}
+.ex-row{display:flex;flex-wrap:wrap;gap:4px 18px}
+.pill{display:inline-block;padding:0 .7em;border-radius:20px;background:var(--mare);color:#fff;font-weight:700;font-style:normal}
+.pill.grey{background:var(--line);color:var(--ink)}
+.art-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px 14px;margin:4px 0 8px;font-size:1.05em}
+.art-grid > div{padding:4px 10px;border-radius:6px;background:var(--paper2)}
+@media (max-width:640px){.art-grid{grid-template-columns:1fr 1fr}}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:8px}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+.box{background:var(--paper2);border-radius:8px;padding:10px 14px}
+.box p{margin:0 0 .35em}
+.mean p{margin:0 0 .45em}
+.ptab-wrap{overflow-x:auto;max-width:100%}
+.ptab{border-collapse:collapse;font-size:1.05em;min-width:32em}
+.ptab th,.ptab td{border:1px solid var(--line);padding:.3em .7em;text-align:center}
+.ptab thead th{background:var(--mare);color:#fff;font-family:var(--body)}
+.ptab tbody th{background:var(--mare-tint);color:var(--gink);font-family:var(--body)}
+.ptab td b{color:var(--mare)}
+.ptab td u{text-decoration-color:var(--rosso);text-decoration-thickness:2px;text-underline-offset:3px}
+.ptab input.gap{width:4.6em;min-width:0;text-align:center}
+
+/* animazione «fusione» */
+.fuse{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin:6px 0 12px;padding:14px;border-radius:10px;background:var(--mare-tint)}
+.fz-stage{display:flex;align-items:center;gap:.5em;font-size:1.7em;font-weight:700;min-height:2em;flex:1 1 auto}
+.fz{display:inline-grid;place-items:center;min-width:1.8em;padding:.05em .45em;border-radius:10px;transition:transform .7s cubic-bezier(.5,0,.3,1),opacity .4s}
+.fz.p{background:var(--rosso);color:#fff}
+.fz.a{background:var(--mare);color:#fff}
+.fz.op{color:var(--soft);font-weight:600}
+.fz.r{background:var(--card);color:var(--bord);border:2px solid var(--bord);opacity:0;transform:scale(.4);font-family:var(--title)}
+.fuse.go .fz.p{transform:translateX(1.45em)}
+.fuse.go .fz.a{transform:translateX(-1.45em)}
+@media (max-width:640px){.fz-stage{font-size:1.2em;gap:.35em}.fuse{padding:10px}}
+.fuse.go .fz.plus{opacity:0}
+.fuse.done .fz.r{opacity:1;transform:scale(1);transition:transform .45s cubic-bezier(.3,1.6,.5,1),opacity .3s}
+@media (prefers-reduced-motion:reduce){.fz{transition:none!important}}
+
+/* ===== esercizi ===== */
+.ex{padding:28px 0 6px;border-top:1px solid var(--line);margin-top:8px;position:relative}
+.regola + .ex{border-top:0}
+.lead{margin-bottom:12px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
+.btn{border:1px solid var(--bord);border-radius:6px;padding:5px 16px;background:var(--bord);color:#fff;font-weight:600}
+.btn:hover{filter:brightness(1.15)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--ink)}
+.btn small{font-weight:600;font-size:.78em;color:var(--mare)}
+.btn.alt{background:var(--mare);border-color:var(--mare)}
+.btn.reg{background:var(--gsheet);color:var(--gink);border-color:var(--mare)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.score{font-weight:700;color:var(--rosso)}
+.verdict{font-family:var(--title);font-style:italic;font-weight:600;color:var(--verde);font-size:1.12rem}
+.verdict.mid{color:var(--sole)}.verdict.low{color:var(--rosso)}
+.ex-list{padding-left:0;margin:0;list-style:none;counter-reset:e}
+.ex-list > li{counter-increment:e;padding:.45em 0 .45em 2.1em;position:relative;border-bottom:1px solid var(--line);line-height:2.1}
+.ex-list > li::before{content:counter(e)".";position:absolute;left:0;top:.45em;font-weight:700;color:var(--rosso)}
+.ex-list.cols2{display:grid;grid-template-columns:1fr 1fr;column-gap:40px}
+@media (max-width:760px){.ex-list.cols2{grid-template-columns:1fr}}
+.gap{border:0;border-bottom:2px solid var(--mare);background:var(--mare-tint);border-radius:4px 4px 0 0;padding:0 6px;min-width:3.5em;max-width:100%;line-height:1.5}
+.gap.wide{width:min(22em,100%)}
+.gap:focus{outline:none;box-shadow:0 0 0 2px var(--sole)}
+.gap.ok{border-bottom-color:var(--ok);background:var(--verde-tint)}
+.gap.ko{border-bottom-color:var(--ko);background:var(--rosso-tint);text-decoration:line-through;text-decoration-color:var(--ko)}
+.acc{font-size:.8em;color:var(--sole);font-weight:700;margin-left:4px}
+.sol{display:none;margin-left:6px;font-size:.82em;font-weight:700;color:var(--ok);background:var(--verde-tint);border-radius:4px;padding:0 6px;vertical-align:middle;line-height:1.5;white-space:nowrap}
+.why{display:none;font-size:.85em;color:var(--ok);line-height:1.4;margin-top:2px}
+.why::before{content:"✓ "}
+.showsol .sol{display:inline-block}
+.showsol .why{display:block}
+.opts{display:inline-flex;flex-wrap:wrap;gap:5px;vertical-align:middle}
+.opt{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:0 .8em;font-weight:600;line-height:1.7}
+.opt:hover{border-color:var(--ink)}
+.opt.sel{background:var(--mare-tint);border-color:var(--mare);box-shadow:0 0 0 1px var(--mare)}
+.opt.ok{background:var(--verde-tint);border-color:var(--ok);color:var(--ok)}
+.opt.ko{background:var(--rosso-tint);border-color:var(--ko);color:var(--ko);text-decoration:line-through}
+.showsol .opt[data-ok]{box-shadow:0 0 0 2px var(--ok)}
+.text{font-size:1.08em;line-height:2.15;padding:14px 18px;background:var(--paper2);border-radius:8px;max-width:62em}
+.text .why{display:none}
+/* dialogo */
+.dl{display:grid;grid-template-columns:7.5em 1fr;gap:12px;padding:.45em 0;border-bottom:1px solid var(--line);line-height:2.1}
+.dl .sp{font-weight:700;color:var(--rosso)}
+.dl.g .sp{color:var(--mare)}
+@media (max-width:640px){.dl{grid-template-columns:1fr;gap:0}}
+/* schede con foto */
+.pics{display:grid;grid-template-columns:repeat(auto-fill,minmax(15em,1fr));gap:14px;list-style:none;padding:0;margin:0;counter-reset:e}
+.pics > li{counter-increment:e;border:1px solid var(--line);border-radius:10px;padding:10px 12px;position:relative;line-height:2}
+.pics > li::before{content:counter(e);position:absolute;top:8px;left:10px;z-index:2;width:1.6em;height:1.6em;border-radius:50%;background:var(--card);display:grid;place-items:center;font-weight:700;color:var(--rosso);line-height:1;box-shadow:0 0 0 1px var(--line)}
+.img-slot{margin:0 0 6px;min-height:9em;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--soft);font-size:.82rem;padding:12px;background:var(--paper2);border:1px dashed var(--line);border-radius:8px;overflow:hidden;line-height:1.35}
+.img-slot img{width:100%;height:auto;display:block;border-radius:8px}
+.img-slot img:not([src]),.img-slot img[src=""]{display:none}
+.img-slot.filled{padding:0;background:none;border:0;min-height:0}
+.img-slot.filled figcaption{display:none}
+/* trova nel testo */
+.tok{cursor:pointer;border-radius:3px;padding:0 1px;transition:background .15s}
+.tok:hover{background:var(--sole-tint)}
+.tok.mk{background:var(--mare-tint);box-shadow:inset 0 -3px var(--mare)}
+.tok.ok::after{content:" ✓";color:var(--ok);font-weight:700;font-size:.8em}
+.tok.ko{text-decoration:line-through;text-decoration-color:var(--ko);text-decoration-thickness:2px}
+.tok.miss,.showsol .tok[data-t]{outline:1.5px dashed var(--ok);outline-offset:1px}
+/* collega */
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px 40px;max-width:44em}
+.pcol{display:flex;flex-direction:column;gap:8px}
+.card{width:100%;display:flex;gap:12px;align-items:center;padding:7px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);text-align:left;font-weight:600}
+.card:hover{border-color:var(--ink)}
+.card.sel{box-shadow:0 0 0 2px var(--sole);border-color:var(--sole)}
+.card.ok{border-color:var(--ok);background:var(--verde-tint)}
+.card.ko{border-color:var(--ko);background:var(--rosso-tint)}
+.bd{flex:none;width:1.6em;height:1.6em;border-radius:50%;display:grid;place-items:center;font-weight:700;border:1.5px solid var(--line);color:var(--soft);font-size:.85em}
+.card.paired .bd{border-color:transparent;color:#fff;background:var(--c)}
+/* colonne */
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 14px;padding:12px;border-radius:8px;background:var(--paper2);min-height:3em}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:2px 14px;font-weight:600;transition:transform .15s}
+.chip:hover{border-color:var(--ink);transform:translateY(-1px)}
+.chip.sel{box-shadow:0 0 0 2px var(--sole);border-color:var(--sole)}
+.chip.ok{border-color:var(--ok);background:var(--verde-tint)}
+.chip.ko{border-color:var(--ko);background:var(--rosso-tint)}
+.bins{display:grid;grid-template-columns:repeat(var(--n,4),minmax(0,1fr));gap:12px}
+@media (max-width:760px){.bins{grid-template-columns:1fr 1fr}}
+.bin{padding:10px 12px;min-height:7em;border:0;border-top:3px solid var(--mare);background:var(--mare-tint);border-radius:0 0 8px 8px;text-align:left;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.bin:nth-child(even){border-top-color:var(--rosso);background:var(--rosso-tint)}
+.bin h4{margin:0 0 4px;font-family:var(--title);color:var(--bord);font-size:1.1rem}
+.pool:empty::before{content:"Tutto sistemato! Premi «Controlla».";color:var(--soft);font-size:.9rem}
+/* ordina */
+.oline{display:flex;flex-wrap:wrap;gap:6px;min-height:2.2em;padding:4px 8px;border-bottom:2px solid var(--mare);background:var(--mare-tint);border-radius:4px 4px 0 0;margin:2px 0 6px}
+.oline.ok{border-bottom-color:var(--ok);background:var(--verde-tint)}
+.oline.ko{border-bottom-color:var(--ko);background:var(--rosso-tint)}
+.otiles{display:flex;flex-wrap:wrap;gap:6px;min-height:2em}
+.tile{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:0 10px;font-weight:600;line-height:1.8}
+.tile:hover{border-color:var(--ink)}
+/* sfida */
+.speed{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;padding:18px;border-radius:12px;background:var(--paper2);max-width:52em}
+@media (max-width:700px){.speed{grid-template-columns:1fr;justify-items:center;text-align:center}}
+.sring{position:relative;width:7.5em;height:7.5em}
+.sring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.sring circle{fill:none;stroke-width:9}
+.sring .bgc{stroke:var(--line)}
+.sring .fg{stroke:var(--mare);stroke-linecap:round}
+.sring .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.sring .num b{font-family:var(--title);font-size:2.3rem;color:var(--bord)}
+.sring .num span{font-size:.8rem;color:var(--soft)}
+.sq{font-size:2em;font-weight:700;margin:0 0 .3em;min-height:1.3em}
+.sq small{font-size:.45em;color:var(--soft);font-weight:600;display:block}
+.sopts{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px}
+.sopts button{min-width:5.5em;border:2px solid var(--line);background:var(--card);border-radius:12px;padding:.25em .9em;font-size:1.3em;font-weight:700}
+.sopts button:hover{border-color:var(--ink)}
+.sopts button.ok{border-color:var(--ok);background:var(--verde-tint)}
+.sopts .btn{background:var(--bord);border-color:var(--bord);color:#fff}
+.sopts button.ko{border-color:var(--ko);background:var(--rosso-tint)}
+.sstat{display:flex;gap:18px;flex-wrap:wrap;font-weight:600}
+.sstat b{color:var(--rosso);font-variant-numeric:tabular-nums}
+.stable{margin-top:14px}
+/* scrittura */
+.starters{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}
+.starters button{border:1px dashed var(--mare);background:var(--mare-tint);border-radius:20px;padding:1px 12px;font-size:.95rem}
+textarea{width:100%;min-height:9em;border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--paper2);resize:vertical;line-height:1.6;display:block}
+textarea:focus{outline:none;border-color:var(--mare)}
+.meters{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.meter{display:inline-block;padding:3px 12px;border-radius:20px;background:var(--paper2);font-size:.92rem}
+.meter.ok{background:var(--verde-tint);color:var(--ok)}
+.model{display:none;margin-top:10px;padding:10px 14px;border-left:3px solid var(--ok);background:var(--verde-tint);border-radius:0 8px 8px 0}
+.showsol .model{display:block}
+/* test */
+.test{border:2px solid var(--bord);border-radius:14px;padding:22px 24px 16px;margin-top:30px}
+.test .kind{color:var(--bord)}
+.tmsg{margin-top:10px;padding:10px 14px;border-radius:8px;display:none}
+.tmsg.on{display:block}
+.tmsg.pass{background:var(--verde-tint);color:var(--ok)}
+.tmsg.fail{background:var(--sole-tint)}
+
+/* ===== finale ===== */
+.finale{margin:30px 0 0;border:2px solid var(--mare);border-radius:14px;padding:22px 26px;display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center}
+@media (max-width:700px){.finale{grid-template-columns:1fr;padding:18px;gap:16px}}
+.ring{position:relative;width:9em;height:9em}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:10}
+.ring .bgc{stroke:var(--line)}
+.ring .fg{stroke:var(--verde);stroke-linecap:round;transition:stroke-dashoffset 1.2s ease-out,stroke .3s}
+.ring .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .num b{font-family:var(--title);font-size:2.6rem;font-weight:800;color:var(--bord);line-height:1}
+.ring .num span{color:var(--soft);font-size:.85rem;text-align:center}
+.fin-title{font-family:var(--title);font-style:italic;font-weight:800;font-size:clamp(2.2rem,4.6vw,3.4rem);color:var(--bord);line-height:1;margin:0 0 .1em;display:inline-block;padding-bottom:.12em;background:linear-gradient(to right,#1F8A50 0 33.3%,var(--line) 33.3% 66.6%,#C8312B 66.6%) bottom/100% 4px no-repeat}
+.fin-sub{font-size:1.1rem;margin:.3em 0 0}
+.fin-ru{color:var(--soft);margin:.2em 0 0}
+.break{list-style:none;padding:0;margin:14px 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(9.5em,1fr));gap:8px}
+.break li{padding:5px 12px;border-radius:8px;background:var(--paper2);display:flex;justify-content:space-between;gap:8px;font-size:.92rem}
+.break li b{font-variant-numeric:tabular-nums}
+.break li.full{background:var(--verde-tint);color:var(--ok)}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:80;overflow:hidden}
+.confetti i{position:absolute;top:-20px;width:9px;height:14px;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(140px);visibility:hidden;background:var(--ink);color:var(--card);padding:8px 18px;border-radius:20px;z-index:95;transition:transform .3s;max-width:90vw;text-align:center}
+.toast.on{transform:translateX(-50%) translateY(0);visibility:visible}
+
+/* ===== finestra «Regola» ===== */
+.modal{position:fixed;inset:0;z-index:85;background:rgba(20,30,35,.45);display:grid;place-items:center;padding:16px}
+.modal[hidden]{display:none}
+.mpanel{background:var(--gsheet);border-radius:14px;max-width:min(52em,96vw);max-height:88vh;overflow:auto;padding:18px 20px 8px;box-shadow:0 20px 50px -15px rgba(0,0,0,.5)}
+.mhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px;font-family:var(--title);font-weight:700;color:var(--mare);font-size:1.2rem}
+.mhead button{border:0;background:none;font-size:1.6rem;line-height:1;color:var(--ink)}
+
+/* ===== evidenziatore ===== */
+mark.hl{background:#FFE34D;color:#1d1d1d;border-radius:2px;box-shadow:0 0 0 1px #FFE34D;cursor:pointer}
+mark.hl.hl-g{background:#A8E6A1;box-shadow:0 0 0 1px #A8E6A1}
+mark.hl.hl-p{background:#FFB8D6;box-shadow:0 0 0 1px #FFB8D6}
+mark.hl.hl-b{background:#A9D8F5;box-shadow:0 0 0 1px #A9D8F5}
+
+/* ===== MODALITÀ LEZIONE: un blocco per schermo ===== */
+.lnav{display:none}
+.lez{--lz:1}
+html.lezh{font-size:clamp(19px,min(1.9vw,3.3vh),38px)}
+.lezh .bar{font-size:15px}
+.lezh .bar .step,.lezh .bar .tbtn{font-size:13px}
+.lez .sheet{zoom:var(--tz,1);padding-bottom:5.5em;padding-right:max(150px,9vw)}
+@media (max-width:860px){.lez .sheet{padding-right:16px}}
+.lez .blk{display:none}
+.lez .blk.cur{display:block}
+.lez .cover.blk.cur{display:grid}
+.lez .finale.blk.cur{display:grid}
+.lez .regola:not(:has(.blk.cur)){display:none}
+.lez .regola{margin-top:0;min-height:calc(100vh - 9em)}
+.lez .ex,.lez .test{border-top:0;margin-top:0}
+.lez .folio{display:none}
+.lez .lnav{display:flex;position:fixed;right:18px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:40;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:5px 6px;box-shadow:0 8px 24px -10px rgba(0,0,0,.35);font-size:.85rem}
+.lnav button.nv{width:2.4em;height:2.4em;border-radius:50%;border:1.5px solid var(--bord);background:var(--card);color:var(--bord);font-size:1.2rem;line-height:1;font-weight:700}
+.lnav button.nv:disabled{opacity:.3}
+.lnav .lt{min-width:9em;max-width:22em;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lnav .lt small{display:block;color:var(--soft)}
+.blk{position:relative}
+
+/* ===== STRUMENTI (solo modalità lezione) ===== */
+.lupa-ov{position:fixed;inset:0;z-index:90;cursor:crosshair;background:rgba(20,20,20,.12)}
+.lupa-ov .lupa-r{position:fixed;border:2px dashed var(--rosso);background:rgba(255,227,77,.15);display:none}
+.lupa-hint,.lupa-exit{position:fixed;top:calc(env(safe-area-inset-top,0px) + 54px);left:50%;transform:translateX(-50%);z-index:91;background:var(--ink);color:var(--card);padding:6px 16px;border-radius:20px;font-size:.92rem;border:0}
+.lupa-exit{cursor:pointer;font-weight:700}
+body.zooming{overflow:hidden}
+.ink{position:absolute;left:0;top:0;z-index:6;pointer-events:none;touch-action:none}
+body.drawing .ink{pointer-events:auto;cursor:crosshair}
+body.drawing.t-eraser .ink{cursor:cell}
+body.drawing.t-text .ink{cursor:text}
+.ink-text{position:absolute;z-index:7;min-width:2ch;padding:2px 6px;font-weight:700;font-size:1.35rem;line-height:1.2;border:1px dashed transparent;border-radius:4px;background:rgba(255,255,255,.6);white-space:pre-wrap}
+.ink-text:focus{outline:none;border-color:currentColor}
+.tools-panel{position:fixed;left:28px;bottom:calc(80px + env(safe-area-inset-bottom,0px));z-index:50;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 30px -10px rgba(0,0,0,.35);padding:8px 10px 10px;display:flex;flex-direction:column;gap:7px;font-size:.8rem;max-width:calc(100vw - 40px)}
+.tools-panel[hidden]{display:none}
+.tp-h{display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:move;font-family:var(--title);font-weight:700;color:var(--bord);user-select:none;touch-action:none}
+.tp-x{border:0;background:none;font-size:1.4rem;line-height:1;padding:0 4px}
+.tp-row{display:flex;flex-wrap:wrap;align-items:center;gap:5px}
+.tp-row > span{color:var(--soft);min-width:4.6em}
+.tools-panel button.tb{border:1px solid var(--line);background:var(--card);border-radius:8px;min-width:34px;height:32px;padding:0 8px}
+.tools-panel button.tb:hover{border-color:var(--ink)}
+.tools-panel button.tb[aria-pressed="true"]{background:var(--bord);border-color:var(--bord);color:#fff}
+.tools-panel .sw{width:26px;height:26px;border-radius:50%;border:2px solid var(--card);box-shadow:0 0 0 1px var(--line);padding:0}
+.tools-panel .sw[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink)}
+#toolsBtn[aria-pressed="true"]{background:var(--bord);color:#fff;border-color:var(--bord)}
+
+@media print{.bar,.actions,.lnav,.tools-panel,.toast,.confetti{display:none!important}.sheet::before{position:absolute}.regola{break-inside:avoid-page}}
+@media (prefers-reduced-motion:reduce){.ring .fg,.chip,.toast,.step i{transition:none}}
+</style>
+</head>
+<body>
+<header class="bar">
+  <span class="bar-title" id="barTitle"></span>
+  <nav class="ladder" id="ladder" aria-label="Passi del modulo"></nav>
+  <span class="pts" id="pts" title="Punti degli esercizi controllati"></span>
+  <div class="bbtns">
+    <button class="tbtn" id="hlBtn" type="button" aria-pressed="true" title="Клик по слову или выделение мышкой — жёлтый маркер. Повторный клик убирает.">Evidenziatore</button>
+    <button class="tbtn" id="hlClear" type="button" hidden title="Убрать маркер">Pulisci</button>
+    <button class="tbtn" id="toolsBtn" type="button" aria-pressed="false">Strumenti</button>
+    <button class="tbtn" id="modeBtn" type="button" title="Переключить режим: дома (одна страница) / на уроке (по одному блоку на экран)"></button>
+  </div>
+</header>
+<main class="sheet" id="sheet">
+  <div class="brand" aria-hidden="true"><svg class="ipl" viewBox="0 0 220 220" aria-hidden="true"><circle cx="110.0" cy="110.0" r="109.5" fill="#FFFFFF" stroke="#DDE0DF" stroke-width="1.0"/><path transform="translate(59.3 0)" d="M25.7048 110.3608 27.9312 111.77759999999999Q22.5676 119.77239999999999 19.0762 122.6566Q15.5848 125.54079999999999 11.0308 125.54079999999999Q7.8936 125.54079999999999 5.9708000000000006 123.76979999999999Q4.048 121.99879999999999 4.048 119.1652Q4.048 116.8376 5.3636 112.1824L11.2332 90.42439999999999Q11.9416 87.38839999999999 11.9416 86.37639999999999Q11.9416 84.7572 10.575399999999998 84.0994Q9.2092 83.4416 5.9708 83.4416V80.7092Q17.71 79.79839999999999 26.4132 77.87559999999999L17.204 111.6764Q16.2932 114.8136 16.2932 116.9388Q16.2932 117.54599999999999 16.7486 118.00139999999999Q17.204 118.4568 17.8112 118.4568Q19.8352 118.4568 25.7048 110.3608ZM23.4784 55.30799999999999Q26.312 55.30799999999999 28.3866 57.331999999999994Q30.461199999999998 59.355999999999995 30.461199999999998 62.1896Q30.461199999999998 65.0232 28.437199999999997 66.9966Q26.4132 68.97 23.4784 68.97Q20.6448 68.97 18.722 66.946Q16.7992 64.922 16.7992 61.987199999999994Q16.7992 59.355999999999995 18.8232 57.331999999999994Q20.8472 55.30799999999999 23.4784 55.30799999999999Z" fill="#7A1E2C"/><path transform="translate(59.3 0)" d="M35.824799999999996 83.4416V80.7092Q41.3908 80.102 55.3564 77.87559999999999L51.5108 89.5136Q55.9636 83.2392 59.6574 80.5574Q63.351200000000006 77.87559999999999 67.7028 77.87559999999999Q72.7628 77.87559999999999 75.6976 81.2152Q78.6324 84.5548 78.6324 90.1208Q78.6324 103.2768 69.7268 114.6112Q60.8212 125.9456 50.599999999999994 125.9456Q48.07 125.9456 43.7184 123.7192L42.504 127.8684Q39.974000000000004 137.3812 39.974000000000004 139.304Q39.974000000000004 141.1256 41.3908 141.834Q42.8076 142.5424 46.552 142.6436V145.376H21.3532V142.6436H21.9604Q25.0976 142.6436 26.4132 141.2268Q27.7288 139.81 28.9432 135.1548L39.0632 95.88919999999999Q41.2896 87.4896 41.2896 85.9716Q41.2896 84.5548 40.2776 84.0994Q39.2656 83.644 35.824799999999996 83.4416ZM65.9824 90.222Q65.9824 87.89439999999999 64.8186 86.4776Q63.654799999999994 85.0608 61.732 85.0608Q60.416399999999996 85.0608 59.151399999999995 85.5668Q57.886399999999995 86.0728 56.874399999999994 87.1354Q55.8624 88.198 54.9516 89.26059999999998Q54.040800000000004 90.32319999999999 53.2312 92.0436Q52.4216 93.764 51.8144 94.92779999999999Q51.2072 96.0916 50.6 97.96379999999999Q49.9928 99.836 49.6892 100.6962Q49.3856 101.5564 48.9302 103.1756Q48.4748 104.7948 48.4748 104.896Q44.9328 116.8376 44.9328 118.76039999999999Q44.9328 120.27839999999999 46.0966 121.341Q47.260400000000004 122.4036 48.879599999999996 122.4036Q52.522800000000004 122.4036 55.8624 118.305Q59.202 114.2064 61.3272 108.691Q63.4524 103.1756 64.7174 98.0144Q65.9824 92.8532 65.9824 90.222Z" fill="#7A1E2C"/><circle cx="149.1" cy="117.0" r="7.6" fill="#B4493B"/><rect x="83.8" y="159.2" width="17.5" height="5.0" fill="#1F8A50"/><rect x="101.3" y="159.2" width="17.5" height="5.0" fill="#FFFFFF" stroke="#DDE0DF" stroke-width="0.5"/><rect x="118.7" y="159.2" width="17.5" height="5.0" fill="#C8312B"/></svg><span id="lvl"></span></div>
+  <section class="cover blk" id="cover" data-passo="regola" data-t="Copertina">
+    <div>
+      <span class="kind">Italiano passo passo — Grammatica passo passo</span>
+      <p class="cover-unit" id="coverUnit"></p>
+      <h1><span id="coverTitle"></span><span class="l2" id="coverSub"></span></h1>
+      <p class="cover-link" id="coverLink"></p>
+    </div>
+    <div class="who-box">
+      <label class="field"><b>Nome</b><input id="nome" autocomplete="name" placeholder="Scrivi il tuo nome"></label>
+      <label class="field"><b>Data</b><input id="data"></label>
+      <div class="how"><p>Иди по ступенькам вверху: сначала правило, потом упражнения, в конце тест. Под каждым упражнением: «Controlla» — проверить, «Ricomincia» — новая порция заданий, «💡 Regola» — подсказка. Ответы сохраняются в этом браузере, можно делать в несколько подходов. В конце нажми «Invia all’insegnante» — откроется Google-форма, в ней нажми «Invia».</p></div>
+    </div>
+  </section>
+  <div id="blocks"></div>
+  <section class="finale blk" id="finale" data-passo="test" data-t="Il tuo risultato" aria-live="polite">
+    <div class="ring">
+      <svg viewBox="0 0 170 170"><circle class="bgc" cx="85" cy="85" r="74"/><circle class="fg" id="ringFg" cx="85" cy="85" r="74"/></svg>
+      <div class="num"><b id="finNum">—</b><span id="finLab">test</span></div>
+    </div>
+    <div>
+      <p class="fin-title" id="finTitle">Il tuo risultato</p>
+      <p class="fin-sub" id="finSub"></p>
+      <p class="fin-ru" id="finRu"></p>
+      <ul class="break" id="break"></ul>
+      <div class="actions">
+        <button class="btn alt" id="sendRes" type="button">Invia all’insegnante</button>
+        <button class="btn ghost" id="copyRes" type="button">Copia il risultato</button>
+        <button class="btn ghost" id="resetAll" type="button">Cancella tutto</button>
+      </div>
+    </div>
+  </section>
+  <footer class="folio"><span id="folioL"></span><span>Grammatica passo passo</span></footer>
+</main>
+<nav class="lnav" aria-label="Navigazione della lezione">
+  <button class="nv" id="lPrev" type="button" aria-label="Indietro">‹</button>
+  <span class="lt" id="lTitle"></span>
+  <button class="nv" id="lNext" type="button" aria-label="Avanti">›</button>
+</nav>
+<div class="modal" id="modal" hidden><div class="mpanel" role="dialog" aria-modal="true" aria-label="Regola"><div class="mhead"><span>💡 Regola</span><button type="button" id="mClose" aria-label="Chiudi">×</button></div><div id="mBody"></div></div></div>
+<div class="toast" id="toast" role="status"></div>
+<script>const MOD={"meta": {"codice": "G_A2_01", "livello": "Italiano A2", "numero": "1", "titolo": "Gradi di comparazione", "titolo_ru": "Степени сравнения прилагательных", "collegato": "A2 · Unità 2 «Che tipo sei?»"}, "foto": [], "blocks": [{"kind": "regola", "id": "r1", "passo": "regola", "title": "Più, meno, come", "sub": "Сравнительная степень: больше, меньше, так же", "html": "<div class=\"rpart\" id=\"r1a\">\n<h3>Три ступени</h3>\n<p>У прилагательного есть три ступени: обычная форма, <b>сравнительная</b> («выше, чем…») и <b>превосходная</b> («самый высокий», «очень высокий»). Сегодня идём по ступенькам снизу вверх.</p>\n<div class=\"fuse\" data-fuse=\"più+alto=più alto|meno+alto=meno alto|il più+alto=il più alto|alt-+-issimo=altissimo\"></div>\n<div class=\"ptab-wrap\"><table class=\"ptab\">\n<thead><tr><th></th><th>обычная</th><th>сравнительная</th><th>превосходная</th></tr></thead>\n<tbody>\n<tr><th>alto</th><td>Marco è alto.</td><td>Marco è <b>più alto di</b> Luca.<br>Luca è <b>meno alto di</b> Marco.<br>Luca è <b>alto come</b> Paolo.</td><td>Marco è <b>il più alto</b> della classe.<br>Marco è <b>altissimo</b>!</td></tr>\n</tbody></table></div>\n</div>\n\n<div class=\"rpart\" id=\"r1b\">\n<h3>Больше / меньше: più… di, meno… di</h3>\n<p class=\"ex-row\"><i>Marco è <b>più</b> alto <b>di</b> Luca.</i> · <i>Il treno è <b>meno</b> veloce <b>dell’</b>aereo.</i></p>\n<p>Прилагательное согласуется с тем, <b>кого</b> описываем (с первым словом): <i>Anna è più alt<b>a</b> di Marco</i> · <i>Le mie sorelle sono più sportiv<b>e</b> di me</i>.</p>\n<p>Если после <b>di</b> стоит артикль, получается слитный предлог: <i>di + il treno = <b>del</b> treno</i>, <i>di + la sorella = <b>della</b> sorella</i>, <i>di + gli amici = <b>degli</b> amici</i>. Перед именами и городами артикля нет: <i>di Marco, di Roma</i>.</p>\n<p>После <b>di</b> — ударные местоимения: <span class=\"pill\">di me</span> <span class=\"pill\">di te</span> <span class=\"pill\">di lui / di lei</span> <span class=\"pill\">di noi</span> <span class=\"pill\">di voi</span> <span class=\"pill\">di loro</span> — никогда не <i>di io, di tu</i>.</p>\n</div>\n\n<div class=\"rpart\" id=\"r1c\">\n<h3>Так же, как: come / quanto</h3>\n<p><b>come</b> и <b>quanto</b> значат одно и то же — выбирай любое:</p>\n<p class=\"ex-row\"><i>Laura è alta <b>come</b> sua madre.</i> · <i>Sono stanca <b>quanto</b> te.</i></p>\n<p>Можно усилить: <i><b>così</b> alta <b>come</b>…</i>, <i><b>tanto</b> stanca <b>quanto</b>…</i>, но в разговоре чаще говорят просто <i>alta come</i>. После come / quanto тоже ударные местоимения: <i>come <b>me</b>, quanto <b>te</b></i>.</p>\n<div class=\"two\">\n <div class=\"box\"><p><b>+</b> più … di</p><p><b>−</b> meno … di</p><p><b>=</b> come / quanto</p></div>\n <div class=\"box\"><p><i>Roma è più grande di Firenze.</i></p><p><i>Firenze è meno grande di Roma.</i></p><p><i>Milano è elegante come Torino.</i></p></div>\n</div>\n</div>"}, {"kind": "es", "id": "r1x", "passo": "riconosci", "tipo": "find", "title": "La famiglia di Sara", "opt": {}, "kv": {"icon": "read", "it": "Leggi il testo e tocca tutti i paragoni (più… di, meno… di, come, quanto).", "ru": "Прочитай текст и нажми на все сравнения: «più… di», «meno… di», «come», «quanto».", "regola": "r1b", "testo": "Mi chiamo Sara e ho due fratelli, Luca e Marta. Luca ha 25 anni ed è *più grande di* me. È anche *più alto di* me, ma è *meno sportivo di* Marta. Marta ha 17 anni ed è *alta come* me. È *più timida di* Luca, ma è *simpatica quanto* lui. Io sono *meno paziente di* mia madre e *testarda come* mio padre. Luca dice che sono *più chiacchierona di* Marta… ed è vero!"}, "items": []}, {"kind": "es", "id": "r2x", "passo": "riconosci", "tipo": "choice", "title": "Più, meno o uguale?", "opt": {"show": "10"}, "kv": {"icon": "gram", "it": "Leggi la frase: è un paragone di maggioranza (+), di minoranza (−) o di uguaglianza (=)?", "ru": "Прочитай фразу: это «больше» (+), «меньше» (−) или «так же» (=)?", "regola": "r1c"}, "items": [{"raw": "Marco è più alto di Luca. → {*+|−|=}", "why": "più … di = больше"}, {"raw": "Il treno è meno caro dell’aereo. → {+|*−|=}", "why": "meno … di = меньше"}, {"raw": "Anna è simpatica come sua sorella. → {+|−|*=}", "why": "come = так же"}, {"raw": "Roma è più grande di Firenze. → {*+|−|=}", "why": "più … di"}, {"raw": "Io sono stanco quanto te. → {+|−|*=}", "why": "quanto = так же"}, {"raw": "Questo libro è meno interessante del film. → {+|*−|=}", "why": "meno … di"}, {"raw": "Mia madre è paziente come mia nonna. → {+|−|*=}", "why": "come"}, {"raw": "Il gatto è più pigro del cane. → {*+|−|=}", "why": "più … di"}, {"raw": "Luisa è meno timida di Paola. → {+|*−|=}", "why": "meno … di"}, {"raw": "Il caffè è caldo quanto il tè. → {+|−|*=}", "why": "quanto"}, {"raw": "Gli esami sono più difficili degli esercizi. → {*+|−|=}", "why": "più … di"}, {"raw": "La mia casa è meno moderna della tua. → {+|*−|=}", "why": "meno … di"}, {"raw": "Mio padre è alto quanto mio fratello. → {+|−|*=}", "why": "quanto"}, {"raw": "Le scarpe sono più care della borsa. → {*+|−|=}", "why": "più … di"}]}, {"kind": "es", "id": "f1", "passo": "forma", "tipo": "gap", "title": "Più, meno, come", "opt": {"show": "10"}, "kv": {"icon": "write", "it": "Scrivi il paragone. Attenzione: l’aggettivo si accorda con la prima persona o cosa!", "ru": "Напиши сравнение (+ = più … di, − = meno … di, = = come / quanto). Внимание: прилагательное согласуется с первым словом!", "regola": "r1b"}, "items": [{"raw": "Marco è ((+ alto)) [più alto di] Luca.", "why": "Marco — м. р. → alto"}, {"raw": "Anna è ((+ alto)) [più alta di] Marco.", "why": "согласуем с Anna → alta"}, {"raw": "Roma è ((+ grande)) [più grande di] Firenze.", "why": "grande одинаково для м. и ж. р."}, {"raw": "Paola è ((− timido)) [meno timida di] Sara.", "why": "Paola → timida"}, {"raw": "Luca è ((= simpatico)) [simpatico come|simpatico quanto] Paolo.", "why": "= → come или quanto"}, {"raw": "Le mie sorelle sono ((+ sportivo)) [più sportive di] Marco.", "why": "le sorelle — ж. р. мн. ч. → sportive"}, {"raw": "Milano è ((− caldo)) [meno calda di] Palermo.", "why": "Milano (la città) → calda"}, {"raw": "Giulia è ((= bello)) [bella come|bella quanto] Chiara.", "why": "= → come / quanto; Giulia → bella"}, {"raw": "I miei amici sono ((+ allegro)) [più allegri di] Paolo.", "why": "gli amici — м. р. мн. ч. → allegri"}, {"raw": "Torino è ((= elegante)) [elegante come|elegante quanto] Milano.", "why": "elegante одинаково для м. и ж. р."}, {"raw": "Mario è ((− paziente)) [meno paziente di] Lucia.", "why": "meno … di"}, {"raw": "Marta e Anna sono ((= alto)) [alte come|alte quanto] Giorgio.", "why": "Marta e Anna → alte"}, {"raw": "Venezia è ((+ piccolo)) [più piccola di] Roma.", "why": "Venezia → piccola"}, {"raw": "Tu sei ((+ giovane)) [più giovane di] Sergio.", "why": "più … di"}, {"raw": "Questa casa è ((− caro)) [meno cara di] quella.", "why": "la casa → cara"}]}, {"kind": "es", "id": "f2", "passo": "forma", "tipo": "gap", "title": "Di + articolo, di + me", "opt": {"show": "10"}, "kv": {"icon": "gram", "it": "Completa con di, di + articolo (del, della, dei…) o con il pronome giusto (me, te, lui…).", "ru": "Вставь di, слитный предлог (del, della, dei…) или правильное местоимение (me, te, lui…).", "regola": "r1b"}, "items": [{"raw": "Il treno è più veloce ((di)) [dell’]autobus.", "why": "l’autobus → di + l’ = dell’"}, {"raw": "Il mare è più bello ((di)) [della] montagna.", "why": "la montagna → della"}, {"raw": "Mio fratello è più alto ((di)) [di] Marco.", "why": "перед именем артикля нет → di"}, {"raw": "Il gatto è meno attivo ((di)) [del] cane.", "why": "il cane → del"}, {"raw": "Gli esercizi sono più facili ((di)) [del] test.", "why": "il test → del"}, {"raw": "Sei più alto ((di + io)) [di me].", "why": "после di — me, не io"}, {"raw": "Lei è simpatica come ((tu)) [te].", "why": "после come — te, не tu"}, {"raw": "Il caffè è più forte ((di)) [del] tè.", "why": "il tè → del"}, {"raw": "Firenze è meno grande ((di)) [di] Roma.", "why": "перед городом артикля нет"}, {"raw": "Marco è stanco quanto ((io)) [me].", "why": "после quanto — me"}, {"raw": "Questa borsa è più cara ((di)) [dello] zaino.", "why": "lo zaino → dello"}, {"raw": "La pizza è più famosa ((di)) [degli] spaghetti.", "why": "gli spaghetti → degli"}, {"raw": "Paolo è più giovane ((di + lei)) [di lei].", "why": "di lei"}, {"raw": "Siete più bravi ((di + noi)) [di noi].", "why": "di noi"}, {"raw": "Il mio telefono è più vecchio ((di)) [del] tuo.", "why": "il tuo → del tuo"}, {"raw": "L’estate è più calda ((di)) [della] primavera.", "why": "la primavera → della"}, {"raw": "Loro sono più giovani ((di + voi)) [di voi].", "why": "di voi"}]}, {"kind": "es", "id": "f3", "passo": "forma", "tipo": "pairs", "title": "Trova la fine", "opt": {"show": "8"}, "kv": {"icon": "match", "it": "Collega: tocca l’inizio della frase a sinistra, poi la fine giusta a destra.", "ru": "Соедини: нажми на начало фразы слева, потом на подходящий конец справа.", "regola": "r1b"}, "items": [{"raw": "Il treno è più veloce = dell’autobus", "why": ""}, {"raw": "Roma è più grande = di Firenze", "why": ""}, {"raw": "Mia sorella è alta = come me", "why": ""}, {"raw": "Il libro è più lungo = del film", "why": ""}, {"raw": "Luglio è più caldo = di maggio", "why": ""}, {"raw": "Il gatto è più pigro = del cane", "why": ""}, {"raw": "Io sono stanca quanto = te", "why": ""}, {"raw": "Napoli è più calda = di Torino", "why": ""}, {"raw": "Il tè è meno forte = del caffè", "why": ""}, {"raw": "I miei nonni sono più vecchi = dei tuoi", "why": ""}, {"raw": "Sei più giovane = di lui", "why": ""}, {"raw": "La mia borsa è cara quanto = la tua", "why": ""}]}, {"kind": "regola", "id": "r2", "passo": "scegli", "title": "Di o che?", "sub": "Когда «di», а когда «che»", "html": "<div class=\"rpart\" id=\"r2a\">\n<h3>di — сравниваем двух людей или две вещи</h3>\n<p>Одно качество, два участника: «кто из них больше?». После сравнения идёт <b>существительное, имя или местоимение</b> → <b>di</b>.</p>\n<p class=\"ex-row\"><i>Luca è più alto <b>di</b> Marco.</i> · <i>Roma è più grande <b>di</b> Napoli.</i> · <i>Ho più libri <b>di</b> te.</i></p>\n</div>\n\n<div class=\"rpart\" id=\"r2b\">\n<h3>che — сравниваем две вещи у одного</h3>\n<p>Участник один, а сравниваем два его качества, два действия, два места или два количества → <b>che</b>.</p>\n<div class=\"two\">\n <div class=\"box\">\n <p><b>2 прилагательных:</b> <i>Marta è più simpatica <b>che</b> bella.</i></p>\n <p><b>2 глагола:</b> <i>È più facile leggere <b>che</b> parlare.</i></p>\n </div>\n <div class=\"box\">\n <p><b>предлог + слово:</b> <i>Fa più caldo a Catania <b>che</b> a Milano.</i></p>\n <p><b>2 количества:</b> <i>Ho più libri <b>che</b> quaderni.</i></p>\n </div>\n</div>\n<p class=\"hint\">Быстрая проверка: если после сравнения стоит прилагательное, глагол или предлог (a, in, con…) — почти всегда <b>che</b>.</p>\n<p>Сравни: <i>Ho più amici <b>di</b> te</i> (у меня больше друзей, чем у тебя) — <i>Ho più amici <b>che</b> amiche</i> (у меня друзей больше, чем подруг).</p>\n</div>"}, {"kind": "es", "id": "s1", "passo": "scegli", "tipo": "choice", "title": "Di o che?", "opt": {"show": "12"}, "kv": {"icon": "gram", "it": "Scegli di (o di + articolo) oppure che.", "ru": "Выбери: di (или слитный предлог) или che.", "regola": "r2b"}, "items": [{"raw": "Luca è più alto {*di|che} Marco.", "why": "два человека, одно качество → di"}, {"raw": "Marta è più simpatica {di|*che} bella.", "why": "два прилагательных → che"}, {"raw": "È più facile leggere {di|*che} parlare.", "why": "два глагола → che"}, {"raw": "Fa più caldo a Catania {di|*che} a Milano.", "why": "после сравнения предлог → che"}, {"raw": "Ho più libri {di|*che} quaderni.", "why": "два количества → che"}, {"raw": "Ho più libri {*di|che} te.", "why": "сравниваем меня и тебя → di"}, {"raw": "Roma è più grande {*di|che} Napoli.", "why": "два города → di"}, {"raw": "Viaggiare è più comodo in treno {di|*che} in macchina.", "why": "предлог → che"}, {"raw": "Mio fratello è più pigro {*di|che} me.", "why": "местоимение → di"}, {"raw": "Questa casa è più bella {di|*che} grande.", "why": "два прилагательных → che"}, {"raw": "In città ci sono più macchine {di|*che} biciclette.", "why": "два количества → che"}, {"raw": "Il caffè è più forte {*del|che il} tè.", "why": "две вещи → di + il = del"}, {"raw": "Studio più la sera {di|*che} la mattina.", "why": "два времени одного действия → che"}, {"raw": "Parlare è più divertente {di|*che} scrivere.", "why": "два глагола → che"}, {"raw": "Marco è più simpatico {*di|che} suo fratello.", "why": "два человека → di"}, {"raw": "Questa borsa è più pratica {di|*che} elegante.", "why": "два прилагательных → che"}, {"raw": "Ci sono più turisti a Roma {di|*che} a Napoli.", "why": "предлог → che"}, {"raw": "Lavoro più a casa {di|*che} in ufficio.", "why": "предлог → che"}]}, {"kind": "es", "id": "s2", "passo": "scegli", "tipo": "sort", "title": "Di o che? In colonna", "opt": {"show": "12"}, "kv": {"icon": "match", "it": "Tocca la frase, poi la colonna giusta: di o che?", "ru": "Нажми на фразу, потом на колонку: di или che?", "regola": "r2b", "colonne": "di | che"}, "items": [{"raw": "Luca è più alto … Marco = 1", "why": "два человека"}, {"raw": "più simpatica … bella = 2", "why": "два прилагательных"}, {"raw": "più facile leggere … parlare = 2", "why": "два глагола"}, {"raw": "più caldo a Catania … a Milano = 2", "why": "предлог"}, {"raw": "più libri … quaderni = 2", "why": "два количества"}, {"raw": "più grande … te = 1", "why": "местоимение"}, {"raw": "più giovane … mio fratello = 1", "why": "два человека"}, {"raw": "più comodo in treno … in macchina = 2", "why": "предлог"}, {"raw": "meno timida … Paola = 1", "why": "имя"}, {"raw": "più pratica … elegante = 2", "why": "два прилагательных"}, {"raw": "più amici … amiche = 2", "why": "два количества"}, {"raw": "più veloce … lui = 1", "why": "местоимение"}, {"raw": "Napoli è più grande … Firenze = 1", "why": "два города"}, {"raw": "più divertente ballare … cantare = 2", "why": "два глагола"}, {"raw": "più stanco … me = 1", "why": "местоимение"}, {"raw": "più a casa … in ufficio = 2", "why": "предлог"}, {"raw": "meno paziente … mia madre = 1", "why": "два человека"}]}, {"kind": "regola", "id": "r3", "passo": "forma", "title": "Il più bello, bellissimo", "sub": "Превосходная степень: «самый» и «очень»", "html": "<div class=\"rpart\" id=\"r3a\">\n<h3>«Самый»: il più … di / tra</h3>\n<p>Сравниваем одного <b>со всеми</b>: артикль + <b>più / meno</b> + прилагательное + <b>di / tra</b>.</p>\n<p class=\"ex-row\"><i>Marco è <b>il più</b> alto <b>della</b> classe.</i> · <i>Anna è <b>la più</b> simpatica <b>tra</b> le mie amiche.</i> · <i>Luca è <b>il meno</b> sportivo <b>di</b> tutti.</i></p>\n<p>Если есть существительное, артикль ставим <b>один раз</b> — перед ним, а <i>più + прилагательное</i> после:</p>\n<p class=\"ex-row\"><i><b>la</b> città <b>più bella</b> d’Italia</i> · <i><b>il</b> giorno <b>più bello</b> della mia vita</i></p>\n<p class=\"hint\">Ошибка: <i>la città <s>la</s> più bella</i> — второй артикль не нужен.</p>\n<p>Сравни: <i>Marco è <b>più alto di</b> Luca</i> (двое) — <i>Marco è <b>il più alto della</b> classe</i> (все).</p>\n</div>\n\n<div class=\"rpart\" id=\"r3b\">\n<h3>«Очень»: -issimo</h3>\n<p>Никакого сравнения, просто «очень»: <i>Questo film è <b>lunghissimo</b>!</i> = <i>molto lungo</i>.</p>\n<p><b>Как образовать:</b> берём прилагательное во мн. ч. м. р., убираем <b>-i</b> и добавляем <b>-issimo</b>:</p>\n<div class=\"ptab-wrap\"><table class=\"ptab\">\n<thead><tr><th></th><th>мн. ч. м. р.</th><th>-issimo</th></tr></thead>\n<tbody>\n<tr><th>bello</th><td>bell<b>i</b></td><td>bell<b>issimo</b></td></tr>\n<tr><th>facile</th><td>facil<b>i</b></td><td>facil<b>issimo</b></td></tr>\n<tr><th>lungo</th><td>lungh<b>i</b></td><td>lungh<b>issimo</b></td></tr>\n<tr><th>ricco</th><td>ricch<b>i</b></td><td>ricch<b>issimo</b></td></tr>\n<tr><th>simpatico</th><td>simpatic<b>i</b></td><td>simpatic<b>issimo</b></td></tr>\n</tbody></table></div>\n<p>Окончание меняется как у обычного прилагательного на -o: <i>bellissim<b>o</b>, bellissim<b>a</b>, bellissim<b>i</b>, bellissim<b>e</b></i>.</p>\n<p class=\"hint\">-issimo уже значит «очень»: <s>molto bellissimo</s>, <s>il più bellissimo</s> — так нельзя.</p>\n</div>"}, {"kind": "es", "id": "f4", "passo": "forma", "tipo": "gap", "title": "-issimo", "opt": {"show": "10"}, "kv": {"icon": "write", "it": "Scrivi l’aggettivo con -issimo. Attenzione al genere e al numero!", "ru": "Напиши прилагательное с -issimo. Следи за родом и числом!", "regola": "r3b"}, "items": [{"raw": "Questo film è ((lungo)) [lunghissimo].", "why": "lunghi → lunghissimo"}, {"raw": "Le tue amiche sono ((simpatico)) [simpaticissime].", "why": "simpatici → simpaticissim- + e (ж. р. мн. ч.)"}, {"raw": "Il caffè è ((caldo)) [caldissimo].", "why": "caldi → caldissimo"}, {"raw": "Marco è ((ricco)) [ricchissimo].", "why": "ricchi → ricchissimo"}, {"raw": "Oggi sono ((stanco)) [stanchissimo|stanchissima].", "why": "stanchi → stanchissimo / stanchissima"}, {"raw": "La lezione è ((facile)) [facilissima].", "why": "facili → facilissima"}, {"raw": "I miei nonni sono ((vecchio)) [vecchissimi].", "why": "vecchi → vecchissimi"}, {"raw": "Siracusa è una città ((antico)) [antichissima].", "why": "antichi → antichissima"}, {"raw": "Gli esercizi sono ((difficile)) [difficilissimi].", "why": "difficili → difficilissimi"}, {"raw": "La strada è ((largo)) [larghissima].", "why": "larghi → larghissima"}, {"raw": "Gli spaghetti sono ((buono)) [buonissimi|ottimi].", "why": "buonissimi (или ottimi — см. правило 4)"}, {"raw": "Mia sorella è ((gentile)) [gentilissima].", "why": "gentili → gentilissima"}, {"raw": "Il mare è ((pulito)) [pulitissimo].", "why": "puliti → pulitissimo"}, {"raw": "Queste scarpe sono ((caro)) [carissime].", "why": "cari → carissime"}, {"raw": "Mio fratello è ((pigro)) [pigrissimo].", "why": "pigri → pigrissimo"}, {"raw": "La casa è ((bello)) [bellissima].", "why": "belli → bellissima"}]}, {"kind": "es", "id": "s3", "passo": "scegli", "tipo": "choice", "title": "Il più… o -issimo?", "opt": {"show": "10"}, "kv": {"icon": "gram", "it": "Scegli la forma giusta.", "ru": "Выбери правильный вариант.", "regola": "r3a"}, "items": [{"raw": "Roma è la città {*più grande|la più grande} d’Italia.", "why": "артикль один раз: la città più grande"}, {"raw": "Marco è {*il più alto|più alto} della classe.", "why": "«della classe» — из всех → il più alto"}, {"raw": "Marco è {il più alto|*più alto} di Luca.", "why": "сравниваем двоих → più alto di"}, {"raw": "È il ristorante {*più caro|il più caro} della città.", "why": "артикль один раз"}, {"raw": "Questo esercizio è {*facilissimo|il più facilissimo}.", "why": "-issimo уже «очень», il più не нужен"}, {"raw": "Mia nonna è la persona {*più paziente|più pazientissima} della famiglia.", "why": "più + -issimo нельзя"}, {"raw": "Il film è {*molto lungo|molto lunghissimo}.", "why": "molto + -issimo нельзя"}, {"raw": "Anna è {*la più simpatica|la simpaticissima} tra le mie amiche.", "why": "«tra le mie amiche» → la più simpatica"}, {"raw": "Il Po è il fiume {*più lungo|lunghissimo} d’Italia.", "why": "«d’Italia» — из всех → più lungo"}, {"raw": "Questi esercizi sono {*difficilissimi|difficilissimo}.", "why": "gli esercizi — мн. ч. → difficilissimi"}, {"raw": "Le mie amiche sono {*simpaticissime|simpaticissima}.", "why": "le amiche — ж. р. мн. ч."}, {"raw": "Questo è il giorno {*più bello|il più bello} della mia vita.", "why": "артикль один раз"}, {"raw": "Luca è {*il meno sportivo|meno sportivo} della famiglia.", "why": "«della famiglia» — из всех → il meno"}, {"raw": "È la città {*più bella|bellissima} del mondo.", "why": "«del mondo» — из всех → più bella"}]}, {"kind": "es", "id": "s4", "passo": "scegli", "tipo": "gap", "title": "La mia famiglia", "opt": {"stile": "testo"}, "kv": {"icon": "read", "it": "Completa il testo. (+) = il più…, (−) = il meno…, (-issimo) = molto.", "ru": "Заполни текст. (+) — «самый», (−) — «наименее», (-issimo) — «очень». Не забудь артикль и согласование!", "regola": "r3a"}, "items": [{"raw": "Nella mia famiglia siamo in sei. Mio nonno ha 90 anni: è ((+ vecchio)) [il più vecchio] della famiglia. Mio fratello Luca è alto 1,90: è ((+ alto)) [il più alto] di tutti. Mia sorella Marta ha 15 anni: è ((+ giovane)) [la più giovane] ed è ((simpatico, -issimo)) [simpaticissima]. Mia madre lavora tanto ed è sempre ((stanco, -issimo)) [stanchissima], ma è la persona ((+ paziente)) [più paziente] della casa. Mio padre cucina benissimo: le sue lasagne sono ((buono, -issimo)) [buonissime|ottime]! E io? Io sono ((− ordinato)) [la meno ordinata|il meno ordinato] della famiglia: la mia stanza è ((disordinato, -issimo)) [disordinatissima]!", "why": ""}]}, {"kind": "regola", "id": "r4", "passo": "forma", "title": "Migliore, meglio", "sub": "Особые формы: лучше, хуже, старший, младший", "html": "<div class=\"rpart\" id=\"r4a\">\n<h3>buono, cattivo, grande, piccolo</h3>\n<p>У этих четырёх прилагательных есть <b>особые формы</b>. Обычные (<i>più buono, più grande</i>) тоже правильные, но особые звучат естественнее и встречаются очень часто.</p>\n<div class=\"ptab-wrap\"><table class=\"ptab\">\n<thead><tr><th></th><th>сравнительная</th><th>«самый»</th><th>«очень»</th></tr></thead>\n<tbody>\n<tr><th>buono</th><td><b>migliore</b> (лучше)</td><td><b>il migliore</b></td><td><b>ottimo</b></td></tr>\n<tr><th>cattivo</th><td><b>peggiore</b> (хуже)</td><td><b>il peggiore</b></td><td><b>pessimo</b></td></tr>\n<tr><th>grande</th><td><b>maggiore</b> (старший)</td><td><b>il maggiore</b></td><td><b>massimo</b></td></tr>\n<tr><th>piccolo</th><td><b>minore</b> (младший)</td><td><b>il minore</b></td><td><b>minimo</b></td></tr>\n</tbody></table></div>\n<p class=\"ex-row\"><i>È la mia <b>migliore</b> amica.</i> · <i>Ho un fratello <b>maggiore</b>.</i> · <i>Il tiramisù è <b>ottimo</b>!</i> · <i>il <b>massimo</b> dei voti</i></p>\n<p><b>maggiore / minore</b> о людях — это «старший / младший» (<i>mia sorella minore</i>); о росте и размере говорим <i>più grande, più piccolo</i>.</p>\n<p class=\"hint\">Ошибки: <s>più migliore</s>, <s>molto ottimo</s> — «более» и «очень» уже внутри слова.</p>\n</div>\n\n<div class=\"rpart\" id=\"r4b\">\n<h3>migliore или meglio?</h3>\n<p><b>meglio / peggio</b> — это сравнительная степень наречий <b>bene / male</b>. Задай вопрос:</p>\n<div class=\"two\">\n <div class=\"box\"><p><b>какой?</b> → прилагательное</p><p>buono → <b>migliore</b></p><p>cattivo → <b>peggiore</b></p><p><i>Il tuo italiano è <b>migliore</b> del mio.</i></p></div>\n <div class=\"box\"><p><b>как?</b> → наречие</p><p>bene → <b>meglio</b></p><p>male → <b>peggio</b></p><p><i>Parli italiano <b>meglio</b> di me.</i></p></div>\n</div>\n<p>Запомни выражения: <i>Oggi sto <b>meglio</b></i> (stare bene → meglio) · <i>È <b>meglio</b> partire presto</i> (лучше + инфинитив).</p>\n<p class=\"hint\">Ошибка: <s>più meglio</s>, <s>più peggio</s>.</p>\n</div>"}, {"kind": "es", "id": "f5", "passo": "forma", "tipo": "grid", "title": "La grande tabella", "opt": {"show": "14"}, "kv": {"icon": "gram", "it": "Completa la tabella. Per buono, cattivo, grande e piccolo scrivi la forma speciale.", "ru": "Заполни таблицу. Для buono, cattivo, grande и piccolo пиши особую форму.", "regola": "r4a", "cols": "più… | il più… | -issimo"}, "items": [{"raw": "alto: più alto | il più alto | altissimo", "why": ""}, {"raw": "bello: più bello | il più bello | bellissimo", "why": ""}, {"raw": "simpatico: più simpatico | il più simpatico | simpaticissimo", "why": ""}, {"raw": "lungo: più lungo | il più lungo | lunghissimo", "why": ""}, {"raw": "ricco: più ricco | il più ricco | ricchissimo", "why": ""}, {"raw": "facile: più facile | il più facile | facilissimo", "why": ""}, {"raw": "buono: migliore | il migliore | ottimo", "why": ""}, {"raw": "cattivo: peggiore | il peggiore | pessimo", "why": ""}, {"raw": "grande: maggiore | il maggiore | massimo", "why": ""}, {"raw": "piccolo: minore | il minore | minimo", "why": ""}]}, {"kind": "es", "id": "s5", "passo": "scegli", "tipo": "choice", "title": "Migliore o meglio?", "opt": {"show": "12"}, "kv": {"icon": "gram", "it": "Scegli la forma giusta. Chiediti: come? (meglio, peggio) o quale? (migliore, peggiore)", "ru": "Выбери правильную форму. Спроси себя: как? (meglio, peggio) или какой? (migliore, peggiore)", "regola": "r4b"}, "items": [{"raw": "Il tuo italiano è {*migliore|meglio} del mio.", "why": "какой итальянский? → migliore"}, {"raw": "Parli italiano {*meglio|migliore} di me.", "why": "как говоришь? → meglio"}, {"raw": "È {*meglio|migliore} partire presto.", "why": "è meglio + инфинитив"}, {"raw": "Questo ristorante è {*peggiore|peggio} di quello di ieri.", "why": "какой ресторан? → peggiore"}, {"raw": "Oggi sto {*meglio|migliore}, grazie.", "why": "stare bene → meglio"}, {"raw": "Canto {*peggio|peggiore} di mia sorella.", "why": "как пою? → peggio"}, {"raw": "Marta è la mia {*migliore|meglio} amica.", "why": "какая подруга? → migliore"}, {"raw": "Ho un fratello {*maggiore|massimo}: ha 30 anni.", "why": "старший → maggiore"}, {"raw": "Il tiramisù di mia madre è {*ottimo|molto ottimo}.", "why": "ottimo уже «очень»"}, {"raw": "È il {*peggiore|peggio} film dell’anno.", "why": "какой фильм? → peggiore"}, {"raw": "Lavoro {*meglio|migliore} la mattina.", "why": "как работаю? → meglio"}, {"raw": "Questa soluzione è {*migliore|più migliore}.", "why": "migliore уже «лучше», più не нужно"}, {"raw": "Mia sorella {*minore|minima} va ancora a scuola.", "why": "младшая → minore"}, {"raw": "Ho preso {*il massimo|il maggiore} dei voti.", "why": "il massimo dei voti — высший балл"}, {"raw": "Ti senti {*meglio|più meglio}?", "why": "più meglio — ошибка"}]}, {"kind": "es", "id": "s6", "passo": "scegli", "tipo": "gap", "title": "Chi cucina meglio?", "opt": {"stile": "dialogo"}, "kv": {"icon": "vocab", "it": "Completa il dialogo. (+) = forma comparativa, (-issimo) = molto.", "ru": "Заполни диалог. (+) — сравнительная форма, (-issimo) — «очень». Подумай: какой? или как?", "regola": "r4b"}, "items": [{"raw": "Anna:: Secondo te, chi cucina ((bene, +)) [meglio]: tua madre o tua nonna?", "why": ""}, {"raw": "Luca:: Mia nonna! Le sue lasagne sono ((buono, +)) [migliori] di quelle di mia madre.", "why": ""}, {"raw": "Anna:: Davvero? Per me la torta di tua madre è ((buono, -issimo)) [ottima|buonissima]!", "why": ""}, {"raw": "Luca:: Sì, i dolci li fa ((bene, +)) [meglio] lei. E tu? Cucini bene?", "why": ""}, {"raw": "Anna:: No, io cucino ((male, +)) [peggio] di tutti! Ma mio fratello ((grande, +)) [maggiore] è il cuoco ((buono, +)) [migliore] della famiglia.", "why": ""}, {"raw": "Luca:: Allora la prossima volta cucina lui! È ((bene, +)) [meglio] così!", "why": ""}]}, {"kind": "es", "id": "u1", "passo": "usa", "tipo": "gap", "title": "Traduci", "opt": {"show": "8", "stile": "largo"}, "kv": {"icon": "write", "it": "Traduci in italiano.", "ru": "Переведи на итальянский.", "regola": "r1b"}, "items": [{"raw": "Марко выше Луки. → [Marco è più alto di Luca.]", "why": ""}, {"raw": "Моя сестра такая же высокая, как я. → [Mia sorella è alta come me.|Mia sorella è alta quanto me.|Mia sorella è così alta come me.|Mia sorella è tanto alta quanto me.]", "why": ""}, {"raw": "Поезд медленнее самолёта. → [Il treno è più lento dell’aereo.|Il treno è meno veloce dell’aereo.]", "why": ""}, {"raw": "Читать легче, чем говорить. → [Leggere è più facile che parlare.|È più facile leggere che parlare.]", "why": ""}, {"raw": "Рим — самый большой город Италии. → [Roma è la città più grande d’Italia.]", "why": ""}, {"raw": "Этот фильм очень длинный. → [Questo film è lunghissimo.|Questo film è molto lungo.]", "why": ""}, {"raw": "Ты говоришь по-итальянски лучше меня. → [Parli italiano meglio di me.|Tu parli italiano meglio di me.|Parli l’italiano meglio di me.|Tu parli l’italiano meglio di me.]", "why": ""}, {"raw": "Это моя лучшая подруга. → [È la mia migliore amica.|Questa è la mia migliore amica.|Lei è la mia migliore amica.]", "why": ""}, {"raw": "У меня есть старший брат. → [Ho un fratello maggiore.|Ho un fratello più grande.]", "why": ""}, {"raw": "В Катании теплее, чем в Милане. → [A Catania fa più caldo che a Milano.|Fa più caldo a Catania che a Milano.]", "why": ""}, {"raw": "Анна самая симпатичная в классе. → [Anna è la più simpatica della classe.]", "why": ""}, {"raw": "Лучше выйти пораньше. → [È meglio uscire presto.|È meglio partire presto.|Meglio uscire presto.|È meglio uscire prima.|È meglio partire prima.]", "why": ""}]}, {"kind": "es", "id": "u2", "passo": "usa", "tipo": "order", "title": "Metti in ordine", "opt": {"show": "6"}, "kv": {"icon": "write", "it": "Metti le parole in ordine: tocca le parti una dopo l’altra.", "ru": "Составь предложение: нажимай на части по порядку. Нажми на слово в строке, чтобы вернуть его обратно.", "regola": "r3a"}, "items": [{"raw": "Marco / è / più alto / di / Luca", "why": ""}, {"raw": "Mia sorella / è / alta / come / me", "why": ""}, {"raw": "Roma / è / la città / più grande / d’Italia", "why": ""}, {"raw": "Leggere / è / più facile / che / parlare ~ È più facile leggere che parlare", "why": ""}, {"raw": "Parli / italiano / meglio / di / me", "why": ""}, {"raw": "Questo / film / è / lunghissimo", "why": ""}, {"raw": "Anna / è / la più simpatica / della / classe ~ La più simpatica della classe è Anna", "why": ""}, {"raw": "Il tuo italiano / è / migliore / del / mio", "why": ""}, {"raw": "Ho / più amici / che / amiche", "why": ""}]}, {"kind": "es", "id": "u3", "passo": "usa", "tipo": "speed", "title": "Sfida: 60 secondi", "opt": {}, "kv": {"icon": "warm", "it": "Quante forme giuste in 60 secondi? Tocca la risposta giusta il più velocemente possibile.", "ru": "Сколько правильных форм ты успеешь выбрать за 60 секунд? Нажимай на верный ответ как можно быстрее. Можно играть много раз.", "regola": "r4a", "da": "f5"}, "items": []}, {"kind": "es", "id": "u4", "passo": "usa", "tipo": "open", "title": "Io e…", "opt": {}, "kv": {"icon": "write", "it": "Confrontati con una persona della tua famiglia o con un amico. Scrivi 6–8 frasi: più… di, meno… di, come, il più…, -issimo, meglio. Se vuoi, registra anche un messaggio vocale e mandalo all’insegnante.", "ru": "Сравни себя с кем-то из семьи или с другом. Напиши 6–8 предложений: più… di, meno… di, come, il più…, -issimo, meglio. По желанию запиши ещё голосовое сообщение и отправь его преподавателю.", "regola": "r1b", "starters": "Io sono più … di … | … è meno … di me | Siamo … come / quanto … | … è il / la più … della famiglia | … è …issimo / …issima | … meglio di me", "min": "6", "esempio": "Ho una sorella gemella, Julia. Julia è un po’ più bassa di me e un po’ più magra di me. I suoi capelli sono come i miei e anche gli occhi sono dello stesso colore. Anche di carattere siamo molto simili. Quasi tutti ci confondono!"}, "items": []}], "test": {"kind": "test", "opt": {"show": "15", "quote": "forma:4,dichi:4,superl:4,speciali:3"}, "items": [{"g": "forma", "t": "gap", "raw": "Anna è ((+ alto)) [più alta di] Marco.", "why": "согласуем с Anna"}, {"g": "forma", "t": "gap", "raw": "Il treno è più lento ((di)) [dell’]aereo.", "why": "l’aereo → dell’"}, {"g": "forma", "t": "gap", "raw": "Sei stanco come ((io)) [me]?", "why": "после come — me"}, {"g": "forma", "t": "choice", "raw": "Le mie sorelle sono {*più sportive|più sportivo|più sportiva} di me.", "why": "ж. р. мн. ч."}, {"g": "forma", "t": "choice", "raw": "Luca è simpatico {*quanto|di|che} Paolo.", "why": "равенство: come / quanto"}, {"g": "forma", "t": "gap", "raw": "Mio padre è più giovane ((di)) [di] mia madre.", "why": "перед mia madre артикля нет"}, {"g": "forma", "t": "choice", "raw": "Paolo è più alto {*di te|di tu}.", "why": "после di — te"}, {"g": "dichi", "t": "choice", "raw": "Marta è più bella {di|*che} simpatica.", "why": "два прилагательных → che"}, {"g": "dichi", "t": "choice", "raw": "Roma è più antica {*di|che} Milano.", "why": "два города → di"}, {"g": "dichi", "t": "choice", "raw": "È più facile scrivere {di|*che} parlare.", "why": "два глагола → che"}, {"g": "dichi", "t": "choice", "raw": "Ho più amiche {di|*che} amici.", "why": "два количества → che"}, {"g": "dichi", "t": "choice", "raw": "Fa più freddo a Milano {di|*che} a Napoli.", "why": "предлог → che"}, {"g": "dichi", "t": "choice", "raw": "Mio fratello è più pigro {*di|che} me.", "why": "местоимение → di"}, {"g": "superl", "t": "gap", "raw": "Questo film è ((lungo, -issimo)) [lunghissimo].", "why": "lunghi → lunghissimo"}, {"g": "superl", "t": "gap", "raw": "Le tue amiche sono ((simpatico, -issimo)) [simpaticissime].", "why": "ж. р. мн. ч."}, {"g": "superl", "t": "choice", "raw": "È la città {*più bella|la più bella} d’Italia.", "why": "артикль один раз"}, {"g": "superl", "t": "choice", "raw": "Marco è {*il più alto|più alto} della classe.", "why": "из всех → il più alto"}, {"g": "superl", "t": "choice", "raw": "Questo esercizio è {*facilissimo|molto facilissimo}.", "why": "molto + -issimo нельзя"}, {"g": "superl", "t": "gap", "raw": "Sono ((stanco, -issimo)) [stanchissimo|stanchissima].", "why": "stanchi → stanchissimo"}, {"g": "speciali", "t": "choice", "raw": "Parli italiano {*meglio|migliore} di me.", "why": "как? → meglio"}, {"g": "speciali", "t": "choice", "raw": "Il tuo italiano è {*migliore|meglio} del mio.", "why": "какой? → migliore"}, {"g": "speciali", "t": "choice", "raw": "È {*meglio|migliore} uscire presto.", "why": "è meglio + инфинитив"}, {"g": "speciali", "t": "choice", "raw": "Ho una sorella {*minore|minima}: ha 10 anni.", "why": "младшая → minore"}, {"g": "speciali", "t": "choice", "raw": "Questa pizza è {*ottima|molto ottima}!", "why": "ottimo уже «очень»"}, {"g": "speciali", "t": "gap", "raw": "Canto ((male, +)) [peggio] di te.", "why": "male → peggio"}]}};</script>
+<script>
+(function(){
+'use strict';
+const B=document.body,H=document.documentElement,M=MOD,META=M.meta,BRAND='Italiano passo passo';
+const KEY='gpp:'+META.codice;
+/* ===== GOOGLE MODULO: lo stesso dei Quaderni A1 (non cambiare) ===== */
+const MODULO={
+  url:'https://docs.google.com/forms/d/e/1FAIpQLSfdEbDz_loexufuIp4SsyB9jLq7otuUNPJeA91Qpgd0R-3EeA/viewform',
+  nome:'entry.1271164771', data:'entry.1325902077', lezione:'entry.1705899089', punteggio:'entry.1851506855',
+  dettagli:'entry.1450450077', testo:'entry.2110683261', percentuale:'entry.1501772916'
+};
+const STEPS=[['regola','Regola'],['riconosci','Riconosci'],['forma','Forma'],['scegli','Scegli'],['usa','Usa'],['test','Test']];
+const STEPRU={regola:'Правило',riconosci:'Узнай',forma:'Образуй',scegli:'Выбери',usa:'Используй',test:'Тест'};
+const $=s=>document.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const range=n=>[...Array(n).keys()];
+/* confronto risposte (come nel Quaderno) */
+const norm=s=>(s||'').toLowerCase().replace(/[’`´]/g,"'").replace(/\s+/g,' ').replace(/\s*'\s*/g,"'").replace(/[.!?,;:]+$/,'').trim();
+const fold=s=>norm(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+function judge(v,ans){const a=ans.split('|');if(!norm(v))return 0;if(a.some(x=>norm(x)===norm(v)))return 2;if(a.some(x=>fold(x)===fold(v)))return 1;return 0}
+/* salvataggio */
+let ST;try{ST=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){ST=null}
+if(!ST||typeof ST!=='object')ST={};
+ST.ex=ST.ex||{};ST.sc=ST.sc||{};ST.seen=ST.seen||{};
+let saveT=0;function save(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(ST))}catch(e){}},150)}
+function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.id);toast.id=setTimeout(()=>el.classList.remove('on'),2600)}
+
+/* ===== intestazioni ===== */
+const NAME=META.titolo;
+document.title=BRAND+' — '+NAME;
+$('#barTitle').innerHTML=BRAND+' — <i>'+esc(META.titolo)+'</i>';
+$('#lvl').textContent=META.livello;$('#coverUnit').textContent=META.livello+' — Grammatica passo passo';
+$('#coverTitle').textContent=META.titolo;$('#coverSub').textContent=META.titolo_ru||'';
+$('#coverLink').textContent=META.collegato?'Collegato alle lezioni: '+META.collegato:'';
+$('#folioL').textContent=BRAND+' — '+META.livello+' — '+NAME;
+
+const ICONS={
+    write:'<rect x="11" y="5" width="27" height="38" rx="3"/><path d="M6 11h8M6 19h8M6 27h8M6 35h8"/><rect x="16" y="11" width="4" height="4"/><path d="M24 13h9"/><rect x="16" y="20" width="4" height="4"/><path d="M24 22h9"/><rect x="16" y="29" width="4" height="4"/><path d="M24 31h4"/><path d="M44 17 31 36l-4 3 1-5 13-19z"/>',
+    listen:'<path d="M9 30v-6a15 15 0 0 1 30 0v6"/><rect x="5" y="28" width="8" height="13" rx="3"/><rect x="35" y="28" width="8" height="13" rx="3"/><path d="M20 31v6M24 28v12M28 31v6"/>',
+    gram:'<path d="M5 5h26v19H5z"/><path d="M11 10l10 8"/><circle cx="38" cy="11" r="4"/><path d="M38 15v15M27 19l11 4"/><circle cx="12" cy="34" r="3"/><circle cx="25" cy="34" r="3"/><path d="M6 44c0-3 3-5 6-5s6 2 6 5M19 44c0-3 3-5 6-5s6 2 6 5"/>',
+    speak:'<path d="M16 5c8 0 14 6 14 14l4 7-4 1v5c0 2-1 3-3 3h-4v8"/><path d="M9 11v16M4 15v8"/><path d="M38 23l5-2M38 28h6M38 33l5 2"/>',
+    vocab:'<path d="M7 5h20a3 3 0 0 1 3 3v13a3 3 0 0 1-3 3H15l-7 6v-6H7a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3z"/><path d="M11 11h12M17 9v2M14 12c1 4 4 7 8 8M20 12c-1 4-4 7-8 8"/><path d="M34 19h7a3 3 0 0 1 3 3v13a3 3 0 0 1-3 3h-1v6l-7-6h-7a3 3 0 0 1-3-3v-7"/><path d="M30 34l4-9 4 9M31.5 31h5"/>',
+    warm:'<path d="M24 3v4M9 9l3 3M39 9l-3 3M3 23h4M41 23h4"/><path d="M17 34c0-5-6-7-6-14a13 13 0 0 1 26 0c0 7-6 9-6 14z"/><path d="M24 12v22M18 39h12M20 44h8"/><path d="M24 16c-3-3-7-1-7 3M24 24c-3-2-6 0-6 3"/>',
+    read:'<circle cx="24" cy="10" r="6"/><path d="M6 21l18 6 18-6v19l-18 6-18-6z"/><path d="M24 27v19"/><rect x="2" y="27" width="5" height="9" rx="2"/><rect x="41" y="27" width="5" height="9" rx="2"/>',
+    match:'<rect x="3" y="6" width="14" height="9" rx="2"/><rect x="3" y="20" width="14" height="9" rx="2"/><rect x="3" y="34" width="14" height="9" rx="2"/><rect x="31" y="6" width="14" height="9" rx="2"/><rect x="31" y="20" width="14" height="9" rx="2"/><rect x="31" y="34" width="14" height="9" rx="2"/><path d="M17 10.5l14 28M17 24.5l14-14M17 38.5l14-14"/>'
+  };
+function icon(k){const p=ICONS[k]||ICONS.gram;return '<span class="ico" aria-hidden="true"><svg viewBox="0 0 48 48">'+p+'</svg></span>'}
+
+/* ===== parser delle righe: [risposta]  ((aiuto))  {a|*b} ===== */
+function inl(raw){
+  let h=raw.replace(/\(\(([^)]*)\)\)/g,(m,x)=>'<span class="hint">('+x+')</span>');
+  h=h.replace(/\[([^\]]+)\]/g,(m,a)=>{const w=Math.max(5.2,Math.max(...a.split('|').map(x=>x.length))*.62+1.6);
+    return '<input class="gap" data-answer="'+esc(a)+'" style="width:'+w.toFixed(1)+'em" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="risposta"><span class="sol">'+esc(a.split('|')[0])+'</span>'});
+  h=h.replace(/\{([^}]+)\}/g,(m,a)=>'<span class="opts">'+shuffle(a.split('|')).map(x=>{const ok=x.startsWith('*'),t=ok?x.slice(1):x;return '<button type="button" class="opt"'+(ok?' data-ok':'')+'>'+t+'</button>'}).join('')+'</span>');
+  return h;
+}
+const fotoOf=k=>{const f=(M.foto||[]).find(x=>x.k===k);return{src:(typeof FOTO!=='undefined'&&FOTO[k])||'',d:f?f.d:k}};
+function figure(k){const f=fotoOf(k);return '<figure class="img-slot'+(f.src?' filled':'')+'"><img src="'+esc(f.src)+'" alt="'+esc(f.d)+'"><figcaption>Фото: '+esc(f.d)+'</figcaption></figure>'}
+
+/* ===== scelta casuale dalla banca ===== */
+function pickIdx(n,show,groups){
+  if(!show||show>=n)return range(n);
+  if(groups){const by={};range(n).forEach(i=>(by[groups[i]]=by[groups[i]]||[]).push(i));
+    const first=Object.values(by).map(a=>shuffle(a)[0]).slice(0,show);
+    const rest=shuffle(range(n).filter(i=>!first.includes(i))).slice(0,show-first.length);
+    return [...first,...rest].sort((a,b)=>a-b)}
+  return shuffle(range(n)).slice(0,show).sort((a,b)=>a-b);
+}
+
+/* ===== tipi di esercizio ===== */
+var TYPES;
+function listType(){return{
+  render(st){
+    const b=this.b,its=b.items,show=+b.opt.show||0;
+    st.sel=st.sel&&st.sel.every(i=>i<its.length)?st.sel:pickIdx(its.length,show);
+    const body=this.sec.querySelector('.body');const stile=b.opt.stile||'';
+    const rows=st.sel.map(i=>its[i]);
+    if(stile==='testo'){body.innerHTML='<div class="text">'+rows.map(r=>inl(r.raw)).join(' ')+'</div>'}
+    else if(stile==='dialogo'){let sp0=null;body.innerHTML='<div class="dialog">'+rows.map(r=>{const m=r.raw.match(/^(.+?)::\s*(.*)$/);const sp=m?m[1]:'',tx=m?m[2]:r.raw;if(sp0===null)sp0=sp;return '<div class="dl'+(sp===sp0?'':' g')+'"><span class="sp">'+esc(sp)+'</span><div>'+inl(tx)+'</div></div>'}).join('')+'</div>'}
+    else{
+      const img=rows.some(r=>/^img=/.test(r.raw));
+      body.innerHTML='<ol class="'+(img?'pics':'ex-list'+(b.tipo==='choice'&&!img&&rows.length>6&&rows.every(r=>r.raw.length<60)?' cols2':''))+'">'+rows.map(r=>{
+        let raw=r.raw,fig='';const m=raw.match(/^img=([\w-]+)\s*::\s*(.*)$/);if(m){fig=figure(m[1]);raw=m[2]}
+        return '<li>'+fig+'<span>'+inl(raw)+'</span>'+(r.why?'<span class="why">'+esc(r.why)+'</span>':'')+'</li>'}).join('')+'</ol>';
+      if(stile==='largo')$$('.gap',body).forEach(g=>{g.classList.add('wide');g.style.width=''});
+    }
+    const gaps=$$('.gap',body),groups=$$('.opts',body);
+    (st.gaps||[]).forEach((v,i)=>{if(gaps[i])gaps[i].value=v});
+    (st.opts||[]).forEach((v,i)=>{if(v!=null&&groups[i]){const bt=[...groups[i].children].find(x=>x.textContent===v);if(bt)bt.classList.add('sel')}});
+    gaps.forEach((g,i)=>g.addEventListener('input',()=>{clearMark(g);st.gaps=st.gaps||[];st.gaps[i]=g.value;this.dirty();save()}));
+    gaps.forEach((g,i)=>g.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();const n=gaps[i+1];if(n)n.focus();else this.sec.querySelector('[data-a=check]').click()}}));
+    groups.forEach((gr,i)=>gr.addEventListener('click',e=>{const bt=e.target.closest('.opt');if(!bt)return;[...gr.children].forEach(x=>x.classList.remove('sel','ok','ko'));bt.classList.add('sel');st.opts=st.opts||[];st.opts[i]=bt.textContent;this.dirty();save()}));
+    this.max=gaps.length+groups.length;
+  },
+  check(){let n=0;const body=this.sec.querySelector('.body');
+    $$('.gap',body).forEach(g=>n+=judgeInput(g));
+    $$('.opts',body).forEach(gr=>{const s=gr.querySelector('.sel');if(!s)return;const ok=s.hasAttribute('data-ok');s.classList.add(ok?'ok':'ko');if(ok)n++});
+    return n},
+  newState(){return{}}
+}}
+function clearMark(el){el.classList.remove('ok','ko');const n=el.nextElementSibling;if(n&&n.classList.contains('acc'))n.remove()}
+function judgeInput(inp){clearMark(inp);const r=judge(inp.value,inp.dataset.answer);inp.classList.add(r?'ok':'ko');
+  if(r===1){const a=inp.dataset.answer.split('|').find(x=>fold(x)===fold(inp.value));const s=document.createElement('span');s.className='acc';s.textContent='→ '+a;s.title='Attenzione all’accento';inp.after(s)}return r?1:0}
+
+TYPES={
+  gap:listType(),
+  choice:listType(),
+  find:{
+    render(st){
+      const body=this.sec.querySelector('.body');const box=document.createElement('div');box.className='text';body.innerHTML='';body.append(box);
+      (this.b.kv.testo||'').split(/(\*[^*]+\*)/).forEach(part=>{
+        const m=part.match(/^\*(.+)\*$/);
+        if(m){const s=document.createElement('span');s.className='tok';s.dataset.t='1';s.textContent=m[1];box.append(s);return}
+        part.split(/(\s+)/).forEach(w=>{if(!w)return;if(/^\s+$/.test(w)){box.append(w);return}
+          const mm=w.match(/^([^\p{L}]*)([\p{L}’']+)([^\p{L}]*)$/u);if(!mm){box.append(w);return}
+          if(mm[1])box.append(mm[1]);const s=document.createElement('span');s.className='tok';s.textContent=mm[2];box.append(s);if(mm[3])box.append(mm[3])})});
+      const toks=$$('.tok',box);(st.mk||[]).forEach(i=>toks[i]&&toks[i].classList.add('mk'));
+      toks.forEach((t,i)=>t.onclick=()=>{toks.forEach(x=>x.classList.remove('ok','ko','miss'));t.classList.toggle('mk');st.mk=toks.map((x,j)=>x.classList.contains('mk')?j:-1).filter(j=>j>=0);this.dirty();save()});
+      this.max=toks.filter(t=>t.dataset.t).length;
+    },
+    check(){let g=0,bad=0;$$('.tok',this.sec).forEach(t=>{if(t.classList.contains('mk')){if(t.dataset.t){t.classList.add('ok');g++}else{t.classList.add('ko');bad++}}else if(t.dataset.t)t.classList.add('miss')});return Math.max(0,g-bad)},
+    newState(){return{}}
+  },
+  pairs:{
+    render(st){
+      const its=this.b.items.map(r=>{const[l,rr]=r.raw.split('=').map(s=>s.trim());return{l,r:rr}});
+      st.sel=st.sel&&st.sel.every(i=>i<its.length)?st.sel:pickIdx(its.length,+this.b.opt.show||0);
+      st.ro=st.ro&&st.ro.length===st.sel.length?st.ro:shuffle(range(st.sel.length));st.p=st.p||{};
+      const body=this.sec.querySelector('.body');const C=['#2F6F86','#B4493B','#5E7A3A','#C59A45','#7A1E2C','#6A4C93','#1F8A50','#D2691E'];
+      body.innerHTML='<div class="pairs"><div class="pcol">'+st.sel.map((i,k)=>'<button type="button" class="card pa" data-k="'+k+'"><span class="bd">'+(k+1)+'</span><span>'+esc(its[i].l)+'</span><span class="sol">'+esc(its[i].r)+'</span></button>').join('')
+        +'</div><div class="pcol">'+st.ro.map(k=>'<button type="button" class="card pb" data-k="'+k+'"><span class="bd">·</span><span>'+esc(its[st.sel[k]].r)+'</span></button>').join('')+'</div></div>';
+      const pa=$$('.pa',body),pb=$$('.pb',body);let selA=null;
+      const draw=()=>{pa.forEach(a=>{const k=+a.dataset.k,on=st.p[k]!=null;a.classList.toggle('paired',on);a.classList.toggle('sel',a===selA);a.style.setProperty('--c',C[k%C.length])});
+        pb.forEach(b=>{const k=Object.keys(st.p).find(x=>st.p[x]===+b.dataset.k);b.classList.toggle('paired',k!=null);if(k!=null)b.style.setProperty('--c',C[k%C.length]);b.querySelector('.bd').textContent=k!=null?(+k+1):'·'})};
+      const clr=()=>$$('.card',body).forEach(c=>c.classList.remove('ok','ko'));
+      pa.forEach(a=>a.onclick=()=>{clr();const k=+a.dataset.k;if(st.p[k]!=null)delete st.p[k];selA=selA===a?null:a;draw();this.dirty();save()});
+      pb.forEach(b=>b.onclick=()=>{clr();const r=+b.dataset.k;for(const k in st.p)if(st.p[k]===r)delete st.p[k];if(selA){st.p[+selA.dataset.k]=r;selA=null}draw();this.dirty();save()});
+      draw();this.max=st.sel.length;
+    },
+    check(){const st=this.st;let n=0;$$('.pa',this.sec).forEach(a=>{const k=+a.dataset.k;if(st.p[k]==null)return;const ok=st.p[k]===k;a.classList.add(ok?'ok':'ko');const b=this.sec.querySelector('.pb[data-k="'+st.p[k]+'"]');if(b)b.classList.add(ok?'ok':'ko');if(ok)n++});return n},
+    newState(){return{}}
+  },
+  grid:{
+    render(st){
+      const cols=(this.b.kv.cols||'').split('|').map(s=>s.trim());
+      const rows=this.b.items.map(r=>{const[h,rest]=r.raw.split(/:(.*)/s);return{h:h.trim(),c:rest.split('|').map(s=>s.trim())}});
+      const total=rows.length*cols.length;
+      st.hid=st.hid&&st.hid.every(i=>i<total)?st.hid:pickIdx(total,+this.b.opt.show||total);st.v=st.v||{};
+      const body=this.sec.querySelector('.body');
+      body.innerHTML='<div class="ptab-wrap"><table class="ptab"><thead><tr><th></th>'+cols.map(c=>'<th>'+esc(c)+'</th>').join('')+'</tr></thead><tbody>'
+        +rows.map((r,ri)=>'<tr><th>'+esc(r.h)+'</th>'+r.c.map((c,ci)=>{const k=ri*cols.length+ci;return '<td>'+(st.hid.includes(k)?'<input class="gap" data-answer="'+esc(c)+'" data-k="'+k+'" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="'+esc(r.h+' + '+cols[ci])+'"><span class="sol">'+esc(c)+'</span>':esc(c))+'</td>'}).join('')+'</tr>').join('')+'</tbody></table></div>';
+      const gaps=$$('.gap',body);gaps.forEach(g=>{if(st.v[g.dataset.k])g.value=st.v[g.dataset.k];g.addEventListener('input',()=>{clearMark(g);st.v[g.dataset.k]=g.value;this.dirty();save()})});
+      gaps.forEach((g,i)=>g.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();(gaps[i+1]||g).focus()}}));
+      this.max=gaps.length;
+    },
+    check(){let n=0;$$('.gap',this.sec).forEach(g=>n+=judgeInput(g));return n},
+    newState(){return{}}
+  },
+  sort:{
+    render(st){
+      const cols=(this.b.kv.colonne||'').split('|').map(s=>s.trim());
+      const its=this.b.items.map(r=>{const m=r.raw.match(/^(.*)=\s*(\d+)\s*$/);return{w:m[1].trim(),c:+m[2]-1,why:r.why}});
+      st.sel=st.sel&&st.sel.every(i=>i<its.length)?st.sel:pickIdx(its.length,+this.b.opt.show||0,its.map(x=>x.c));
+      st.pl=st.pl||{};st.ord=st.ord&&st.ord.length===st.sel.length?st.ord:shuffle(range(st.sel.length));
+      const body=this.sec.querySelector('.body');
+      body.innerHTML='<div class="pool"></div><div class="bins" style="--n:'+cols.length+'">'+cols.map((c,i)=>'<div class="bin" role="button" tabindex="0" data-c="'+i+'"><h4>'+esc(c)+'</h4></div>').join('')+'</div>';
+      const pool=body.querySelector('.pool'),bins=$$('.bin',body);let selC=null;
+      const chip=k=>{const it=its[st.sel[k]];const c=document.createElement('button');c.type='button';c.className='chip';c.dataset.k=k;c.innerHTML=esc(it.w)+'<span class="sol">'+esc(cols[it.c])+'</span>';return c};
+      const chips=st.sel.map((_,k)=>chip(k));
+      const draw=()=>{pool.innerHTML='';bins.forEach(b=>$$('.chip',b).forEach(c=>c.remove()));
+        st.ord.forEach(k=>{const c=chips[k];c.classList.toggle('sel',c===selC);if(st.pl[k]!=null)bins[st.pl[k]].append(c);else pool.append(c)})};
+      chips.forEach(c=>c.onclick=e=>{e.stopPropagation();chips.forEach(x=>x.classList.remove('ok','ko'));const k=+c.dataset.k;
+        if(st.pl[k]!=null){delete st.pl[k];selC=null}else selC=selC===c?null:c;draw();this.dirty();save()});
+      bins.forEach(b=>{const act=()=>{if(!selC)return;st.pl[+selC.dataset.k]=+b.dataset.c;selC=null;draw();this.dirty();save()};b.onclick=act;b.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();act()}}});
+      draw();this.chips=chips;this.its=its;this.max=st.sel.length;
+    },
+    check(){let n=0;const st=this.st;this.chips.forEach(c=>{const k=+c.dataset.k;if(st.pl[k]==null)return;const ok=st.pl[k]===this.its[st.sel[k]].c;c.classList.add(ok?'ok':'ko');if(ok)n++});return n},
+    newState(){return{}}
+  },
+  order:{
+    render(st){
+      const its=this.b.items.map(r=>{const[main,...alts]=r.raw.split('~').map(s=>s.trim());const parts=main.split('/').map(s=>s.trim());const show=parts.slice();show[0]=show[0].charAt(0).toLowerCase()+show[0].slice(1);return{parts,show,alts}});
+      st.sel=st.sel&&st.sel.every(i=>i<its.length)?st.sel:pickIdx(its.length,+this.b.opt.show||0);
+      st.sh=st.sh&&st.sh.length===st.sel.length?st.sh:st.sel.map(i=>{const n=its[i].parts.length;let s;do{s=shuffle(range(n))}while(n>1&&s.every((x,j)=>x===j));return s});
+      st.ln=st.ln&&st.ln.length===st.sel.length?st.ln:st.sel.map(()=>[]);
+      const body=this.sec.querySelector('.body');
+      body.innerHTML='<ol class="ex-list">'+st.sel.map((i,k)=>'<li data-k="'+k+'"><div class="oline"></div><div class="otiles"></div><span class="sol" style="white-space:normal">'+esc(its[i].parts.join(' '))+'</span></li>').join('')+'</ol>';
+      const draw=k=>{const li=body.querySelector('li[data-k="'+k+'"]'),it=its[st.sel[k]],L=li.querySelector('.oline'),Tl=li.querySelector('.otiles');L.innerHTML='';Tl.innerHTML='';
+        st.ln[k].forEach(p=>{const b=document.createElement('button');b.type='button';b.className='tile';b.textContent=it.show[p];b.onclick=()=>{st.ln[k]=st.ln[k].filter(x=>x!==p);L.classList.remove('ok','ko');draw(k);this.dirty();save()};L.append(b)});
+        st.sh[k].filter(p=>!st.ln[k].includes(p)).forEach(p=>{const b=document.createElement('button');b.type='button';b.className='tile';b.textContent=it.show[p];b.onclick=()=>{st.ln[k].push(p);L.classList.remove('ok','ko');draw(k);this.dirty();save()};Tl.append(b)})};
+      st.sel.forEach((_,k)=>draw(k));this.its=its;this.max=st.sel.length;
+    },
+    check(){let n=0;const st=this.st;st.sel.forEach((i,k)=>{const it=this.its[i],L=this.sec.querySelector('li[data-k="'+k+'"] .oline');if(!st.ln[k].length)return;
+      const s=norm(st.ln[k].map(p=>it.parts[p]).join(' '));const ok=[it.parts.join(' '),...it.alts].some(a=>norm(a)===s)&&st.ln[k].length===it.parts.length;L.classList.add(ok?'ok':'ko');if(ok)n++});return n},
+    newState(){return{}}
+  },
+  speed:{
+    noCheck:true,resetLabel:'Ricomincia la sfida',solLabel:'Mostra la tabella',
+    render(st){
+      const g=M.blocks.find(x=>x.id===this.b.kv.da);const cols=g.kv.cols.split('|').map(s=>s.trim());
+      const Q=[];g.items.forEach(r=>{const[h,rest]=r.raw.split(/:(.*)/s);rest.split('|').forEach((c,ci)=>Q.push({p:h.trim(),a:cols[ci],r:c.trim()}))});
+      this.Q=Q;const body=this.sec.querySelector('.body');
+      body.innerHTML='<div class="speed"><div class="sring"><svg viewBox="0 0 120 120"><circle class="bgc" cx="60" cy="60" r="52"/><circle class="fg" cx="60" cy="60" r="52"/></svg><div class="num"><b class="stime">60</b><span>secondi</span></div></div>'
+        +'<div><p class="sq"><small>Premi «Inizia»</small>pronto?</p><div class="sopts"><button type="button" class="btn sgo" style="font-size:1rem">▶ Inizia</button></div><div class="sstat"><span>Giuste: <b class="sok">0</b></span><span>Record: <b class="sbest">'+(ST.best||0)+'</b></span></div></div></div>'
+        +'<div class="stable sol" style="display:none"></div>';
+      const fg=body.querySelector('.fg'),C=2*Math.PI*52;fg.style.strokeDasharray=C;fg.style.strokeDashoffset=0;
+      this.max=0;this.C=C;this.body=body;
+      body.querySelector('.sgo').onclick=()=>this.start();
+    },
+    start(){
+      const body=this.body,fg=body.querySelector('.fg'),C=this.C,Q=this.Q;let left=60,ok=0,busy=false;clearInterval(this.tid);
+      const tx=body.querySelector('.stime'),sq=body.querySelector('.sq'),so=body.querySelector('.sopts'),sk=body.querySelector('.sok');sk.textContent='0';
+      const next=()=>{const q=Q[Math.floor(Math.random()*Q.length)];
+        const same=shuffle(Q.filter(x=>x.p===q.p&&x.r!==q.r)).slice(0,2),other=shuffle(Q.filter(x=>x.a===q.a&&x.p!==q.p))[0];
+        const opts=shuffle([q.r,...same.map(x=>x.r),other.r]);
+        sq.innerHTML='<small>Quale forma?</small>'+esc(q.p)+' + '+esc(q.a);
+        so.innerHTML=opts.map(o=>'<button type="button">'+esc(o)+'</button>').join('');
+        $$('button',so).forEach(b=>b.onclick=()=>{if(busy||left<=0)return;busy=true;
+          if(b.textContent===q.r){b.classList.add('ok');ok++;sk.textContent=ok;setTimeout(()=>{busy=false;if(left>0)next()},reduce?0:220)}
+          else{b.classList.add('ko');$$('button',so).find(x=>x.textContent===q.r).classList.add('ok');setTimeout(()=>{busy=false;if(left>0)next()},900)}})};
+      next();
+      this.tid=setInterval(()=>{left--;tx.textContent=left;fg.style.strokeDashoffset=C*(1-left/60);
+        if(left<=0){clearInterval(this.tid);const best=Math.max(ST.best||0,ok);const rec=ok>(ST.best||0);ST.best=best;body.querySelector('.sbest').textContent=best;
+          sq.innerHTML='<small>Tempo scaduto!</small>'+ok+' giuste'+(rec?' — nuovo record!':'');so.innerHTML='<button type="button" class="btn sgo" style="font-size:1rem">▶ Ancora</button>';so.querySelector('.sgo').onclick=()=>this.start();
+          this.st.played=(this.st.played||0)+1;this.st.last=ok;this.sec.querySelector('.score').textContent='Risultato: '+ok+' · Record: '+best;save();refresh()}},1000);
+    },
+    reset(){clearInterval(this.tid);this.render(this.st)},
+    newState(){return{}}
+  },
+  open:{
+    noCheck:true,resetLabel:'Cancella il testo',solLabel:'Mostra un esempio',
+    render(st){
+      const kv=this.b.kv,body=this.sec.querySelector('.body');const min=+kv.min||6;
+      body.innerHTML='<div class="starters">'+(kv.starters||'').split('|').map(s=>'<button type="button">'+esc(s.trim())+'</button>').join('')+'</div>'
+        +'<textarea aria-label="Il tuo testo" placeholder="'+esc(((kv.starters||'').split('|')[0]||'').trim())+'"></textarea>'
+        +'<div class="meters"><span class="meter mf">Frasi: <b>0</b> / '+min+'+</span><span class="meter mp">Preposizioni articolate: <b>0</b></span></div>'
+        +'<p class="hint" style="margin-top:8px">Это задание проверяет преподаватель: текст попадёт в форму, когда ты нажмёшь «Invia all’insegnante».</p>'
+        +(kv.esempio?'<div class="model"><b>Esempio:</b> '+esc(kv.esempio)+'</div>':'');
+      const ta=body.querySelector('textarea');ta.value=st.t||'';
+      const RX=/(^|[^\p{L}])((?:all|dell|dall|nell|sull)['’]|(?:al|allo|alla|ai|agli|alle|del|dello|della|dei|degli|delle|dal|dallo|dalla|dai|dagli|dalle|nel|nello|nella|nei|negli|nelle|sul|sullo|sulla|sui|sugli|sulle)(?![\p{L}'’]))/giu;
+      const meters=()=>{const t=ta.value;const fr=(t.match(/[^.!?…]*\p{L}[^.!?…]*[.!?…]+/gu)||[]).length;const pr=(t.match(RX)||[]).length;
+        body.querySelector('.mf b').textContent=fr;body.querySelector('.mp b').textContent=pr;body.querySelector('.mf').classList.toggle('ok',fr>=min);body.querySelector('.mp').classList.toggle('ok',pr>=min);
+        st.ok=fr>=min&&pr>=Math.ceil(min/2)};
+      ta.addEventListener('input',()=>{st.t=ta.value;meters();save();refresh()});
+      $$('.starters button',body).forEach(b=>b.onclick=()=>{const v=ta.value;ta.value=v+(v&&!/\s$/.test(v)?' ':'')+b.textContent.replace('…',' ');st.t=ta.value;ta.focus();meters();save();refresh()});
+      meters();this.max=0;this.ta=ta;
+    },
+    reset(){if(this.st.t&&!confirm('Cancellare il testo?'))return false;this.st.t='';this.render(this.st)},
+    newState(){return{}}
+  }
+};
+function TYPES_TEST(){const L=listType();return Object.assign(L,{
+  render(st){
+    const its=this.b.items,q=Object.fromEntries((this.b.opt.quote||'').split(',').filter(Boolean).map(x=>{const[g,n]=x.split(':');return[g.trim(),+n]}));
+    if(!st.sel||!st.sel.every(i=>i<its.length)){
+      const groups=[...new Set(its.map(x=>x.g))];st.sel=[];
+      groups.forEach(g=>{const ids=range(its.length).filter(i=>its[i].g===g);st.sel.push(...shuffle(ids).slice(0,q[g]||ids.length))});
+    }
+    const fake={b:{items:its,opt:{},tipo:'choice'},sec:this.sec,dirty:()=>this.dirty()};
+    const body=this.sec.querySelector('.body');
+    body.innerHTML='<ol class="ex-list">'+st.sel.map(i=>'<li><span>'+inl(its[i].raw)+'</span>'+(its[i].why?'<span class="why">'+esc(its[i].why)+'</span>':'')+'</li>').join('')+'</ol>';
+    const gaps=$$('.gap',body),groups=$$('.opts',body);
+    (st.gaps||[]).forEach((v,i)=>{if(gaps[i])gaps[i].value=v});
+    (st.opts||[]).forEach((v,i)=>{if(v!=null&&groups[i]){const bt=[...groups[i].children].find(x=>x.textContent===v);if(bt)bt.classList.add('sel')}});
+    gaps.forEach((g,i)=>g.addEventListener('input',()=>{clearMark(g);st.gaps=st.gaps||[];st.gaps[i]=g.value;this.dirty();save()}));
+    groups.forEach((gr,i)=>gr.addEventListener('click',e=>{const bt=e.target.closest('.opt');if(!bt)return;[...gr.children].forEach(x=>x.classList.remove('sel','ok','ko'));bt.classList.add('sel');st.opts=st.opts||[];st.opts[i]=bt.textContent;this.dirty();save()}));
+    this.max=gaps.length+groups.length;
+    this.sec.querySelector('[data-a=sol]').disabled=!(ST.sc.test&&ST.sc.test.n!=null);
+  }
+})}
+
+/* ===== costruzione della pagina ===== */
+const EX={};const ORDER=[];let exNo=0,regNo=0;
+const host=$('#blocks');
+function actionsHTML(o){
+  return '<div class="actions">'+(o.check!==false?'<button class="btn" type="button" data-a="check">Controlla</button>':'')
+   +'<button class="btn ghost" type="button" data-a="reset"'+(o.fresh?' title="Новая порция заданий: каждый раз другие фразы"':'')+'>'+(o.resetLabel||('Ricomincia'+(o.fresh?' <small>('+o.fresh+')</small>':'')))+'</button>'
+   +'<button class="btn alt" type="button" data-a="sol" aria-pressed="false">'+(o.solLabel||'Mostra le soluzioni')+'</button>'
+   +(o.reg?'<button class="btn reg" type="button" data-a="reg" data-reg="'+esc(o.reg)+'">💡 Regola</button>':'')
+   +'<span class="score"></span><span class="verdict"></span></div>';
+}
+M.blocks.forEach(b=>{
+  if(b.kind==='regola'){
+    const sec=document.createElement('section');sec.className='regola';sec.dataset.passo=b.passo;sec.id=b.id;
+    regNo++;sec.innerHTML='<div class="rhead"><span class="kind">'+icon('gram')+'Regola '+regNo+'</span><h2>'+esc(b.title)+'</h2><p class="rsub">'+esc(b.sub)+'</p></div>'+b.html;
+    $$('.rpart',sec).forEach(p=>{p.classList.add('blk');p.dataset.passo=b.passo;p.dataset.t=(p.querySelector('h3')||{}).textContent||b.title;p.dataset.reg=b.id});
+    host.append(sec);return;
+  }
+  exNo++;
+  const sec=document.createElement('section');sec.className='ex blk';sec.id='es-'+b.id;sec.dataset.passo=b.passo;sec.dataset.ex=b.id;sec.dataset.t='Esercizio '+exNo+': '+b.title;
+  sec.innerHTML='<span class="kind">'+icon(b.kv.icon||'gram')+'Esercizio '+exNo+'<span class="stag">'+STEPS.find(s=>s[0]===b.passo)[1]+'</span></span><h2>'+esc(b.title)+'</h2>'
+   +'<p class="lead">'+inlText(b.kv.it||'')+'<span class="tr">'+inlText(b.kv.ru||'')+'</span></p><div class="body"></div>';
+  host.append(sec);
+  const T=TYPES[b.tipo];if(!T){sec.querySelector('.body').textContent='Tipo sconosciuto: '+b.tipo;return}
+  const E=Object.assign({b,sec,id:b.id,no:exNo,label:'Esercizio '+exNo},T);
+  EX[b.id]=E;ORDER.push(E);
+  const tot=b.tipo==='grid'?b.items.length*((b.kv.cols||'').split('|').length):b.items.length;const fresh=(+b.opt.show&&+b.opt.show<tot)?'nuovi esercizi':'';
+  sec.insertAdjacentHTML('beforeend',actionsHTML({reg:b.kv.regola,check:T.noCheck?false:true,resetLabel:T.resetLabel,solLabel:T.solLabel,fresh}));
+});
+function inlText(s){return esc(s).replace(/&lt;(\/?)(b|i)&gt;/g,'<$1$2>')}
+/* test */
+let TEST=null;
+if(M.test){
+  const sec=document.createElement('section');sec.className='test blk';sec.id='test';sec.dataset.passo='test';sec.dataset.ex='test';sec.dataset.t='Test finale';
+  sec.innerHTML='<span class="kind">'+icon('write')+'Test finale<span class="stag">Test</span></span><h2>Test finale</h2><p class="lead">Rispondi a tutte le domande e premi «Controlla». Per superare il test servono almeno l’80% di risposte giuste.<span class="tr">Ответь на все вопросы и нажми «Controlla». Тест засчитан от 80% правильных ответов. «Ricomincia» — новый вариант теста. Решения можно посмотреть только после проверки.</span></p><div class="body"></div><div class="tmsg" id="tmsg"></div>';
+  host.append(sec);
+  sec.insertAdjacentHTML('beforeend',actionsHTML({reg:'r1f',fresh:'nuovo test'}));
+  TEST=Object.assign({b:{tipo:'test',opt:M.test.opt,kv:{},items:M.test.items},sec,id:'test',label:'Test',isTest:true},TYPES_TEST());
+  EX.test=TEST;
+}
+
+/* ===== motore comune: Controlla · Ricomincia · Soluzioni · Regola ===== */
+function verdict(sec,n,max){const v=sec.querySelector('.verdict');const r=max?n/max:0;
+  v.className='verdict'+(r===1?'':r>=.8?'':r>=.6?' mid':' low');
+  v.textContent=r===1?'Perfetto!':r>=.8?'Bravo! Quasi tutto giusto.':r>=.6?'Bene, ma rivedi gli errori.':'Coraggio, riprova!'}
+function setupEx(E){
+  const st=ST.ex[E.id]=ST.ex[E.id]||E.newState();E.st=st;
+  E.dirty=()=>{E.sec.querySelectorAll('.acc').forEach(x=>x.remove())};
+  E.render(st);
+  const sc=ST.sc[E.id];if(sc&&sc.n!=null&&!E.noCheck){E.sec.querySelector('.score').textContent=sc.n+' / '+sc.max;verdict(E.sec,sc.n,sc.max)}
+  if(E.id==='u3'||E.b.tipo==='speed'){if(st.played)E.sec.querySelector('.score').textContent='Risultato: '+(st.last||0)+' · Record: '+(ST.best||0)}
+  const bar=E.sec.querySelector('.actions');
+  bar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const a=b.dataset.a;
+    if(a==='check'){const n=E.check();ST.sc[E.id]={n,max:E.max};E.sec.querySelector('.score').textContent=n+' / '+E.max;verdict(E.sec,n,E.max);
+      if(E.isTest){const p=n/E.max,m=$('#tmsg');m.className='tmsg on '+(p>=.8?'pass':'fail');
+        m.innerHTML=p>=.8?'<b>Test superato!</b> '+Math.round(p*100)+'% — <i>тест засчитан, отличная работа!</i>':'<b>'+Math.round(p*100)+'%.</b> Ripassa la regola e riprova: «Ricomincia» = un nuovo test. <i>Повтори правило и попробуй ещё раз.</i>';
+        E.sec.querySelector('[data-a=sol]').disabled=false;if(p>=.8)confetti()}
+      save();refresh()}
+    if(a==='reset'){if(E.reset){if(E.reset()===false)return}else{const keep=E.st;Object.keys(keep).forEach(k=>delete keep[k]);E.render(keep)}
+      delete ST.sc[E.id];E.sec.classList.remove('showsol');const sb=E.sec.querySelector('[data-a=sol]');sb.setAttribute('aria-pressed','false');sb.textContent=E.solLabel||'Mostra le soluzioni';
+      E.sec.querySelector('.score').textContent='';E.sec.querySelector('.verdict').textContent='';if(E.isTest){$('#tmsg').className='tmsg'}save();refresh()}
+    if(a==='sol'){const on=!E.sec.classList.contains('showsol');E.sec.classList.toggle('showsol',on);b.setAttribute('aria-pressed',on);b.textContent=on?(E.solLabel?E.solLabel.replace('Mostra','Nascondi'):'Nascondi le soluzioni'):(E.solLabel||'Mostra le soluzioni');
+      if(E.b.tipo==='speed'){const t=E.sec.querySelector('.stable');if(!t.innerHTML){const r=document.getElementById('r1f');t.innerHTML=r?r.querySelector('.ptab-wrap').outerHTML:''}t.style.display=on?'block':'none'}}
+    if(a==='reg')openReg(b.dataset.reg)});
+}
+ORDER.forEach(setupEx);if(TEST)setupEx(TEST);
+
+/* ===== finestra «Regola» ===== */
+const modal=$('#modal');
+function openReg(id){const src=document.getElementById(id);if(!src)return;$('#mBody').innerHTML='';const c=src.cloneNode(true);c.removeAttribute('id');c.classList.remove('blk','cur');$$('mark.hl',c).forEach(m=>m.replaceWith(document.createTextNode(m.textContent)));$$('canvas,.ink-text',c).forEach(x=>x.remove());$('#mBody').append(c);initFuse(c);modal.hidden=false;$('#mClose').focus()}
+$('#mClose').onclick=()=>modal.hidden=true;modal.addEventListener('click',e=>{if(e.target===modal)modal.hidden=true});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)modal.hidden=true});
+
+/* ===== animazione «fusione» ===== */
+function initFuse(root){$$('.fuse',root).forEach(f=>{if(f.dataset.init)return;f.dataset.init=1;
+  const L=f.dataset.fuse.split('|').map(s=>{const[l,r]=s.split('=');const[p,a]=l.split('+');return{p,a,r}});let i=0,t1,t2;
+  f.innerHTML='<div class="fz-stage"><span class="fz p"></span><span class="fz op plus">+</span><span class="fz a"></span><span class="fz op">→</span><span class="fz r"></span></div><button type="button" class="btn ghost">▶ Ancora</button>';
+  const [P,,A,,R]=f.querySelector('.fz-stage').children;
+  const play=()=>{clearTimeout(t1);clearTimeout(t2);const x=L[i%L.length];i++;f.classList.remove('go','done');P.textContent=x.p;A.textContent=x.a;R.textContent=x.r;
+    if(reduce){f.classList.add('go','done');return}
+    t1=setTimeout(()=>f.classList.add('go'),350);t2=setTimeout(()=>f.classList.add('done'),1100)};
+  f.querySelector('button').onclick=play;
+  const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){play();io.disconnect()}},{threshold:.6});io.observe(f);P.textContent=L[0].p;A.textContent=L[0].a;R.textContent=L[0].r})}
+initFuse(document);
+
+/* ===== scaletta, punti, finale ===== */
+const lad=$('#ladder');
+lad.innerHTML=STEPS.map(([k,t])=>'<button type="button" class="step" data-s="'+k+'" title="'+STEPRU[k]+'"><i></i>'+t+'</button>').join('');
+function exDone(E){if(E.b.tipo==='speed')return !!E.st.played;if(E.b.tipo==='open')return !!E.st.ok;const s=ST.sc[E.id];return !!(s&&s.max&&s.n/s.max>=.8)}
+function exTouched(E){if(E.b.tipo==='speed')return !!E.st.played;if(E.b.tipo==='open')return !!(E.st.t||'').trim();return !!ST.sc[E.id]}
+function stepState(k){
+  if(k==='regola')return ST.seen.r1?'done':'';
+  const list=[...ORDER.filter(E=>E.b.passo===k&&E.b.tipo!=='speed'),...(k==='test'&&TEST?[TEST]:[])];
+  if(!list.length)return '';
+  if(list.every(exDone))return 'done';
+  return list.some(exTouched)||(k==='scegli'&&ST.seen.r2)?'part':'';
+}
+const C2=2*Math.PI*74,fg=$('#ringFg');fg.style.strokeDasharray=C2;fg.style.strokeDashoffset=C2;
+let celebrated=false;
+function refresh(){
+  STEPS.forEach(([k])=>{const b=lad.querySelector('[data-s="'+k+'"]');const s=stepState(k);b.classList.toggle('done',s==='done');b.classList.toggle('part',s==='part')});
+  let n=0,mx=0;ORDER.forEach(E=>{const s=ST.sc[E.id];if(s&&!E.noCheck){n+=s.n;mx+=s.max}});
+  $('#pts').textContent=mx?n+' / '+mx:'';
+  const t=ST.sc.test;
+  $('#break').innerHTML=STEPS.filter(s=>s[0]!=='regola').map(([k,lab])=>{let a=0,m=0,c=0;const L=k==='test'?(TEST?[TEST]:[]):ORDER.filter(E=>E.b.passo===k&&!E.noCheck);L.forEach(E=>{const s=ST.sc[E.id];if(s){a+=s.n;m+=s.max;c++}});
+    return '<li class="'+(m&&a/m>=.8?'full':'')+'"><span>'+lab+'</span><b>'+(c?a+' / '+m:'—')+'</b></li>'}).join('');
+  const T=$('#finTitle'),S=$('#finSub'),R=$('#finRu');
+  if(!t){$('#finNum').textContent='—';$('#finLab').textContent='test';fg.style.strokeDashoffset=C2;T.textContent='Il tuo risultato';
+    S.textContent=mx?'Esercizi: '+n+' risposte giuste su '+mx+'. Ora fai il test finale!':'Fai gli esercizi passo passo e poi il test finale.';
+    R.textContent='Итог появится после теста. Потом нажми «Invia all’insegnante».';return}
+  const p=t.n/t.max;$('#finNum').textContent=Math.round(p*100)+'%';$('#finLab').textContent='test: '+t.n+' / '+t.max;fg.style.strokeDashoffset=C2*(1-p);
+  if(p>=.8){T.textContent='Complimenti!';S.textContent='Test superato: '+t.n+' su '+t.max+'. Modulo completato!';R.textContent='Тест засчитан — модуль пройден. Отправь результат преподавателю.';fg.style.stroke='var(--verde)'}
+  else if(p>=.5){T.textContent='Quasi!';S.textContent='Test: '+t.n+' su '+t.max+'. Ripassa la regola e fai un nuovo test.';R.textContent='Почти! Повтори правило и пройди новый вариант теста («Ricomincia»).';fg.style.stroke='var(--sole)'}
+  else{T.textContent='Coraggio!';S.textContent='Test: '+t.n+' su '+t.max+'. Chi va piano va sano e va lontano: rifai gli esercizi e riprova.';R.textContent='Не сдавайся! Вернись к упражнениям и попробуй тест ещё раз.';fg.style.stroke='var(--rosso)'}
+}
+function confetti(){if(reduce||celebrated)return;celebrated=true;const box=document.createElement('div');box.className='confetti';const cols=['#1F8A50','#FFFFFF','#C8312B','#C59A45'];
+  for(let i=0;i<90;i++){const c=document.createElement('i');c.style.left=Math.random()*100+'vw';c.style.background=cols[i%4];c.style.boxShadow='0 0 0 1px rgba(0,0,0,.08)';c.style.animationDuration=(2.2+Math.random()*1.8)+'s';c.style.animationDelay=(Math.random()*.6)+'s';box.append(c)}
+  document.body.append(box);setTimeout(()=>{box.remove();celebrated=false},4800)}
+
+/* regola «vista» */
+const seenIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const id=e.target.dataset.reg;if(id&&!ST.seen[id]){ST.seen[id]=1;save();refresh()}}}),{threshold:.5});
+$$('.rpart').forEach(p=>{if(p===p.parentNode.querySelector('.rpart:last-of-type')||p.id==='r1f'||p.id==='r2e')seenIO.observe(p)});
+
+/* ===== modalità: Studio / Lezione ===== */
+const blks=()=>$$('.blk');let cur=0;
+function setMode(m){ST.mode=m;B.classList.toggle('lez',m==='lez');H.classList.toggle('lezh',m==='lez');
+  $('#modeBtn').textContent=m==='lez'?'🏠 Studio':'🖥 Lezione';$('#modeBtn').title=m==='lez'?'Вернуться к режиму «дома»: одна длинная страница':'Режим урока: по одному блоку на экран, крупный шрифт, Strumenti';
+  if(m!=='lez'){if(window.__tools)window.__tools.close();blks().forEach(b=>b.classList.remove('cur'))}else go(cur);save()}
+function go(i){const L=blks();cur=Math.max(0,Math.min(L.length-1,i));L.forEach((b,j)=>b.classList.toggle('cur',j===cur));const b=L[cur];
+  $('#lTitle').innerHTML='<small>'+(cur+1)+' / '+L.length+'</small>'+esc(b.dataset.t||'');$('#lPrev').disabled=cur===0;$('#lNext').disabled=cur===L.length-1;
+  if(b.dataset.reg&&!ST.seen[b.dataset.reg]&&(b.id==='r1f'||b.id==='r2e')){ST.seen[b.dataset.reg]=1;save();refresh()}
+  STEPS.forEach(([k])=>lad.querySelector('[data-s="'+k+'"]').classList.toggle('here',k===b.dataset.passo));
+  scrollTo(0,0);initFuse(b);document.dispatchEvent(new Event('blkchange'))}
+$('#modeBtn').onclick=()=>setMode(ST.mode==='lez'?'studio':'lez');
+$('#lPrev').onclick=()=>go(cur-1);$('#lNext').onclick=()=>go(cur+1);
+addEventListener('keydown',e=>{if(ST.mode!=='lez'||!modal.hidden||e.target.closest('input,textarea,[contenteditable]'))return;if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();go(cur+1)}if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(cur-1)}});
+lad.addEventListener('click',e=>{const s=e.target.closest('.step');if(!s)return;const k=s.dataset.s;const L=blks();
+  let i=L.findIndex(b=>b.dataset.passo===k&&b.id!=='cover');if(i<0)return;
+  if(ST.mode==='lez')go(i);else L[i].closest('.regola')?L[i].closest('.regola').scrollIntoView({block:'start'}):L[i].scrollIntoView({block:'start'})});
+/* in Studio: la scaletta segue lo scorrimento */
+const hereIO=new IntersectionObserver(es=>{if(ST.mode==='lez')return;es.forEach(e=>{if(e.isIntersecting){const k=e.target.dataset.passo;STEPS.forEach(([s])=>lad.querySelector('[data-s="'+s+'"]').classList.toggle('here',s===k))}})},{rootMargin:'-45% 0px -50% 0px'});
+blks().forEach(b=>hereIO.observe(b));
+
+/* ===== nome, data, invio ===== */
+$('#nome').value=ST.nome||'';$('#data').value=ST.data||new Date().toLocaleDateString('it-IT');
+['nome','data'].forEach(k=>$('#'+k).addEventListener('input',e=>{ST[k]=e.target.value;save()}));
+function details(){return ORDER.map(E=>{if(E.b.tipo==='speed')return E.label+' (sfida): '+(E.st.played?'record '+(ST.best||0):'—');if(E.b.tipo==='open')return E.label+' (scrittura): '+((E.st.t||'').trim()?'scritto':'—');const s=ST.sc[E.id];return E.label+': '+(s?s.n+'/'+s.max:'—')}).join(' · ')}
+function texts(){return ORDER.filter(E=>E.b.tipo==='open').map(E=>E.label+' — '+E.b.title+':\n'+((E.st.t||'').trim()||'—')).join('\n\n')}
+$('#sendRes').onclick=()=>{
+  const nome=$('#nome').value.trim();if(!nome){toast('Scrivi il tuo nome in alto, per favore.');if(ST.mode==='lez')go(0);$('#nome').focus();return}
+  const t=ST.sc.test;if(!t&&!confirm('Тест ещё не пройден. Отправить результат без теста?'))return;
+  const f=new URLSearchParams({usp:'pp_url'});
+  f.append(MODULO.nome,nome);f.append(MODULO.data,$('#data').value);f.append(MODULO.lezione,'Grammatica passo passo — '+NAME);
+  f.append(MODULO.punteggio,t?'Test: '+t.n+' / '+t.max:'Test: non fatto');f.append(MODULO.percentuale,t?Math.round(t.n/t.max*100):'');
+  f.append(MODULO.dettagli,details());f.append(MODULO.testo,texts());
+  const u=MODULO.url+'?'+f.toString();const w=window.open(u,'_blank');if(!w){location.href=u;return}
+  toast('Si è aperto il modulo: premi «Invia» in fondo alla pagina.')};
+$('#copyRes').onclick=()=>{const t=ST.sc.test;const txt=[BRAND+' — Grammatica passo passo — '+NAME,'Nome: '+($('#nome').value||'—'),'Data: '+($('#data').value||'—'),'',details().split(' · ').join('\n'),'Test: '+(t?t.n+' / '+t.max+' ('+Math.round(t.n/t.max*100)+'%)':'non fatto'),'',texts()].join('\n');
+  const ok=()=>toast('Risultato copiato!');if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(ok,fb);else fb();
+  function fb(){const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.append(ta);ta.select();try{document.execCommand('copy');ok()}catch(e){toast('Copia non riuscita.')}ta.remove()}};
+$('#resetAll').onclick=()=>{if(!confirm('Cancellare tutte le risposte di questo modulo?'))return;try{localStorage.removeItem(KEY)}catch(e){}location.reload()};
+
+/* ===== EVIDENZIATORE ===== */
+(function(){
+  const hb=$('#hlBtn'),hc=$('#hlClear');let on=true;hb.onclick=()=>{on=!on;hb.setAttribute('aria-pressed',on)};
+  const EXCL='canvas,.ink-text,.tools-panel,.lupa-ov,button,input,select,textarea,a,label,.tok,.opts,.chip,.card,.oline,.otiles,.bin,.speed,.fuse,.actions,.starters,figure,svg,.modal,.who-box';
+  const scope=()=>ST.mode==='lez'?'.blk.cur':'.sheet';
+  const okNode=n=>{const el=n&&(n.nodeType===3?n.parentElement:n);return !!(el&&el.closest(scope())&&el.closest('.sheet')&&!el.closest(EXCL))};
+  const marks=()=>$$((ST.mode==='lez'?'.blk.cur ':'')+'mark.hl');const upd=()=>{hc.hidden=!marks().length};
+  let G=0;function unwrap(m){if(!m.parentNode)return;const p=m.parentNode;while(m.firstChild)p.insertBefore(m.firstChild,m);p.removeChild(m);p.normalize()}
+  const unG=m=>{const g=m.dataset.g;(g?$$('mark.hl[data-g="'+g+'"]'):[m]).forEach(unwrap)};
+  function wrap(node,a,b){if(a>=b||!node.textContent.slice(a,b).trim())return;let n=node;if(b<n.length)n.splitText(b);if(a>0)n=n.splitText(a);const m=document.createElement('mark');m.className='hl'+(window.HLC&&window.HLC!=='y'?' hl-'+window.HLC:'');m.dataset.g=G;n.parentNode.insertBefore(m,n);m.appendChild(n)}
+  function hlRange(r){let root=r.commonAncestorContainer;if(root.nodeType===3)root=root.parentNode;
+    const tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>(r.intersectsNode(n)&&n.textContent.trim()&&okNode(n))?1:2});
+    const nodes=[];while(tw.nextNode())nodes.push(tw.currentNode);if(!nodes.length)return false;
+    if(nodes.every(n=>n.parentElement.closest('mark.hl'))){new Set(nodes.map(n=>n.parentElement.closest('mark.hl'))).forEach(unG);return true}
+    G++;const sc=r.startContainer,so=r.startOffset,ec=r.endContainer,eo=r.endOffset;nodes.forEach(n=>{if(n.parentElement.closest('mark.hl'))return;wrap(n,n===sc?so:0,n===ec?eo:n.length)});return true}
+  let selT=0;
+  document.addEventListener('mouseup',e=>{if(!on||B.classList.contains('drawing'))return;const s=getSelection();if(e.detail>1){if(okNode(e.target)){s.removeAllRanges();selT=Date.now()}return}if(!s.rangeCount||s.isCollapsed)return;const r=s.getRangeAt(0);if(!okNode(r.startContainer)&&!okNode(r.endContainer))return;if(hlRange(r)){s.removeAllRanges();selT=Date.now();upd()}});
+  document.addEventListener('click',e=>{if(!on||B.classList.contains('drawing')||Date.now()-selT<400)return;
+    const m=e.target.closest&&e.target.closest('mark.hl');if(m&&okNode(m)){unG(m);upd();return}
+    if(!okNode(e.target))return;let node,off;
+    if(document.caretPositionFromPoint){const p=document.caretPositionFromPoint(e.clientX,e.clientY);if(!p)return;node=p.offsetNode;off=p.offset}
+    else if(document.caretRangeFromPoint){const r=document.caretRangeFromPoint(e.clientX,e.clientY);if(!r)return;node=r.startContainer;off=r.startOffset}
+    if(!node||node.nodeType!==3||!okNode(node))return;
+    const t=node.textContent,w=c=>/[\p{L}\p{N}'’-]/u.test(c||'');let a=off,b=off;while(a>0&&w(t[a-1]))a--;while(b<t.length&&w(t[b]))b++;if(a===b)return;
+    {const rg=document.createRange();rg.setStart(node,a);rg.setEnd(node,b);if(![...rg.getClientRects()].some(q=>e.clientX>=q.left-2&&e.clientX<=q.right+2&&e.clientY>=q.top-2&&e.clientY<=q.bottom+2))return}
+    G++;wrap(node,a,b);upd()});
+  hc.onclick=()=>{marks().forEach(unwrap);upd()};document.addEventListener('blkchange',upd);
+})();
+
+/* ===== STRUMENTI (modalità lezione) ===== */
+(function(){
+  let TZ=1;const setTZ=v=>{TZ=Math.max(.8,Math.min(1.8,Math.round(v*10)/10));H.style.setProperty('--tz',TZ);unzoom()};
+  const P=document.createElement('div');P.className='tools-panel';P.hidden=true;P.setAttribute('role','dialog');P.setAttribute('aria-label','Strumenti');
+  const COLS=[['#C8312B','rosso'],['#2F6F86','blu'],['#1F8A50','verde'],['#262626','nero'],['#E0A800','giallo']];
+  P.innerHTML='<div class="tp-h"><span>Strumenti</span><button class="tp-x" type="button" aria-label="Chiudi">×</button></div>'
+    +'<div class="tp-row"><span>Экран</span><button class="tb" data-a="lupa" title="Обведи участок — он увеличится">🔍 Lupa</button><button class="tb" data-a="zm" title="Текст меньше">A−</button><button class="tb" data-a="zp" title="Текст больше">A+</button><button class="tb" data-a="z0" title="Обычный размер">↺</button></div>'
+    +'<div class="tp-row"><span>Маркер</span><button class="sw" data-hl="y" style="background:#FFE34D" title="жёлтый"></button><button class="sw" data-hl="g" style="background:#A8E6A1" title="зелёный"></button><button class="sw" data-hl="p" style="background:#FFB8D6" title="розовый"></button><button class="sw" data-hl="b" style="background:#A9D8F5" title="голубой"></button></div>'
+    +'<div class="tp-row"><span>Рисунок</span><button class="tb" data-t="none" title="Обычный режим: нажимать на упражнения">👆</button><button class="tb" data-t="pen" title="Ручка">✏️</button><button class="tb" data-t="arrow" title="Стрелка">➜</button><button class="tb" data-t="rect" title="Рамка">▭</button><button class="tb" data-t="ellipse" title="Кружок">◯</button><button class="tb" data-t="text" title="Текст">T</button><button class="tb" data-t="eraser" title="Ластик: нажми на рисунок">🧽</button></div>'
+    +'<div class="tp-row"><span>Цвет</span>'+COLS.map(([c,n])=>'<button class="sw" data-c="'+c+'" style="background:'+c+'" title="'+n+'"></button>').join('')+'<button class="tb" data-w="3" title="Тонкая линия">─</button><button class="tb" data-w="7" title="Толстая линия">━</button></div>'
+    +'<div class="tp-row"><span></span><button class="tb" data-a="undo">↶ Annulla</button><button class="tb" data-a="clear">🗑 Pulisci disegno</button></div>'
+    +'<div class="tp-row"><span></span><button class="tb" data-a="all" title="Убрать маркер, рисунки и ответы на этом экране">🧹 Pulisci tutta la pagina</button></div>';
+  document.body.append(P);
+  const tb=$('#toolsBtn');const openP=o=>{P.hidden=!o;tb.setAttribute('aria-pressed',o);if(!o)setTool('none')};
+  tb.onclick=()=>openP(P.hidden);P.querySelector('.tp-x').onclick=()=>openP(false);
+  window.__tools={close:()=>{openP(false);unzoom()}};
+  (function(){const h=P.querySelector('.tp-h');h.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;h.setPointerCapture(e.pointerId);const r=P.getBoundingClientRect(),dx=e.clientX-r.left,dy=e.clientY-r.top;
+    const mv=ev=>{P.style.left=Math.max(0,Math.min(innerWidth-r.width,ev.clientX-dx))+'px';P.style.top=Math.max(0,Math.min(innerHeight-40,ev.clientY-dy))+'px';P.style.bottom='auto'};
+    const up=()=>{h.removeEventListener('pointermove',mv);h.removeEventListener('pointerup',up)};h.addEventListener('pointermove',mv);h.addEventListener('pointerup',up)})})();
+  let TOOL='none',COLOR=COLS[0][0],W=3;
+  const press=(sel,fn)=>P.querySelectorAll(sel).forEach(b=>b.setAttribute('aria-pressed',fn(b)));
+  const curB=()=>$('.blk.cur');
+  function setTool(t){TOOL=t;B.classList.toggle('drawing',t!=='none');['pen','arrow','rect','ellipse','text','eraser'].forEach(x=>B.classList.toggle('t-'+x,t===x));press('[data-t]',b=>b.dataset.t===t);if(t!=='none'&&curB())layer(curB())}
+  press('[data-c]',b=>b.dataset.c===COLOR);press('[data-w]',b=>+b.dataset.w===W);setTool('none');window.HLC='y';press('[data-hl]',b=>b.dataset.hl==='y');
+  P.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    if(b.dataset.t)setTool(b.dataset.t);
+    if(b.dataset.c){COLOR=b.dataset.c;press('[data-c]',x=>x===b);if(TOOL==='none'||TOOL==='eraser')setTool('pen')}
+    if(b.dataset.w){W=+b.dataset.w;press('[data-w]',x=>x===b)}
+    if(b.dataset.hl){window.HLC=b.dataset.hl;press('[data-hl]',x=>x===b);setTool('none');const hb=$('#hlBtn');if(hb.getAttribute('aria-pressed')!=='true')hb.click()}
+    const a=b.dataset.a;if(!a)return;
+    if(a==='zm')setTZ(TZ-.1);if(a==='zp')setTZ(TZ+.1);if(a==='z0')setTZ(1);if(a==='lupa')lupa();
+    const blk=curB();if(!blk)return;const L=store.get(blk);
+    if(a==='all'){$$('mark.hl',blk).forEach(m=>m.replaceWith(document.createTextNode(m.textContent)));blk.normalize();$('#hlClear').hidden=true;
+      const r=blk.querySelector('[data-a=reset]');if(r&&!blk.querySelector('textarea'))r.click();if(L){L.objs.forEach(o=>o.el&&o.el.remove());L.objs=[];render(L)}return}
+    if(!L)return;
+    if(a==='undo'){const o=L.objs.pop();if(o&&o.el)o.el.remove();render(L)}
+    if(a==='clear'){L.objs.forEach(o=>o.el&&o.el.remove());L.objs=[];render(L)}});
+  const store=new Map();
+  function layer(sh){let L=store.get(sh);if(!L){const cv=document.createElement('canvas');cv.className='ink';sh.prepend(cv);L={sh,cv,ctx:cv.getContext('2d'),objs:[]};store.set(sh,L);bind(L)}fit(L);return L}
+  function fit(L){const w=L.sh.scrollWidth,h=L.sh.scrollHeight,d=devicePixelRatio||1;if(L.cv.width!==Math.round(w*d)||L.cv.height!==Math.round(h*d)){L.cv.width=Math.round(w*d);L.cv.height=Math.round(h*d);L.cv.style.width=w+'px';L.cv.style.height=h+'px';L.ctx.setTransform(d,0,0,d,0,0);render(L)}}
+  function draw(c,o){c.strokeStyle=c.fillStyle=o.c;c.lineWidth=o.w;c.lineCap=c.lineJoin='round';c.beginPath();
+    if(o.t==='pen'){o.p.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.stroke()}
+    else if(o.t==='rect'){c.strokeRect(Math.min(o.x1,o.x2),Math.min(o.y1,o.y2),Math.abs(o.x2-o.x1),Math.abs(o.y2-o.y1))}
+    else if(o.t==='ellipse'){c.ellipse((o.x1+o.x2)/2,(o.y1+o.y2)/2,Math.abs(o.x2-o.x1)/2,Math.abs(o.y2-o.y1)/2,0,0,Math.PI*2);c.stroke()}
+    else if(o.t==='arrow'){const a=Math.atan2(o.y2-o.y1,o.x2-o.x1),hl=10+o.w*2.5;c.moveTo(o.x1,o.y1);c.lineTo(o.x2,o.y2);c.stroke();c.beginPath();c.moveTo(o.x2,o.y2);c.lineTo(o.x2-hl*Math.cos(a-.45),o.y2-hl*Math.sin(a-.45));c.lineTo(o.x2-hl*Math.cos(a+.45),o.y2-hl*Math.sin(a+.45));c.closePath();c.fill()}}
+  function render(L){L.ctx.clearRect(0,0,L.cv.width,L.cv.height);L.objs.forEach(o=>{if(!o.el)draw(L.ctx,o)})}
+  const pt=(L,e)=>{const r=L.cv.getBoundingClientRect();return[(e.clientX-r.left)*L.cv.offsetWidth/r.width,(e.clientY-r.top)*L.cv.offsetHeight/r.height]};
+  function hit(o,x,y){const m=12;if(o.t==='pen')return o.p.some(([a,b])=>Math.hypot(a-x,b-y)<m);const x1=Math.min(o.x1,o.x2)-m,x2=Math.max(o.x1,o.x2)+m,y1=Math.min(o.y1,o.y2)-m,y2=Math.max(o.y1,o.y2)+m;return x>x1&&x<x2&&y>y1&&y<y2}
+  function bind(L){let cur=null;
+    L.cv.addEventListener('pointerdown',e=>{if(TOOL==='none')return;e.preventDefault();fit(L);const[x,y]=pt(L,e);
+      if(TOOL==='eraser'){for(let i=L.objs.length-1;i>=0;i--){if(!L.objs[i].el&&hit(L.objs[i],x,y)){L.objs.splice(i,1);render(L);break}}return}
+      if(TOOL==='text'){const d=document.createElement('div');d.className='ink-text';d.contentEditable='true';d.style.left=x+'px';d.style.top=(y-14)+'px';d.style.color=COLOR;L.sh.append(d);const o={el:d};L.objs.push(o);
+        d.addEventListener('blur',()=>{if(!d.textContent.trim()){d.remove();L.objs=L.objs.filter(z=>z!==o)}});
+        d.addEventListener('pointerdown',ev=>{if(TOOL==='eraser'){ev.preventDefault();d.remove();L.objs=L.objs.filter(z=>z!==o)}});setTimeout(()=>d.focus(),0);return}
+      L.cv.setPointerCapture(e.pointerId);cur=TOOL==='pen'?{t:'pen',c:COLOR,w:W,p:[[x,y]]}:{t:TOOL,c:COLOR,w:W,x1:x,y1:y,x2:x,y2:y};L.objs.push(cur)});
+    L.cv.addEventListener('pointermove',e=>{if(!cur)return;const[x,y]=pt(L,e);if(cur.t==='pen')cur.p.push([x,y]);else{cur.x2=x;cur.y2=y}render(L)});
+    const end=()=>{if(cur&&cur.t!=='pen'&&Math.hypot(cur.x2-cur.x1,cur.y2-cur.y1)<4){L.objs.pop();render(L)}cur=null};
+    L.cv.addEventListener('pointerup',end);L.cv.addEventListener('pointercancel',end)}
+  document.addEventListener('blkchange',()=>{unzoom();if(TOOL!=='none'&&curB())layer(curB())});
+  addEventListener('resize',()=>{const b=curB();if(b&&store.get(b))fit(store.get(b))});
+  /* lupa */
+  let zoomed=null,exitB=null;
+  function unzoom(){if(!zoomed)return;zoomed.style.transform='';zoomed=null;B.classList.remove('zooming');if(exitB){exitB.remove();exitB=null}}
+  function zoomTo(r){const el=curB();if(!el)return;const er=el.getBoundingClientRect(),top=$('.bar').getBoundingClientRect().bottom;
+    const vw=innerWidth,vh=innerHeight-top,s=Math.min(vw/r.width,vh/r.height,5),z=TZ||1;
+    const tx=((vw-r.width*s)/2-er.left-(r.left-er.left)*s)/z,ty=(top+(vh-r.height*s)/2-er.top-(r.top-er.top)*s)/z;
+    B.classList.add('zooming');el.style.transformOrigin='0 0';el.style.transition='transform .35s ease';el.style.transform='translate('+tx+'px,'+ty+'px) scale('+s+')';zoomed=el;
+    exitB=document.createElement('button');exitB.type='button';exitB.className='lupa-exit';exitB.textContent='✕ Esci dallo zoom (Esc)';exitB.onclick=unzoom;document.body.append(exitB)}
+  function lupa(){unzoom();setTool('none');const ov=document.createElement('div');ov.className='lupa-ov';ov.innerHTML='<div class="lupa-hint">Обведи мышкой участок, который нужно увеличить · Esc — отмена</div><div class="lupa-r"></div>';document.body.append(ov);
+    const box=ov.querySelector('.lupa-r');let s=null;
+    ov.addEventListener('pointerdown',e=>{ov.setPointerCapture(e.pointerId);s=[e.clientX,e.clientY];box.style.display='block'});
+    ov.addEventListener('pointermove',e=>{if(!s)return;const x=Math.min(s[0],e.clientX),y=Math.min(s[1],e.clientY);Object.assign(box.style,{left:x+'px',top:y+'px',width:Math.abs(e.clientX-s[0])+'px',height:Math.abs(e.clientY-s[1])+'px'})});
+    ov.addEventListener('pointerup',e=>{const r=box.getBoundingClientRect();ov.remove();if(r.width>20&&r.height>20)zoomTo(r)});
+    const k=e=>{if(e.key==='Escape'){ov.remove();removeEventListener('keydown',k)}};addEventListener('keydown',k)}
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&zoomed)unzoom()});
+})();
+
+setMode(ST.mode==='lez'?'lez':'studio');
+refresh();
+})();
+</script>
+</body>
+</html>
