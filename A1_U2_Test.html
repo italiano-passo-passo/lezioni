@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Test finale — Buon appetito!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,800;1,600;1,800&display=swap" rel="stylesheet">
+<!--
+  ITALIANO PASSO PASSO — TEST FINALE (template)
+  Per un nuovo test cambia SOLO: <title>, data-level / data-unit / data-lesson / data-name nel <body>,
+  i link della barra .jump (uno per parte) e il contenuto delle <section class="ex">.
+  Punti, totale, modulo Google (A1/A2 da data-level), salvataggio e invio: automatici, non toccare lo <script>.
+  Versione insegnante (chiave): data-mode="insegnante" → salva come …_Test_insegnante.html
+-->
+<style>
+:root{
+  --bg:#FFFFFF; --card:#FFFFFF; --ink:#262626; --soft:#6B6B6B; --paper2:#F4F5F5;
+  --bord:#7A1E2C; --verde:#5E7A3A; --rosso:#B4493B; --mare:#2F6F86; --sole:#C59A45;
+  --mare-tint:#E6EFF2; --rosso-tint:#F7E6E2; --sole-tint:#F7F1E3; --verde-tint:#E9EFDF;
+  --line:#DDE0DF; --ok:#5E7A3A; --ko:#B4493B;
+  --title:"Playfair Display", Georgia, serif;
+  --body:"Source Sans 3", "Segoe UI", Roboto, Arial, sans-serif;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1B1F1E; --card:#1B1F1E; --ink:#ECECEA; --soft:#A9AEAC; --paper2:#252A29; --bord:#F0A3AE;
+    --verde:#A9BE7A; --rosso:#E58C76; --mare:#7FB5C9; --sole:#D9B66A;
+    --mare-tint:#22313A; --rosso-tint:#3A2621; --sole-tint:#332C1E; --verde-tint:#283020;
+    --line:#38403E; --ok:#A9BE7A; --ko:#E58C76; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1B1F1E; --card:#1B1F1E; --ink:#ECECEA; --soft:#A9AEAC; --paper2:#252A29; --bord:#F0A3AE;
+  --verde:#A9BE7A; --rosso:#E58C76; --mare:#7FB5C9; --sole:#D9B66A;
+  --mare-tint:#22313A; --rosso-tint:#3A2621; --sole-tint:#332C1E; --verde-tint:#283020;
+  --line:#38403E; --ok:#A9BE7A; --ko:#E58C76; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 56px);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17.5px;line-height:1.45}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--card)}
+h1,h2,h3{font-family:var(--title);color:var(--bord);line-height:1.1;margin:0 0 .35em;font-weight:700}
+h2{font-size:clamp(1.6rem,2.8vw,2.3rem)}
+h3{font-size:1.25rem}
+p{margin:0 0 .6em}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--rosso);outline-offset:2px}
+
+/* barra in alto */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;align-items:center;gap:16px;padding:6px 22px 6px 34px;background:var(--card);border-bottom:1px solid var(--line);font-size:.9rem}
+.bar-title{font-weight:600;color:var(--bord);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.progress{flex:1;height:3px;background:var(--line);min-width:60px;border-radius:3px;overflow:hidden}
+.progress span{display:block;height:100%;width:0;background:var(--rosso);transition:width .4s}
+/* ===== IP logo + gradini ===== */
+.brand svg{display:block;flex:none;width:64px;height:64px}
+.progress{height:16px;border-radius:0;clip-path:polygon(0 100%,0 80%,20% 80%,20% 60%,40% 60%,40% 40%,60% 40%,60% 20%,80% 20%,80% 0,100% 0,100% 100%)}
+.pts{font-weight:700;color:var(--rosso);white-space:nowrap;font-variant-numeric:tabular-nums}
+.jump{display:flex;gap:4px}
+.jump a{display:grid;place-items:center;width:28px;height:28px;border:1px solid var(--line);border-radius:50%;text-decoration:none;color:var(--ink);font-weight:700;font-size:.85rem}
+.jump a:hover{border-color:var(--ink)}
+.jump a.done{background:var(--verde-tint);border-color:var(--ok);color:var(--ok)}
+@media (max-width:700px){.bar-title,.progress{display:none}.bar{justify-content:space-between;padding-left:24px}}
+
+/* foglio */
+.sheet{min-height:100vh;background:var(--card);padding:22px 120px 0 58px;position:relative}
+.sheet::before{content:"";position:fixed;left:0;top:0;bottom:0;width:14px;background:linear-gradient(to right,#1F8A50 0 5px,transparent 5px 9px,#C8312B 9px 14px);z-index:22}
+.brand{position:absolute;top:16px;right:26px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.8rem;font-weight:600;color:var(--bord)}
+.brand i{display:flex;width:44px;height:29px;box-shadow:0 0 0 1px var(--line)}
+.brand i b{flex:1}.brand i b:nth-child(1){background:#1F8A50}.brand i b:nth-child(2){background:#fff}.brand i b:nth-child(3){background:#C8312B}
+@media (max-width:860px){.sheet{padding:18px 18px 0 32px}.brand{position:static;align-items:flex-end;margin-bottom:6px}}
+.kind{display:flex;align-items:center;gap:10px;font-weight:600;font-size:1rem;color:var(--rosso);margin-bottom:8px}
+.kind::after{content:"";flex:1;height:1px;background:var(--line)}
+.hint{color:var(--soft);font-size:.88em}
+.tr{display:block;color:var(--soft);font-size:.93em;font-style:italic}
+.lead{max-width:80ch;margin-bottom:14px}
+.folio{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding:10px 0 16px;border-top:1px solid var(--line);font-size:.82rem;color:var(--soft)}
+
+/* icone a linee nere */
+.ico{width:40px;height:40px;flex:none;color:var(--ink)}
+.ico svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+/* copertina */
+.cover{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:end;padding:10px 0 26px}
+@media (max-width:860px){.cover{grid-template-columns:1fr;gap:20px}}
+.cover-unit{font-weight:700;font-size:1.2rem;color:var(--bord);margin:0 0 .2em}
+.cover h1{font-size:clamp(2.6rem,6vw,5rem);line-height:.95;margin:.05em 0 .15em}
+.cover h1 .l2{display:block;font-style:italic;font-weight:600;color:var(--rosso);padding-left:.6em;font-size:.62em;margin-top:.15em}
+.who-box{border-top:1px solid var(--ink);padding-top:10px}
+.field{display:flex;gap:12px;align-items:baseline;margin:6px 0}
+.field b{min-width:3.4em;color:var(--bord)}
+.field input{flex:1;border:0;border-bottom:2px solid var(--line);background:none;padding:2px 4px;min-width:0}
+.field input:focus{outline:none;border-bottom-color:var(--mare)}
+.how{margin-top:12px;padding:10px 14px;border-left:3px solid var(--sole);background:var(--sole-tint);border-radius:0 8px 8px 0;font-size:.95rem}
+.how p{margin:0}
+
+/* esercizi */
+.ex{padding:30px 0 6px;border-top:1px solid var(--line);margin-top:8px}
+.ex .kind{margin-bottom:6px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
+.btn{border:1px solid var(--bord);border-radius:6px;padding:6px 18px;background:var(--bord);color:#fff;font-weight:600}
+.btn:hover{filter:brightness(1.15)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--ink)}
+.btn.alt{background:var(--mare);border-color:var(--mare)}
+.score{font-weight:700;color:var(--rosso)}
+.verdict{font-family:var(--title);font-style:italic;font-weight:600;color:var(--verde);font-size:1.15rem}
+.verdict.mid{color:var(--sole)}.verdict.low{color:var(--rosso)}
+
+.gap{border:0;border-bottom:2px solid var(--mare);background:var(--mare-tint);border-radius:4px 4px 0 0;padding:0 6px;min-width:8em;width:10em;max-width:100%}
+.gap:focus{outline:none;box-shadow:0 0 0 2px var(--sole)}
+.gap.ok{border-bottom-color:var(--ok);background:var(--verde-tint)}
+.gap.ko{border-bottom-color:var(--ko);background:var(--rosso-tint)}
+.acc{font-size:.8em;color:var(--sole);font-weight:700;margin-left:4px}
+.ex-list{padding-left:0;margin:0;list-style:none;counter-reset:e;max-width:1100px}
+.ex-list li{counter-increment:e;padding:.55em 0 .55em 2em;position:relative;border-bottom:1px solid var(--line);line-height:2}
+.ex-list li::before{content:counter(e)".";position:absolute;left:0;top:.55em;font-weight:700;color:var(--rosso)}
+.gloss{border-bottom:2px dotted var(--sole);cursor:help;position:relative}
+.gloss:hover::after,.gloss:focus::after{content:attr(data-g);position:absolute;left:0;top:1.7em;background:var(--ink);color:var(--card);padding:4px 10px;border-radius:6px;font-size:.8rem;white-space:nowrap;z-index:5;line-height:1.4}
+
+/* es. 1: banca di parole */
+.bank{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 16px;padding:12px;border-radius:8px;background:var(--paper2)}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:3px 14px;font-weight:600;transition:opacity .2s,transform .15s}
+.chip:hover{border-color:var(--ink);transform:translateY(-1px)}
+.chip.used{opacity:.25;pointer-events:none;text-decoration:line-through}
+.dialog{max-width:1000px}
+.dl{display:grid;grid-template-columns:6.4em 1fr;gap:12px;padding:.5em 0;border-bottom:1px solid var(--line);line-height:2.1}
+.dl .sp{font-weight:700;color:var(--rosso)}
+.dl.g .sp{color:var(--mare)}
+.slot{display:inline-block;vertical-align:baseline;min-width:8.5em;min-height:1.65em;line-height:1.45;padding:0 10px;border:0;border-bottom:2px solid var(--mare);background:var(--mare-tint);border-radius:4px 4px 0 0;font-weight:600;text-align:center}
+.slot:empty::before{content:"\00a0"}
+.slot.cur{box-shadow:0 0 0 2px var(--sole);background:var(--sole-tint)}
+.slot.ok{border-bottom-color:var(--ok);background:var(--verde-tint)}
+.slot.ko{border-bottom-color:var(--ko);background:var(--rosso-tint)}
+
+/* es. 2: collega */
+.pairs{display:grid;grid-template-columns:1fr 1.15fr;gap:14px 44px;max-width:1200px}
+@media (max-width:860px){.pairs{grid-template-columns:1fr}}
+.col h3{font-size:1.05rem;color:var(--soft);font-family:var(--body);font-weight:700;margin-bottom:8px}
+.col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.card{width:100%;display:flex;gap:12px;align-items:center;padding:9px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);text-align:left;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.card:hover{border-color:var(--ink)}
+.card.sel{box-shadow:0 0 0 2px var(--sole);border-color:var(--sole)}
+.card.ok{border-color:var(--ok);background:var(--verde-tint)}
+.card.ko{border-color:var(--ko);background:var(--rosso-tint)}
+.bd{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:700;border:1.5px solid var(--line);color:var(--soft);font-size:.95rem}
+.card.paired .bd{border-color:transparent;color:#fff;background:var(--c)}
+.card .gap{width:9em;min-width:7em}
+.card .txt{flex:1;line-height:1.9}
+.footnotes{margin-top:12px}
+.footnotes p{margin:0}
+
+/* es. 3: evidenziatori */
+.pens{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.pen{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--card);border-radius:20px;padding:3px 14px 3px 8px;font-weight:600}
+.pen i{width:18px;height:18px;border-radius:50%;background:var(--c);display:block}
+.pen[aria-pressed="true"]{border-color:var(--c);box-shadow:0 0 0 2px var(--c)}
+.pen.gomma i{background:none;border:2px dashed var(--soft)}
+.text{font-size:1.1rem;line-height:2;max-width:78ch;padding:14px 18px;background:var(--paper2);border-radius:8px;margin-bottom:16px}
+.tok{cursor:pointer;border-radius:3px;padding:1px 1px;transition:background .15s}
+.tok:hover{background:var(--sole-tint)}
+.tok.mi{background:var(--mare-tint);box-shadow:inset 0 -3px var(--mare)}
+.tok.mp{background:var(--rosso-tint);box-shadow:inset 0 -3px var(--rosso)}
+.tok.ok::after{content:" ✓";color:var(--ok);font-weight:700;font-size:.8em}
+.tok.ko{text-decoration:line-through;text-decoration-color:var(--ko);text-decoration-thickness:2px}
+.tok.miss{outline:1.5px dashed var(--sole);outline-offset:1px}
+.bins{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1200px}
+@media (max-width:640px){.bins{grid-template-columns:1fr}}
+.bin{padding:12px 16px;min-height:120px;border-top:3px solid var(--mare);background:var(--mare-tint);border-radius:0 0 8px 8px}
+.bin.p{border-top-color:var(--rosso);background:var(--rosso-tint)}
+.bin h3{font-size:1.1rem;display:flex;justify-content:space-between;gap:10px}
+.bin h3 span{font-family:var(--body);color:var(--soft);font-size:.9rem;font-weight:600}
+.bin ol{margin:0;padding-left:1.6em;columns:2;column-gap:24px}
+.bin li{padding:1px 0;break-inside:avoid}
+.bin .empty{color:var(--soft);font-size:.9rem;list-style:none;margin-left:-1.6em}
+
+/* es. 5: scrittura */
+.starters{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}
+.starters button{border:1px dashed var(--mare);background:var(--mare-tint);border-radius:20px;padding:1px 12px;font-size:.95rem}
+textarea{width:100%;max-width:1000px;min-height:220px;border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--paper2);resize:vertical;line-height:1.6;display:block}
+textarea:focus{outline:none;border-color:var(--mare)}
+.meters{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.meter{display:inline-block;padding:3px 12px;border-radius:20px;background:var(--paper2);font-size:.92rem}
+.meter b{font-variant-numeric:tabular-nums}
+.meter.ok{background:var(--verde-tint);color:var(--ok)}
+
+/* finale: complimenti */
+.finale{margin:34px 0 0;border:2px solid var(--bord);border-radius:14px;padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;max-width:1100px;position:relative;overflow:hidden}
+@media (max-width:700px){.finale{grid-template-columns:1fr;padding:20px;gap:18px;justify-items:start}}
+.ring{position:relative;width:170px;height:170px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:10}
+.ring .bgc{stroke:var(--line)}
+.ring .fg{stroke:var(--verde);stroke-linecap:round;transition:stroke-dashoffset 1.2s ease-out,stroke .3s}
+.ring .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .num b{font-family:var(--title);font-size:3rem;font-weight:800;color:var(--bord);line-height:1}
+.ring .num span{color:var(--soft);font-size:.95rem}
+.fin-title{font-family:var(--title);font-style:italic;font-weight:800;font-size:clamp(2.4rem,5vw,3.8rem);color:var(--bord);line-height:1;margin:0 0 .1em;display:inline-block;padding-bottom:.12em;background:linear-gradient(to right,#1F8A50 0 33.3%,var(--line) 33.3% 66.6%,#C8312B 66.6%) bottom/100% 4px no-repeat}
+.fin-sub{font-size:1.15rem;margin:.3em 0 0}
+.fin-ru{color:var(--soft);margin:.2em 0 0}
+.break{list-style:none;padding:0;margin:14px 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.break li{padding:6px 12px;border-radius:8px;background:var(--paper2);display:flex;justify-content:space-between;gap:8px;font-size:.95rem}
+.break li b{font-variant-numeric:tabular-nums}
+.break li.full{background:var(--verde-tint);color:var(--ok)}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
+.confetti i{position:absolute;top:-20px;width:9px;height:14px;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(120px);background:var(--ink);color:var(--card);padding:8px 18px;border-radius:20px;z-index:60;transition:transform .3s}
+.toast.on{transform:translateX(-50%) translateY(0)}
+@media (prefers-reduced-motion:reduce){.ring .fg,.chip,.toast,.progress span{transition:none}}
+
+/* versione insegnante */
+.prof-badge{font-size:.8rem;font-weight:700;color:#fff;background:var(--ok);padding:1px 10px;border-radius:20px;white-space:nowrap}
+.sol{display:none;margin-left:6px;font-size:.82em;font-weight:700;color:var(--ok);background:var(--verde-tint);border-radius:4px;padding:0 6px;vertical-align:middle;line-height:1.5}
+.prof .sol{display:inline-block}
+.prof .tok[data-v="i"]{text-decoration:underline var(--mare) 2px;text-underline-offset:4px}
+.prof .tok[data-v="p"]{text-decoration:underline var(--rosso) 2px;text-underline-offset:4px}
+
+@media print{.bar,.actions,.pens,.starters,.confetti,.toast{display:none!important}.sheet::before{position:absolute}.ex{break-inside:avoid-page}}
+/* ===== CARATTERE GRANDE (22.10.2026): шрифт тетради растёт вместе с экраном (дома ученик не увеличивает сам) ===== */
+html{font-size:clamp(17px,min(1.7vw,3vh),32px)}
+body{font-size:1.1rem}
+.ex-list,.dialog,.pairs,.bins,.finale,textarea{max-width:none}
+.lead{max-width:none}
+.text{max-width:60em}
+.jump a{width:1.7em;height:1.7em}
+.ico{width:2.2em;height:2.2em}
+.ring{width:9em;height:9em}
+.sheet{padding-right:clamp(20px,7vw,140px)}
+.gloss:hover::after,.gloss:focus::after{font-size:.85em}
+@media (max-width:700px){html{font-size:17px}}
+/* ===== AGGIUNTE U6_L2 ===== */
+/* ===== GIOCO «MEMORY» (24.10.2026): блок шаблона ===== */
+.memory{flex:1 1 auto;display:flex;flex-direction:column;min-height:0}
+.mem-grid{flex:1 1 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(4.2em,1fr);gap:.6em;min-height:0}
+.mem-card{border:0;padding:0;background:none;perspective:900px;cursor:pointer;font:inherit;color:inherit;min-height:4.2em}
+.mem-card .in{position:relative;display:block;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d}
+.mem-card.on .in,.mem-card.done .in{transform:rotateY(180deg)}
+.mem-card .mf,.mem-card .mb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:.4em .6em;border-radius:12px;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:2px solid var(--line)}
+.mem-card .mf{font-family:var(--title);font-size:2em;font-weight:800;color:#fff;background:var(--mare)}
+.mem-card.a .mf{background:var(--sole)}
+.mem-card .mb{transform:rotateY(180deg);background:var(--mare-tint);font-weight:600;line-height:1.25}
+.mem-card.a .mb{background:var(--sole-tint)}
+.mem-card.done .mb{border-color:var(--ok);background:var(--verde-tint)}
+.mem-card.done{cursor:default;animation:ipp-pop .45s ease}
+.mem-card.miss .mb{border-color:var(--ko)}
+.memory .actions{margin-top:.6em}
+.mem-list{display:grid;grid-template-columns:1fr 1fr;gap:.5em}
+.mem-pair{border:1px solid var(--line);border-radius:10px;padding:.4em .8em;background:var(--card)}
+.mem-pair .q{display:block;color:var(--mare)}
+.mem-pair b{color:var(--ok)}
+@media (max-width:700px){.mem-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.mem-list{grid-template-columns:1fr}}
+
+.mem-grid{grid-auto-rows:minmax(5em,auto)}
+.mem-card .mb{font-size:.95em}
+.mem-info{color:var(--soft);margin:.5em 0 0}
+.gap.sm{min-width:0;width:5.2em}
+.dettato{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(20em,100%),1fr));gap:.3em 2em}
+.dettato .gap{width:8em;min-width:0}
+@media (max-width:700px){.prof .jump,.prof .pts,.prof .prof-badge{display:none}.dettato .gap{width:42%}}
+.vocale{margin-top:16px;padding:12px 16px;border-radius:10px;background:var(--sole-tint);border-left:4px solid var(--sole)}
+.vocale h3{margin:0 0 .3em}
+.audio{margin:.4em 0 .8em}
+.audio{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;border:1px solid var(--line);border-left:6px solid var(--mare);border-radius:10px;background:var(--mare-tint)}
+.audio .a-play{width:52px;height:52px;border-radius:50%;border:0;background:var(--mare);color:#fff;font-size:1.3rem;flex:none}
+.audio .a-bar{flex:1 1 180px;height:8px;border-radius:8px;background:var(--line);cursor:pointer;position:relative;overflow:hidden}
+.audio .a-bar span{position:absolute;inset:0 auto 0 0;width:0;background:var(--mare)}
+.audio .a-time{font-variant-numeric:tabular-nums;color:var(--soft);min-width:5.5em;font-size:.92rem}
+.audio .a-btn{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:2px 12px;font-size:.9rem}
+.audio .a-btn[aria-pressed="true"]{border-color:var(--mare);color:var(--mare);font-weight:700}
+.audio.empty{justify-content:center;color:var(--soft);border-style:dashed;border-left-style:solid;min-height:76px}
+.gbar{display:none}
+@media (max-width:700px){.prof .gbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;align-items:center;gap:8px;padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));background:var(--card);border-top:1px solid var(--line)}
+.prof .gbar button{font:inherit}.prof .gbar .nv{width:52px;height:46px;border-radius:12px;border:1.5px solid var(--bord);background:var(--card);color:var(--bord);font-size:1.6rem}
+.prof .gbar .gt{flex:1;min-width:0;border:0;background:none;text-align:center}.prof .gbar .gt small{display:block;color:var(--soft);font-size:.8rem}.prof .gbar .gt b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--bord)}
+.prof .sheet{padding-bottom:90px!important}.prof .img-slot,.prof .gift-stage{max-height:28vh;overflow:hidden}.prof .gift-stage svg{max-height:26vh}
+}
+/* mappa del quartiere */
+.nv-road{stroke:#D9D6CF;stroke-width:46;stroke-linecap:square}.nv-dash{stroke:#fff;stroke-width:3;stroke-dasharray:12 12}
+.nv-pl rect{fill:#fff;stroke:#BDB7AC;stroke-width:2}.nv-pl text{font:700 24px var(--body);fill:var(--ink);text-anchor:middle}.nv-pl .e{font-size:30px;dominant-baseline:middle}
+.nv-pl.goal rect{fill:var(--sole-tint);stroke:var(--sole);stroke-width:5}
+.nv-pl.ok rect{fill:var(--verde-tint);stroke:var(--ok);stroke-width:5}
+.nmap{width:100%;max-width:820px;height:auto;display:block;border-radius:12px;border:1px solid var(--line);margin:4px 0 12px}
+.route{line-height:2.4;max-width:80ch}
+.route .slot{min-width:6em}
+.reading{border-left:4px solid var(--mare);background:var(--mare-tint);padding:10px 16px;border-radius:0 10px 10px 0;margin-bottom:12px}
+.vf{list-style:none;padding:0;margin:0;max-width:1000px}
+.vf li{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.vf li>span:first-child{flex:1 1 30em}
+.vf .opts{display:flex;gap:6px;flex-wrap:wrap}
+.vf .opts button{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:1px 14px}
+.vf .opts button.sel{border-color:var(--sole);box-shadow:0 0 0 2px var(--sole);font-weight:600}
+.vf .opts button.ok{background:var(--verde-tint);border-color:var(--ok);font-weight:700}
+.vf .opts button.ko{background:var(--rosso-tint);border-color:var(--ko);text-decoration:line-through}
+.vf .opts button.key{box-shadow:0 0 0 2px var(--ok);background:var(--verde-tint)}
+
+.slots-list li{line-height:2.3}
+.qmap .m-nb,.qmap .m-n{display:none}
+
+.test-note{border:2px solid var(--sole);background:var(--sole-tint);border-radius:12px;padding:10px 16px;margin:14px 0}
+.ex .pts-ex{float:right;font-weight:700;color:var(--soft);font-size:.9em}
+.res-locked .score,.res-locked .verdict{display:none}
+.selfcheck li{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.selfcheck .opts{display:flex;gap:6px}
+.selfcheck .opts button{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:1px 12px}
+.selfcheck .opts button.sel{border-color:var(--mare);box-shadow:0 0 0 2px var(--mare);font-weight:600}
+.sent-ok{display:none;margin-top:10px;font-weight:700;color:var(--ok)}
+.done-test .sent-ok{display:block}
+#break li.low b{color:var(--ko)}
+
+.pairs .card .txt{flex:1}
+.prof .gap{pointer-events:none}
+.prof .vf .opts button{pointer-events:none}
+.reading .dl{grid-template-columns:6.4em 1fr}
+</style>
+</head>
+<body data-level="Italiano A1" data-mode="studente" data-unit="Unità 2" data-lesson="Test finale" data-name="Buon appetito!">
+<header class="bar">
+  <span class="bar-title" id="barTitle"></span>
+  <div class="progress" aria-hidden="true"><span id="prog"></span></div>
+  <nav class="jump" aria-label="Vai alla parte"><a href="#es1" data-for="e1">1</a><a href="#es2" data-for="e2">2</a><a href="#es3" data-for="e3">3</a><a href="#es4" data-for="e4">4</a><a href="#es5" data-for="e5">5</a><a href="#es6" data-for="e6">6</a><a href="#es7" data-for="e7">7</a><a href="#es8" data-for="e8">8</a><a href="#es9" data-for="e9">9</a><a href="#es10" data-for="e10">10</a></nav>
+  <span class="pts" id="pts">—</span>
+</header>
+<main class="sheet">
+  <div class="brand" aria-hidden="true"><svg class="ipl" viewBox="0 0 220 220" aria-hidden="true"><circle cx="110.0" cy="110.0" r="109.5" fill="#FFFFFF" stroke="#DDE0DF" stroke-width="1.0"/><path transform="translate(59.3 0)" d="M25.7048 110.3608 27.9312 111.77759999999999Q22.5676 119.77239999999999 19.0762 122.6566Q15.5848 125.54079999999999 11.0308 125.54079999999999Q7.8936 125.54079999999999 5.9708000000000006 123.76979999999999Q4.048 121.99879999999999 4.048 119.1652Q4.048 116.8376 5.3636 112.1824L11.2332 90.42439999999999Q11.9416 87.38839999999999 11.9416 86.37639999999999Q11.9416 84.7572 10.575399999999998 84.0994Q9.2092 83.4416 5.9708 83.4416V80.7092Q17.71 79.79839999999999 26.4132 77.87559999999999L17.204 111.6764Q16.2932 114.8136 16.2932 116.9388Q16.2932 117.54599999999999 16.7486 118.00139999999999Q17.204 118.4568 17.8112 118.4568Q19.8352 118.4568 25.7048 110.3608ZM23.4784 55.30799999999999Q26.312 55.30799999999999 28.3866 57.331999999999994Q30.461199999999998 59.355999999999995 30.461199999999998 62.1896Q30.461199999999998 65.0232 28.437199999999997 66.9966Q26.4132 68.97 23.4784 68.97Q20.6448 68.97 18.722 66.946Q16.7992 64.922 16.7992 61.987199999999994Q16.7992 59.355999999999995 18.8232 57.331999999999994Q20.8472 55.30799999999999 23.4784 55.30799999999999Z" fill="#7A1E2C"/><path transform="translate(59.3 0)" d="M35.824799999999996 83.4416V80.7092Q41.3908 80.102 55.3564 77.87559999999999L51.5108 89.5136Q55.9636 83.2392 59.6574 80.5574Q63.351200000000006 77.87559999999999 67.7028 77.87559999999999Q72.7628 77.87559999999999 75.6976 81.2152Q78.6324 84.5548 78.6324 90.1208Q78.6324 103.2768 69.7268 114.6112Q60.8212 125.9456 50.599999999999994 125.9456Q48.07 125.9456 43.7184 123.7192L42.504 127.8684Q39.974000000000004 137.3812 39.974000000000004 139.304Q39.974000000000004 141.1256 41.3908 141.834Q42.8076 142.5424 46.552 142.6436V145.376H21.3532V142.6436H21.9604Q25.0976 142.6436 26.4132 141.2268Q27.7288 139.81 28.9432 135.1548L39.0632 95.88919999999999Q41.2896 87.4896 41.2896 85.9716Q41.2896 84.5548 40.2776 84.0994Q39.2656 83.644 35.824799999999996 83.4416ZM65.9824 90.222Q65.9824 87.89439999999999 64.8186 86.4776Q63.654799999999994 85.0608 61.732 85.0608Q60.416399999999996 85.0608 59.151399999999995 85.5668Q57.886399999999995 86.0728 56.874399999999994 87.1354Q55.8624 88.198 54.9516 89.26059999999998Q54.040800000000004 90.32319999999999 53.2312 92.0436Q52.4216 93.764 51.8144 94.92779999999999Q51.2072 96.0916 50.6 97.96379999999999Q49.9928 99.836 49.6892 100.6962Q49.3856 101.5564 48.9302 103.1756Q48.4748 104.7948 48.4748 104.896Q44.9328 116.8376 44.9328 118.76039999999999Q44.9328 120.27839999999999 46.0966 121.341Q47.260400000000004 122.4036 48.879599999999996 122.4036Q52.522800000000004 122.4036 55.8624 118.305Q59.202 114.2064 61.3272 108.691Q63.4524 103.1756 64.7174 98.0144Q65.9824 92.8532 65.9824 90.222Z" fill="#7A1E2C"/><circle cx="149.1" cy="117.0" r="7.6" fill="#B4493B"/><rect x="83.8" y="159.2" width="17.5" height="5.0" fill="#1F8A50"/><rect x="101.3" y="159.2" width="17.5" height="5.0" fill="#FFFFFF" stroke="#DDE0DF" stroke-width="0.5"/><rect x="118.7" y="159.2" width="17.5" height="5.0" fill="#C8312B"/></svg><span id="lvl"></span></div>
+  <section class="cover">
+    <div>
+      <span class="kind">Italiano passo passo</span>
+      <p class="cover-unit" id="coverUnit"></p>
+      <h1>Test finale<span class="l2" id="coverName"></span></h1>
+    </div>
+    <div class="who-box">
+      <label class="field"><b>Nome</b><input id="nome" autocomplete="name" placeholder="Scrivi il tuo nome"></label>
+      <label class="field"><b>Data</b><input id="data"></label>
+      <div class="how"><p>Это итоговый тест по теме «Buon appetito!» (уроки 1–3). Выполняй задания спокойно, можно возвращаться и исправлять. Правильные ответы не показываются. В конце нажми «Invia all’insegnante»: увидишь свой результат, а преподаватель получит подробный разбор и пришлёт тебе обратную связь.</p></div>
+    </div>
+  </section>
+  <section class="ex" id="es1" data-ex="e1" data-label="Lessico" data-long="Parte 1 · Lessico (bar, ristorante, pasti)">
+    <span class="kind" data-icon="vocab">Parte 1</span><span class="pts-ex"></span>
+    <h2>Le parole del ristorante</h2>
+    <p class="lead">Collega le parole italiane con la traduzione: tocca una parola, poi la traduzione.<span class="tr">Соедини итальянские слова с переводом.</span></p>
+    <div class="pairs"><div class="col"><h3>Italiano</h3><ul><li><button class="card pa" data-n="1" data-key="a"><span class="bd">1</span><span class="txt">la forchetta</span></button></li><li><button class="card pa" data-n="2" data-key="e"><span class="bd">2</span><span class="txt">il coltello</span></button></li><li><button class="card pa" data-n="3" data-key="d"><span class="bd">3</span><span class="txt">il cucchiaio</span></button></li><li><button class="card pa" data-n="4" data-key="h"><span class="bd">4</span><span class="txt">il conto</span></button></li><li><button class="card pa" data-n="5" data-key="g"><span class="bd">5</span><span class="txt">il cameriere</span></button></li><li><button class="card pa" data-n="6" data-key="b"><span class="bd">6</span><span class="txt">il contorno</span></button></li><li><button class="card pa" data-n="7" data-key="f"><span class="bd">7</span><span class="txt">la prenotazione</span></button></li><li><button class="card pa" data-n="8" data-key="c"><span class="bd">8</span><span class="txt">la merenda</span></button></li></ul></div><div class="col"><h3>Русский</h3><ul><li><div class="card pb" data-l="a" role="button" tabindex="0"><span class="bd">a</span><span class="txt">вилка</span></div></li><li><div class="card pb" data-l="b" role="button" tabindex="0"><span class="bd">b</span><span class="txt">гарнир</span></div></li><li><div class="card pb" data-l="c" role="button" tabindex="0"><span class="bd">c</span><span class="txt">полдник</span></div></li><li><div class="card pb" data-l="d" role="button" tabindex="0"><span class="bd">d</span><span class="txt">ложка</span></div></li><li><div class="card pb" data-l="e" role="button" tabindex="0"><span class="bd">e</span><span class="txt">нож</span></div></li><li><div class="card pb" data-l="f" role="button" tabindex="0"><span class="bd">f</span><span class="txt">бронь, заказ столика</span></div></li><li><div class="card pb" data-l="g" role="button" tabindex="0"><span class="bd">g</span><span class="txt">официант</span></div></li><li><div class="card pb" data-l="h" role="button" tabindex="0"><span class="bd">h</span><span class="txt">счёт</span></div></li></ul></div></div><p class="sol" style="margin-top:10px">1 – a · 2 – e · 3 – d · 4 – h · 5 – g · 6 – b · 7 – f · 8 – c</p>
+  </section>
+  <section class="ex" id="es2" data-ex="e2" data-label="Il menù" data-long="Parte 2 · Il menù">
+    <span class="kind" data-icon="vocab">Parte 2</span><span class="pts-ex"></span>
+    <h2>Antipasto, primo, secondo…?</h2>
+    <p class="lead">Che cos’è nel menù? Scegli.<span class="tr">Что это в меню? Выбери.</span></p>
+    <ul class="vf"><li><span>1. La bruschetta</span><span class="opts" data-answer="antipasto"><button>antipasto</button><button>primo</button><button>dolce</button></span></li><li><span>2. Gli spaghetti al pomodoro</span><span class="opts" data-answer="primo"><button>antipasto</button><button>primo</button><button>secondo</button></span></li><li><span>3. La bistecca</span><span class="opts" data-answer="secondo"><button>primo</button><button>secondo</button><button>dolce</button></span></li><li><span>4. Le patate al forno</span><span class="opts" data-answer="contorno"><button>contorno</button><button>primo</button><button>dolce</button></span></li><li><span>5. Il tiramisù</span><span class="opts" data-answer="dolce"><button>secondo</button><button>contorno</button><button>dolce</button></span></li></ul>
+  </section>
+  <section class="ex" id="es3" data-ex="e3" data-label="Verbi in -ere" data-long="Parte 3 · Verbi in -ere (Lezione 1)">
+    <span class="kind" data-icon="gram">Parte 3</span><span class="pts-ex"></span>
+    <h2>Al bar: i verbi in -ere</h2>
+    <p class="lead">Scrivi il verbo nella forma giusta.<span class="tr">Напиши глагол в нужной форме.</span></p>
+    <ol class="ex-list"><li>Io <input class="gap" style="width:7em;min-width:0" data-answer="prendo" aria-label="risposta"> <span class="hint">(prendere)</span> un cappuccino e un cornetto.</li><li>Il barista <input class="gap" style="width:7em;min-width:0" data-answer="chiede" aria-label="risposta"> <span class="hint">(chiedere)</span> sempre: «Che cosa desidera?»</li><li>Tu <input class="gap" style="width:7em;min-width:0" data-answer="leggi" aria-label="risposta"> <span class="hint">(leggere)</span> il giornale al bar?</li><li>Noi <input class="gap" style="width:7em;min-width:0" data-answer="scriviamo" aria-label="risposta"> <span class="hint">(scrivere)</span> un messaggio a Marco.</li><li>Voi <input class="gap" style="width:7em;min-width:0" data-answer="vivete" aria-label="risposta"> <span class="hint">(vivere)</span> a Roma?</li><li>Gli studenti <input class="gap" style="width:7em;min-width:0" data-answer="rispondono" aria-label="risposta"> <span class="hint">(rispondere)</span> alle domande.</li><li>Il bar <input class="gap" style="width:7em;min-width:0" data-answer="chiude" aria-label="risposta"> <span class="hint">(chiudere)</span> alle otto di sera.</li><li><input class="gap" style="width:7em;min-width:0" data-answer="Conosci" aria-label="risposta"> <span class="hint">(tu – conoscere)</span> questo bar? È molto buono!</li></ol>
+  </section>
+  <section class="ex" id="es4" data-ex="e4" data-label="Volere e co." data-long="Parte 4 · volere, preferire, mangiare, pagare (Lezione 2)">
+    <span class="kind" data-icon="gram">Parte 4</span><span class="pts-ex"></span>
+    <h2>Al ristorante: volere, preferire, mangiare, pagare</h2>
+    <p class="lead">Scrivi il verbo nella forma giusta. Attenzione alle trappole!<span class="tr">Напиши глагол в нужной форме. Осторожно, ловушки!</span></p>
+    <ol class="ex-list"><li><input class="gap" style="width:7em;min-width:0" data-answer="Voglio" aria-label="risposta"> <span class="hint">(io – volere)</span> un tavolo per due, per favore.</li><li>Ragazzi, che cosa <input class="gap" style="width:7em;min-width:0" data-answer="volete" aria-label="risposta"> <span class="hint">(voi – volere)</span> ordinare?</li><li>I signori <input class="gap" style="width:7em;min-width:0" data-answer="vogliono" aria-label="risposta"> <span class="hint">(volere)</span> il conto.</li><li>Tu <input class="gap" style="width:7em;min-width:0" data-answer="preferisci" aria-label="risposta"> <span class="hint">(preferire)</span> il vino o la birra?</li><li>Mia sorella <input class="gap" style="width:7em;min-width:0" data-answer="preferisce" aria-label="risposta"> <span class="hint">(preferire)</span> il pesce.</li><li>Il sabato noi <input class="gap" style="width:7em;min-width:0" data-answer="mangiamo" aria-label="risposta"> <span class="hint">(mangiare)</span> la pizza.</li><li>Tu <input class="gap" style="width:7em;min-width:0" data-answer="paghi" aria-label="risposta"> <span class="hint">(pagare)</span> con la carta?</li><li>Oggi <input class="gap" style="width:7em;min-width:0" data-answer="pago" aria-label="risposta"> <span class="hint">(io – pagare)</span> io!</li></ol>
+  </section>
+  <section class="ex" id="es5" data-ex="e5" data-label="Domande" data-long="Parte 5 · quale, quali, quanti, quante (Lezione 2)">
+    <span class="kind" data-icon="gram">Parte 5</span><span class="pts-ex"></span>
+    <h2>Quale, quali, quanti o quante?</h2>
+    <p class="lead">Scegli la parola giusta.<span class="tr">Выбери правильное слово.</span></p>
+    <ul class="vf"><li><span>1. ___ vino preferisci?</span><span class="opts" data-answer="Quale"><button>Quale</button><button>Quali</button></span></li><li><span>2. ___ persone siete?</span><span class="opts" data-answer="Quante"><button>Quanti</button><button>Quante</button></span></li><li><span>3. ___ sono i dolci del giorno?</span><span class="opts" data-answer="Quali"><button>Quale</button><button>Quali</button></span></li><li><span>4. ___ caffè prendete?</span><span class="opts" data-answer="Quanti"><button>Quanti</button><button>Quante</button></span></li><li><span>5. ___ è il tuo piatto preferito?</span><span class="opts" data-answer="Qual"><button>Qual</button><button>Quali</button></span></li></ul>
+  </section>
+  <section class="ex" id="es6" data-ex="e6" data-label="Plurali ribelli" data-long="Parte 6 · Plurali ribelli">
+    <span class="kind" data-icon="gram">Parte 6</span><span class="pts-ex"></span>
+    <h2>Plurali ribelli</h2>
+    <p class="lead">Scrivi il plurale.<span class="tr">Напиши множественное число.</span></p>
+    <ol class="ex-list"><li>un’arancia → tre <input class="gap" style="width:8em;min-width:0" data-answer="arance" aria-label="risposta"></li><li>una ciliegia → dieci <input class="gap" style="width:8em;min-width:0" data-answer="ciliegie" aria-label="risposta"></li><li>una focaccia → due <input class="gap" style="width:8em;min-width:0" data-answer="focacce" aria-label="risposta"></li><li>un uovo → due <input class="gap" style="width:8em;min-width:0" data-answer="uova" aria-label="risposta"></li><li>una pesca → quattro <input class="gap" style="width:8em;min-width:0" data-answer="pesche" aria-label="risposta"></li><li>un’albicocca → cinque <input class="gap" style="width:8em;min-width:0" data-answer="albicocche" aria-label="risposta"></li></ol>
+  </section>
+  <section class="ex" id="es7" data-ex="e7" data-label="Lezione 3" data-long="Parte 7 · bere, quanto spesso?, buono/bene (Lezione 3)">
+    <span class="kind" data-icon="gram">Parte 7</span><span class="pts-ex"></span>
+    <h2>Bere, quanto spesso? Buono o bene?</h2>
+    <p class="lead">Scegli la forma giusta.<span class="tr">Выбери правильную форму.</span></p>
+    <ul class="vf"><li><span>1. Marco, che cosa ___ a colazione?</span><span class="opts" data-answer="bevi"><button>bevi</button><button>beve</button></span></li><li><span>2. I bambini ___ il latte a merenda.</span><span class="opts" data-answer="bevono"><button>beviamo</button><button>bevono</button></span></li><li><span>3. Noi ___ l’acqua a pranzo.</span><span class="opts" data-answer="beviamo"><button>beviamo</button><button>bevete</button></span></li><li><span>4. (0%) Io ___ il caffè la sera.</span><span class="opts" data-answer="non bevo mai"><button>non bevo mai</button><button>bevo non mai</button><button>mai bevo</button></span></li><li><span>5. (85%) ___ ceniamo alle otto.</span><span class="opts" data-answer="Di solito"><button>Di solito</button><button>Qualche volta</button></span></li><li><span>6. Questa pasta è molto ___.</span><span class="opts" data-answer="buona"><button>buona</button><button>bene</button></span></li><li><span>7. Luca cucina molto ___.</span><span class="opts" data-answer="bene"><button>buono</button><button>bene</button></span></li><li><span>8. Le pesche sono ___.</span><span class="opts" data-answer="buone"><button>buoni</button><button>buone</button></span></li></ul>
+  </section>
+  <section class="ex" id="es8" data-ex="e8" data-label="Lettura" data-long="Parte 8 · Lettura">
+    <span class="kind" data-icon="read">Parte 8</span><span class="pts-ex"></span>
+    <h2>Leggi: sabato sera al ristorante</h2>
+    <p class="lead">Leggi il dialogo e rispondi: vero o falso?<span class="tr">Прочитай диалог и ответь: верно или нет?</span></p>
+    <div class="reading"><div class="dl"><span class="sp">Cameriere</span><div>Buonasera! Avete una prenotazione?</div></div><div class="dl g"><span class="sp">Laura</span><div>Sì, un tavolo per tre, a nome Bianchi.</div></div><div class="dl"><span class="sp">Cameriere</span><div>Prego, accomodatevi. Ecco il menù.</div></div><div class="dl g"><span class="sp">Laura</span><div>Io vorrei gli spaghetti alle vongole e poi il pesce del giorno.</div></div><div class="dl g"><span class="sp">Paolo</span><div>Io non mangio mai il pesce. Prendo le lasagne e una bistecca con le patate.</div></div><div class="dl g"><span class="sp">Giulia</span><div>Per me solo un secondo: il pollo con l’insalata. A cena mangio sempre leggero.</div></div><div class="dl"><span class="sp">Cameriere</span><div>E da bere?</div></div><div class="dl g"><span class="sp">Paolo</span><div>Una bottiglia di vino rosso e l’acqua naturale.</div></div><div class="dl g"><span class="sp">Giulia</span><div>Io non bevo vino: per me una birra.</div></div><div class="dl"><span class="sp">…</span><div></div></div><div class="dl g"><span class="sp">Laura</span><div>Il conto, per favore! Paghiamo con la carta.</div></div><div class="dl"><span class="sp">Cameriere</span><div>Ecco a voi. Com’era la cena?</div></div><div class="dl g"><span class="sp">Paolo</span><div>Tutto buonissimo! Qui mangiamo sempre bene.</div></div><p class="hint" style="margin-top:8px"><i>accomodatevi</i> — садитесь, проходите · <i>le vongole</i> — моллюски (вонголе) · <i>in contanti</i> — наличными</p></div><ul class="vf"><li><span>1. Laura ha una prenotazione per tre persone.</span><span class="opts" data-answer="vero"><button>vero</button><button>falso</button></span></li><li><span>2. Paolo mangia spesso il pesce.</span><span class="opts" data-answer="falso"><button>vero</button><button>falso</button></span></li><li><span>3. Giulia prende un primo e un secondo.</span><span class="opts" data-answer="falso"><button>vero</button><button>falso</button></span></li><li><span>4. Giulia non beve il vino.</span><span class="opts" data-answer="vero"><button>vero</button><button>falso</button></span></li><li><span>5. Pagano in contanti.</span><span class="opts" data-answer="falso"><button>vero</button><button>falso</button></span></li><li><span>6. Per Paolo la cena è buona.</span><span class="opts" data-answer="vero"><button>vero</button><button>falso</button></span></li></ul>
+  </section>
+  <section class="ex" id="es9" data-ex="e9">
+    <span class="kind" data-icon="write">Parte 9</span><span class="pts-ex">✍ punti</span>
+    <h2>Al ristorante con un amico</h2>
+    <p class="lead">Sei al ristorante con un amico. Scrivi il dialogo con il cameriere (6–8 battute): la prenotazione, che cosa mangiate e bevete, il conto. Puoi dire anche che cosa mangi di solito.<span class="tr">Ты в ресторане с другом. Напиши диалог с официантом (6–8 реплик): бронь, что вы едите и пьёте, счёт. Можно рассказать, что ты обычно ешь. Это задание оценивает преподаватель.</span></p>
+    <div class="starters" id="starters"><button>Buonasera, abbiamo una prenotazione…</button><button>Vorrei…</button><button>Per me…</button><button>Da bere…</button><button>Preferisco…</button><button>Di solito…</button><button>Il conto, per favore!</button></div>
+    <textarea id="essay" data-min="6" data-scritto="Parte 9 — Al ristorante con un amico" placeholder="Cameriere: Buonasera! …" aria-label="Il tuo testo"></textarea>
+    <div class="meters"><span class="meter" id="mFrasi">Frasi: <b>0</b> / 6–8</span></div>
+  </section>
+  <section class="ex" id="es10" data-ex="e10">
+    <span class="kind" data-icon="match">Parte 10</span><span class="pts-ex">— punti</span>
+    <h2>Cosa so fare?</h2>
+    <p class="lead">Rispondi sinceramente: questo serve a te e all’insegnante, non dà punti.<span class="tr">Ответь честно: это нужно тебе и преподавателю, баллов здесь нет.</span></p>
+    <ul class="selfcheck" id="selfcheck" style="list-style:none;padding:0"><li><span>Posso ordinare al bar: Vorrei un cappuccino, per favore.</span><span class="opts"><button>Sì</button><button>Quasi</button><button>Non ancora</button></span></li><li><span>Posso usare i verbi in -ere: prendo, leggo, scrivo…</span><span class="opts"><button>Sì</button><button>Quasi</button><button>Non ancora</button></span></li><li><span>Posso prenotare un tavolo e chiedere il conto.</span><span class="opts"><button>Sì</button><button>Quasi</button><button>Non ancora</button></span></li><li><span>Posso usare volere, preferire, mangiare, pagare.</span><span class="opts"><button>Sì</button><button>Quasi</button><button>Non ancora</button></span></li><li><span>Posso fare domande con quale, quali, quanti, quante.</span><span class="opts"><button>Sì</button><button>Quasi</button><button>Non ancora</button></span></li><li><span>Conosco il menù italiano: antipasto, primo, secondo, contorno, dolce.</span><span class="opts"><button>Sì</button><button>Quasi</button><button>Non ancora</button></span></li><li><span>Posso dire che cosa mangio e bevo a colazione, a pranzo e a cena.</span><span class="opts"><button>Sì</button><button>Quasi</button><button>Non ancora</button></span></li><li><span>Posso dire quanto spesso: sempre, di solito, spesso, qualche volta, non… mai.</span><span class="opts"><button>Sì</button><button>Quasi</button><button>Non ancora</button></span></li><li><span>Posso usare bere e buono / bene.</span><span class="opts"><button>Sì</button><button>Quasi</button><button>Non ancora</button></span></li></ul>
+  </section>
+
+  <section class="finale" id="finale" aria-live="polite">
+    <div class="ring">
+      <svg viewBox="0 0 170 170"><circle class="bgc" cx="85" cy="85" r="74"/><circle class="fg" id="ringFg" cx="85" cy="85" r="74"/></svg>
+      <div class="num"><b id="finNum">?</b><span>su <span id="finMax"></span></span></div>
+    </div>
+    <div>
+      <p class="fin-title" id="finTitle">Hai finito?</p>
+      <p class="fin-sub" id="finSub">Controlla di aver risposto a tutto, poi premi «Invia all’insegnante».</p>
+      <p class="fin-ru" id="finRu">Проверь, что ответил(а) на всё, и нажми «Invia all’insegnante». Результат появится после отправки.</p>
+      <ul class="break" id="break"></ul>
+      <div class="actions">
+        <button class="btn alt" id="sendRes">Invia all’insegnante</button>
+        <button class="btn ghost" id="resetAll">Cancella tutto</button>
+      </div>
+      <p class="sent-ok">✔ Inviato! Nel modulo Google premi «Invia». L’insegnante ti manderà la scheda di valutazione.</p>
+    </div>
+  </section>
+  <footer class="folio"><span id="folioL"></span><span>Test finale</span></footer>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<script>
+/* ===== ITALIANO PASSO PASSO — TEST FINALE (motore universale, non modificare) =====
+   Tipi di domanda riconosciuti in ogni <section class="ex" data-ex="eN" data-label="…" data-long="…">:
+   • collega:  <div class="pairs"> con .card.pa[data-n][data-key] e .card.pb[data-l]   (1 punto per coppia)
+   • scrivi:   <input class="gap" data-answer="giusta|alternativa">                    (1 punto ciascuno)
+   • scegli:   <ul class="vf"><li><span>domanda</span><span class="opts" data-answer="testo del bottone giusto">…   (1 punto)
+   • scrittura: <textarea id="essay" data-scritto="…"> (senza punti) · autovalutazione: <ul id="selfcheck"> (senza punti)
+   I punti di ogni parte e il totale si contano da soli. Il risultato si vede solo dopo «Invia». */
+(function(){
+  const B=document.body,PROF=B.dataset.mode==='insegnante',BRAND='Italiano passo passo';
+  const LV=B.dataset.level,UNIT=B.dataset.unit,LES=B.dataset.lesson,NAME=B.dataset.name;
+  const KEY='ipp:test:'+UNIT+':'+LES+':'+NAME;
+  /* ===== GOOGLE MODULI: uno per livello (da data-level), non cambiare ===== */
+  const MODULI={
+    A1:{url:'https://docs.google.com/forms/d/e/1FAIpQLSfdEbDz_loexufuIp4SsyB9jLq7otuUNPJeA91Qpgd0R-3EeA/viewform',
+      nome:'entry.1271164771',data:'entry.1325902077',lezione:'entry.1705899089',punteggio:'entry.1851506855',
+      dettagli:'entry.1450450077',errori:'entry.1885764929',testo:'entry.2110683261',percentuale:'entry.1501772916'},
+    A2:{url:'https://docs.google.com/forms/d/e/1FAIpQLSdWvL3aBL7NjZmhLvsCEaIKkgNiHiT0R3lUEP6061C2_TRfZg/viewform',
+      nome:'entry.1271164771',data:'entry.1325902077',lezione:'entry.1705899089',punteggio:'entry.1851506855',
+      dettagli:'entry.1450450077',errori:'entry.1242774453',testo:'entry.2110683261',percentuale:'entry.1501772916'}
+  };
+  const MODULO=MODULI[(LV.match(/A[12]/)||['A1'])[0]];
+  const $=s=>document.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.title=BRAND+' — '+UNIT+', '+LES+': '+NAME+(PROF?' (insegnante)':'');
+  $('#barTitle').innerHTML=BRAND+' — '+UNIT+', '+LES+' — <i>'+NAME+'</i>';
+  $('#coverUnit').textContent=UNIT+' — '+LES;$('#coverName').textContent=NAME;$('#lvl').textContent=LV;
+  $('#folioL').textContent=BRAND+' — '+LV+' — '+UNIT+', '+LES+': '+NAME;
+  if(PROF){B.classList.add('prof');const bd=document.createElement('span');bd.className='prof-badge';bd.textContent='Versione insegnante — chiave del test';$('#barTitle').after(bd)}
+
+  const ICONS={
+    write:'<rect x="11" y="5" width="27" height="38" rx="3"/><path d="M6 11h8M6 19h8M6 27h8M6 35h8"/><rect x="16" y="11" width="4" height="4"/><path d="M24 13h9"/><rect x="16" y="20" width="4" height="4"/><path d="M24 22h9"/><rect x="16" y="29" width="4" height="4"/><path d="M24 31h4"/><path d="M44 17 31 36l-4 3 1-5 13-19z"/>',
+    gram:'<path d="M5 5h26v19H5z"/><path d="M11 10l10 8"/><circle cx="38" cy="11" r="4"/><path d="M38 15v15M27 19l11 4"/><circle cx="12" cy="34" r="3"/><circle cx="25" cy="34" r="3"/><path d="M6 44c0-3 3-5 6-5s6 2 6 5M19 44c0-3 3-5 6-5s6 2 6 5"/>',
+    vocab:'<path d="M7 5h20a3 3 0 0 1 3 3v13a3 3 0 0 1-3 3H15l-7 6v-6H7a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3z"/><path d="M11 11h12M17 9v2M14 12c1 4 4 7 8 8M20 12c-1 4-4 7-8 8"/><path d="M34 19h7a3 3 0 0 1 3 3v13a3 3 0 0 1-3 3h-1v6l-7-6h-7a3 3 0 0 1-3-3v-7"/><path d="M30 34l4-9 4 9M31.5 31h5"/>',
+    listen:'<path d="M9 30v-6a15 15 0 0 1 30 0v6"/><rect x="5" y="28" width="8" height="13" rx="3"/><rect x="35" y="28" width="8" height="13" rx="3"/><path d="M20 31v6M24 28v12M28 31v6"/>',
+    read:'<circle cx="24" cy="10" r="6"/><path d="M6 21l18 6 18-6v19l-18 6-18-6z"/><path d="M24 27v19"/><rect x="2" y="27" width="5" height="9" rx="2"/><rect x="41" y="27" width="5" height="9" rx="2"/>',
+    match:'<rect x="3" y="6" width="14" height="9" rx="2"/><rect x="3" y="20" width="14" height="9" rx="2"/><rect x="3" y="34" width="14" height="9" rx="2"/><rect x="31" y="6" width="14" height="9" rx="2"/><rect x="31" y="20" width="14" height="9" rx="2"/><rect x="31" y="34" width="14" height="9" rx="2"/><path d="M17 10.5l14 28M17 24.5l14-14M17 38.5l14-14"/>'
+  };
+  $$('[data-icon]').forEach(el=>{const k=ICONS[el.dataset.icon];if(!k)return;const sp=document.createElement('span');sp.className='ico';sp.setAttribute('aria-hidden','true');sp.innerHTML='<svg viewBox="0 0 48 48">'+k+'</svg>';el.prepend(sp)});
+
+  const norm=s=>(s||'').toLowerCase().replace(/[’`´]/g,"'").replace(/\s+/g,' ').replace(/[.!?,;:]+$/,'').trim();
+  const fold=s=>norm(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const judge=(v,ans)=>{const a=ans.split('|');if(!norm(v))return 0;return a.some(x=>norm(x)===norm(v)||fold(x)===fold(v))?1:0};
+
+  /* ===== parti e punti (contati da soli) ===== */
+  const SECS=$$('section.ex[data-ex]').filter(s=>s.querySelector('.pairs,.gap,.vf .opts'));
+  const MAX={},LABELS={},LONG={},score={};
+  SECS.forEach((s,i)=>{const k=s.dataset.ex;MAX[k]=$$('.pairs .pa',s).length+$$('.gap',s).length+$$('.vf .opts',s).length;
+    LABELS[k]=s.dataset.label||('Parte '+(i+1));LONG[k]=s.dataset.long||LABELS[k];score[k]=null});
+  $$('section.ex').forEach(s=>{const p=s.querySelector('.pts-ex');if(p&&!p.textContent.trim())p.textContent=MAX[s.dataset.ex]!==undefined?MAX[s.dataset.ex]+' punti':'— punti'});
+  const TOTAL=Object.values(MAX).reduce((a,b)=>a+b,0);$('#pts').textContent='— / '+TOTAL;
+
+  /* ===== collega (una o più parti) ===== */
+  const PC=['var(--mare)','var(--rosso)','var(--verde)','var(--sole)','var(--bord)','#6B4C9A','#2E8B8B','#A0522D','#5A6E9C','#9C5A87'];
+  const PS=$$('.pairs').map(P=>({P,pa:$$('.pa',P),pb:$$('.pb',P),pairs:{},selA:null}));
+  function drawPairs(o){
+    o.pa.forEach(a=>{const l=o.pairs[a.dataset.n];a.classList.toggle('paired',!!l);a.classList.toggle('sel',a===o.selA);a.style.setProperty('--c',PC[(a.dataset.n-1)%PC.length]);a.querySelector('.bd').textContent=l?a.dataset.n+l:a.dataset.n});
+    o.pb.forEach(b=>{const n=Object.keys(o.pairs).find(k=>o.pairs[k]===b.dataset.l);b.classList.toggle('paired',!!n);if(n)b.style.setProperty('--c',PC[(n-1)%PC.length]);b.querySelector('.bd').textContent=n?n+b.dataset.l:b.dataset.l});
+  }
+  PS.forEach(o=>{
+    o.pa.forEach(a=>a.onclick=()=>{if(PROF)return;if(o.pairs[a.dataset.n])delete o.pairs[a.dataset.n];o.selA=(o.selA===a)?null:a;drawPairs(o);save();progress()});
+    o.pb.forEach(b=>{const act=()=>{if(PROF)return;const l=b.dataset.l;for(const k in o.pairs)if(o.pairs[k]===l)delete o.pairs[k];if(o.selA){o.pairs[o.selA.dataset.n]=l;o.selA=null}drawPairs(o);save();progress()};
+      b.onclick=act;b.onkeydown=e=>{if((e.key==='Enter'||e.key===' ')&&e.target===b){e.preventDefault();act()}}});
+    if(PROF)o.pa.forEach(a=>o.pairs[a.dataset.n]=a.dataset.key);
+    drawPairs(o)});
+
+  /* ===== scegli e autovalutazione ===== */
+  const vfg=$$('.vf .opts');
+  vfg.forEach(g=>g.querySelectorAll('button').forEach(b=>{b.type='button';b.onclick=()=>{if(PROF)return;const was=b.classList.contains('sel');g.querySelectorAll('button').forEach(x=>x.classList.remove('sel'));if(!was)b.classList.add('sel');save();progress()}}));
+  const vfState=()=>vfg.map(g=>{const s=g.querySelector('.sel');return s?s.textContent:''});
+  const scg=$$('#selfcheck .opts');
+  scg.forEach(g=>g.querySelectorAll('button').forEach(b=>{b.type='button';b.onclick=()=>{g.querySelectorAll('button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');save()}}));
+  const scState=()=>scg.map(g=>{const s=g.querySelector('.sel');return s?s.textContent:''});
+
+  /* ===== correzione silenziosa ===== */
+  const qText=el=>{const li=el.closest('li,.dl,.card');if(!li)return'';const c=li.cloneNode(true);c.querySelectorAll('.opts,.sol,.hint').forEach(x=>x.remove());return c.textContent.replace(/\s+/g,' ').trim().slice(0,60)};
+  function grade(){const err=[];
+    SECS.forEach((s,i)=>{const k=s.dataset.ex,P='P'+(i+1);let n=0;
+      PS.filter(o=>s.contains(o.P)).forEach(o=>o.pa.forEach(a=>{const l=o.pairs[a.dataset.n];if(l===a.dataset.key)n++;else err.push(P+' «'+a.querySelector('.txt').textContent.trim()+'»: '+(l?'scelto '+l:'vuoto')+', giusto '+a.dataset.key)}));
+      $$('.gap',s).forEach((g,j)=>{if(judge(g.value,g.dataset.answer))n++;else err.push(P+' «'+qText(g)+'»: scritto «'+(g.value||'—')+'», giusto «'+g.dataset.answer.split('|')[0]+'»')});
+      $$('.vf .opts',s).forEach((g,j)=>{const x=g.querySelector('.sel');if(x&&x.textContent===g.dataset.answer)n++;else err.push(P+' n.'+(j+1)+' «'+qText(g)+'»: '+(x?'scelto «'+x.textContent+'»':'vuoto')+', giusto «'+g.dataset.answer+'»')});
+      score[k]=n});
+    return err}
+  function answered(){let a=0,t=0;PS.forEach(o=>{t+=o.pa.length;a+=Object.keys(o.pairs).length});$$('.ex .gap').forEach(i=>{t++;if(i.value.trim())a++});vfg.forEach(g=>{t++;if(g.querySelector('.sel'))a++});return [a,t]}
+  function progress(){const [a,t]=answered();$('#prog').style.width=(t?a/t*100:0)+'%';
+    SECS.forEach(s=>{const done=$$('.gap',s).every(i=>i.value.trim())&&$$('.vf .opts',s).every(g=>g.querySelector('.sel'))&&PS.filter(o=>s.contains(o.P)).every(o=>Object.keys(o.pairs).length===o.pa.length);const j=$('[data-for="'+s.dataset.ex+'"]');if(j)j.classList.toggle('done',done)})}
+
+  /* ===== scrittura ===== */
+  const essay=$('#essay');const MIN=essay?+(essay.dataset.min||6):0;
+  if(essay){$$('#starters button').forEach(b=>{b.type='button';b.onclick=()=>{const v=essay.value;const sep=v&&!/\s$/.test(v)?' ':'';essay.value=v+sep+b.textContent.replace('…',' ');essay.focus();meters();save()}});essay.addEventListener('input',()=>{meters();save()})}
+  function meters(){if(!essay)return 0;const fr=(essay.value.match(/[^.!?…]*[a-zà-ù][^.!?…]*[.!?…]+/gi)||[]).length;const m=$('#mFrasi');if(m){m.querySelector('b').textContent=fr;m.classList.toggle('ok',fr>=MIN)}const j=$('[data-for="'+essay.closest('section').dataset.ex+'"]');if(j)j.classList.toggle('done',fr>=MIN);return fr}
+
+  /* ===== finale: il risultato si vede solo dopo l’invio ===== */
+  const C=2*Math.PI*74,fg=$('#ringFg');fg.style.strokeDasharray=C;fg.style.strokeDashoffset=C;$('#finMax').textContent=TOTAL;
+  function showResult(){const tot=Object.values(score).reduce((a,b)=>a+(b||0),0),p=tot/TOTAL;
+    $('#pts').textContent=tot+' / '+TOTAL;$('#finNum').textContent=tot;fg.style.strokeDashoffset=C*(1-p);
+    $('#break').innerHTML=Object.keys(MAX).map(k=>'<li class="'+(score[k]===MAX[k]?'full':score[k]/MAX[k]<.6?'low':'')+'"><span>'+LABELS[k]+'</span><b>'+score[k]+' / '+MAX[k]+'</b></li>').join('');
+    const T=$('#finTitle'),S=$('#finSub'),R=$('#finRu');
+    if(p>=.9){T.textContent='Complimenti!';S.textContent='Hai '+tot+' punti su '+TOTAL+'. Un risultato eccellente!';R.textContent='Отличный результат! Тема пройдена.';fg.style.stroke='var(--verde)';confetti()}
+    else if(p>=.75){T.textContent='Molto bene!';S.textContent='Hai '+tot+' punti su '+TOTAL+'. Ottimo lavoro!';R.textContent='Очень хорошо! Преподаватель пришлёт разбор ошибок.';fg.style.stroke='var(--verde)';confetti()}
+    else if(p>=.5){T.textContent='Buon lavoro!';S.textContent='Hai '+tot+' punti su '+TOTAL+'. Con un po’ di ripasso andrà ancora meglio.';R.textContent='Неплохо! Преподаватель подскажет, что повторить.';fg.style.stroke='var(--sole)'}
+    else{T.textContent='Coraggio!';S.textContent='Hai '+tot+' punti su '+TOTAL+'. Chi va piano va sano e va lontano: ripassiamo insieme.';R.textContent='Не страшно! Вместе повторим трудные темы.';fg.style.stroke='var(--rosso)'}
+    B.classList.add('done-test')}
+  function confetti(){if(reduce)return;const box=document.createElement('div');box.className='confetti';const cols=['#1F8A50','#FFFFFF','#C8312B','#C59A45'];
+    for(let i=0;i<90;i++){const c=document.createElement('i');c.style.left=Math.random()*100+'vw';c.style.background=cols[i%4];c.style.boxShadow='0 0 0 1px rgba(0,0,0,.08)';c.style.animationDuration=(2.2+Math.random()*1.8)+'s';c.style.animationDelay=(Math.random()*.6)+'s';c.style.transform='rotate('+Math.random()*360+'deg)';box.append(c)}
+    document.body.append(box);setTimeout(()=>box.remove(),4800)}
+  function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.id);toast.id=setTimeout(()=>el.classList.remove('on'),2600)}
+  $('#resetAll').onclick=()=>{if(!confirm('Cancellare tutte le risposte?'))return;try{localStorage.removeItem(KEY);localStorage.removeItem(KEY+':sent')}catch(e){}location.reload()};
+
+  /* ===== invia al Google Modulo ===== */
+  $('#sendRes').onclick=()=>{
+    const nome=$('#nome').value.trim();if(!nome){toast('Scrivi il tuo nome in alto, per favore.');$('#nome').focus();return}
+    const [a,t]=answered();if(a<t&&!confirm('Non hai risposto a '+(t-a)+' domande. Inviare lo stesso?'))return;
+    const err=grade(),tot=Object.values(score).reduce((x,y)=>x+y,0),pct=Math.round(tot/TOTAL*100);
+    const det=Object.keys(MAX).map(k=>LONG[k]+': '+score[k]+'/'+MAX[k]).join(' · ');
+    const sc=$$('#selfcheck li').map((li,i)=>'- '+li.querySelector('span').textContent+' → '+(scState()[i]||'—')).join('\n');
+    const testi=(essay?essay.dataset.scritto+':\n'+(essay.value.trim()||'—'):'')+(sc?'\n\nCOSA SO FARE (autovalutazione):\n'+sc:'');
+    const f=new URLSearchParams({usp:'pp_url'});
+    f.append(MODULO.nome,nome);f.append(MODULO.data,$('#data').value);f.append(MODULO.lezione,UNIT+': '+LES+' «'+NAME+'»');
+    f.append(MODULO.punteggio,tot+' / '+TOTAL);f.append(MODULO.percentuale,pct);f.append(MODULO.dettagli,det);
+    f.append(MODULO.errori,err.length?err.join('\n'):'nessuno');f.append(MODULO.testo,testi);
+    const w=window.open(MODULO.url+'?'+f.toString(),'_blank');if(!w){location.href=MODULO.url+'?'+f.toString();return}
+    try{localStorage.setItem(KEY+':sent',new Date().toISOString())}catch(e){}
+    showResult();save();$('#finale').scrollIntoView({block:'center'});toast('Si è aperto il modulo: premi «Invia» in fondo alla pagina.')};
+
+  /* ===== lettore audio ===== */
+  $$('.audio').forEach(box=>{const src=(box.dataset.src||'').trim();if(!src){box.classList.add('empty');box.textContent='Spazio per l’audio (mp3)';return}
+    box.innerHTML='<audio preload="metadata"></audio><button class="a-play" type="button" aria-label="Ascolta">▶</button><div class="a-bar"><span></span></div><span class="a-time">0:00 / 0:00</span><button class="a-btn" type="button" data-back>−5 s</button><button class="a-btn" type="button" data-rate aria-pressed="false">0,75×</button>';
+    const a=box.querySelector('audio'),pl=box.querySelector('.a-play'),bar=box.querySelector('.a-bar'),fill=bar.querySelector('span'),tm=box.querySelector('.a-time'),rt=box.querySelector('[data-rate]');
+    a.src=src;const f=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
+    const upd=()=>{fill.style.width=(a.duration?a.currentTime/a.duration*100:0)+'%';tm.textContent=f(a.currentTime)+' / '+f(a.duration||0)};
+    a.addEventListener('timeupdate',upd);a.addEventListener('loadedmetadata',upd);a.addEventListener('play',()=>pl.textContent='❚❚');a.addEventListener('pause',()=>pl.textContent='▶');
+    pl.onclick=()=>a.paused?a.play():a.pause();bar.onclick=e=>{const r=bar.getBoundingClientRect();if(a.duration)a.currentTime=(e.clientX-r.left)/r.width*a.duration};
+    box.querySelector('[data-back]').onclick=()=>{a.currentTime=Math.max(0,a.currentTime-5)};rt.onclick=()=>{const s=a.playbackRate===1;a.playbackRate=s?.75:1;rt.setAttribute('aria-pressed',s)}});
+
+  /* ===== versione insegnante: chiave + barra sul telefono ===== */
+  if(PROF){
+    $$('.gap[data-answer]').forEach(el=>{el.value=el.dataset.answer.split('|')[0];el.readOnly=true;el.classList.add('ok');const s=document.createElement('span');s.className='sol';s.textContent=el.dataset.answer.split('|').join(' / ');el.after(s)});
+    vfg.forEach(g=>[...g.querySelectorAll('button')].forEach(b=>{if(b.textContent===g.dataset.answer)b.classList.add('key')}));
+    const EXS=$$('section.ex');const gb=document.createElement('div');gb.className='gbar';
+    gb.innerHTML='<button class="nv" data-d="-1" aria-label="Indietro">‹</button><button class="gt" type="button"><small></small><b></b></button><button class="nv" data-d="1" aria-label="Avanti">›</button>';document.body.append(gb);
+    let cur=0;const show=i=>{cur=Math.max(0,Math.min(EXS.length-1,i));gb.querySelector('small').textContent='Parte '+(cur+1)+' / '+EXS.length;gb.querySelector('b').textContent=EXS[cur].querySelector('h2').textContent};
+    gb.querySelectorAll('.nv').forEach(b=>b.onclick=()=>{show(cur+ +b.dataset.d);EXS[cur].scrollIntoView({block:'start'})});
+    gb.querySelector('.gt').onclick=()=>scrollTo({top:0});
+    addEventListener('scroll',()=>{const y=innerHeight*.35;let k=0;EXS.forEach((s,i)=>{if(s.getBoundingClientRect().top<y)k=i});if(k!==cur)show(k)},{passive:true});show(0)}
+
+  /* ===== salvataggio nel browser ===== */
+  function save(){if(PROF)return;try{localStorage.setItem(KEY,JSON.stringify({nome:$('#nome').value,data:$('#data').value,pairs:PS.map(o=>o.pairs),vf:vfState(),sc:scState(),gaps:$$('.gap').map(i=>i.value),essay:essay?essay.value:''}))}catch(e){}}
+  function load(){let d=null;try{d=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
+    if(!d||PROF){$('#data').value=new Date().toLocaleDateString('it-IT');return}
+    $('#nome').value=d.nome||'';$('#data').value=d.data||new Date().toLocaleDateString('it-IT');
+    (d.pairs||[]).forEach((p,i)=>{if(PS[i]){PS[i].pairs=p||{};drawPairs(PS[i])}});
+    vfg.forEach((g,i)=>{const v=d.vf&&d.vf[i];if(v)[...g.querySelectorAll('button')].forEach(b=>{if(b.textContent===v)b.classList.add('sel')})});
+    scg.forEach((g,i)=>{const v=d.sc&&d.sc[i];if(v)[...g.querySelectorAll('button')].forEach(b=>{if(b.textContent===v)b.classList.add('sel')})});
+    $$('.gap').forEach((g,i)=>{if(d.gaps&&d.gaps[i])g.value=d.gaps[i]});if(essay)essay.value=d.essay||'';
+    try{if(localStorage.getItem(KEY+':sent')){grade();showResult()}}catch(e){}}
+  ['#nome','#data'].forEach(s=>$(s).addEventListener('input',save));
+  $$('.gap').forEach(i=>i.addEventListener('input',()=>{save();progress()}));
+  load();meters();progress();
+  if(PROF){$('#finNum').textContent=TOTAL;$('#finTitle').textContent='Chiave del test';$('#finSub').textContent='Totale: '+TOTAL+' punti. Scrittura e autovalutazione senza punti.';$('#finRu').textContent='Ключ: правильные ответы отмечены зелёным.'}
+})();
+</script>
+
+</body>
+</html>
