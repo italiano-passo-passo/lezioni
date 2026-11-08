@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Первые 4 недели итальянского с нуля — Italiano passo passo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--ink:#262626;--soft:#6B6B6B;--p2:#F4F5F5;--bord:#7A1E2C;--verde:#5E7A3A;--rosso:#B4493B;--mare:#2F6F86;--sole:#C59A45;--rt:#F7E6E2;--st:#F7F1E3;--line:#DDE0DF;--t:"Playfair Display",Georgia,serif;--b:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;color-scheme:light;padding-top:env(safe-area-inset-top,0)}
+@media(prefers-color-scheme:dark){:root{--bg:#1B1F1E;--ink:#ECECEA;--soft:#A9AEAC;--p2:#252A29;--bord:#F0A3AE;--verde:#A9BE7A;--rosso:#E58C76;--mare:#7FB5C9;--sole:#D9B66A;--rt:#3A2621;--st:#332C1E;--line:#38403E;color-scheme:dark}}
+*{box-sizing:border-box}html{scroll-padding-top:34px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17.5px/1.5 var(--b)}
+body::before{content:"";position:fixed;left:0;top:0;bottom:0;width:14px;background:linear-gradient(to right,#1F8A50 0 5px,transparent 5px 9px,#C8312B 9px 14px)}
+.pr{position:sticky;top:0;z-index:5;height:16px;background:var(--line);clip-path:polygon(0 100%,0 80%,20% 80%,20% 60%,40% 60%,40% 40%,60% 40%,60% 20%,80% 20%,80% 0,100% 0,100% 100%)}
+.pr span{display:block;height:100%;width:0;background:var(--rosso);transition:width .4s}
+main{max-width:760px;margin:0 auto;padding:18px 20px 40px 38px}
+h1,h2,h3{font-family:var(--t);color:var(--bord);line-height:1.12;margin:0 0 .4em}
+h1{font-size:clamp(3rem,10vw,4.8rem);line-height:1}h1 em{display:block;color:var(--rosso);font-weight:600;font-size:.42em;line-height:1.2;margin-top:.4em}
+h2{font-size:1.7rem;margin-top:1.6em;border-top:1px solid var(--ink);padding-top:.6em}h3{font-size:1.2rem}
+.k{color:var(--rosso);font-weight:600;font-size:.95rem}.s{color:var(--soft)}
+.ipl{width:84px;height:84px;display:block;margin-bottom:10px}
+.box{background:var(--p2);border-radius:8px;padding:14px 16px;margin:12px 0}
+.box.g{background:var(--st);border-left:4px solid var(--sole)}
+label{display:inline-flex;gap:8px;align-items:center;margin:4px 14px 4px 0}
+select,input,textarea{border:1px solid var(--line);border-radius:6px;background:var(--bg);padding:6px 10px;color:inherit;font:inherit}
+textarea{width:100%;min-height:64px}
+ul.c{list-style:none;padding:0;margin:.5em 0}ul.c li{padding:5px 0;border-bottom:1px solid var(--line)}
+ul.c label{display:flex;align-items:flex-start;margin:0}ul.c input{width:20px;height:20px;margin-top:3px;flex:none;accent-color:var(--rosso)}
+details{border:1px solid var(--line);border-radius:8px;margin:10px 0;padding:0 16px}
+summary{cursor:pointer;padding:12px 0;font-weight:700;color:var(--bord)}
+table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+.out{font-weight:600;color:var(--bord)}small{color:var(--soft)}
+@media print{.pr{display:none}details{border:0}}
+</style>
+</head>
+<body>
+<div class="pr"><span id="pb"></span></div>
+<main>
+<svg class="ipl" viewBox="0 0 220 220" aria-hidden="true"><circle cx="110.0" cy="110.0" r="109.5" fill="#FFFFFF" stroke="#DDE0DF" stroke-width="1.0"/><path transform="translate(59.3 0)" d="M25.7048 110.3608 27.9312 111.77759999999999Q22.5676 119.77239999999999 19.0762 122.6566Q15.5848 125.54079999999999 11.0308 125.54079999999999Q7.8936 125.54079999999999 5.9708000000000006 123.76979999999999Q4.048 121.99879999999999 4.048 119.1652Q4.048 116.8376 5.3636 112.1824L11.2332 90.42439999999999Q11.9416 87.38839999999999 11.9416 86.37639999999999Q11.9416 84.7572 10.575399999999998 84.0994Q9.2092 83.4416 5.9708 83.4416V80.7092Q17.71 79.79839999999999 26.4132 77.87559999999999L17.204 111.6764Q16.2932 114.8136 16.2932 116.9388Q16.2932 117.54599999999999 16.7486 118.00139999999999Q17.204 118.4568 17.8112 118.4568Q19.8352 118.4568 25.7048 110.3608ZM23.4784 55.30799999999999Q26.312 55.30799999999999 28.3866 57.331999999999994Q30.461199999999998 59.355999999999995 30.461199999999998 62.1896Q30.461199999999998 65.0232 28.437199999999997 66.9966Q26.4132 68.97 23.4784 68.97Q20.6448 68.97 18.722 66.946Q16.7992 64.922 16.7992 61.987199999999994Q16.7992 59.355999999999995 18.8232 57.331999999999994Q20.8472 55.30799999999999 23.4784 55.30799999999999Z" fill="#7A1E2C"/><path transform="translate(59.3 0)" d="M35.824799999999996 83.4416V80.7092Q41.3908 80.102 55.3564 77.87559999999999L51.5108 89.5136Q55.9636 83.2392 59.6574 80.5574Q63.351200000000006 77.87559999999999 67.7028 77.87559999999999Q72.7628 77.87559999999999 75.6976 81.2152Q78.6324 84.5548 78.6324 90.1208Q78.6324 103.2768 69.7268 114.6112Q60.8212 125.9456 50.599999999999994 125.9456Q48.07 125.9456 43.7184 123.7192L42.504 127.8684Q39.974000000000004 137.3812 39.974000000000004 139.304Q39.974000000000004 141.1256 41.3908 141.834Q42.8076 142.5424 46.552 142.6436V145.376H21.3532V142.6436H21.9604Q25.0976 142.6436 26.4132 141.2268Q27.7288 139.81 28.9432 135.1548L39.0632 95.88919999999999Q41.2896 87.4896 41.2896 85.9716Q41.2896 84.5548 40.2776 84.0994Q39.2656 83.644 35.824799999999996 83.4416ZM65.9824 90.222Q65.9824 87.89439999999999 64.8186 86.4776Q63.654799999999994 85.0608 61.732 85.0608Q60.416399999999996 85.0608 59.151399999999995 85.5668Q57.886399999999995 86.0728 56.874399999999994 87.1354Q55.8624 88.198 54.9516 89.26059999999998Q54.040800000000004 90.32319999999999 53.2312 92.0436Q52.4216 93.764 51.8144 94.92779999999999Q51.2072 96.0916 50.6 97.96379999999999Q49.9928 99.836 49.6892 100.6962Q49.3856 101.5564 48.9302 103.1756Q48.4748 104.7948 48.4748 104.896Q44.9328 116.8376 44.9328 118.76039999999999Q44.9328 120.27839999999999 46.0966 121.341Q47.260400000000004 122.4036 48.879599999999996 122.4036Q52.522800000000004 122.4036 55.8624 118.305Q59.202 114.2064 61.3272 108.691Q63.4524 103.1756 64.7174 98.0144Q65.9824 92.8532 65.9824 90.222Z" fill="#7A1E2C"/><circle cx="149.1" cy="117.0" r="7.6" fill="#B4493B"/><rect x="83.8" y="159.2" width="17.5" height="5.0" fill="#1F8A50"/><rect x="101.3" y="159.2" width="17.5" height="5.0" fill="#FFFFFF" stroke="#DDE0DF" stroke-width="0.5"/><rect x="118.7" y="159.2" width="17.5" height="5.0" fill="#C8312B"/></svg>
+<p class="k">Italiano passo passo</p>
+<h1>Гид для старта <em>Первые 4 недели итальянского с нуля</em></h1>
+<p class="s">Рабочий план на 20 минут в день: что делать, сколько, в каком порядке и как не забывать выученное. Без материала какого-либо курса: подойдёт к любому учебнику, приложению или занятиям с преподавателем.</p>
+<div class="box"><b>Что это за гид.</b> Это план для самостоятельного старта: если вы решите заниматься сами, его хватит на первые четыре недели.</div>
+<div class="box g"><b>Как пользоваться.</b> Идите сверху вниз. Заполните цель и нагрузку (части 1–2), настройте повторение слов (часть 3), дальше отмечайте галочки в плане. Всё сохраняется в этом браузере на этом устройстве. Полоска сверху показывает ваш прогресс.</div>
+
+<h2>1. Цель на 4 недели</h2>
+<p>Без конкретной цели вы будете учить «всё понемногу» и через неделю не увидите результата. Выберите одну:</p>
+<ul>
+<li><b>Поездка:</b> бар, кафе, магазин, транспорт, дорога, отель.</li>
+<li><b>Жизнь или работа в Италии:</b> знакомство, бытовые вопросы, простые разговоры.</li>
+<li><b>Понять, как устроен язык:</b> чтение, звуки, базовая грамматика.</li>
+<li><b>Быстрая база под дату:</b> отъезд, собеседование, экзамен.</li>
+</ul>
+<p>Допишите фразу своими словами:</p>
+<textarea data-s="goal" placeholder="Через 4 недели я смогу … в ситуации … (например: заказать еду и попросить счёт в кафе)"></textarea>
+<p class="s"><small>Правило проверки: цель должна быть такой, чтобы в конце 4-й недели вы могли честно ответить «получилось / нет».</small></p>
+
+<h2>2. Нагрузка</h2>
+<p>Регулярность работает лучше, чем редкие длинные занятия: исследования разнесённого обучения (Cepeda et al., 2006) показывают, что запоминание выигрывает, когда повторение разнесено во времени. Начните с минимума, который вы точно выдержите.</p>
+<div class="box"><label>Минут в день <select id="m"><option>10</option><option>15</option><option selected>20</option><option>30</option><option>45</option></select></label><label>Дней в неделю <select id="d"><option>3</option><option>4</option><option>5</option><option selected>6</option><option>7</option></select></label>
+<p class="out" id="calc"></p></div>
+<h3>Из чего состоит занятие</h3>
+<table><tr><td><b>25%</b></td><td>Повторение вчерашнего и прошлых слов: сначала вспоминаем, потом проверяем</td></tr><tr><td><b>50%</b></td><td>Новое: слушаем, повторяем вслух, разбираем</td></tr><tr><td><b>25%</b></td><td>Говорим вслух или пишем своими словами то, что выучили</td></tr></table>
+<p><small>Пропустили день? Не навёрстывайте. Вернитесь с блока повторения: дыра в расписании лучше, чем выгорание.</small></p>
+<p><b>Материал.</b> Возьмите один источник уровня A1, где есть аудио, диалоги и перевод. Не меняйте его все 4 недели: смена учебника каждые три дня — самая частая причина «топтания на месте».</p>
+
+<h2>3. Как не забывать слова</h2>
+<ul>
+<li><b>Слово — только во фразе.</b> Не «mela», а «Mangio una mela». Так вы запоминаете и слово, и его окружение.</li>
+<li><b>Существительное с артиклем:</b> il / la / l’ / un / una. Род в итальянском нужно знать сразу, потом его не выучить «задним числом».</li>
+<li><b>Сначала вспоминаем, потом смотрим.</b> Закройте перевод, попробуйте вспомнить и только потом проверьте. Активное вспоминание эффективнее перечитывания (Karpicke &amp; Roediger, 2008).</li>
+<li><b>Новых слов в день:</b> ориентир — около 5 при 20 минутах (это наше наблюдение, а не норма: подстройте под себя).</li>
+<li><b>Говорите вслух.</b> Каждое слово и каждую фразу хотя бы раз произнесите.</li>
+</ul>
+<h3>Календарь повторений</h3>
+<p>Выучили порцию слов? Укажите дату и повторите их в эти дни. Точных «идеальных» интервалов наука не даёт, это рабочая схема (наша практика), опирающаяся на принцип разнесённого повторения.</p>
+<div class="box"><label>Дата первого занятия <input type="date" id="dt"></label><ul class="c" id="rep"></ul></div>
+
+<h2>4. План по неделям</h2>
+<p class="s"><small>Идите по порядку, но не гонитесь: если чек-лист недели не закрыт, повторите неделю.</small></p>
+<details open><summary>Неделя 1. Звуки и чтение</summary>
+<p>Цель недели: читать вслух любое итальянское слово, не гадая.</p><ul class="c" data-w="1">
+<li><label><input type="checkbox">Прослушал алфавит и 20 слов-образцов, повторил вслух</label></li>
+<li><label><input type="checkbox">Разобрал c и g: перед a, o, u — «к», «г»; перед e, i — «ч», «дж»</label></li>
+<li><label><input type="checkbox">Разобрал сочетания: ch, gh, sc, gn, gli</label></li>
+<li><label><input type="checkbox">Понял: двойные согласные читаются долго (pala и palla — разные слова)</label></li>
+<li><label><input type="checkbox">Научился ставить ударение: обычно на предпоследний слог</label></li>
+<li><label><input type="checkbox">Выучил первые 25 слов под свою цель (во фразах, с артиклем)</label></li>
+<li><label><input type="checkbox">Прочитал вслух вывеску, меню или подпись к фото на итальянском</label></li>
+<li><label><input type="checkbox">Записал на диктофон 5 слов. Файл сохранён для сравнения в неделе 4</label></li></ul></details>
+<details><summary>Неделя 2. Готовые фразы</summary>
+<p>Цель недели: сказать главное в своей ситуации. Фразы учите целиком, без разбора грамматики.</p><ul class="c" data-w="2">
+<li><label><input type="checkbox">Поздороваться, попрощаться, поблагодарить, извиниться</label></li>
+<li><label><input type="checkbox">Представиться и спросить имя</label></li>
+<li><label><input type="checkbox">Сказать «не понимаю» и попросить повторить медленнее</label></li>
+<li><label><input type="checkbox">Попросить что-то и спросить цену или «где…?»</label></li>
+<li><label><input type="checkbox">Числа до 20 и время суток</label></li>
+<li><label><input type="checkbox">Выписал 10 фраз под свою цель из части 1 и знаю их наизусть</label></li>
+<li><label><input type="checkbox">Проговорил эти 10 фраз вслух, как в настоящей ситуации</label></li></ul></details>
+<details><summary>Неделя 3. Первые предложения</summary>
+<p>Цель недели: составить собственное простое предложение. Нужны артикли, глаголы essere и avere, глаголы на -are в настоящем времени (любой учебник A1 даёт их в начале).</p><ul class="c" data-w="3">
+<li><label><input type="checkbox">Артикли il / lo / la / l’ и un / uno / una</label></li>
+<li><label><input type="checkbox">Essere и avere: все формы, на слух и в речи</label></li>
+<li><label><input type="checkbox">Один глагол на -are во всех лицах (например, parlare)</label></li>
+<li><label><input type="checkbox">Отрицание: non + глагол</label></li>
+<li><label><input type="checkbox">Составил 5 предложений о себе, проверил по учебнику</label></li>
+<li><label><input type="checkbox">Прослушал короткий диалог 3 раза: сначала без текста, потом с текстом</label></li></ul></details>
+<details><summary>Неделя 4. Слушаем и говорим</summary>
+<p>Цель недели: понять короткий диалог и сказать о себе.</p><ul class="c" data-w="4">
+<li><label><input type="checkbox">Понял главную мысль диалога на 60–90 секунд (без полного текста)</label></li>
+<li><label><input type="checkbox">Повторил диалог вслух за диктором, потом по ролям сам</label></li>
+<li><label><input type="checkbox">Рассказал о себе за 1 минуту: имя, откуда, где живу, что делаю, что люблю</label></li>
+<li><label><input type="checkbox">Записал рассказ на диктофон и сравнил с записью недели 1</label></li>
+<li><label><input type="checkbox">Повторил все слова за 4 недели по календарю</label></li>
+<li><label><input type="checkbox">Прошёл самопроверку (часть 6)</label></li></ul></details>
+
+<h2>5. Пять частых ошибок</h2>
+<ul>
+<li>Учить слова списком, без фраз и без повторения.</li>
+<li>Читать и слушать, но не говорить вслух: понимание не равно умению сказать.</li>
+<li>Ждать, пока «буду готов», чтобы начать говорить. Начинайте с первой недели.</li>
+<li>Менять учебники и приложения, не доведя ничего до конца.</li>
+<li>Стараться выучить всё сразу и бросать через две недели. Лучше меньше, но каждый день.</li>
+</ul>
+
+<h2>6. Самопроверка через 4 недели</h2>
+<ul class="c" data-w="5">
+<li><label><input type="checkbox">Читаю вслух любое слово без подсказок</label></li>
+<li><label><input type="checkbox">Знаю наизусть 10 фраз под свою цель</label></li>
+<li><label><input type="checkbox">Знаю около 100 слов, помню их без подсказки</label></li>
+<li><label><input type="checkbox">Составляю простое предложение о себе</label></li>
+<li><label><input type="checkbox">Понимаю главное в медленном диалоге</label></li>
+<li><label><input type="checkbox">Хотя бы 20 дней из 28 я занимался</label></li></ul>
+<p class="out" id="res"></p>
+<p><b>5–6 галочек:</b> вы готовы идти на A1 дальше. <b>3–4:</b> повторите слабую неделю ещё раз, это нормально. <b>0–2:</b> вернитесь к неделе 1 и урежьте нагрузку до реалистичной.</p>
+
+<h2>7. Где самостоятельно сложно</h2>
+<p>Самостоятельное изучение работает, и этот гид написан именно для него. Но у него есть пределы. Вот где без второго человека труднее всего (это наше наблюдение, а не результат исследования):</p>
+<ul>
+<li><b>Произношение.</b> Себя мы слышим иначе, чем другие. Запись на диктофон помогает, но ошибку в ударении или в двойной согласной сам часто не замечаешь.</li>
+<li><b>Ошибки, которых не видишь.</b> Ключи в учебнике сверяют только то, что в них есть. Свои собственные предложения проверить нечем.</li>
+<li><b>Живая речь.</b> Учебник даёт правильный язык, а в Италии говорят иначе: короче, быстрее, со своими оборотами. Разницу трудно понять, не живя там.</li>
+<li><b>Следующий шаг.</b> После четырёх недель надо решить, что учить дальше и с какой нагрузкой. Лучше решать это под вашу цель, а не «по учебнику».</li>
+<li><b>Ритм.</b> Без внешних договорённостей регулярность держится сложнее.</li>
+</ul>
+<div class="box g"><b>Если вы застряли на любом из этих пунктов, приходите к нам.</b> Мы живём в Италии, учим тому, что нужно там, и поможем разобраться с вашей целью, нагрузкой и произношением. Напишите в Instagram <b>@ip_italiano</b>, и мы подскажем, с чего начать. Если справляетесь сами, продолжайте: это тоже хороший результат.</div>
+
+<h2>Источники</h2>
+<p><small>Cepeda N. J. et al. Distributed practice in verbal recall tasks: A review and quantitative synthesis. Psychological Bulletin, 2006. · Karpicke J. D., Roediger H. L. The critical importance of retrieval for learning. Science, 2008. Всё остальное в гиде — наше практическое наблюдение, а не норма.</small></p>
+<p class="s">Надежда · Italiano passo passo · Instagram @ip_italiano</p>
+</main>
+<script>
+(function(){
+var S={};try{S=JSON.parse(localStorage.getItem('ipg')||'{}')}catch(e){}
+function save(){try{localStorage.setItem('ipg',JSON.stringify(S))}catch(e){}}
+var $=function(s){return document.querySelector(s)},A=function(s){return[].slice.call(document.querySelectorAll(s))};
+var g=$('[data-s=goal]');g.value=S.goal||'';g.oninput=function(){S.goal=g.value;save()};
+function calc(){var m=+$('#m').value,d=+$('#d').value,n=Math.max(3,Math.round(m/4)),h=m*d*4/60;
+$('#calc').textContent='В неделю: '+m*d+' мин. За 4 недели: около '+h.toFixed(1).replace('.',',')+' ч и примерно '+n*d*4+' новых слов (по '+n+' в день).'}
+['m','d'].forEach(function(i){var e=$('#'+i);if(S[i])e.value=S[i];e.onchange=function(){S[i]=e.value;save();calc()}});calc();
+var dt=$('#dt');if(S.dt)dt.value=S.dt;
+function rep(){var r=$('#rep');r.innerHTML='';if(!dt.value)return;var b=new Date(dt.value+'T12:00:00');
+[[0,'Выучил новое'],[1,'Повтор 1'],[3,'Повтор 2'],[7,'Повтор 3'],[14,'Повтор 4'],[28,'Повтор 5']].forEach(function(x){var t=new Date(b);t.setDate(b.getDate()+x[0]);
+var li=document.createElement('li');li.textContent=t.toLocaleDateString('ru-RU',{weekday:'short',day:'numeric',month:'long'})+' — '+x[1];r.appendChild(li)})}
+dt.onchange=function(){S.dt=dt.value;save();rep()};rep();
+var cb=A('input[type=checkbox]');cb.forEach(function(c,i){c.checked=!!S['c'+i];c.onchange=function(){S['c'+i]=c.checked;save();upd()}});
+function upd(){var n=cb.filter(function(c){return c.checked}).length;$('#pb').style.width=(100*n/cb.length)+'%';
+var q=A('[data-w=5] input:checked').length;$('#res').textContent='Отмечено в самопроверке: '+q+' из 6'}upd();
+})();
+</script>
+</body>
+</html>
