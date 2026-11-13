@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verbi passo passo — Italiano passo passo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bord:#8A1F2B;--rosso:#C8312B;--verde:#1F8A50;--mare:#2E6E8E;--sole:#C59A45;--ink:#222;--soft:#666;--line:#e3e3e3;--card:#fff;--bg:#fff;
+--sole-tint:#F7F1E3;--rosso-tint:#FBEDEB;--mare-tint:#EAF2F6;--verde-tint:#E9F4EE;--title:'Playfair Display',Georgia,serif;--body:'Source Sans 3','Segoe UI',Arial,sans-serif}
+@media (prefers-color-scheme:dark){:root{--ink:#eee;--soft:#aaa;--line:#3a3a3a;--card:#1e1e1e;--bg:#151515;--sole-tint:#2c2717;--rosso-tint:#2e1b1a;--mare-tint:#17252c;--verde-tint:#16261d;--bord:#e07a84}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.45 var(--body)}
+body::before{content:"";position:fixed;left:0;top:0;bottom:0;width:6px;background:linear-gradient(90deg,var(--verde) 0 33%,#fff 33% 66%,var(--rosso) 66%);z-index:5}
+.wrap{max-width:1100px;margin:0 auto;padding:18px 22px 60px 28px}
+header{display:flex;align-items:flex-start;gap:16px;justify-content:space-between}
+.ipl{width:46px;height:46px;flex:none}
+.brand{font:700 .85rem var(--body);color:var(--rosso);margin:0}
+h1{font:700 2.3rem/1.1 var(--title);color:var(--bord);margin:2px 0 4px}h1 em{color:var(--rosso);font-weight:500}
+.sub{color:var(--soft);margin:0}
+.flag{text-align:center;font:700 .75rem var(--body);color:var(--bord);flex:none}
+.flag i{display:block;width:34px;height:22px;margin:0 auto 3px;background:linear-gradient(90deg,var(--verde) 0 33%,#fff 33% 66%,var(--rosso) 66%);border:1px solid var(--line)}
+.tools{position:sticky;top:0;z-index:4;background:var(--bg);padding:12px 0 10px;border-bottom:1px solid var(--line);margin-top:12px}
+.search{width:100%;font:inherit;font-size:1.05rem;padding:10px 14px;border:1.5px solid var(--mare);border-radius:10px;background:var(--card);color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center}
+.chips b{font-size:.85rem;color:var(--soft);margin-right:2px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:18px;padding:3px 12px;font:inherit;font-size:.92rem;cursor:pointer}
+.chip.on{background:var(--bord);border-color:var(--bord);color:#fff}
+select.chip{padding:3px 8px}
+.count{color:var(--soft);font-size:.9rem;margin:10px 0 4px}
+.legend{font-size:.88rem;color:var(--soft);margin:4px 0 0}
+.legend span{margin-right:12px;display:inline-block}
+html,body{overflow-x:hidden}
+.list{display:grid;gap:8px;margin-top:8px}
+details.v{border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden}
+details.v[open]{border-color:var(--mare);box-shadow:0 2px 10px rgba(0,0,0,.05)}
+summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;padding:10px 14px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▸";color:var(--mare);transition:transform .2s}
+details[open] summary::before{transform:rotate(90deg)}
+.inf{font:700 1.2rem var(--title);color:var(--bord)}
+.tr{color:var(--mare);font-style:italic}
+.tags{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+.tag{font-size:.75rem;font-weight:700;border-radius:10px;padding:1px 8px;background:var(--mare-tint);color:var(--mare)}
+.tag.irr{background:var(--rosso-tint);color:var(--rosso)}.tag.isc{background:var(--sole-tint);color:#8a6a1e}.tag.rif{background:var(--verde-tint);color:var(--verde)}.tag.lv{background:none;border:1px solid var(--line);color:var(--soft)}
+.body{padding:4px 16px 14px 34px;display:grid;grid-template-columns:minmax(220px,1fr) minmax(240px,1.3fr);gap:10px 26px}
+@media (max-width:700px){.body{grid-template-columns:1fr;padding-left:16px}.inf{font-size:1.1rem}h1{font-size:1.8rem}.wrap{padding:14px 12px 50px 16px}}
+.body h3{font:700 1rem var(--title);color:var(--bord);margin:6px 0 4px;border-bottom:1.5px solid var(--bord);padding-bottom:2px}
+table{border-collapse:collapse;width:100%}
+td{padding:3px 6px;border-bottom:1px solid var(--line)}
+td.p{color:var(--soft);width:5.5em}
+.x{color:var(--rosso);font-weight:700}
+.isc b{color:#a07a1a}
+.reg li{margin:3px 0}.reg i{color:var(--mare)}
+.reg .pr{color:var(--rosso);font-weight:700}
+.note{background:var(--sole-tint);border-radius:8px;padding:5px 10px;font-size:.92rem;margin-top:6px}
+.none{color:var(--soft);font-style:italic;padding:20px 0}
+footer{margin-top:30px;color:var(--soft);font-size:.85rem;border-top:1px solid var(--line);padding-top:8px}
+mark{background:#FFE9A8;color:inherit;border-radius:3px}
+</style></head>
+<body>
+<div class="wrap">
+<header>
+ <div style="display:flex;gap:14px;align-items:flex-start"><svg class="ipl" viewBox="0 0 220 220" aria-hidden="true"><circle cx="110.0" cy="110.0" r="109.5" fill="#FFFFFF" stroke="#DDE0DF" stroke-width="1.0"/><path transform="translate(59.3 0)" d="M25.7048 110.3608 27.9312 111.77759999999999Q22.5676 119.77239999999999 19.0762 122.6566Q15.5848 125.54079999999999 11.0308 125.54079999999999Q7.8936 125.54079999999999 5.9708000000000006 123.76979999999999Q4.048 121.99879999999999 4.048 119.1652Q4.048 116.8376 5.3636 112.1824L11.2332 90.42439999999999Q11.9416 87.38839999999999 11.9416 86.37639999999999Q11.9416 84.7572 10.575399999999998 84.0994Q9.2092 83.4416 5.9708 83.4416V80.7092Q17.71 79.79839999999999 26.4132 77.87559999999999L17.204 111.6764Q16.2932 114.8136 16.2932 116.9388Q16.2932 117.54599999999999 16.7486 118.00139999999999Q17.204 118.4568 17.8112 118.4568Q19.8352 118.4568 25.7048 110.3608ZM23.4784 55.30799999999999Q26.312 55.30799999999999 28.3866 57.331999999999994Q30.461199999999998 59.355999999999995 30.461199999999998 62.1896Q30.461199999999998 65.0232 28.437199999999997 66.9966Q26.4132 68.97 23.4784 68.97Q20.6448 68.97 18.722 66.946Q16.7992 64.922 16.7992 61.987199999999994Q16.7992 59.355999999999995 18.8232 57.331999999999994Q20.8472 55.30799999999999 23.4784 55.30799999999999Z" fill="#7A1E2C"/><path transform="translate(59.3 0)" d="M35.824799999999996 83.4416V80.7092Q41.3908 80.102 55.3564 77.87559999999999L51.5108 89.5136Q55.9636 83.2392 59.6574 80.5574Q63.351200000000006 77.87559999999999 67.7028 77.87559999999999Q72.7628 77.87559999999999 75.6976 81.2152Q78.6324 84.5548 78.6324 90.1208Q78.6324 103.2768 69.7268 114.6112Q60.8212 125.9456 50.599999999999994 125.9456Q48.07 125.9456 43.7184 123.7192L42.504 127.8684Q39.974000000000004 137.3812 39.974000000000004 139.304Q39.974000000000004 141.1256 41.3908 141.834Q42.8076 142.5424 46.552 142.6436V145.376H21.3532V142.6436H21.9604Q25.0976 142.6436 26.4132 141.2268Q27.7288 139.81 28.9432 135.1548L39.0632 95.88919999999999Q41.2896 87.4896 41.2896 85.9716Q41.2896 84.5548 40.2776 84.0994Q39.2656 83.644 35.824799999999996 83.4416ZM65.9824 90.222Q65.9824 87.89439999999999 64.8186 86.4776Q63.654799999999994 85.0608 61.732 85.0608Q60.416399999999996 85.0608 59.151399999999995 85.5668Q57.886399999999995 86.0728 56.874399999999994 87.1354Q55.8624 88.198 54.9516 89.26059999999998Q54.040800000000004 90.32319999999999 53.2312 92.0436Q52.4216 93.764 51.8144 94.92779999999999Q51.2072 96.0916 50.6 97.96379999999999Q49.9928 99.836 49.6892 100.6962Q49.3856 101.5564 48.9302 103.1756Q48.4748 104.7948 48.4748 104.896Q44.9328 116.8376 44.9328 118.76039999999999Q44.9328 120.27839999999999 46.0966 121.341Q47.260400000000004 122.4036 48.879599999999996 122.4036Q52.522800000000004 122.4036 55.8624 118.305Q59.202 114.2064 61.3272 108.691Q63.4524 103.1756 64.7174 98.0144Q65.9824 92.8532 65.9824 90.222Z" fill="#7A1E2C"/><circle cx="149.1" cy="117.0" r="7.6" fill="#B4493B"/><rect x="83.8" y="159.2" width="17.5" height="5.0" fill="#1F8A50"/><rect x="101.3" y="159.2" width="17.5" height="5.0" fill="#FFFFFF" stroke="#DDE0DF" stroke-width="0.5"/><rect x="118.7" y="159.2" width="17.5" height="5.0" fill="#C8312B"/></svg>
+  <div><p class="brand">Italiano passo passo</p><h1>Verbi <em>passo passo</em></h1>
+  <p class="sub">Таблица глаголов курса: спряжение и управление (какой предлог нужен глаголу). Пополняется с каждым уроком.</p></div></div>
+ <div class="flag"><i></i>Italiano A1–A2</div>
+</header>
+
+<div class="tools">
+ <input class="search" id="q" type="search" placeholder="Cerca un verbo… (по-итальянски или по-русски)" autocomplete="off" aria-label="Cerca un verbo">
+ <div class="chips" id="fLiv"><b>Livello:</b></div>
+ <div class="chips" id="fTipo"><b>Tipo:</b></div>
+ <div class="chips"><b>Lezione:</b><select class="chip" id="fLez" aria-label="Lezione"></select>
+  <button class="chip" id="openAll" type="button">Apri tutti</button><button class="chip" id="closeAll" type="button">Chiudi tutti</button></div>
+</div>
+<p class="legend"><span><span class="x">красным</span> — неправильные формы</span><span class="isc"><b>-isc-</b> — как capire</span><span>♻ — глагол из A1</span></p>
+<p class="count" id="count"></p>
+<div class="list" id="list"></div>
+<footer>Italiano passo passo — Verbi passo passo · Нажми на глагол, чтобы открыть спряжение и примеры.</footer>
+</div>
+
+<script>
+/* ================================================================
+   DATI — ДОБАВЛЯТЬ ГЛАГОЛЫ СЮДА (одна строка = один глагол)
+   v: инфинитив · ru: перевод · liv: A1/A2 · lez: урок (например 'A2 U3 L3')
+   tipo: 'are' | 'ere' | 'ire' | 'isc' (как capire) | 'irr' (неправильный)
+   рефлексивные глаголы пишем с -rsi (innervosirsi) — местоимения и essere добавляются сами
+   pres: 6 форм presente (только у неправильных) · pp: причастие, если неправильное
+   aux: 'essere' (если не avere) · ger: герундий, если неправильный
+   reg: управление [['глагол + предлог','пример'], …] · note: заметка по-русски
+   ================================================================ */
+const VERBI=[
+ {v:'essere',ru:'быть',liv:'A1',lez:'A1 base',tipo:'irr',pres:'sono sei è siamo siete sono',pp:'stato',aux:'essere',reg:[['essere di + город','Sono di Milano.'],['essere a / in','Sono a casa. Sono in ufficio.']]},
+ {v:'avere',ru:'иметь',liv:'A1',lez:'A1 base',tipo:'irr',pres:'ho hai ha abbiamo avete hanno',reg:[['avere bisogno di','Ho bisogno di un biglietto.'],['avere voglia di + инф.','Hai voglia di venire al cinema?'],['avercela (ce l’ho)','Il biglietto? Sì, ce l’ho.']]},
+ {v:'fare',ru:'делать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'faccio fai fa facciamo fate fanno',pp:'fatto',ger:'facendo',reg:[['fare la fila','Stiamo facendo la fila.']]},
+ {v:'andare',ru:'идти, ехать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'vado vai va andiamo andate vanno',aux:'essere',reg:[['andare a + город / инф.','Vado a Roma. Vado a ballare.'],['andare in + страна, место','Vado in Italia, in centro, in ufficio.'],['andare al / a teatro','Andiamo a teatro, al cinema.']]},
+ {v:'venire',ru:'приходить',liv:'A1',lez:'A1 base',tipo:'irr',pres:'vengo vieni viene veniamo venite vengono',pp:'venuto',aux:'essere',reg:[['venire da','Vengo da Mosca.'],['venire con','Ti va di venire con me?']]},
+ {v:'stare',ru:'находиться, быть (самочувствие)',liv:'A1',lez:'A1 base',tipo:'irr',pres:'sto stai sta stiamo state stanno',pp:'stato',aux:'essere',reg:[['stare + gerundio','Sto comprando il biglietto.']]},
+ {v:'dare',ru:'давать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'do dai dà diamo date danno',reg:[['dare qc a qn','Ti do il biglietto.'],['dare fastidio a qn','Mi dà fastidio il rumore.']]},
+ {v:'dire',ru:'говорить, сказать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'dico dici dice diciamo dite dicono',pp:'detto',ger:'dicendo',reg:[['dire qc a qn','Ti dico una cosa.']]},
+ {v:'uscire',ru:'выходить, гулять',liv:'A1',lez:'A1 base',tipo:'irr',pres:'esco esci esce usciamo uscite escono',aux:'essere',reg:[['uscire con','Esco con gli amici.'],['uscire da','Esco dall’ufficio alle sei.']]},
+ {v:'bere',ru:'пить',liv:'A1',lez:'A1 base',tipo:'irr',pres:'bevo bevi beve beviamo bevete bevono',pp:'bevuto',ger:'bevendo'},
+ {v:'sapere',ru:'знать, уметь',liv:'A1',lez:'A1 base',tipo:'irr',pres:'so sai sa sappiamo sapete sanno',reg:[['sapere + инф. (= уметь)','So suonare la chitarra.']]},
+ {v:'dovere',ru:'быть должным',liv:'A1',lez:'A1 base',tipo:'irr',pres:'devo devi deve dobbiamo dovete devono',reg:[['dovere + инф.','Il telefono? Lo devo spegnere / Devo spegnerlo.']]},
+ {v:'potere',ru:'мочь',liv:'A1',lez:'A1 base',tipo:'irr',pres:'posso puoi può possiamo potete possono',reg:[['potere + инф.','Posso lasciarla qui? / La posso lasciare qui?']]},
+ {v:'volere',ru:'хотеть',liv:'A1',lez:'A1 base',tipo:'irr',pres:'voglio vuoi vuole vogliamo volete vogliono',reg:[['volere + инф.','I biglietti? Li voglio comprare / Voglio comprarli.']]},
+ {v:'tenere',ru:'держать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'tengo tieni tiene teniamo tenete tengono',pp:'tenuto'},
+ {v:'rimanere',ru:'оставаться',liv:'A1',lez:'A1 base',tipo:'irr',pres:'rimango rimani rimane rimaniamo rimanete rimangono',pp:'rimasto',aux:'essere',reg:[['rimanere a / in','Rimaniamo a casa.']]},
+ {v:'scegliere',ru:'выбирать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'scelgo scegli sceglie scegliamo scegliete scelgono',pp:'scelto'},
+ {v:'parlare',ru:'говорить',liv:'A1',lez:'A1 base',tipo:'are',reg:[['parlare di','il film di cui ti ho parlato'],['parlare con','Parlo con Marco.'],['parlare a qn','Le ho parlato del ragazzo.']]},
+ {v:'mangiare',ru:'есть',liv:'A1',lez:'A1 base',tipo:'are'},
+ {v:'cercare',ru:'искать; стараться',liv:'A1',lez:'A1 base',tipo:'are',reg:[['cercare qc','Cerco un biglietto.'],['cercare di + инф. (= стараться)','Cerchiamo di non tossire.']]},
+ {v:'telefonare',ru:'звонить',liv:'A1',lez:'A1 base',tipo:'are',reg:[['telefonare a qn','l’amico a cui telefono']]},
+ {v:'pensare',ru:'думать',liv:'A1',lez:'A1 base',tipo:'are',reg:[['pensare a','Mara è una persona a cui penso spesso. · Ci penso.'],['pensare di + инф.','Penso di andare a teatro.']]},
+ {v:'prenotare',ru:'бронировать',liv:'A1',lez:'A2 U3 L3',tipo:'are',a1:true,reg:[['prenotare qc','È possibile prenotare telefonicamente?']]},
+ {v:'prendere',ru:'брать',liv:'A1',lez:'A1 base',tipo:'ere',pp:'preso'},
+ {v:'leggere',ru:'читать',liv:'A1',lez:'A1 base',tipo:'ere',pp:'letto'},
+ {v:'scrivere',ru:'писать',liv:'A1',lez:'A1 base',tipo:'ere',pp:'scritto',reg:[['scrivere a qn','l’amica a cui scrivo']]},
+ {v:'vedere',ru:'видеть',liv:'A1',lez:'A1 base',tipo:'ere',pp:'visto'},
+ {v:'dormire',ru:'спать',liv:'A1',lez:'A1 base',tipo:'ire'},
+ {v:'partire',ru:'уезжать',liv:'A1',lez:'A1 base',tipo:'ire',aux:'essere',reg:[['partire per','Parto per Roma.']]},
+ {v:'capire',ru:'понимать',liv:'A1',lez:'A1 base',tipo:'isc'},
+ {v:'finire',ru:'заканчивать',liv:'A1',lez:'A1 base',tipo:'isc',reg:[['finire di + инф.','Finisco di lavorare alle sei.']]},
+ {v:'preferire',ru:'предпочитать',liv:'A1',lez:'A1 base',tipo:'isc'},
+ {v:'chiamarsi',ru:'называться, звать',liv:'A1',lez:'A1 base',tipo:'are'},
+ {v:'svegliarsi',ru:'просыпаться',liv:'A1',lez:'A1 base',tipo:'are'},
+ /* ---- A2 · Unità 3 «Ti va di venire?» · Lezione 3 «Una serata a teatro» ---- */
+ {v:'spegnere',ru:'выключать',liv:'A2',lez:'A2 U3 L3',tipo:'irr',pres:'spengo spegni spegne spegniamo spegnete spengono',pp:'spento',reg:[['spegnere qc','Il telefono possiamo spegnerlo.']]},
+ {v:'starnutire',ru:'чихать',liv:'A2',lez:'A2 U3 L3',tipo:'isc'},
+ {v:'tossire',ru:'кашлять',liv:'A2',lez:'A2 U3 L3',tipo:'ire',note:'Можно и с -isc-: tossisco, tossisci…'},
+ {v:'innervosirsi',ru:'разнервничаться',liv:'A2',lez:'A2 U3 L3',tipo:'isc',reg:[['innervosirsi per qc','Mi sono innervosita per il rumore.']]},
+ {v:'mantenere',ru:'сохранять, держать',liv:'A2',lez:'A2 U3 L3',tipo:'irr',pres:'mantengo mantieni mantiene manteniamo mantenete mantengono',pp:'mantenuto',note:'Спрягается как tenere.'},
+ {v:'muovere',ru:'двигать',liv:'A2',lez:'A2 U3 L3',tipo:'ere',pp:'mosso'},
+ {v:'evitare',ru:'избегать',liv:'A2',lez:'A2 U3 L3',tipo:'are',reg:[['evitare qc','Evitiamo commenti e rumori.'],['evitare di + инф.','Evitiamo di leggere la guida ad alta voce.']]},
+ {v:'sopportare',ru:'терпеть',liv:'A2',lez:'A2 U3 L3',tipo:'are',reg:[['non sopportare qc / qn','Non sopporto le persone che parlano ad alta voce.']]},
+ {v:'chiacchierare',ru:'болтать',liv:'A2',lez:'A2 U3 L3',tipo:'are',reg:[['chiacchierare con','Chiacchiero con le amiche.']]},
+ {v:'acquistare',ru:'покупать',liv:'A2',lez:'A2 U3 L3',tipo:'are',reg:[['acquistare qc','Le conviene acquistare i biglietti via internet.']]},
+ {v:'aspettare',ru:'ждать',liv:'A2',lez:'A2 U3 L3',tipo:'are',a1:true,reg:[['aspettare qc / qn (без предлога!)','Aspettiamo la pausa.']]},
+ {v:'discutere',ru:'спорить, обсуждать',liv:'A2',lez:'A2 U3 L3',tipo:'ere',pp:'discusso',reg:[['discutere con qn','discutere con chi le occupa'],['discutere di qc','Discutiamo del programma.']]},
+ {v:'dipendere',ru:'зависеть',liv:'A2',lez:'A2 U3 L3',tipo:'ere',pp:'dipeso',aux:'essere',reg:[['dipendere da','Dipende dal prezzo.']]},
+ {v:'convenire',ru:'быть выгодным',liv:'A2',lez:'A2 U3 L3',tipo:'irr',pres:'convengo convieni conviene conveniamo convenite convengono',pp:'convenuto',aux:'essere',reg:[['convenire a qn','Le conviene comprarli online. · Ti conviene…']],note:'Чаще всего в 3-м лице: conviene, convengono.'},
+];
+/* ================================================================ */
+
+const PRON=['io','tu','lui/lei','noi','voi','loro'],RP=['mi','ti','si','ci','vi','si'];
+const norm=s=>(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[’']/g,"'").trim();
+function regular(v,tipo){
+  let base=v,rif=false;if(/rsi$/.test(v)){rif=true;base=v.slice(0,-2)+'e'}
+  const st=base.slice(0,-3),end=base.slice(-3);let f;
+  if(tipo==='isc'){f=[st+'isco',st+'isci',st+'isce',st+'iamo',st+'ite',st+'iscono']}
+  else if(end==='are'){const h=/[cg]$/.test(st)?st+'h':st;const i=/i$/.test(st)?st.slice(0,-1):st;
+    f=[st+'o',(/i$/.test(st)?st:h+'i'),st+'a',(/i$/.test(st)?st+'amo':h+'iamo'),st+'ate',st+'ano']}
+  else if(end==='ere'){f=[st+'o',st+'i',st+'e',st+'iamo',st+'ete',st+'ono']}
+  else{f=[st+'o',st+'i',st+'e',st+'iamo',st+'ite',st+'ono']}
+  if(rif)f=f.map((x,i)=>RP[i]+' '+x);
+  const pp=end==='are'?st+'ato':end==='ere'?st+'uto':st+'ito';
+  const ger=end==='are'?st+'ando':st+'endo';
+  return {f,pp,ger,rif};
+}
+function build(d){
+  const tipo=d.tipo,r=regular(d.v,tipo==='irr'?(d.v.endsWith('are')?'are':'ere'):tipo);
+  const forms=d.pres?d.pres.split(' '):r.f;
+  const pp=d.pp||r.pp,ger=d.ger||r.ger,ess=d.aux==='essere'||r.rif;
+  return {forms,reg:r,pp,ger,ess};
+}
+function hl(form,regf,tipo){
+  if(tipo==='isc')return form.replace(/isc/,'<b>isc</b>');
+  if(regf&&form!==regf)return '<span class="x">'+form+'</span>';
+  return form;
+}
+function card(d){
+  const b=build(d),rr=regular(d.v,d.v.endsWith('are')?'are':d.v.endsWith('ere')?'ere':'ire');
+  const rows=b.forms.map((f,i)=>'<tr><td class="p">'+PRON[i]+'</td><td class="'+(d.tipo==='isc'?'isc':'')+'">'+hl(f,d.pres?rr.f[i]:null,d.tipo)+'</td></tr>').join('');
+  const ppIrr=d.pp&&d.pp!==rr.pp;
+  const ppx=ppIrr?'<span class="x">'+b.pp+'</span>':b.pp;
+  const pass=b.reg.rif?('mi sono '+ppx.replace(/o(<\/span>)?$/,'o$1/a')+' · ci siamo '+ppx.replace(/o(<\/span>)?$/,'i$1/e'))
+            :b.ess?('sono '+ppx.replace(/o(<\/span>)?$/,'o$1/a')+' · siamo '+ppx.replace(/o(<\/span>)?$/,'i$1/e'))
+            :('ho '+ppx+' · abbiamo '+ppx);
+  const gx=d.ger?'<span class="x">'+b.ger+'</span>':b.ger;
+  const stare=b.reg.rif?('mi sto '+b.ger.replace(/o$/,'o')+' / sto '+b.ger+'mi'):('sto '+gx);
+  const tags=[];
+  if(d.tipo==='irr')tags.push('<span class="tag irr">irregolare</span>');
+  if(d.tipo==='isc')tags.push('<span class="tag isc">-isc-</span>');
+  if(b.reg.rif)tags.push('<span class="tag rif">riflessivo</span>');
+  if(b.ess)tags.push('<span class="tag">essere</span>');
+  tags.push('<span class="tag lv">'+d.lez+'</span>');
+  const reg=(d.reg||[]).map(([a,e])=>'<li><span class="pr">'+a+'</span> — <i>'+e+'</i></li>').join('');
+  return '<details class="v" data-k="'+norm(d.v+' '+d.ru)+'"><summary><span class="inf">'+d.v+(d.a1?' ♻':'')+'</span><span class="tr">'+d.ru+'</span><span class="tags">'+tags.join('')+'</span></summary>'
+   +'<div class="body"><div><h3>Presente</h3><table>'+rows+'</table></div>'
+   +'<div><h3>Passato prossimo</h3><p>'+pass+'</p><h3>Gerundio</h3><p>'+gx+' <span style="color:var(--soft)">('+stare+')</span></p>'
+   +(reg?'<h3>Управление и примеры</h3><ul class="reg">'+reg+'</ul>':'')+(d.note?'<p class="note">'+d.note+'</p>':'')+'</div></div></details>';
+}
+const $=s=>document.querySelector(s);
+const list=$('#list');
+const sorted=[...VERBI].sort((a,b)=>a.v.localeCompare(b.v,'it'));
+list.innerHTML=sorted.map(card).join('');
+const items=[...list.children].map((el,i)=>({el,d:sorted[i]}));
+const F={liv:'Tutti',tipo:'Tutti',lez:'Tutte',q:''};
+/* ссылки с параметрами: ?liv=A1 (только A1) · ?lez=A2%20U3%20L3 (глаголы урока) */
+const URLP=new URLSearchParams(location.search);
+if(/^A[12]$/.test(URLP.get('liv')||''))F.liv=URLP.get('liv');
+if(URLP.get('lez')&&VERBI.some(d=>d.lez===URLP.get('lez')))F.lez=URLP.get('lez');
+function chips(id,key,vals){const box=$(id);vals.forEach(v=>{const b=document.createElement('button');b.type='button';b.className='chip'+(v===F[key]?' on':'');b.textContent=v;b.onclick=()=>{F[key]=v;box.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c===b));apply()};box.append(b)})}
+chips('#fLiv','liv',['Tutti','A1','A2']);
+chips('#fTipo','tipo',['Tutti','regolari','-isc-','irregolari','riflessivi','con essere']);
+const lez=['Tutte',...[...new Set(VERBI.map(d=>d.lez))].sort()];
+$('#fLez').innerHTML=lez.map(l=>'<option>'+l+'</option>').join('');$('#fLez').value=F.lez;$('#fLez').onchange=e=>{F.lez=e.target.value;apply()};
+$('#q').addEventListener('input',e=>{F.q=norm(e.target.value);apply()});
+$('#openAll').onclick=()=>items.forEach(x=>{if(!x.el.hidden)x.el.open=true});
+$('#closeAll').onclick=()=>items.forEach(x=>x.el.open=false);
+function apply(){let n=0;
+  items.forEach(({el,d})=>{const b=build(d);
+    let ok=(F.liv==='Tutti'||d.liv===F.liv)&&(F.lez==='Tutte'||d.lez===F.lez)&&(!F.q||el.dataset.k.includes(F.q));
+    if(ok&&F.tipo!=='Tutti'){ok={'regolari':['are','ere','ire'].includes(d.tipo)&&!b.reg.rif,'-isc-':d.tipo==='isc','irregolari':d.tipo==='irr','riflessivi':b.reg.rif,'con essere':b.ess}[F.tipo]}
+    el.hidden=!ok;if(ok)n++;if(ok&&F.q&&n<=3)el.open=true});
+  $('#count').textContent=n?('Verbi: '+n+' su '+VERBI.length):'';
+  if(!n){if(!$('#none')){const p=document.createElement('p');p.id='none';p.className='none';p.textContent='Nessun verbo trovato. Prova un’altra parola.';list.after(p)}}else{const z=$('#none');if(z)z.remove()}
+}
+apply();
+</script>
+</body></html>
