@@ -86,25 +86,26 @@ mark{background:#FFE9A8;color:inherit;border-radius:3px}
    рефлексивные глаголы пишем с -rsi (innervosirsi) — местоимения и essere добавляются сами
    pres: 6 форм presente (только у неправильных) · pp: причастие, если неправильное
    aux: 'essere' (если не avere) · ger: герундий, если неправильный
+   lez2: второй урок, где глагол — один из главных (для ссылки ?lez=…)
    reg: управление [['глагол + предлог','пример'], …] · note: заметка по-русски
    ================================================================ */
 const VERBI=[
- {v:'essere',ru:'быть',liv:'A1',lez:'A1 base',tipo:'irr',pres:'sono sei è siamo siete sono',pp:'stato',aux:'essere',reg:[['essere di + город','Sono di Milano.'],['essere a / in','Sono a casa. Sono in ufficio.']]},
+ {v:'essere',ru:'быть',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'sono sei è siamo siete sono',pp:'stato',aux:'essere',reg:[['essere di + город','Sono di Milano.'],['essere a / in','Sono a casa. Sono in ufficio.']]},
  {v:'avere',ru:'иметь',liv:'A1',lez:'A1 base',tipo:'irr',pres:'ho hai ha abbiamo avete hanno',reg:[['avere bisogno di','Ho bisogno di un biglietto.'],['avere voglia di + инф.','Hai voglia di venire al cinema?'],['avercela (ce l’ho)','Il biglietto? Sì, ce l’ho.']]},
  {v:'fare',ru:'делать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'faccio fai fa facciamo fate fanno',pp:'fatto',ger:'facendo',reg:[['fare la fila','Stiamo facendo la fila.']]},
- {v:'andare',ru:'идти, ехать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'vado vai va andiamo andate vanno',aux:'essere',reg:[['andare a + город / инф.','Vado a Roma. Vado a ballare.'],['andare in + страна, место','Vado in Italia, in centro, in ufficio.'],['andare al / a teatro','Andiamo a teatro, al cinema.']]},
- {v:'venire',ru:'приходить',liv:'A1',lez:'A1 base',tipo:'irr',pres:'vengo vieni viene veniamo venite vengono',pp:'venuto',aux:'essere',reg:[['venire da','Vengo da Mosca.'],['venire con','Ti va di venire con me?']]},
- {v:'stare',ru:'находиться, быть (самочувствие)',liv:'A1',lez:'A1 base',tipo:'irr',pres:'sto stai sta stiamo state stanno',pp:'stato',aux:'essere',reg:[['stare + gerundio','Sto comprando il biglietto.']]},
+ {v:'andare',ru:'идти, ехать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'vado vai va andiamo andate vanno',aux:'essere',reg:[['andare a + город / инф.','Vado a Roma. Vado a ballare.'],['andare in + страна, место','Vado in Italia, in centro, in ufficio.'],['andare al / a teatro','Andiamo a teatro, al cinema.']]},
+ {v:'venire',ru:'приходить',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'vengo vieni viene veniamo venite vengono',pp:'venuto',aux:'essere',reg:[['venire da','Vengo da Mosca.'],['venire con','Ti va di venire con me?']]},
+ {v:'stare',ru:'находиться, быть (самочувствие)',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'sto stai sta stiamo state stanno',pp:'stato',aux:'essere',reg:[['stare + gerundio','Sto comprando il biglietto.']]},
  {v:'dare',ru:'давать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'do dai dà diamo date danno',reg:[['dare qc a qn','Ti do il biglietto.'],['dare fastidio a qn','Mi dà fastidio il rumore.']]},
  {v:'dire',ru:'говорить, сказать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'dico dici dice diciamo dite dicono',pp:'detto',ger:'dicendo',reg:[['dire qc a qn','Ti dico una cosa.']]},
- {v:'uscire',ru:'выходить, гулять',liv:'A1',lez:'A1 base',tipo:'irr',pres:'esco esci esce usciamo uscite escono',aux:'essere',reg:[['uscire con','Esco con gli amici.'],['uscire da','Esco dall’ufficio alle sei.']]},
+ {v:'uscire',ru:'выходить, гулять',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'esco esci esce usciamo uscite escono',aux:'essere',reg:[['uscire con','Esco con gli amici.'],['uscire da','Esco dall’ufficio alle sei.']]},
  {v:'bere',ru:'пить',liv:'A1',lez:'A1 base',tipo:'irr',pres:'bevo bevi beve beviamo bevete bevono',pp:'bevuto',ger:'bevendo'},
  {v:'sapere',ru:'знать, уметь',liv:'A1',lez:'A1 base',tipo:'irr',pres:'so sai sa sappiamo sapete sanno',reg:[['sapere + инф. (= уметь)','So suonare la chitarra.']]},
  {v:'dovere',ru:'быть должным',liv:'A1',lez:'A1 base',tipo:'irr',pres:'devo devi deve dobbiamo dovete devono',reg:[['dovere + инф.','Il telefono? Lo devo spegnere / Devo spegnerlo.']]},
  {v:'potere',ru:'мочь',liv:'A1',lez:'A1 base',tipo:'irr',pres:'posso puoi può possiamo potete possono',reg:[['potere + инф.','Posso lasciarla qui? / La posso lasciare qui?']]},
  {v:'volere',ru:'хотеть',liv:'A1',lez:'A1 base',tipo:'irr',pres:'voglio vuoi vuole vogliamo volete vogliono',reg:[['volere + инф.','I biglietti? Li voglio comprare / Voglio comprarli.']]},
  {v:'tenere',ru:'держать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'tengo tieni tiene teniamo tenete tengono',pp:'tenuto'},
- {v:'rimanere',ru:'оставаться',liv:'A1',lez:'A1 base',tipo:'irr',pres:'rimango rimani rimane rimaniamo rimanete rimangono',pp:'rimasto',aux:'essere',reg:[['rimanere a / in','Rimaniamo a casa.']]},
+ {v:'rimanere',ru:'оставаться',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'rimango rimani rimane rimaniamo rimanete rimangono',pp:'rimasto',aux:'essere',reg:[['rimanere a / in','Rimaniamo a casa.']]},
  {v:'scegliere',ru:'выбирать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'scelgo scegli sceglie scegliamo scegliete scelgono',pp:'scelto'},
  {v:'parlare',ru:'говорить',liv:'A1',lez:'A1 base',tipo:'are',reg:[['parlare di','il film di cui ti ho parlato'],['parlare con','Parlo con Marco.'],['parlare a qn','Le ho parlato del ragazzo.']]},
  {v:'mangiare',ru:'есть',liv:'A1',lez:'A1 base',tipo:'are'},
@@ -117,7 +118,7 @@ const VERBI=[
  {v:'scrivere',ru:'писать',liv:'A1',lez:'A1 base',tipo:'ere',pp:'scritto',reg:[['scrivere a qn','l’amica a cui scrivo']]},
  {v:'vedere',ru:'видеть',liv:'A1',lez:'A1 base',tipo:'ere',pp:'visto'},
  {v:'dormire',ru:'спать',liv:'A1',lez:'A1 base',tipo:'ire'},
- {v:'partire',ru:'уезжать',liv:'A1',lez:'A1 base',tipo:'ire',aux:'essere',reg:[['partire per','Parto per Roma.']]},
+ {v:'partire',ru:'уезжать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'ire',aux:'essere',reg:[['partire per','Parto per Roma.']]},
  {v:'capire',ru:'понимать',liv:'A1',lez:'A1 base',tipo:'isc'},
  {v:'finire',ru:'заканчивать',liv:'A1',lez:'A1 base',tipo:'isc',reg:[['finire di + инф.','Finisco di lavorare alle sei.']]},
  {v:'preferire',ru:'предпочитать',liv:'A1',lez:'A1 base',tipo:'isc'},
@@ -138,23 +139,14 @@ const VERBI=[
  {v:'discutere',ru:'спорить, обсуждать',liv:'A2',lez:'A2 U3 L3',tipo:'ere',pp:'discusso',reg:[['discutere con qn','discutere con chi le occupa'],['discutere di qc','Discutiamo del programma.']]},
  {v:'dipendere',ru:'зависеть',liv:'A2',lez:'A2 U3 L3',tipo:'ere',pp:'dipeso',aux:'essere',reg:[['dipendere da','Dipende dal prezzo.']]},
  {v:'convenire',ru:'быть выгодным',liv:'A2',lez:'A2 U3 L3',tipo:'irr',pres:'convengo convieni conviene conveniamo convenite convengono',pp:'convenuto',aux:'essere',reg:[['convenire a qn','Le conviene comprarli online. · Ti conviene…']],note:'Чаще всего в 3-м лице: conviene, convengono.'},
- /* ---- A1 · Unità 6 «Andiamo in vacanza!» · Lezione 1 «Cosa hai fatto ieri?» (passato prossimo con avere) ---- */
- {v:'passare',ru:'проводить (время); проходить',liv:'A1',lez:'A1 U6 L1',tipo:'are',reg:[['passare + время','Ieri ho passato una giornata molto intensa.']]},
- {v:'visitare',ru:'посещать, осматривать',liv:'A1',lez:'A1 U6 L1',tipo:'are',reg:[['visitare qc','La mattina ho visitato il museo di Ötzi.']]},
- {v:'pranzare',ru:'обедать',liv:'A1',lez:'A1 U6 L1',tipo:'are',reg:[['pranzare in / al','Poi ho pranzato in un ristorante tipico.']]},
- {v:'cenare',ru:'ужинать',liv:'A1',lez:'A1 U6 L1',tipo:'are',reg:[['cenare con qn','La sera ho cenato con un’amica.']]},
- {v:'camminare',ru:'ходить пешком, гулять',liv:'A1',lez:'A1 U6 L1',tipo:'are',reg:[['camminare per','Il pomeriggio ho camminato per le strade di Merano.']]},
- {v:'comprare',ru:'покупать',liv:'A1',lez:'A1 U6 L1',tipo:'are',reg:[['comprare qc per qn','Ho comprato un regalo per te.']]},
- {v:'lavorare',ru:'работать',liv:'A1',lez:'A1 U6 L1',tipo:'are',reg:[['lavorare in / a','Ieri Anna ha lavorato in ufficio.']]},
- {v:'guardare',ru:'смотреть',liv:'A1',lez:'A1 U6 L1',tipo:'are',reg:[['guardare qc (без предлога!)','Ieri sera ho guardato la TV.']]},
- {v:'ascoltare',ru:'слушать',liv:'A1',lez:'A1 U6 L1',tipo:'are',reg:[['ascoltare qc (без предлога!)','La sera abbiamo ascoltato l’Aida all’Arena.']]},
- {v:'ballare',ru:'танцевать',liv:'A1',lez:'A1 U6 L1',tipo:'are',reg:[['ballare in discoteca','Sabato Marco ha ballato in discoteca.']]},
- {v:'cucinare',ru:'готовить (еду)',liv:'A1',lez:'A1 U6 L1',tipo:'are',reg:[['cucinare qc','Ieri ho cucinato la pasta.']]},
- {v:'studiare',ru:'учить, изучать',liv:'A1',lez:'A1 U6 L1',tipo:'are',reg:[['studiare qc','Il pomeriggio ho studiato l’italiano.']]},
- {v:'riposare',ru:'отдыхать',liv:'A1',lez:'A1 U6 L1',tipo:'are',reg:[['riposare un po’','Domenica hai riposato un po’?']]},
- {v:'ricevere',ru:'получать',liv:'A1',lez:'A1 U6 L1',tipo:'ere',reg:[['ricevere qc','Avete ricevuto il messaggio?']]},
- {v:'vendere',ru:'продавать',liv:'A1',lez:'A1 U6 L1',tipo:'ere'},
- {v:'sentire',ru:'слышать; чувствовать',liv:'A1',lez:'A1 U6 L1',tipo:'ire'},
+ /* ---- A1 · Unità 6 «Andiamo in vacanza!» · Lezione 2 «Dove sei andata?» (passato prossimo con essere) ---- */
+ {v:'arrivare',ru:'приезжать, прибывать',liv:'A1',lez:'A1 U6 L2',tipo:'are',aux:'essere',reg:[['arrivare a + город','Sono arrivata ieri a Bolzano.'],['arrivare in + страна','Siamo arrivati in Italia.']]},
+ {v:'tornare',ru:'возвращаться',liv:'A1',lez:'A1 U6 L2',tipo:'are',aux:'essere',reg:[['tornare a / da','Siete tornati al lago anche domenica? · Torno da Roma.']]},
+ {v:'entrare',ru:'входить',liv:'A1',lez:'A1 U6 L2',tipo:'are',aux:'essere',reg:[['entrare in','Sono entrata nel museo.']]},
+ {v:'salire',ru:'подниматься',liv:'A1',lez:'A1 U6 L2',tipo:'irr',pres:'salgo sali sale saliamo salite salgono',aux:'essere',reg:[['salire su (sul, sulla…)','Ieri sono salito sul cratere.']]},
+ {v:'restare',ru:'оставаться',liv:'A1',lez:'A1 U6 L2',tipo:'are',aux:'essere',reg:[['restare a / in','Sono restata a casa.']],note:'= rimanere'},
+ {v:'nascere',ru:'родиться',liv:'A1',lez:'A1 U6 L2',tipo:'ere',pp:'nato',aux:'essere',reg:[['nascere a + город · nel + год','Sono nata a Mosca nel 1990.']],note:'Чаще всего в прошедшем: sono nato/-a.'},
+ {v:'diventare',ru:'становиться',liv:'A1',lez:'A1 U6 L2',tipo:'are',aux:'essere',reg:[['diventare + прилагательное / существительное','Marco è diventato papà.']]},
 ];
 /* ================================================================ */
 
@@ -215,18 +207,18 @@ const F={liv:'Tutti',tipo:'Tutti',lez:'Tutte',q:''};
 /* ссылки с параметрами: ?liv=A1 (только A1) · ?lez=A2%20U3%20L3 (глаголы урока) */
 const URLP=new URLSearchParams(location.search);
 if(/^A[12]$/.test(URLP.get('liv')||''))F.liv=URLP.get('liv');
-if(URLP.get('lez')&&VERBI.some(d=>d.lez===URLP.get('lez')))F.lez=URLP.get('lez');
+if(URLP.get('lez')&&VERBI.some(d=>d.lez===URLP.get('lez')||d.lez2===URLP.get('lez')))F.lez=URLP.get('lez');
 function chips(id,key,vals){const box=$(id);vals.forEach(v=>{const b=document.createElement('button');b.type='button';b.className='chip'+(v===F[key]?' on':'');b.textContent=v;b.onclick=()=>{F[key]=v;box.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c===b));apply()};box.append(b)})}
 chips('#fLiv','liv',['Tutti','A1','A2']);
 chips('#fTipo','tipo',['Tutti','regolari','-isc-','irregolari','riflessivi','con essere']);
-const lez=['Tutte',...[...new Set(VERBI.map(d=>d.lez))].sort()];
+const lez=['Tutte',...[...new Set(VERBI.flatMap(d=>d.lez2?[d.lez,d.lez2]:[d.lez]))].sort()];
 $('#fLez').innerHTML=lez.map(l=>'<option>'+l+'</option>').join('');$('#fLez').value=F.lez;$('#fLez').onchange=e=>{F.lez=e.target.value;apply()};
 $('#q').addEventListener('input',e=>{F.q=norm(e.target.value);apply()});
 $('#openAll').onclick=()=>items.forEach(x=>{if(!x.el.hidden)x.el.open=true});
 $('#closeAll').onclick=()=>items.forEach(x=>x.el.open=false);
 function apply(){let n=0;
   items.forEach(({el,d})=>{const b=build(d);
-    let ok=(F.liv==='Tutti'||d.liv===F.liv)&&(F.lez==='Tutte'||d.lez===F.lez)&&(!F.q||el.dataset.k.includes(F.q));
+    let ok=(F.liv==='Tutti'||d.liv===F.liv)&&(F.lez==='Tutte'||d.lez===F.lez||d.lez2===F.lez)&&(!F.q||el.dataset.k.includes(F.q));
     if(ok&&F.tipo!=='Tutti'){ok={'regolari':['are','ere','ire'].includes(d.tipo)&&!b.reg.rif,'-isc-':d.tipo==='isc','irregolari':d.tipo==='irr','riflessivi':b.reg.rif,'con essere':b.ess}[F.tipo]}
     el.hidden=!ok;if(ok)n++;if(ok&&F.q&&n<=3)el.open=true});
   $('#count').textContent=n?('Verbi: '+n+' su '+VERBI.length):'';
