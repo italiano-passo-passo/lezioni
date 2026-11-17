@@ -107,7 +107,7 @@ const VERBI=[
  {v:'volere',ru:'хотеть',liv:'A1',lez:'A1 base',tipo:'irr',pres:'voglio vuoi vuole vogliamo volete vogliono',reg:[['volere + инф.','I biglietti? Li voglio comprare / Voglio comprarli.']]},
  {v:'tenere',ru:'держать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'tengo tieni tiene teniamo tenete tengono',pp:'tenuto'},
  {v:'rimanere',ru:'оставаться',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'rimango rimani rimane rimaniamo rimanete rimangono',pp:'rimasto',aux:'essere',reg:[['rimanere a / in','Rimaniamo a casa.']]},
- {v:'scegliere',ru:'выбирать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'scelgo scegli sceglie scegliamo scegliete scelgono',pp:'scelto'},
+ {v:'scegliere',ru:'выбирать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L5',tipo:'irr',pres:'scelgo scegli sceglie scegliamo scegliete scelgono',pp:'scelto',reg:[['scegliere qc','Abbiamo scelto un piccolo ristorante vicino al lago.']],note:'В io и loro появляется g: scelgo, scelgono.'},
  {v:'parlare',ru:'говорить',liv:'A1',lez:'A1 base',tipo:'are',reg:[['parlare di','il film di cui ti ho parlato'],['parlare con','Parlo con Marco.'],['parlare a qn','Le ho parlato del ragazzo.']]},
  {v:'mangiare',ru:'есть',liv:'A1',lez:'A1 base',tipo:'are'},
  {v:'cercare',ru:'искать; стараться',liv:'A1',lez:'A1 base',lez2:'A1 U6 L3',tipo:'are',reg:[['cercare qc','Cerco un biglietto.'],['cercare di + инф. (= стараться)','Cerchiamo di non tossire.']]},
@@ -121,7 +121,7 @@ const VERBI=[
  {v:'dormire',ru:'спать',liv:'A1',lez:'A1 base',tipo:'ire'},
  {v:'partire',ru:'уезжать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'ire',aux:'essere',reg:[['partire per','Parto per Roma.']]},
  {v:'capire',ru:'понимать',liv:'A1',lez:'A1 base',tipo:'isc'},
- {v:'finire',ru:'заканчивать',liv:'A1',lez:'A1 base',tipo:'isc',reg:[['finire di + инф.','Finisco di lavorare alle sei.']]},
+ {v:'finire',ru:'заканчивать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L5',tipo:'isc',reg:[['finire di + инф.','Finisco di lavorare alle sei. · Ho finito di pulire la cucina in cinque minuti!']],note:'Когда кончается само событие — с essere: Il film è finito. La lezione è finita.'},
  {v:'preferire',ru:'предпочитать',liv:'A1',lez:'A1 base',tipo:'isc'},
  {v:'chiamarsi',ru:'называться, звать',liv:'A1',lez:'A1 base',tipo:'are'},
  {v:'svegliarsi',ru:'просыпаться',liv:'A1',lez:'A1 base',tipo:'are'},
@@ -162,6 +162,11 @@ const VERBI=[
  {v:'piovere',ru:'идти (о дожде)',liv:'A1',lez:'A1 U6 L4',tipo:'ere',imp:'piove',reg:[['piove (без подлежащего)','Prendi l’ombrello: piove! · Ieri ha piovuto.']],note:'Только форма «он»: piove. В прошедшем ha piovuto (можно и è piovuto).'},
  {v:'nevicare',ru:'идти (о снеге)',liv:'A1',lez:'A1 U6 L4',tipo:'are',imp:'nevica',reg:[['nevica (без подлежащего)','Sulle Alpi nevica. · Stanotte ha nevicato.']],note:'Только форма «он»: nevica. В прошедшем ha nevicato.'},
  {v:'conoscere',ru:'знакомиться, знать',liv:'A1',lez:'A1 U6 L4',tipo:'ere',pp:'conosciuto',reg:[['conoscere qn (без предлога!)','In vacanza ho conosciuto due ragazzi di Bologna.']],note:'Произношение: conosco [к], conosci [ш]. В причастии -i- сохраняет [ш]: conosciuto.'},
+/* ---- A1 · Unità 6 «Andiamo in vacanza!» · Lezione 5 «Cos’hai fatto tutto il giorno?» ---- */
+ {v:'cominciare',ru:'начинать',liv:'A1',lez:'A1 U6 L5',tipo:'are',reg:[['cominciare a + инф.','Comincio a lavorare alle nove. · Ho cominciato a mettere in ordine la casa.']],note:'Когда начинается само событие — с essere: Il film è cominciato alle nove.'},
+ {v:'passare',ru:'проводить (время); проходить',liv:'A1',lez:'A1 U6 L5',tipo:'are',reg:[['passare (il tempo) a + инф.','Ho passato la domenica a fare le pulizie.'],['passare una giornata / le vacanze','Ho passato una giornata molto intensa.']]},
+ {v:'pulire',ru:'чистить, убирать',liv:'A1',lez:'A1 U6 L5',tipo:'isc',reg:[['pulire qc','Ho pulito la cucina.']]},
+ {v:'piacere',ru:'нравиться',liv:'A1',lez:'A1 U6 L5',tipo:'irr',pres:'piaccio piaci piace piacciamo piacete piacciono',pp:'piaciuto',aux:'essere',reg:[['piacere a qn (mi, ti, Le…)','Mi piace il mare. Mi piacciono i musei.'],['passato prossimo: mi è piaciuto / mi è piaciuta','Mi è piaciuto il pesce. Mi è piaciuta la vacanza.']],note:'Чаще всего в 3-м лице: piace / piacciono. Окончание причастия — по тому, ЧТО понравилось. Подробнее — в A2.'},
 ];
 /* ================================================================ */
 
