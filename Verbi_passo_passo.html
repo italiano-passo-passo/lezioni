@@ -86,20 +86,21 @@ mark{background:#FFE9A8;color:inherit;border-radius:3px}
    рефлексивные глаголы пишем с -rsi (innervosirsi) — местоимения и essere добавляются сами
    pres: 6 форм presente (только у неправильных) · pp: причастие, если неправильное
    aux: 'essere' (если не avere) · ger: герундий, если неправильный
+   imp: безличный глагол погоды — пишем только форму «он» (imp:'piove')
    lez2: второй урок, где глагол — один из главных (для ссылки ?lez=…)
    reg: управление [['глагол + предлог','пример'], …] · note: заметка по-русски
    ================================================================ */
 const VERBI=[
- {v:'essere',ru:'быть',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'sono sei è siamo siete sono',pp:'stato',aux:'essere',reg:[['essere di + город','Sono di Milano.'],['essere a / in','Sono a casa. Sono in ufficio.']]},
+ {v:'essere',ru:'быть',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'sono sei è siamo siete sono',pp:'stato',aux:'essere',reg:[['essere di + город','Sono di Milano.'],['essere a / in','Sono a casa. Sono in ufficio.'],['c’è / ci sono (погода) → c’è stato','Oggi c’è il sole. Ieri c’è stato un temporale.']]},
  {v:'avere',ru:'иметь',liv:'A1',lez:'A1 base',tipo:'irr',pres:'ho hai ha abbiamo avete hanno',reg:[['avere bisogno di','Ho bisogno di un biglietto.'],['avere voglia di + инф.','Hai voglia di venire al cinema?'],['avercela (ce l’ho)','Il biglietto? Sì, ce l’ho.']]},
- {v:'fare',ru:'делать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'faccio fai fa facciamo fate fanno',pp:'fatto',ger:'facendo',reg:[['fare la fila','Stiamo facendo la fila.']]},
+ {v:'fare',ru:'делать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L4',tipo:'irr',pres:'faccio fai fa facciamo fate fanno',pp:'fatto',ger:'facendo',reg:[['fare la fila','Stiamo facendo la fila.'],['fa caldo / freddo / bello (погода)','Oggi fa freddo. Ieri ha fatto caldo.']]},
  {v:'andare',ru:'идти, ехать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'vado vai va andiamo andate vanno',aux:'essere',reg:[['andare a + город / инф.','Vado a Roma. Vado a ballare.'],['andare in + страна, место','Vado in Italia, in centro, in ufficio.'],['andare al / a teatro','Andiamo a teatro, al cinema.']]},
  {v:'venire',ru:'приходить',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'vengo vieni viene veniamo venite vengono',pp:'venuto',aux:'essere',reg:[['venire da','Vengo da Mosca.'],['venire con','Ti va di venire con me?']]},
  {v:'stare',ru:'находиться, быть (самочувствие)',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'sto stai sta stiamo state stanno',pp:'stato',aux:'essere',reg:[['stare + gerundio','Sto comprando il biglietto.']]},
  {v:'dare',ru:'давать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'do dai dà diamo date danno',reg:[['dare qc a qn','Ti do il biglietto.'],['dare fastidio a qn','Mi dà fastidio il rumore.']]},
  {v:'dire',ru:'говорить, сказать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L3',tipo:'irr',pres:'dico dici dice diciamo dite dicono',pp:'detto',ger:'dicendo',reg:[['dire qc a qn','Ti dico una cosa.'],['passato prossimo: ho detto','Il cameriere ha detto: «Offre la casa!»']]},
  {v:'uscire',ru:'выходить, гулять',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'esco esci esce usciamo uscite escono',aux:'essere',reg:[['uscire con','Esco con gli amici.'],['uscire da','Esco dall’ufficio alle sei.']]},
- {v:'bere',ru:'пить',liv:'A1',lez:'A1 base',tipo:'irr',pres:'bevo bevi beve beviamo bevete bevono',pp:'bevuto',ger:'bevendo'},
+ {v:'bere',ru:'пить',liv:'A1',lez:'A1 base',lez2:'A1 U6 L4',tipo:'irr',pres:'bevo bevi beve beviamo bevete bevono',pp:'bevuto',ger:'bevendo',reg:[['bere qc','Che caldo! Ho bevuto tre granite.']],note:'Основа «старая» bev-: bevo, bevi… → bevuto.'},
  {v:'sapere',ru:'знать, уметь',liv:'A1',lez:'A1 base',tipo:'irr',pres:'so sai sa sappiamo sapete sanno',reg:[['sapere + инф. (= уметь)','So suonare la chitarra.']]},
  {v:'dovere',ru:'быть должным',liv:'A1',lez:'A1 base',tipo:'irr',pres:'devo devi deve dobbiamo dovete devono',reg:[['dovere + инф.','Il telefono? Lo devo spegnere / Devo spegnerlo.']]},
  {v:'potere',ru:'мочь',liv:'A1',lez:'A1 base',tipo:'irr',pres:'posso puoi può possiamo potete possono',reg:[['potere + инф.','Posso lasciarla qui? / La posso lasciare qui?']]},
@@ -157,6 +158,10 @@ const VERBI=[
  {v:'pranzare',ru:'обедать',liv:'A1',lez:'A1 U6 L3',tipo:'are',reg:[['pranzare in / a','Abbiamo pranzato in un ristorante tipico.']]},
  {v:'camminare',ru:'ходить пешком, гулять',liv:'A1',lez:'A1 U6 L3',tipo:'are',reg:[['camminare per (le strade)','Ho camminato per le strade di Merano.']],note:'Движение без «куда» (просто процесс) → с avere: ho camminato.'},
  {v:'ballare',ru:'танцевать',liv:'A1',lez:'A1 U6 L3',tipo:'are',note:'С avere: ho ballato (не «sono ballato»).'},
+ /* ---- A1 · Unità 6 «Andiamo in vacanza!» · Lezione 4 «Che tempo fa?» (meteo) ---- */
+ {v:'piovere',ru:'идти (о дожде)',liv:'A1',lez:'A1 U6 L4',tipo:'ere',imp:'piove',reg:[['piove (без подлежащего)','Prendi l’ombrello: piove! · Ieri ha piovuto.']],note:'Только форма «он»: piove. В прошедшем ha piovuto (можно и è piovuto).'},
+ {v:'nevicare',ru:'идти (о снеге)',liv:'A1',lez:'A1 U6 L4',tipo:'are',imp:'nevica',reg:[['nevica (без подлежащего)','Sulle Alpi nevica. · Stanotte ha nevicato.']],note:'Только форма «он»: nevica. В прошедшем ha nevicato.'},
+ {v:'conoscere',ru:'знакомиться, знать',liv:'A1',lez:'A1 U6 L4',tipo:'ere',pp:'conosciuto',reg:[['conoscere qn (без предлога!)','In vacanza ho conosciuto due ragazzi di Bologna.']],note:'Произношение: conosco [к], conosci [ш]. В причастии -i- сохраняет [ш]: conosciuto.'},
 ];
 /* ================================================================ */
 
@@ -188,14 +193,14 @@ function hl(form,regf,tipo){
 }
 function card(d){
   const b=build(d),rr=regular(d.v,d.v.endsWith('are')?'are':d.v.endsWith('ere')?'ere':'ire');
-  const rows=b.forms.map((f,i)=>'<tr><td class="p">'+PRON[i]+'</td><td class="'+(d.tipo==='isc'?'isc':'')+'">'+hl(f,d.pres?rr.f[i]:null,d.tipo)+'</td></tr>').join('');
+  const rows=d.imp?'<tr><td class="p">—</td><td>'+d.imp+'</td></tr>':b.forms.map((f,i)=>'<tr><td class="p">'+PRON[i]+'</td><td class="'+(d.tipo==='isc'?'isc':'')+'">'+hl(f,d.pres?rr.f[i]:null,d.tipo)+'</td></tr>').join('');
   const ppIrr=d.pp&&d.pp!==rr.pp;
   const ppx=ppIrr?'<span class="x">'+b.pp+'</span>':b.pp;
   const pass=b.reg.rif?('mi sono '+ppx.replace(/o(<\/span>)?$/,'o$1/a')+' · ci siamo '+ppx.replace(/o(<\/span>)?$/,'i$1/e'))
             :b.ess?('sono '+ppx.replace(/o(<\/span>)?$/,'o$1/a')+' · siamo '+ppx.replace(/o(<\/span>)?$/,'i$1/e'))
-            :('ho '+ppx+' · abbiamo '+ppx);
+            :d.imp?('ha '+ppx):('ho '+ppx+' · abbiamo '+ppx);
   const gx=d.ger?'<span class="x">'+b.ger+'</span>':b.ger;
-  const stare=b.reg.rif?('mi sto '+b.ger.replace(/o$/,'o')+' / sto '+b.ger+'mi'):('sto '+gx);
+  const stare=d.imp?('sta '+gx):b.reg.rif?('mi sto '+b.ger.replace(/o$/,'o')+' / sto '+b.ger+'mi'):('sto '+gx);
   const tags=[];
   if(d.tipo==='irr')tags.push('<span class="tag irr">irregolare</span>');
   if(d.tipo==='isc')tags.push('<span class="tag isc">-isc-</span>');
