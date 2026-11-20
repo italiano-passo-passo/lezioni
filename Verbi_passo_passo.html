@@ -55,6 +55,32 @@ td.p{color:var(--soft);width:5.5em}
 .none{color:var(--soft);font-style:italic;padding:20px 0}
 footer{margin-top:30px;color:var(--soft);font-size:.85rem;border-top:1px solid var(--line);padding-top:8px}
 mark{background:#FFE9A8;color:inherit;border-radius:3px}
+.tag.plus{background:var(--verde-tint);color:var(--verde)}
+.pview{display:none}
+body.vp .pview{display:block}
+body.vp #list,body.vp #count,body.vp .legend,body.vp #fTipo,body.vp #rowLez,body.vp #none{display:none}
+.pintro{margin:12px 0 4px;font-size:1.02rem}
+.memo{background:var(--mare-tint);border-left:4px solid var(--mare);border-radius:8px;padding:10px 14px;margin:10px 0;font-size:1rem}
+.memo h3{font:700 1.1rem var(--title);color:var(--bord);margin:0 0 4px}
+.memo p{margin:4px 0}.memo i{color:var(--mare)}
+.ptools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+.ptools .chip{font-size:1rem;padding:5px 14px}
+#pScore{color:var(--verde);font-weight:700}
+.grp{border:1px solid var(--line);border-radius:12px;margin-top:14px;overflow:hidden;background:var(--card)}
+.grp>h3{margin:0;padding:8px 14px;font:700 1.25rem var(--title);color:#fff;background:var(--gc)}
+.grp>h3 small{font:400 .9rem var(--body);opacity:.95;margin-left:8px}
+.prow{display:grid;grid-template-columns:minmax(8em,1.1fr) minmax(7.5em,1fr) 7.5em minmax(12em,2fr) 7.5em;gap:4px 14px;padding:7px 14px;border-top:1px solid var(--line);align-items:baseline}
+.prow.h{font-size:.82rem;color:var(--soft);font-weight:700;border-top:0}
+.pinf{font:700 1.1rem var(--title);color:var(--bord)}.pinf small{display:block;font:italic .88rem var(--body);color:var(--mare)}
+.ppart{font-size:1.25rem;font-weight:700;color:var(--gc)}
+.ppart input{font:inherit;font-size:1.1rem;width:8em;max-width:100%;padding:2px 8px;border:1.5px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+.ppart input.ok{border-color:var(--verde);background:var(--verde-tint)}
+.ppart input.ko{border-color:var(--rosso);background:var(--rosso-tint)}
+.paux{font-size:.95rem}.paux.e{color:var(--rosso);font-weight:700}
+.pfr{font-style:italic}
+.plez{font-size:.8rem;color:var(--soft)}
+@media (max-width:700px){.prow{grid-template-columns:1fr 1fr}.prow.h{display:none}.pfr,.plez{grid-column:span 1}}
+
 </style></head>
 <body>
 <div class="wrap">
@@ -67,14 +93,28 @@ mark{background:#FFE9A8;color:inherit;border-radius:3px}
 
 <div class="tools">
  <input class="search" id="q" type="search" placeholder="Cerca un verbo… (по-итальянски или по-русски)" autocomplete="off" aria-label="Cerca un verbo">
+ <div class="chips" id="fVista"><b>Vista:</b></div>
  <div class="chips" id="fLiv"><b>Livello:</b></div>
  <div class="chips" id="fTipo"><b>Tipo:</b></div>
- <div class="chips"><b>Lezione:</b><select class="chip" id="fLez" aria-label="Lezione"></select>
+ <div class="chips" id="rowLez"><b>Lezione:</b><select class="chip" id="fLez" aria-label="Lezione"></select>
   <button class="chip" id="openAll" type="button">Apri tutti</button><button class="chip" id="closeAll" type="button">Chiudi tutti</button></div>
 </div>
-<p class="legend"><span><span class="x">красным</span> — неправильные формы</span><span class="isc"><b>-isc-</b> — как capire</span><span>♻ — глагол из A1</span></p>
+<p class="legend"><span><span class="x">красным</span> — неправильные формы</span><span class="isc"><b>-isc-</b> — как capire</span><span>♻ — глагол из A1</span><span><span class="tag plus">+ utile</span> — extra: не обязательно для A1, но часто нужно в разговоре</span></p>
 <p class="count" id="count"></p>
 <div class="list" id="list"></div>
+<section class="pview" id="participi">
+ <h2 style="font:700 1.8rem var(--title);color:var(--bord);margin:14px 0 0">Participi ribelli <span style="font:italic 500 1.1rem var(--title);color:var(--rosso)">— неправильные причастия</span></h2>
+ <p class="pintro">Обычно причастие образуется по правилу: <i>-are → -ato, -ere → -uto, -ire → -ito</i> (<i>parlato, avuto, dormito</i>). Неправильные причастия образуются <b>не по правилу</b>. Учим их <b>группами</b> (по окончанию) и сразу <b>в словосочетании</b>.</p>
+ <p class="pintro"><span class="tag plus">+ utile</span> — <b>extra</b>: эти причастия не обязательны для A1, но очень часто нужны в разговоре. Выучишь их — будет проще рассказать, что случилось.</p>
+ <div class="memo">
+  <h3>Avere или essere?</h3>
+  <p><b>avere</b> спрягается с <b>avere</b>: <i>ho avuto</i>. <b>essere</b> спрягается с <b>essere</b>: <i>sono stato/-a</i>.</p>
+  <p>🏠 — глагол спрягается с <b>essere</b>, и причастие согласуется: <i>Marco è venuto · Anna è venuta · loro sono venuti / venute</i>.</p>
+  <p id="pEssReg"></p>
+ </div>
+ <div class="ptools"><button class="chip" id="pTest" type="button">✍ Проверь себя</button><button class="chip" id="pSol" type="button" hidden>Mostra le soluzioni</button><span id="pScore"></span></div>
+ <div id="pGroups"></div>
+</section>
 <footer>Italiano passo passo — Verbi passo passo · Нажми на глагол, чтобы открыть спряжение и примеры.</footer>
 </div>
 
@@ -91,33 +131,33 @@ mark{background:#FFE9A8;color:inherit;border-radius:3px}
    reg: управление [['глагол + предлог','пример'], …] · note: заметка по-русски
    ================================================================ */
 const VERBI=[
- {v:'essere',ru:'быть',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'sono sei è siamo siete sono',pp:'stato',aux:'essere',reg:[['essere di + город','Sono di Milano.'],['essere a / in','Sono a casa. Sono in ufficio.'],['c’è / ci sono (погода) → c’è stato','Oggi c’è il sole. Ieri c’è stato un temporale.']]},
- {v:'avere',ru:'иметь',liv:'A1',lez:'A1 base',tipo:'irr',pres:'ho hai ha abbiamo avete hanno',reg:[['avere bisogno di','Ho bisogno di un biglietto.'],['avere voglia di + инф.','Hai voglia di venire al cinema?'],['avercela (ce l’ho)','Il biglietto? Sì, ce l’ho.']]},
- {v:'fare',ru:'делать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L4',tipo:'irr',pres:'faccio fai fa facciamo fate fanno',pp:'fatto',ger:'facendo',reg:[['fare la fila','Stiamo facendo la fila.'],['fa caldo / freddo / bello (погода)','Oggi fa freddo. Ieri ha fatto caldo.']]},
+ {v:'essere',frase:'sono stato/-a a Roma',ru:'быть',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'sono sei è siamo siete sono',pp:'stato',aux:'essere',reg:[['essere di + город','Sono di Milano.'],['essere a / in','Sono a casa. Sono in ufficio.'],['c’è / ci sono','Oggi c’è il sole. In centro ci sono molti turisti.']],note:'В passato prossimo essere спрягается с essere: sono stato/-a (так же и stare).'},
+ {v:'avere',ru:'иметь',liv:'A1',lez:'A1 base',tipo:'irr',pres:'ho hai ha abbiamo avete hanno',reg:[['avere bisogno di','Ho bisogno di un biglietto.'],['avere voglia di + инф.','Hai voglia di venire al cinema?'],['avercela (ce l’ho)','Il biglietto? Sì, ce l’ho.']],note:'В passato prossimo avere спрягается с avere: ho avuto.'},
+ {v:'fare',ru:'делать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L4',ppl:'A1 U6 L1',tipo:'irr',pres:'faccio fai fa facciamo fate fanno',pp:'fatto',ger:'facendo',frase:'ho fatto colazione',reg:[['fare la fila','Stiamo facendo la fila.'],['fa caldo / freddo / bello (погода)','Oggi fa freddo. D’estate fa caldo.']]},
  {v:'andare',ru:'идти, ехать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'vado vai va andiamo andate vanno',aux:'essere',reg:[['andare a + город / инф.','Vado a Roma. Vado a ballare.'],['andare in + страна, место','Vado in Italia, in centro, in ufficio.'],['andare al / a teatro','Andiamo a teatro, al cinema.']]},
- {v:'venire',ru:'приходить',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'vengo vieni viene veniamo venite vengono',pp:'venuto',aux:'essere',reg:[['venire da','Vengo da Mosca.'],['venire con','Ti va di venire con me?']]},
+ {v:'venire',frase:'sono venuto/-a in Italia',ru:'приходить',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'vengo vieni viene veniamo venite vengono',pp:'venuto',aux:'essere',reg:[['venire da','Vengo da Mosca.'],['venire con','Ti va di venire con me?']]},
  {v:'stare',ru:'находиться, быть (самочувствие)',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'sto stai sta stiamo state stanno',pp:'stato',aux:'essere',reg:[['stare + gerundio','Sto comprando il biglietto.']]},
  {v:'dare',ru:'давать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'do dai dà diamo date danno',reg:[['dare qc a qn','Ti do il biglietto.'],['dare fastidio a qn','Mi dà fastidio il rumore.']]},
- {v:'dire',ru:'говорить, сказать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L3',tipo:'irr',pres:'dico dici dice diciamo dite dicono',pp:'detto',ger:'dicendo',reg:[['dire qc a qn','Ti dico una cosa.'],['passato prossimo: ho detto','Il cameriere ha detto: «Offre la casa!»']]},
+ {v:'dire',frase:'ho detto «ciao»',ru:'говорить, сказать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L3',tipo:'irr',pres:'dico dici dice diciamo dite dicono',pp:'detto',ger:'dicendo',reg:[['dire qc a qn','Ti dico una cosa.'],['passato prossimo: ho detto','Il cameriere ha detto: «Offre la casa!»']]},
  {v:'uscire',ru:'выходить, гулять',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'esco esci esce usciamo uscite escono',aux:'essere',reg:[['uscire con','Esco con gli amici.'],['uscire da','Esco dall’ufficio alle sei.']]},
- {v:'bere',ru:'пить',liv:'A1',lez:'A1 base',lez2:'A1 U6 L4',tipo:'irr',pres:'bevo bevi beve beviamo bevete bevono',pp:'bevuto',ger:'bevendo',reg:[['bere qc','Che caldo! Ho bevuto tre granite.']],note:'Основа «старая» bev-: bevo, bevi… → bevuto.'},
+ {v:'bere',frase:'ho bevuto un caffè',ru:'пить',liv:'A1',lez:'A1 base',lez2:'A1 U6 L4',tipo:'irr',pres:'bevo bevi beve beviamo bevete bevono',pp:'bevuto',ger:'bevendo',reg:[['bere qc','Che caldo! Ho bevuto tre granite.']],note:'Основа «старая» bev-: bevo, bevi… → bevuto.'},
  {v:'sapere',ru:'знать, уметь',liv:'A1',lez:'A1 base',tipo:'irr',pres:'so sai sa sappiamo sapete sanno',reg:[['sapere + инф. (= уметь)','So suonare la chitarra.']]},
  {v:'dovere',ru:'быть должным',liv:'A1',lez:'A1 base',tipo:'irr',pres:'devo devi deve dobbiamo dovete devono',reg:[['dovere + инф.','Il telefono? Lo devo spegnere / Devo spegnerlo.']]},
  {v:'potere',ru:'мочь',liv:'A1',lez:'A1 base',tipo:'irr',pres:'posso puoi può possiamo potete possono',reg:[['potere + инф.','Posso lasciarla qui? / La posso lasciare qui?']]},
  {v:'volere',ru:'хотеть',liv:'A1',lez:'A1 base',tipo:'irr',pres:'voglio vuoi vuole vogliamo volete vogliono',reg:[['volere + инф.','I biglietti? Li voglio comprare / Voglio comprarli.']]},
  {v:'tenere',ru:'держать',liv:'A1',lez:'A1 base',tipo:'irr',pres:'tengo tieni tiene teniamo tenete tengono',pp:'tenuto'},
- {v:'rimanere',ru:'оставаться',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'rimango rimani rimane rimaniamo rimanete rimangono',pp:'rimasto',aux:'essere',reg:[['rimanere a / in','Rimaniamo a casa.']]},
- {v:'scegliere',ru:'выбирать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L5',tipo:'irr',pres:'scelgo scegli sceglie scegliamo scegliete scelgono',pp:'scelto',reg:[['scegliere qc','Abbiamo scelto un piccolo ristorante vicino al lago.']],note:'В io и loro появляется g: scelgo, scelgono.'},
+ {v:'rimanere',frase:'sono rimasto/-a a casa',ru:'оставаться',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'irr',pres:'rimango rimani rimane rimaniamo rimanete rimangono',pp:'rimasto',aux:'essere',reg:[['rimanere a / in','Rimaniamo a casa.']]},
+ {v:'scegliere',frase:'ho scelto un ristorante',ru:'выбирать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L5',tipo:'irr',pres:'scelgo scegli sceglie scegliamo scegliete scelgono',pp:'scelto',reg:[['scegliere qc','Abbiamo scelto un piccolo ristorante vicino al lago.']],note:'В io и loro появляется g: scelgo, scelgono.'},
  {v:'parlare',ru:'говорить',liv:'A1',lez:'A1 base',tipo:'are',reg:[['parlare di','il film di cui ti ho parlato'],['parlare con','Parlo con Marco.'],['parlare a qn','Le ho parlato del ragazzo.']]},
  {v:'mangiare',ru:'есть',liv:'A1',lez:'A1 base',tipo:'are'},
  {v:'cercare',ru:'искать; стараться',liv:'A1',lez:'A1 base',lez2:'A1 U6 L3',tipo:'are',reg:[['cercare qc','Cerco un biglietto.'],['cercare di + инф. (= стараться)','Cerchiamo di non tossire.']]},
  {v:'telefonare',ru:'звонить',liv:'A1',lez:'A1 base',tipo:'are',reg:[['telefonare a qn','l’amico a cui telefono']]},
  {v:'pensare',ru:'думать',liv:'A1',lez:'A1 base',tipo:'are',reg:[['pensare a','Mara è una persona a cui penso spesso. · Ci penso.'],['pensare di + инф.','Penso di andare a teatro.']]},
  {v:'prenotare',ru:'бронировать',liv:'A1',lez:'A2 U3 L3',tipo:'are',a1:true,reg:[['prenotare qc','È possibile prenotare telefonicamente?']]},
- {v:'prendere',ru:'брать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L3',tipo:'ere',pp:'preso',reg:[['prendere il treno / l’autobus (= ехать на…)','Abbiamo preso il treno da Catania.'],['prendere il sole (= загорать)','Marco ha preso il sole.']]},
- {v:'leggere',ru:'читать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L3',tipo:'ere',pp:'letto',reg:[['leggere qc','Ho letto un libro sotto l’ombrellone.']]},
- {v:'scrivere',ru:'писать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L3',tipo:'ere',pp:'scritto',reg:[['scrivere a qn','l’amica a cui scrivo · Ho scritto delle cartoline ai nonni.']]},
- {v:'vedere',ru:'видеть',liv:'A1',lez:'A1 base',lez2:'A1 U6 L3',tipo:'ere',pp:'visto',reg:[['vedere qc / qn','Abbiamo visto il Teatro Antico. Ho visto un film.']]},
+ {v:'prendere',frase:'ho preso il treno',ru:'брать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L3',tipo:'ere',pp:'preso',reg:[['prendere il treno / l’autobus (= ехать на…)','Abbiamo preso il treno da Catania.'],['prendere il sole (= загорать)','Marco ha preso il sole.']]},
+ {v:'leggere',frase:'ho letto il giornale',ru:'читать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L3',tipo:'ere',pp:'letto',reg:[['leggere qc','Ho letto un libro sotto l’ombrellone.']]},
+ {v:'scrivere',frase:'ho scritto una mail',ru:'писать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L3',tipo:'ere',pp:'scritto',reg:[['scrivere a qn','l’amica a cui scrivo · Ho scritto delle cartoline ai nonni.']]},
+ {v:'vedere',frase:'ho visto un film',ru:'видеть',liv:'A1',lez:'A1 base',lez2:'A1 U6 L3',tipo:'ere',pp:'visto',reg:[['vedere qc / qn','Abbiamo visto il Teatro Antico. Ho visto un film.']]},
  {v:'dormire',ru:'спать',liv:'A1',lez:'A1 base',tipo:'ire'},
  {v:'partire',ru:'уезжать',liv:'A1',lez:'A1 base',lez2:'A1 U6 L2',tipo:'ire',aux:'essere',reg:[['partire per','Parto per Roma.']]},
  {v:'capire',ru:'понимать',liv:'A1',lez:'A1 base',tipo:'isc'},
@@ -126,19 +166,19 @@ const VERBI=[
  {v:'chiamarsi',ru:'называться, звать',liv:'A1',lez:'A1 base',tipo:'are'},
  {v:'svegliarsi',ru:'просыпаться',liv:'A1',lez:'A1 base',tipo:'are'},
  /* ---- A2 · Unità 3 «Ti va di venire?» · Lezione 3 «Una serata a teatro» ---- */
- {v:'spegnere',ru:'выключать',liv:'A2',lez:'A2 U3 L3',tipo:'irr',pres:'spengo spegni spegne spegniamo spegnete spengono',pp:'spento',reg:[['spegnere qc','Il telefono possiamo spegnerlo.']]},
+ {v:'spegnere',frase:'ho spento il telefono',ru:'выключать',liv:'A2',lez:'A2 U3 L3',tipo:'irr',pres:'spengo spegni spegne spegniamo spegnete spengono',pp:'spento',reg:[['spegnere qc','Il telefono possiamo spegnerlo.']]},
  {v:'starnutire',ru:'чихать',liv:'A2',lez:'A2 U3 L3',tipo:'isc'},
  {v:'tossire',ru:'кашлять',liv:'A2',lez:'A2 U3 L3',tipo:'ire',note:'Можно и с -isc-: tossisco, tossisci…'},
  {v:'innervosirsi',ru:'разнервничаться',liv:'A2',lez:'A2 U3 L3',tipo:'isc',reg:[['innervosirsi per qc','Mi sono innervosita per il rumore.']]},
  {v:'mantenere',ru:'сохранять, держать',liv:'A2',lez:'A2 U3 L3',tipo:'irr',pres:'mantengo mantieni mantiene manteniamo mantenete mantengono',pp:'mantenuto',note:'Спрягается как tenere.'},
- {v:'muovere',ru:'двигать',liv:'A2',lez:'A2 U3 L3',tipo:'ere',pp:'mosso'},
+ {v:'muovere',frase:'ho mosso la sedia',ru:'двигать',liv:'A2',lez:'A2 U3 L3',tipo:'ere',pp:'mosso'},
  {v:'evitare',ru:'избегать',liv:'A2',lez:'A2 U3 L3',tipo:'are',reg:[['evitare qc','Evitiamo commenti e rumori.'],['evitare di + инф.','Evitiamo di leggere la guida ad alta voce.']]},
  {v:'sopportare',ru:'терпеть',liv:'A2',lez:'A2 U3 L3',tipo:'are',reg:[['non sopportare qc / qn','Non sopporto le persone che parlano ad alta voce.']]},
  {v:'chiacchierare',ru:'болтать',liv:'A2',lez:'A2 U3 L3',tipo:'are',reg:[['chiacchierare con','Chiacchiero con le amiche.']]},
  {v:'acquistare',ru:'покупать',liv:'A2',lez:'A2 U3 L3',tipo:'are',reg:[['acquistare qc','Le conviene acquistare i biglietti via internet.']]},
  {v:'aspettare',ru:'ждать',liv:'A2',lez:'A2 U3 L3',tipo:'are',a1:true,reg:[['aspettare qc / qn (без предлога!)','Aspettiamo la pausa.']]},
- {v:'discutere',ru:'спорить, обсуждать',liv:'A2',lez:'A2 U3 L3',tipo:'ere',pp:'discusso',reg:[['discutere con qn','discutere con chi le occupa'],['discutere di qc','Discutiamo del programma.']]},
- {v:'dipendere',ru:'зависеть',liv:'A2',lez:'A2 U3 L3',tipo:'ere',pp:'dipeso',aux:'essere',reg:[['dipendere da','Dipende dal prezzo.']]},
+ {v:'discutere',frase:'ho discusso con Marco',ru:'спорить, обсуждать',liv:'A2',lez:'A2 U3 L3',tipo:'ere',pp:'discusso',reg:[['discutere con qn','discutere con chi le occupa'],['discutere di qc','Discutiamo del programma.']]},
+ {v:'dipendere',frase:'è dipeso dal tempo',ru:'зависеть',liv:'A2',lez:'A2 U3 L3',tipo:'ere',pp:'dipeso',aux:'essere',reg:[['dipendere da','Dipende dal prezzo.']]},
  {v:'convenire',ru:'быть выгодным',liv:'A2',lez:'A2 U3 L3',tipo:'irr',pres:'convengo convieni conviene conveniamo convenite convengono',pp:'convenuto',aux:'essere',reg:[['convenire a qn','Le conviene comprarli online. · Ti conviene…']],note:'Чаще всего в 3-м лице: conviene, convengono.'},
  /* ---- A1 · Unità 6 «Andiamo in vacanza!» · Lezione 2 «Dove sei andata?» (passato prossimo con essere) ---- */
  {v:'arrivare',ru:'приезжать, прибывать',liv:'A1',lez:'A1 U6 L2',tipo:'are',aux:'essere',reg:[['arrivare a + город','Sono arrivata ieri a Bolzano.'],['arrivare in + страна','Siamo arrivati in Italia.']]},
@@ -146,12 +186,12 @@ const VERBI=[
  {v:'entrare',ru:'входить',liv:'A1',lez:'A1 U6 L2',tipo:'are',aux:'essere',reg:[['entrare in','Sono entrata nel museo.']]},
  {v:'salire',ru:'подниматься',liv:'A1',lez:'A1 U6 L2',tipo:'irr',pres:'salgo sali sale saliamo salite salgono',aux:'essere',reg:[['salire su (sul, sulla…)','Ieri sono salito sul cratere.']]},
  {v:'restare',ru:'оставаться',liv:'A1',lez:'A1 U6 L2',tipo:'are',aux:'essere',reg:[['restare a / in','Sono restata a casa.']],note:'= rimanere'},
- {v:'nascere',ru:'родиться',liv:'A1',lez:'A1 U6 L2',tipo:'ere',pp:'nato',aux:'essere',reg:[['nascere a + город · nel + год','Sono nata a Mosca nel 1990.']],note:'Чаще всего в прошедшем: sono nato/-a.'},
+ {v:'nascere',frase:'sono nato/-a a Mosca',ru:'родиться',liv:'A1',lez:'A1 U6 L2',tipo:'ere',pp:'nato',aux:'essere',reg:[['nascere a + город · nel + год','Sono nata a Mosca nel 1990.']],note:'Чаще всего в прошедшем: sono nato/-a.'},
  {v:'diventare',ru:'становиться',liv:'A1',lez:'A1 U6 L2',tipo:'are',aux:'essere',reg:[['diventare + прилагательное / существительное','Marco è diventato papà.']]},
  /* ---- A1 · Unità 6 «Andiamo in vacanza!» · Lezione 3 «Avere o essere?» (participi irregolari) ---- */
- {v:'mettere',ru:'класть, ставить',liv:'A1',lez:'A1 U6 L3',tipo:'ere',pp:'messo',reg:[['mettere in ordine (= наводить порядок)','Ho messo in ordine la casa.'],['mettere qc su / in','Ho messo le foto su Instagram.']]},
- {v:'chiudere',ru:'закрывать',liv:'A1',lez:'A1 U6 L3',tipo:'ere',pp:'chiuso',reg:[['chiudere qc','Ho chiuso la porta. Alle sei hanno chiuso i negozi.']]},
- {v:'aprire',ru:'открывать',liv:'A1',lez:'A1 U6 L3',tipo:'ire',pp:'aperto',reg:[['aprire qc','Il cameriere ha aperto una bottiglia di vino.']]},
+ {v:'mettere',frase:'ho messo in ordine la casa',ru:'класть, ставить',liv:'A1',lez:'A1 U6 L3',tipo:'ere',pp:'messo',reg:[['mettere in ordine (= наводить порядок)','Ho messo in ordine la casa.'],['mettere qc su / in','Ho messo le foto su Instagram.']]},
+ {v:'chiudere',frase:'ho chiuso la porta',ru:'закрывать',liv:'A1',lez:'A1 U6 L3',tipo:'ere',pp:'chiuso',reg:[['chiudere qc','Ho chiuso la porta. Alle sei hanno chiuso i negozi.']]},
+ {v:'aprire',frase:'ho aperto la finestra',ru:'открывать',liv:'A1',lez:'A1 U6 L3',tipo:'ire',pp:'aperto',reg:[['aprire qc','Il cameriere ha aperto una bottiglia di vino.']]},
  {v:'montare',ru:'ставить, собирать (палатку)',liv:'A1',lez:'A1 U6 L3',tipo:'are',reg:[['montare la tenda','Giacomo ha montato la tenda.']]},
  {v:'incontrare',ru:'встречать',liv:'A1',lez:'A1 U6 L3',tipo:'are',reg:[['incontrare qn (без предлога!)','La sera ha incontrato un’amica.']]},
  {v:'cenare',ru:'ужинать',liv:'A1',lez:'A1 U6 L3',tipo:'are',reg:[['cenare in / a','Abbiamo cenato in una trattoria tipica.']]},
@@ -159,14 +199,23 @@ const VERBI=[
  {v:'camminare',ru:'ходить пешком, гулять',liv:'A1',lez:'A1 U6 L3',tipo:'are',reg:[['camminare per (le strade)','Ho camminato per le strade di Merano.']],note:'Движение без «куда» (просто процесс) → с avere: ho camminato.'},
  {v:'ballare',ru:'танцевать',liv:'A1',lez:'A1 U6 L3',tipo:'are',note:'С avere: ho ballato (не «sono ballato»).'},
  /* ---- A1 · Unità 6 «Andiamo in vacanza!» · Lezione 4 «Che tempo fa?» (meteo) ---- */
- {v:'piovere',ru:'идти (о дожде)',liv:'A1',lez:'A1 U6 L4',tipo:'ere',imp:'piove',reg:[['piove (без подлежащего)','Prendi l’ombrello: piove! · Ieri ha piovuto.']],note:'Только форма «он»: piove. В прошедшем ha piovuto (можно и è piovuto).'},
- {v:'nevicare',ru:'идти (о снеге)',liv:'A1',lez:'A1 U6 L4',tipo:'are',imp:'nevica',reg:[['nevica (без подлежащего)','Sulle Alpi nevica. · Stanotte ha nevicato.']],note:'Только форма «он»: nevica. В прошедшем ha nevicato.'},
- {v:'conoscere',ru:'знакомиться, знать',liv:'A1',lez:'A1 U6 L4',tipo:'ere',pp:'conosciuto',reg:[['conoscere qn (без предлога!)','In vacanza ho conosciuto due ragazzi di Bologna.']],note:'Произношение: conosco [к], conosci [ш]. В причастии -i- сохраняет [ш]: conosciuto.'},
+ {v:'piovere',ru:'идти (о дожде)',liv:'A1',lez:'A1 U6 L4',tipo:'ere',imp:'piove',reg:[['piove (без подлежащего)','Prendi l’ombrello: piove! · A Londra piove spesso.']],note:'Только форма «он»: piove.'},
+ {v:'nevicare',ru:'идти (о снеге)',liv:'A1',lez:'A1 U6 L4',tipo:'are',imp:'nevica',reg:[['nevica (без подлежащего)','Sulle Alpi nevica. · A Mosca d’inverno nevica spesso.']],note:'Только форма «он»: nevica.'},
+ {v:'conoscere',frase:'ho conosciuto Marco',ru:'знакомиться, знать',liv:'A1',lez:'A1 U6 L4',tipo:'ere',pp:'conosciuto',reg:[['conoscere qn (без предлога!)','In vacanza ho conosciuto due ragazzi di Bologna.']],note:'Произношение: conosco [к], conosci [ш]. В причастии -i- сохраняет [ш]: conosciuto.'},
 /* ---- A1 · Unità 6 «Andiamo in vacanza!» · Lezione 5 «Cos’hai fatto tutto il giorno?» ---- */
  {v:'cominciare',ru:'начинать',liv:'A1',lez:'A1 U6 L5',tipo:'are',reg:[['cominciare a + инф.','Comincio a lavorare alle nove. · Ho cominciato a mettere in ordine la casa.']],note:'Когда начинается само событие — с essere: Il film è cominciato alle nove.'},
  {v:'passare',ru:'проводить (время); проходить',liv:'A1',lez:'A1 U6 L5',tipo:'are',reg:[['passare (il tempo) a + инф.','Ho passato la domenica a fare le pulizie.'],['passare una giornata / le vacanze','Ho passato una giornata molto intensa.']]},
  {v:'pulire',ru:'чистить, убирать',liv:'A1',lez:'A1 U6 L5',tipo:'isc',reg:[['pulire qc','Ho pulito la cucina.']]},
- {v:'piacere',ru:'нравиться',liv:'A1',lez:'A1 U6 L5',tipo:'irr',pres:'piaccio piaci piace piacciamo piacete piacciono',pp:'piaciuto',aux:'essere',reg:[['piacere a qn (mi, ti, Le…)','Mi piace il mare. Mi piacciono i musei.'],['passato prossimo: mi è piaciuto / mi è piaciuta','Mi è piaciuto il pesce. Mi è piaciuta la vacanza.']],note:'Чаще всего в 3-м лице: piace / piacciono. Окончание причастия — по тому, ЧТО понравилось. Подробнее — в A2.'},
+ {v:'piacere',frase:'mi è piaciuto il film',ru:'нравиться',liv:'A1',lez:'A1 U6 L5',tipo:'irr',pres:'piaccio piaci piace piacciamo piacete piacciono',pp:'piaciuto',aux:'essere',reg:[['piacere a qn (mi, ti, Le…)','Mi piace il mare. Mi piacciono i musei.'],['passato prossimo: mi è piaciuto / mi è piaciuta','Mi è piaciuto il pesce. Mi è piaciuta la vacanza.']],note:'Чаще всего в 3-м лице: piace / piacciono. Окончание причастия — по тому, ЧТО понравилось. Подробнее — в A2.'},
+ /* ---- A1 · «+ utile»: extra: не обязательны для A1, но часто нужны в разговоре ---- */
+ {v:'perdere',ru:'терять; опоздать (на транспорт)',liv:'A1',lez:'A1 base',plus:true,tipo:'ere',pp:'perso',frase:'ho perso il treno',reg:[['perdere qc','Ho perso le chiavi. Ho perso il treno (= опоздал на поезд).']]},
+ {v:'spendere',ru:'тратить',liv:'A1',lez:'A1 base',plus:true,tipo:'ere',pp:'speso',frase:'ho speso 50 euro',reg:[['spendere per qc','Quanto hai speso per il biglietto?']]},
+ {v:'chiedere',ru:'спрашивать, просить',liv:'A1',lez:'A1 base',plus:true,tipo:'ere',pp:'chiesto',frase:'ho chiesto informazioni',reg:[['chiedere qc a qn','Ho chiesto informazioni a un vigile.'],['chiedere di + инф.','Mi ha chiesto di aspettare.']]},
+ {v:'rispondere',ru:'отвечать',liv:'A1',lez:'A1 base',plus:true,tipo:'ere',pp:'risposto',frase:'ho risposto alla mail',reg:[['rispondere a qn / a qc','Non ha risposto al telefono. Ho risposto alla mail.']]},
+ {v:'decidere',ru:'решать',liv:'A1',lez:'A1 base',plus:true,tipo:'ere',pp:'deciso',frase:'ho deciso di partire',reg:[['decidere di + инф.','Abbiamo deciso di partire in treno.']]},
+ {v:'succedere',ru:'случаться',liv:'A1',lez:'A1 base',plus:true,tipo:'ere',pp:'successo',aux:'essere',frase:'Cos’è successo?',reg:[['succedere a qn','Cos’è successo a Marco?']],note:'Почти всегда в 3-м лице: succede, è successo.'},
+ {v:'scendere',ru:'спускаться, выходить (из транспорта)',liv:'A1',lez:'A1 base',plus:true,tipo:'ere',pp:'sceso',aux:'essere',frase:'sono sceso/-a dal treno',reg:[['scendere da','Sono scesa dal treno a Firenze.']],note:'Противоположность salire: sono salito/-a ↔ sono sceso/-a.'},
+ {v:'vivere',ru:'жить',liv:'A1',lez:'A1 base',plus:true,tipo:'ere',pp:'vissuto',frase:'ho vissuto a Mosca',reg:[['vivere a / in','Ho vissuto due anni a Mosca.']],note:'= abitare: abito a Roma = vivo a Roma.'},
 ];
 /* ================================================================ */
 
@@ -203,7 +252,8 @@ function card(d){
   const ppx=ppIrr?'<span class="x">'+b.pp+'</span>':b.pp;
   const pass=b.reg.rif?('mi sono '+ppx.replace(/o(<\/span>)?$/,'o$1/a')+' · ci siamo '+ppx.replace(/o(<\/span>)?$/,'i$1/e'))
             :b.ess?('sono '+ppx.replace(/o(<\/span>)?$/,'o$1/a')+' · siamo '+ppx.replace(/o(<\/span>)?$/,'i$1/e'))
-            :d.imp?('ha '+ppx):('ho '+ppx+' · abbiamo '+ppx);
+            :d.imp?'<span style="color:var(--soft)">В A1 о погоде говорим только в presente.</span>':('ho '+ppx+' · abbiamo '+ppx);
+  const auxh=d.imp?'':(' · <span style="font:600 .85rem var(--body);color:'+(b.ess?'var(--rosso)':'var(--mare)')+'">con '+(b.ess?'essere 🏠':'avere')+'</span>');
   const gx=d.ger?'<span class="x">'+b.ger+'</span>':b.ger;
   const stare=d.imp?('sta '+gx):b.reg.rif?('mi sto '+b.ger.replace(/o$/,'o')+' / sto '+b.ger+'mi'):('sto '+gx);
   const tags=[];
@@ -211,11 +261,12 @@ function card(d){
   if(d.tipo==='isc')tags.push('<span class="tag isc">-isc-</span>');
   if(b.reg.rif)tags.push('<span class="tag rif">riflessivo</span>');
   if(b.ess)tags.push('<span class="tag">essere</span>');
+  if(d.plus)tags.push('<span class="tag plus">+ utile</span>');
   tags.push('<span class="tag lv">'+d.lez+'</span>');
   const reg=(d.reg||[]).map(([a,e])=>'<li><span class="pr">'+a+'</span> — <i>'+e+'</i></li>').join('');
   return '<details class="v" data-k="'+norm(d.v+' '+d.ru)+'"><summary><span class="inf">'+d.v+(d.a1?' ♻':'')+'</span><span class="tr">'+d.ru+'</span><span class="tags">'+tags.join('')+'</span></summary>'
    +'<div class="body"><div><h3>Presente</h3><table>'+rows+'</table></div>'
-   +'<div><h3>Passato prossimo</h3><p>'+pass+'</p><h3>Gerundio</h3><p>'+gx+' <span style="color:var(--soft)">('+stare+')</span></p>'
+   +'<div><h3>Passato prossimo'+auxh+'</h3><p>'+pass+'</p><h3>Gerundio</h3><p>'+gx+(d.v==='essere'?'':' <span style="color:var(--soft)">('+stare+')</span>')+'</p>'
    +(reg?'<h3>Управление и примеры</h3><ul class="reg">'+reg+'</ul>':'')+(d.note?'<p class="note">'+d.note+'</p>':'')+'</div></div></details>';
 }
 const $=s=>document.querySelector(s);
@@ -245,5 +296,45 @@ function apply(){let n=0;
   if(!n){if(!$('#none')){const p=document.createElement('p');p.id='none';p.className='none';p.textContent='Nessun verbo trovato. Prova un’altra parola.';list.after(p)}}else{const z=$('#none');if(z)z.remove()}
 }
 apply();
+
+/* ================= PARTICIPI RIBELLI (вид «Participi») ================= */
+const GR=[['tto','-tto','fare → fatto','var(--rosso)'],['so','-so / -sso','prendere → preso','var(--mare)'],['sto','-sto','vedere → visto','var(--verde)'],['rto','-erto','aprire → aperto','#a07a1a'],['lto','-lto','scegliere → scelto','#7A4FA0'],['nto','-nto','spegnere → spento','#5B6E2A'],['uto','-uto с сюрпризом','окончание обычное, основа меняется: bere → bevuto','var(--bord)'],['spec','Особые','stato, nato','#555']];
+function rtype(v){return v.endsWith('are')?'are':v.endsWith('ere')?'ere':'ire'}
+function gOf(pp){if(['stato','nato','morto'].includes(pp))return 'spec';for(const e of ['tto','sto','rto','lto','nto','uto'])if(pp.endsWith(e))return e;return pp.endsWith('so')?'so':'spec'}
+const PPV=VERBI.filter(d=>d.pp&&d.pp!==regular(d.v,rtype(d.v)).pp&&!d.imp);
+const ESSREG=VERBI.filter(d=>d.aux==='essere'&&!d.imp&&!/rsi$/.test(d.v)&&!(d.pp&&d.pp!==regular(d.v,rtype(d.v)).pp));
+let TEST=false;
+function pLez(d){if(d.plus)return '<span class="tag plus">+ utile</span>';if(d.ppl)return d.ppl;if(d.lez2&&/^A1 U6/.test(d.lez2))return d.lez2;return d.lez}
+function renderP(){
+  const ok=d=>(F.liv==='Tutti'||d.liv===F.liv)&&(!F.q||norm(d.v+' '+d.ru+' '+d.pp).includes(F.q));
+  const er=ESSREG.filter(d=>F.liv==='Tutti'||d.liv===F.liv).map(d=>{const r=regular(d.v,rtype(d.v)).pp;return d.v+' → <i>'+r+'</i>'});
+  $('#pEssReg').innerHTML=er.length?'С <b>essere</b>, но причастие <b>правильное</b>: '+er.join(', ')+'.':'';
+  let html='',n=0;
+  GR.forEach(([k,t,ex,c])=>{
+    const rows=PPV.filter(d=>gOf(d.pp)===k&&ok(d)).sort((a,b)=>(a.plus?1:0)-(b.plus?1:0)||a.v.localeCompare(b.v,'it'));
+    if(!rows.length)return;
+    html+='<div class="grp" style="--gc:'+c+'"><h3>'+t+'<small>'+ex+'</small></h3><div class="prow h"><span>Infinito</span><span>Participio</span><span>Ausiliare</span><span>Словосочетание</span><span>Урок</span></div>';
+    rows.forEach(d=>{n++;const e=d.aux==='essere';
+      const end=d.pp.match(/(tto|sto|rto|lto|nto|uto|ss?o)$/);const ppH=end?d.pp.slice(0,-end[1].length)+'<b>'+end[1]+'</b>':d.pp;
+      const inf=d.v==='essere'?'essere · stare':d.v;
+      html+='<div class="prow"><span class="pinf">'+inf+'<small>'+d.ru+'</small></span><span class="ppart">'+(TEST?'<input data-a="'+d.pp+'" autocomplete="off" spellcheck="false" aria-label="participio di '+d.v+'">':ppH)+'</span><span class="paux'+(e?' e':'')+'">'+(e?'essere 🏠':'avere')+'</span><span class="pfr">'+(TEST?'':(d.frase||((e?'sono ':'ho ')+d.pp)))+'</span><span class="plez">'+pLez(d)+'</span></div>'});
+    html+='</div>'});
+  $('#pGroups').innerHTML=html||'<p class="none">Nessun participio trovato.</p>';
+  $('#pScore').textContent=TEST?('Giusto: 0 / '+n):'';
+  if(TEST)$('#pGroups').querySelectorAll('input').forEach(inp=>{
+    inp.addEventListener('input',()=>{inp.classList.remove('ko');inp.classList.toggle('ok',norm(inp.value)===norm(inp.dataset.a));score()});
+    inp.addEventListener('blur',()=>{if(inp.value.trim()&&!inp.classList.contains('ok'))inp.classList.add('ko')});
+  });
+}
+function score(){const a=[...$('#pGroups').querySelectorAll('input')];$('#pScore').textContent='Giusto: '+a.filter(i=>i.classList.contains('ok')).length+' / '+a.length}
+$('#pTest').onclick=()=>{TEST=!TEST;$('#pTest').textContent=TEST?'↩ Torna alla tabella':'✍ Проверь себя';$('#pSol').hidden=!TEST;renderP()};
+$('#pSol').onclick=()=>{$('#pGroups').querySelectorAll('input').forEach(i=>{if(!i.classList.contains('ok')){i.value=i.dataset.a;i.classList.remove('ko')}})};
+let VISTA=(location.hash==='#participi'||URLP.get('vista')==='participi')?'Participi ribelli':'Verbi';
+function setVista(v){VISTA=v;document.body.classList.toggle('vp',v!=='Verbi');$('#fVista').querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c.textContent===v));
+  try{history.replaceState(null,'',location.pathname+location.search+(v==='Verbi'?'':'#participi'))}catch(e){}
+  if(v!=='Verbi')renderP()}
+['Verbi','Participi ribelli'].forEach(v=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=v;b.onclick=()=>setVista(v);$('#fVista').append(b)});
+const _apply=apply;apply=function(){_apply();if(VISTA!=='Verbi')renderP()};
+setVista(VISTA);
 </script>
 </body></html>
