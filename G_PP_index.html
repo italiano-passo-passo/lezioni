@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<!-- ITALIANO PASSO PASSO — Grammatica passo passo: indice della serie «Passato prossimo».
+     Una scheda (div.card) per ogni modulo. Modulo non ancora pubblicato: class="card soon".
+     Il progresso si legge dal browser (stesso sito dei moduli, chiave gpp:<codice>). -->
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="google" content="notranslate">
+<title>Italiano passo passo — Passato prossimo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#262626;--soft:#6B6B6B;--bord:#7A1E2C;--rosso:#B4493B;--mare:#2F6F86;--verde:#5E7A3A;--sole:#C59A45;--line:#DDE0DF;--paper2:#F4F5F5;--card:#fff;--bg:#fff;
+ --verde-tint:#E9EFDF;--sole-tint:#F7F1E3;--mare-tint:#E6EFF2;
+ --title:"Playfair Display",Georgia,serif;--body:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;color-scheme:light;box-sizing:border-box;
+ padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#ECECEA;--soft:#A9AEAC;--bord:#F0A3AE;--rosso:#E58C76;--mare:#7FB5C9;--verde:#A9BE7A;--sole:#D9B66A;--line:#38403E;--paper2:#252A29;--card:#22272A;--bg:#1B1F1E;--verde-tint:#283020;--sole-tint:#332C1E;--mare-tint:#22313A;color-scheme:dark}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.5;min-height:100vh}
+body::before{content:"";position:fixed;left:0;top:0;bottom:0;width:14px;background:linear-gradient(to right,#1F8A50 0 5px,transparent 5px 9px,#C8312B 9px 14px);z-index:2}
+.wrap{max-width:1180px;margin:0 auto;padding:40px 32px 60px 52px;position:relative}
+.brand{position:absolute;top:22px;right:28px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.8rem;font-weight:700;color:var(--bord)}
+.brand svg{display:block;width:56px;height:56px}
+.kicker{font-weight:700;color:var(--rosso);display:flex;align-items:center;gap:12px;max-width:calc(100% - 100px)}
+.kicker::after{content:"";flex:1;height:1px;background:var(--line)}
+h1{font-family:var(--title);color:var(--bord);font-size:clamp(2.4rem,5.6vw,4.4rem);line-height:1;margin:.2em 0 .25em;font-weight:800}
+h1 em{color:var(--rosso);font-weight:600}
+.lead{color:var(--soft);max-width:64ch;margin:0 0 30px}
+.lead b{color:var(--ink)}
+h2{font-family:var(--title);color:var(--bord);font-size:1.7rem;margin:0 0 6px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+h2 span{font-family:var(--body);font-size:.9rem;font-weight:600;color:var(--soft)}
+.lvl-note{color:var(--soft);margin:0 0 16px;font-size:.95rem}
+.level{margin-bottom:44px}
+/* percorso: schede numerate unite da una linea */
+.route{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;counter-reset:p}
+.card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;color:inherit;transition:box-shadow .2s;position:relative}
+.card:hover{box-shadow:0 14px 30px -18px rgba(0,0,0,.4)}
+.card .main{display:flex;flex-direction:column;gap:6px;padding:16px 18px 14px;text-decoration:none;color:inherit;flex:1;border-top:4px solid var(--mare)}
+.card.ripasso .main{border-top-color:var(--bord)}
+.card .main:hover h3{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.n{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--rosso);font-size:.9rem}
+.n i{font-style:normal;display:inline-grid;place-items:center;width:1.7em;height:1.7em;border-radius:50%;background:var(--mare);color:#fff;font-size:.85rem}
+.card.ripasso .n i{background:var(--bord)}
+.card h3{font-family:var(--title);color:var(--bord);font-size:1.35rem;margin:0;line-height:1.15}
+.card p{margin:0;color:var(--soft);font-size:.95rem}
+.card .ru{color:var(--ink)}
+.card .after{font-size:.85rem;color:var(--mare)}
+.st{display:flex;align-items:center;gap:8px;padding:8px 18px;border-top:1px solid var(--line);font-size:.88rem;font-weight:600;color:var(--soft);background:var(--paper2)}
+.st::before{content:"";width:.7em;height:.7em;border-radius:50%;background:var(--line);flex:none}
+.st.go{color:var(--sole);background:var(--sole-tint)}.st.go::before{background:var(--sole)}
+.st.ok{color:var(--verde);background:var(--verde-tint)}.st.ok::before{background:var(--verde)}
+.st.ko{color:var(--rosso)}.st.ko::before{background:var(--rosso)}
+.card.soon{opacity:.55}
+.card.soon .main{pointer-events:none;border-top-color:var(--line)}
+.card.soon .n i{background:var(--soft)}
+.tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.tool{display:flex;flex-direction:column;gap:2px;padding:12px 16px;border:1px dashed var(--mare);border-radius:10px;background:var(--mare-tint);text-decoration:none;color:inherit}
+.tool b{color:var(--mare)}
+.tool span{color:var(--soft);font-size:.92rem}
+.tool:hover{border-style:solid}
+.sum{display:flex;flex-wrap:wrap;gap:10px 22px;margin:0 0 30px;padding:12px 16px;border-left:3px solid var(--sole);background:var(--sole-tint);border-radius:0 8px 8px 0;font-size:.95rem}
+.sum[hidden]{display:none}
+footer{margin-top:20px;padding-top:14px;border-top:1px solid var(--line);color:var(--soft);font-size:.85rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (max-width:640px){.wrap{padding:22px 16px 40px 30px}.brand{position:static;align-items:flex-end;margin-bottom:6px}.kicker{max-width:none}.route{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand" aria-hidden="true"><svg class="ipl" viewBox="0 0 220 220" aria-hidden="true"><circle cx="110.0" cy="110.0" r="109.5" fill="#FFFFFF" stroke="#DDE0DF" stroke-width="1.0"/><path transform="translate(59.3 0)" d="M25.7048 110.3608 27.9312 111.77759999999999Q22.5676 119.77239999999999 19.0762 122.6566Q15.5848 125.54079999999999 11.0308 125.54079999999999Q7.8936 125.54079999999999 5.9708000000000006 123.76979999999999Q4.048 121.99879999999999 4.048 119.1652Q4.048 116.8376 5.3636 112.1824L11.2332 90.42439999999999Q11.9416 87.38839999999999 11.9416 86.37639999999999Q11.9416 84.7572 10.575399999999998 84.0994Q9.2092 83.4416 5.9708 83.4416V80.7092Q17.71 79.79839999999999 26.4132 77.87559999999999L17.204 111.6764Q16.2932 114.8136 16.2932 116.9388Q16.2932 117.54599999999999 16.7486 118.00139999999999Q17.204 118.4568 17.8112 118.4568Q19.8352 118.4568 25.7048 110.3608ZM23.4784 55.30799999999999Q26.312 55.30799999999999 28.3866 57.331999999999994Q30.461199999999998 59.355999999999995 30.461199999999998 62.1896Q30.461199999999998 65.0232 28.437199999999997 66.9966Q26.4132 68.97 23.4784 68.97Q20.6448 68.97 18.722 66.946Q16.7992 64.922 16.7992 61.987199999999994Q16.7992 59.355999999999995 18.8232 57.331999999999994Q20.8472 55.30799999999999 23.4784 55.30799999999999Z" fill="#7A1E2C"/><path transform="translate(59.3 0)" d="M35.824799999999996 83.4416V80.7092Q41.3908 80.102 55.3564 77.87559999999999L51.5108 89.5136Q55.9636 83.2392 59.6574 80.5574Q63.351200000000006 77.87559999999999 67.7028 77.87559999999999Q72.7628 77.87559999999999 75.6976 81.2152Q78.6324 84.5548 78.6324 90.1208Q78.6324 103.2768 69.7268 114.6112Q60.8212 125.9456 50.599999999999994 125.9456Q48.07 125.9456 43.7184 123.7192L42.504 127.8684Q39.974000000000004 137.3812 39.974000000000004 139.304Q39.974000000000004 141.1256 41.3908 141.834Q42.8076 142.5424 46.552 142.6436V145.376H21.3532V142.6436H21.9604Q25.0976 142.6436 26.4132 141.2268Q27.7288 139.81 28.9432 135.1548L39.0632 95.88919999999999Q41.2896 87.4896 41.2896 85.9716Q41.2896 84.5548 40.2776 84.0994Q39.2656 83.644 35.824799999999996 83.4416ZM65.9824 90.222Q65.9824 87.89439999999999 64.8186 86.4776Q63.654799999999994 85.0608 61.732 85.0608Q60.416399999999996 85.0608 59.151399999999995 85.5668Q57.886399999999995 86.0728 56.874399999999994 87.1354Q55.8624 88.198 54.9516 89.26059999999998Q54.040800000000004 90.32319999999999 53.2312 92.0436Q52.4216 93.764 51.8144 94.92779999999999Q51.2072 96.0916 50.6 97.96379999999999Q49.9928 99.836 49.6892 100.6962Q49.3856 101.5564 48.9302 103.1756Q48.4748 104.7948 48.4748 104.896Q44.9328 116.8376 44.9328 118.76039999999999Q44.9328 120.27839999999999 46.0966 121.341Q47.260400000000004 122.4036 48.879599999999996 122.4036Q52.522800000000004 122.4036 55.8624 118.305Q59.202 114.2064 61.3272 108.691Q63.4524 103.1756 64.7174 98.0144Q65.9824 92.8532 65.9824 90.222Z" fill="#7A1E2C"/><circle cx="149.1" cy="117.0" r="7.6" fill="#B4493B"/><rect x="83.8" y="159.2" width="17.5" height="5.0" fill="#1F8A50"/><rect x="101.3" y="159.2" width="17.5" height="5.0" fill="#FFFFFF" stroke="#DDE0DF" stroke-width="0.5"/><rect x="118.7" y="159.2" width="17.5" height="5.0" fill="#C8312B"/></svg><span>Italiano A1 · A2</span></div>
+  <div class="kicker">Italiano passo passo — Grammatica passo passo</div>
+  <h1>Passato prossimo <em>passo passo</em></h1>
+  <p class="lead">Прошедшее время шаг за шагом: от простого к сложному. Каждый модуль — правило, упражнения и тест. <b>Иди по порядку</b> или выбери модуль, который советует преподаватель. Прогресс сохраняется в этом браузере.</p>
+  <p class="sum" id="sum" hidden></p>
+
+  <!-- ===== A1 ===== -->
+  <section class="level">
+    <h2>Livello A1 <span>5 moduli</span></h2>
+    <p class="lvl-note">Глаголы с avere и essere, неправильные причастия, возвратные глаголы — и большой повтор.</p>
+    <div class="route">
+      <div class="card" data-code="G_A1_05">
+        <a class="main" href="G_A1_05_PP_avere.html">
+          <span class="n"><i>1</i>Passo 1</span>
+          <h3>Passato prossimo con avere</h3>
+          <p class="ru">Что такое passato prossimo, правильные причастия, ieri / fa / scorso, non, già, mai, ancora</p>
+          <p class="after">Collegato: A1 · Unità 6, Lezione 1</p>
+        </a>
+        <div class="st">Non iniziato</div>
+      </div>
+      <div class="card" data-code="G_A1_06">
+        <a class="main" href="G_A1_06_PP_essere.html">
+          <span class="n"><i>2</i>Passo 2</span>
+          <h3>Passato prossimo con essere</h3>
+          <p class="ru">«Дом essere», согласование -o/-a/-i/-e, stato, venuto, rimasto, nato; avere или essere?</p>
+          <p class="after">Лучше после шага 1 · Unità 6, Lezioni 2–3</p>
+        </a>
+        <div class="st">Non iniziato</div>
+      </div>
+      <div class="card" data-code="G_A1_07">
+        <a class="main" href="G_A1_07_Participi_ribelli.html">
+          <span class="n"><i>3</i>Passo 3</span>
+          <h3>Participi ribelli A1</h3>
+          <p class="ru">25 неправильных причастий A1 по группам: -tto, -so, -sto, -erto, -lto, -uto</p>
+          <p class="after">Лучше после шага 2 · Unità 6, Lezione 3</p>
+        </a>
+        <div class="st">Non iniziato</div>
+      </div>
+      <div class="card" data-code="G_A1_08">
+        <a class="main" href="G_A1_08_PP_riflessivi.html">
+          <span class="n"><i>4</i>Passo 4</span>
+          <h3>Verbi riflessivi e reciproci</h3>
+          <p class="ru">mi sono alzata, ci siamo conosciuti; возвратный или нет?</p>
+          <p class="after">Лучше после шага 2</p>
+        </a>
+        <div class="st">Non iniziato</div>
+      </div>
+      <div class="card ripasso" data-code="G_A1_09">
+        <a class="main" href="G_A1_09_PP_ripasso_A1.html">
+          <span class="n"><i>✓</i>Ripasso A1</span>
+          <h3>Tutto insieme: ripasso A1</h3>
+          <p class="ru">Всё вперемешку: avere, essere, неправильные причастия, возвратные. Большой тест.</p>
+          <p class="after">После шагов 1–4</p>
+        </a>
+        <div class="st">Non iniziato</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== A2 ===== -->
+  <section class="level">
+    <h2>Livello A2 <span>5 moduli + 1 in più</span></h2>
+    <p class="lvl-note">Модальные глаголы, глаголы с двумя вспомогательными, piacere и costare, неправильные причастия A2.</p>
+    <div class="route">
+      <div class="card" data-code="G_A2_06">
+        <a class="main" href="G_A2_06_PP_modali.html">
+          <span class="n"><i>5</i>Passo 5</span>
+          <h3>Verbi modali</h3>
+          <p class="ru">ho dovuto lavorare, sono dovuta partire, mi sono dovuta alzare = ho dovuto alzarmi</p>
+          <p class="after">Лучше после Ripasso A1</p>
+        </a>
+        <div class="st">Non iniziato</div>
+      </div>
+      <div class="card" data-code="G_A2_07">
+        <a class="main" href="G_A2_07_PP_due_ausiliari.html">
+          <span class="n"><i>6</i>Passo 6</span>
+          <h3>Ho o sono? Due ausiliari</h3>
+          <p class="ru">cominciare, finire, passare, salire, scendere, cambiare, correre, vivere</p>
+          <p class="after">Лучше после шага 5</p>
+        </a>
+        <div class="st">Non iniziato</div>
+      </div>
+      <div class="card" data-code="G_A2_08">
+        <a class="main" href="G_A2_08_PP_piacere_costare.html">
+          <span class="n"><i>7</i>Passo 7</span>
+          <h3>È piaciuto, è costato, è successo</h3>
+          <p class="ru">piacere, sembrare, mancare, servire; costare, durare, bastare; погода</p>
+          <p class="after">Лучше после шага 6 · урок-мостик «Un regalo per tutti»</p>
+        </a>
+        <div class="st">Non iniziato</div>
+      </div>
+      <div class="card" data-code="G_A2_09">
+        <a class="main" href="G_A2_09_Participi_ribelli_A2.html">
+          <span class="n"><i>8</i>Passo 8</span>
+          <h3>Participi ribelli A2 e avverbi</h3>
+          <p class="ru">corso, offerto, morto, spento, rotto, vinto…; appena, non … più, sempre</p>
+          <p class="after">Лучше после шага 3 (Participi ribelli A1)</p>
+        </a>
+        <div class="st">Non iniziato</div>
+      </div>
+      <div class="card" data-code="G_A2_05">
+        <a class="main" href="G_A2_05_Pronomi_passato_prossimo.html">
+          <span class="n"><i>+</i>In più</span>
+          <h3>Pronomi e passato prossimo</h3>
+          <p class="ru">l’ho vista, li ho comprati, ne ho presi due, le ho telefonato</p>
+          <p class="after">Модуль A2, уже готов</p>
+        </a>
+        <div class="st">Non iniziato</div>
+      </div>
+      <div class="card ripasso" data-code="G_A2_10">
+        <a class="main" href="G_A2_10_PP_ripasso_A2.html">
+          <span class="n"><i>✓</i>Ripasso A2</span>
+          <h3>Tutto insieme: ripasso A2</h3>
+          <p class="ru">Всё A2 вперемешку + повтор A1. Большой тест.</p>
+          <p class="after">После шагов 5–8 и «Pronomi e passato prossimo»</p>
+        </a>
+        <div class="st">Non iniziato</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="level">
+    <h2>Da tenere a portata di mano <span>справочники</span></h2>
+    <div class="tools">
+      <a class="tool" href="Verbi_passo_passo.html?liv=A1#participi"><b>Participi ribelli — tabella A1</b><span>Все неправильные причастия A1 по группам, с avere / essere 🏠 и «Проверь себя»</span></a>
+      <a class="tool" href="Verbi_passo_passo.html"><b>Verbi passo passo</b><span>Спряжение и управление всех глаголов курса</span></a>
+    </div>
+  </section>
+
+  <footer><span>Italiano passo passo — Grammatica passo passo — Passato prossimo</span><span>A1 · A2</span></footer>
+</div>
+<script>
+(function(){
+  'use strict';
+  let done=0,tot=0;
+  document.querySelectorAll('.card[data-code]').forEach(c=>{
+    if(c.classList.contains('soon'))return;tot++;
+    const st=c.querySelector('.st');let S=null;
+    try{S=JSON.parse(localStorage.getItem('gpp:'+c.dataset.code)||'null')}catch(e){S=null}
+    if(!S||!S.sc)return;
+    const t=S.sc.test,n=Object.keys(S.sc).filter(k=>k!=='test').length;
+    if(t&&t.max){const p=Math.round(t.n/t.max*100);
+      if(p>=80){st.className='st ok';st.textContent='Test superato · '+p+'%';done++}
+      else{st.className='st ko';st.textContent='Test: '+p+'% — riprova';}}
+    else if(n){st.className='st go';st.textContent='In corso · esercizi fatti: '+n}
+  });
+  if(done){const s=document.getElementById('sum');s.hidden=false;
+    s.innerHTML='<b>Il tuo percorso:</b> moduli completati '+done+' su '+tot+(done===tot?' — complimenti!':' · avanti così!');}
+})();
+</script>
+</body>
+</html>
