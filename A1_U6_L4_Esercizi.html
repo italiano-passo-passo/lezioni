@@ -243,7 +243,7 @@ body{font-size:1.1rem}
       <div class="dl g"><span class="sp">Giulia</span><div>Ciao Marco! Come va la vacanza a Venezia? Che tempo fa?</div></div>
       <div class="dl"><span class="sp">Marco</span><div>Mah, non benissimo! Stamattina <button class="slot" data-answer="piove"></button> e c’è tanta acqua in Piazza San Marco. Adesso ci sono ancora le <button class="slot" data-answer="nuvole"></button> e c’è anche <button class="slot" data-answer="vento"></button>. E da te?</div></div>
       <div class="dl g"><span class="sp">Giulia</span><div>Qui a Bari c’è il <button class="slot" data-answer="sole"></button> e fa <button class="slot" data-answer="caldo"></button>: 25 gradi!</div></div>
-      <div class="dl"><span class="sp">Marco</span><div><span class="gloss" tabindex="0" data-g="везёт тебе!">Beata te!</span> Ieri qui c’è stato anche un <button class="slot" data-answer="temporale"></button>.</div></div>
+      <div class="dl"><span class="sp">Marco</span><div><span class="gloss" tabindex="0" data-g="везёт тебе!">Beata te!</span> E stasera qui c’è anche un <button class="slot" data-answer="temporale"></button>!</div></div>
     </div>
     <div class="actions"><button class="btn" data-check="e1">Controlla</button><button class="btn ghost" data-reset="e1">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
   </section>
@@ -277,15 +277,15 @@ body{font-size:1.1rem}
   <section class="ex" id="es3" data-ex="e3">
     <span class="kind" data-icon="read">Esercizio 3</span>
     <h2>Il diario di Francesca</h2>
-    <p class="lead">Segna nel testo solo le espressioni sul tempo: blu per il presente, rosso per il passato prossimo.<span class="tr">Отметь в тексте только выражения о погоде: синим — настоящее время (fa, c’è, è, piove), красным — passato prossimo (ha fatto, c’è stato…). Другие глаголы не отмечай: лишние слова отнимают баллы.</span></p>
+    <p class="lead">Segna nel testo: in blu le espressioni sul tempo (fa freddo, c’è il sole, piove…), in rosso i verbi al passato prossimo (che cosa ha fatto Francesca).<span class="tr">Отметь в тексте: синим — выражения о погоде (fa freddo, c’è il sole, piove…), красным — глаголы в passato prossimo (что Франческа сделала). Другие слова не отмечай: лишние отнимают баллы.</span></p>
     <div class="pens" role="group" aria-label="Evidenziatori">
-      <button class="pen" data-pen="i" style="--c:var(--mare)" aria-pressed="true"><i></i>Il tempo: presente</button>
-      <button class="pen" data-pen="p" style="--c:var(--rosso)" aria-pressed="false"><i></i>Il tempo: passato prossimo</button>
+      <button class="pen" data-pen="i" style="--c:var(--mare)" aria-pressed="true"><i></i>Il tempo (presente)</button>
+      <button class="pen" data-pen="p" style="--c:var(--rosso)" aria-pressed="false"><i></i>Passato prossimo</button>
       <button class="pen gomma" data-pen="x" aria-pressed="false"><i></i>Gomma</button>
     </div>
     <div class="text" id="text3"></div>
     <div class="bins">
-      <div class="bin"><h3>Presente <span id="ni">0</span></h3><ol id="li"></ol></div>
+      <div class="bin"><h3>Il tempo <span id="ni">0</span></h3><ol id="li"></ol></div>
       <div class="bin p"><h3>Passato prossimo <span id="np">0</span></h3><ol id="lp"></ol></div>
     </div>
     <div class="actions"><button class="btn" data-check="e3">Controlla</button><button class="btn ghost" data-reset="e3">Ricomincia</button><span class="score"></span><span class="verdict"></span></div>
@@ -294,19 +294,19 @@ body{font-size:1.1rem}
   <!-- ===== ESERCIZIO 4 ===== -->
   <section class="ex" id="es4" data-ex="e4">
     <span class="kind" data-icon="gram">Esercizio 4</span>
-    <h2>Che tempo ha fatto?</h2>
-    <p class="lead">Completa le frasi con il passato prossimo.<span class="tr">Дополни предложения глаголами в passato prossimo. Помни: fare → с avere, c’è / è → с essere.</span></p>
+    <h2>Che tempo fa? E che cosa hai fatto?</h2>
+    <p class="lead">Completa le frasi con il passato prossimo. Il tempo è al presente: guarda bene il verbo!<span class="tr">Дополни предложения глаголами в passato prossimo: avere или essere? Погода в предложениях — в настоящем времени.</span></p>
     <ol class="ex-list">
-      <li>Ieri pomeriggio a Roma <span class="hint">(piovere)</span> <input class="gap" data-answer="ha piovuto|è piovuto">.</li>
-      <li>Domenica scorsa <span class="hint">(fare)</span> <input class="gap" data-answer="ha fatto"> molto freddo.</li>
-      <li>Stanotte sulle Alpi <span class="hint">(nevicare)</span> <input class="gap" data-answer="ha nevicato|è nevicato">.</li>
-      <li>Sabato <span class="hint">(esserci)</span> <input class="gap" data-answer="c’è stato"> un temporale molto forte.</li>
-      <li>La settimana scorsa <span class="hint">(esserci)</span> <input class="gap" data-answer="ci sono state"> tante nuvole.</li>
-      <li>Ieri il cielo <span class="hint">(essere)</span> <input class="gap" data-answer="è stato"> sereno.</li>
-      <li>Anche a Napoli ieri <span class="hint">(fare)</span> <input class="gap" data-answer="ha fatto"> bello?</li>
+      <li>Oggi piove: <span class="hint">(io – guardare)</span> <input class="gap" data-answer="ho guardato"> un film a casa.</li>
+      <li>Fa caldo, allora Sara e Giulia <span class="hint">(andare)</span> <input class="gap" data-answer="sono andate"> in piscina.</li>
+      <li>Nevica! Stamattina <span class="hint">(noi – fare)</span> <input class="gap" data-answer="abbiamo fatto"> un <span class="gloss" tabindex="0" data-g="снеговик">pupazzo di neve</span>.</li>
+      <li>C’è la nebbia, allora Paolo <span class="hint">(tornare)</span> <input class="gap" data-answer="è tornato"> a casa a piedi.</li>
+      <li>Che freddo! Marta <span class="hint">(mettere)</span> <input class="gap" data-answer="ha messo"> due maglioni.</li>
+      <li>C’è il sole: oggi <span class="hint">(voi – mangiare)</span> <input class="gap" data-answer="avete mangiato"> in giardino?</li>
+      <li>È nuvoloso, ma Paola <span class="hint">(partire)</span> <input class="gap" data-answer="è partita"> per il mare.</li>
       <li>Che caldo! <span class="hint">(io – bere)</span> <input class="gap" data-answer="ho bevuto"> due litri d’acqua.</li>
       <li>Al mare <span class="hint">(noi – conoscere)</span> <input class="gap" data-answer="abbiamo conosciuto"> una famiglia di Torino.</li>
-      <li>Ha piovuto e Luca <span class="hint">(rimanere)</span> <input class="gap" data-answer="è rimasto"> a casa.</li>
+      <li>Piove e Luca <span class="hint">(rimanere)</span> <input class="gap" data-answer="è rimasto"> a casa.</li>
       <li>Piove! <span class="hint">(tu – prendere)</span> <input class="gap" data-answer="hai preso"> l’ombrello?</li>
       <li>Ieri sera <span class="hint">(venire)</span> <input class="gap" data-answer="è venuta"> Anna e <span class="hint">(noi – bere)</span> <input class="gap" data-answer="abbiamo bevuto"> una cioccolata calda.</li>
     </ol>
@@ -316,15 +316,15 @@ body{font-size:1.1rem}
   <!-- ===== ESERCIZIO 5 ===== -->
   <section class="ex" id="es5" data-ex="e5">
     <span class="kind" data-icon="write">Esercizio 5</span>
-    <h2>Il mio diario del tempo</h2>
-    <p class="lead">Scrivi 6–8 frasi: che tempo ha fatto negli ultimi giorni e che cosa hai fatto? E che tempo fa oggi?<span class="tr">Напиши 6–8 предложений: какая была погода в последние дни и что ты делал(а)? А какая погода сегодня?</span></p>
+    <h2>Il mio diario di oggi</h2>
+    <p class="lead">Scrivi 6–8 frasi: che tempo fa oggi da te? Che cosa hai fatto oggi (e ieri sera)?<span class="tr">Напиши 6–8 предложений: какая сегодня у тебя погода? Что ты сделал(а) сегодня (и вчера вечером)?</span></p>
     <div class="starters" id="starters">
-      <button>Ieri…</button><button>L’altro ieri…</button><button>Domenica…</button><button>ha fatto…</button><button>c’è stato…</button><button>ha piovuto…</button><button>allora…</button><button>Oggi…</button>
+      <button>Oggi…</button><button>fa…</button><button>c’è…</button><button>piove…</button><button>allora…</button><button>Stamattina…</button><button>Ieri sera…</button><button>sono…</button><button>ho…</button>
     </div>
-    <textarea id="essay" data-scritto="Esercizio 5" placeholder="Ieri ha fatto bello, allora…" aria-label="Il tuo testo"></textarea>
+    <textarea id="essay" data-scritto="Esercizio 5" placeholder="Oggi piove, allora…" aria-label="Il tuo testo"></textarea>
     <div class="meters">
       <span class="meter" id="mFrasi">Frasi: <b>0</b> / 6–8</span>
-      <span class="meter" id="mPass">Tempo al passato: <b>0</b></span>
+      <span class="meter" id="mPass">Passato prossimo: <b>0</b></span>
       <span class="meter" id="mOggi">Tempo oggi: <b>0</b></span>
     </div>
     <p class="hint" style="margin-top:8px">Это задание проверяет преподаватель: текст попадёт в форму вместе с результатом, когда ты нажмёшь «Invia all’insegnante».</p>
@@ -387,7 +387,7 @@ body{font-size:1.1rem}
   const clearMarks=root=>{$$('.ok,.ko,.miss',root).forEach(e=>e.classList.remove('ok','ko','miss'));$$('.acc',root).forEach(e=>e.remove())};
 
   /* Es. 3: testo (prima di contare i punti) */
-  const TXT='Oggi a Milano {è nuvoloso|i} e {fa freddo|i}. Ieri invece {è stato bello|p}: {c’è stato il sole|p} e ho fatto una lunga passeggiata nel parco. Domenica scorsa {ha piovuto|p} e la sera {c’è stato un temporale|p}, allora sono rimasta a casa e ho bevuto un tè caldo. Adesso {piove|i} di nuovo e {c’è vento|i}. Per fortuna la settimana scorsa {ha fatto caldo|p} e sono andata al lago con Paolo: lì ho conosciuto i suoi amici. Domani vado a Palermo per lavoro: lì {c’è il sole|i} e {fa caldo|i}. Che bello!';
+  const TXT='Oggi a Milano {è nuvoloso|i} e {fa freddo|i}, allora {ho preso|p} la giacca e la sciarpa. Stamattina {sono andata|p} al lavoro in autobus. Adesso {piove|i} e {c’è vento|i}: per fortuna {ho messo|p} l’ombrello nella borsa! A pranzo {ho bevuto|p} un tè caldo con Paolo e {abbiamo parlato|p} delle vacanze. Stasera {sono rimasta|p} a casa e {ho letto|p} un libro. Domani vado a Palermo per lavoro: lì {c’è il sole|i} e {fa caldo|i}. Che bello!';
   const box3=$('#text3');
   TXT.split(/(\{[^}]+\})/).forEach(part=>{
     const m=part.match(/^\{(.+)\|([ip])\}$/);
@@ -469,7 +469,7 @@ body{font-size:1.1rem}
   $$('#starters button').forEach(b=>b.onclick=()=>{const v=essay.value;const sep=v&&!/\s$/.test(v)?' ':'';essay.value=v+sep+b.textContent.replace('…',' ');essay.focus();essay.selectionStart=essay.selectionEnd=essay.value.length;meters();save()});
   function meters(){
     const t=essay.value.toLowerCase().replace(/[’`]/g,"'");const fr=(essay.value.match(/[^.!?…]*[a-zà-ù][^.!?…]*[.!?…]+/gi)||[]).length;
-    const ps=(t.match(/(ha fatto|c'è stat[oaie]|c'e stat[oaie]|ci sono stat[ie]|è stato|e stato|ha piovuto|è piovuto|ha nevicato)/g)||[]).length;
+    const ps=(t.match(/\b(ho|hai|ha|abbiamo|avete|hanno|sono|sei|è|siamo|siete) [a-zà-ù]+(at|ut|it|tt|s|st|ert|lt)[oaie]\b/g)||[]).length;
     const og=(t.match(/(\bfa (caldo|freddo|bello|brutto)|c'è (il sole|vento|un temporale)|ci sono le nuvole|\bpiove\b|\bnevica\b|è (nuvoloso|sereno|bello|brutto))/g)||[]).length;
     $('#mFrasi b').textContent=fr;$('#mPass b').textContent=ps;$('#mOggi b').textContent=og;
     $('#mFrasi').classList.toggle('ok',fr>=6);$('#mPass').classList.toggle('ok',ps>0);$('#mOggi').classList.toggle('ok',og>0);
